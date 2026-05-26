@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.codec.binary.types;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +35,6 @@ import org.xrpl.xrpl4j.codec.binary.serdes.BinaryParser;
 import org.xrpl.xrpl4j.codec.binary.serdes.BinarySerializer;
 import org.xrpl.xrpl4j.model.jackson.ObjectMapperFactory;
 import org.xrpl.xrpl4j.model.transactions.Address;
-
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -51,144 +49,52 @@ import java.util.stream.Collectors;
 @SuppressWarnings("AbbreviationAsWordInName")
 public class STObjectType extends SerializedType<STObjectType> {
 
-  public static final String OBJECT_END_MARKER_HEX = "E1";
-  private static final String OBJECT_END_MARKER = "ObjectEndMarker";
-  private static final String ST_OBJECT = "STObject";
-  private static final DefinitionsService definitionsService = DefinitionsService.getInstance();
+    public static final String OBJECT_END_MARKER_HEX = "E1";
 
-  public STObjectType() {
-    this(UnsignedByteArray.empty());
-  }
+    private static final String OBJECT_END_MARKER = "ObjectEndMarker";
 
-  public STObjectType(UnsignedByteArray list) {
-    super(list);
-  }
+    private static final String ST_OBJECT = "STObject";
 
-  @Override
-  public STObjectType fromParser(BinaryParser parser) {
-    UnsignedByteArray byteArray = UnsignedByteArray.empty();
-    BinarySerializer serializer = new BinarySerializer(byteArray);
+    private static final DefinitionsService definitionsService = DefinitionsService.getInstance();
 
-    while (parser.hasMore()) {
-      FieldInstance field = parser.readField().orElseThrow(() -> new IllegalArgumentException("bad field encountered"));
-      if (field.name().equals(OBJECT_END_MARKER)) {
-        break;
-      }
-
-      SerializedType<?> associatedValue = parser.readFieldValue(field);
-      serializer.writeFieldAndValue(field, associatedValue);
-      if (field.type().equals(ST_OBJECT)) {
-        serializer.put(OBJECT_END_MARKER_HEX);
-      }
-    }
-    return new STObjectType(byteArray);
-  }
-
-  @Override
-  public STObjectType fromJson(JsonNode node) {
-    UnsignedByteArray byteList = UnsignedByteArray.empty();
-    BinarySerializer serializer = new BinarySerializer(byteList);
-    boolean isUNLModify;
-    try {
-      isUNLModify = "UNLModify".equals(node.get("TransactionType").asText());
-    } catch (Exception e) {
-      isUNLModify = false;
+    public STObjectType() {
+        this(UnsignedByteArray.empty());
     }
 
-    List<FieldWithValue<JsonNode>> fields = new ArrayList<>();
-    for (String fieldName : Lists.newArrayList(node.fieldNames())) {
-
-      /**
-       * The Account field must not be a part of the UNLModify pseudotransaction encoding, due to a bug in rippled.
-       */
-      if (isUNLModify && fieldName.equals("Account")) {
-        continue;
-      }
-
-      JsonNode fieldNode;
-      // rippled expects signers canonically based on address
-      if (fieldName.equals("Signers")) {
-        final AddressCodec addressCodec = AddressCodec.getInstance();
-        ArrayNode arrayNode = (ArrayNode) node.get(fieldName);
-        List<JsonNode> jsonNodeList = new ArrayList<>();
-        for (JsonNode x : arrayNode) {
-          jsonNodeList.add(x);
-        }
-        List<JsonNode> jsonNodesSorted = jsonNodeList.stream().sorted(
-          Comparator.comparing(
-            signature -> new BigInteger(addressCodec.decodeAccountId(
-              Address.of(signature.get("Signer").get("Account").asText())
-            ).hexValue(), 16)
-          )
-        ).collect(Collectors.toList());
-
-        final ObjectMapper objectMapper = ObjectMapperFactory.create();
-        fieldNode = objectMapper.createObjectNode().arrayNode().addAll(jsonNodesSorted);
-      } else {
-        fieldNode = node.get(fieldName);
-      }
-
-      definitionsService.getFieldInstance(fieldName)
-        .filter(FieldInstance::isSerialized)
-        .ifPresent(fieldInstance -> fields.add(FieldWithValue.<JsonNode>builder()
-          .field(fieldInstance)
-          .value(mapSpecializedValues(fieldName, fieldNode))
-          .build()));
+    public STObjectType(UnsignedByteArray list) {
+        super(list);
     }
-    fields.stream()
-      .sorted()
-      .forEach(value -> {
-        try {
-          serializer.writeFieldAndValue(value.field(), value.value());
-        } catch (JsonProcessingException e) {
-          throw new IllegalArgumentException("invalid json", e);
-        }
-        if (value.field().type().equals(ST_OBJECT)) {
-          serializer.put(OBJECT_END_MARKER_HEX);
-        }
-      });
 
-    return new STObjectType(byteList);
-  }
-
-  /**
-   * Maps (if necessary) a JSON node for the given fieldName to it's canonical value. Some fields (e.g. TransactionType)
-   * can be specified in JSON as an ordinal value or an enum (e.g. OfferCreate). Enum values need to be converted to the
-   * ordinal value for binary serialization.
-   *
-   * @param fieldName name of the JSON field.
-   * @param fieldNode JSON value for the field.
-   *
-   * @return either the original fieldNode or a remapped node if it's one of these special cases.
-   */
-  private JsonNode mapSpecializedValues(String fieldName, JsonNode fieldNode) {
-    return definitionsService.mapFieldSpecialization(fieldName, fieldNode.asText())
-      .map(value -> new TextNode("" + value))
-      .map(JsonNode.class::cast)
-      .orElse(fieldNode);
-  }
-
-  /**
-   * Return this object as JSON.
-   *
-   * @return A {@link JsonNode}.
-   */
-  public JsonNode toJson() {
-    BinaryParser parser = new BinaryParser(this.toString());
-    Map<String, JsonNode> objectMap = new LinkedHashMap<>();
-    while (parser.hasMore()) {
-      FieldInstance field = parser.readField().orElseThrow(() -> new IllegalArgumentException("bad field encountered"));
-      if (field.name().equals(OBJECT_END_MARKER)) {
-        break;
-      }
-      JsonNode value = parser.readFieldValue(field).toJson(field);
-      JsonNode mapped = definitionsService.mapFieldRawValueToSpecialization(field.name(), value.asText())
-        .map(TextNode::new)
-        .map(JsonNode.class::cast)
-        .orElse(value);
-      objectMap.put(field.name(), mapped);
+    @Override
+    public STObjectType fromParser(BinaryParser parser) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return new ObjectNode(BinaryCodecObjectMapperFactory.getObjectMapper().getNodeFactory(), objectMap);
-  }
 
+    @Override
+    public STObjectType fromJson(JsonNode node) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Maps (if necessary) a JSON node for the given fieldName to it's canonical value. Some fields (e.g. TransactionType)
+     * can be specified in JSON as an ordinal value or an enum (e.g. OfferCreate). Enum values need to be converted to the
+     * ordinal value for binary serialization.
+     *
+     * @param fieldName name of the JSON field.
+     * @param fieldNode JSON value for the field.
+     *
+     * @return either the original fieldNode or a remapped node if it's one of these special cases.
+     */
+    private JsonNode mapSpecializedValues(String fieldName, JsonNode fieldNode) {
+        return definitionsService.mapFieldSpecialization(fieldName, fieldNode.asText()).map(value -> new TextNode("" + value)).map(JsonNode.class::cast).orElse(fieldNode);
+    }
+
+    /**
+     * Return this object as JSON.
+     *
+     * @return A {@link JsonNode}.
+     */
+    public JsonNode toJson() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

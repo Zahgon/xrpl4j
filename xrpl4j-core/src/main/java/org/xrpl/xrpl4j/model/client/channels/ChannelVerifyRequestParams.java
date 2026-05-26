@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.channels;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -36,44 +35,43 @@ import org.xrpl.xrpl4j.model.transactions.XrpCurrencyAmount;
 @JsonDeserialize(as = ImmutableChannelVerifyRequestParams.class)
 public interface ChannelVerifyRequestParams extends XrplRequestParams {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableChannelVerifyRequestParams.Builder}.
-   */
-  static ImmutableChannelVerifyRequestParams.Builder builder() {
-    return ImmutableChannelVerifyRequestParams.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableChannelVerifyRequestParams.Builder}.
+     */
+    static ImmutableChannelVerifyRequestParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The amount of XRP, in drops, the provided {@link #signature()} authorizes.
-   *
-   * @return the xrp currency amount
-   */
-  XrpCurrencyAmount amount();
+    /**
+     * The amount of XRP, in drops, the provided {@link #signature()} authorizes.
+     *
+     * @return the xrp currency amount
+     */
+    XrpCurrencyAmount amount();
 
-  /**
-   * The Channel ID of the channel that provides the XRP.
-   *
-   * @return the hash 256
-   */
-  @JsonProperty("channel_id")
-  Hash256 channelId();
+    /**
+     * The Channel ID of the channel that provides the XRP.
+     *
+     * @return the hash 256
+     */
+    @JsonProperty("channel_id")
+    Hash256 channelId();
 
-  /**
-   * The public key of the channel and the key pair that was used to create the {@link #signature()}, in
-   * hexadecimal or the XRP Ledger's base58 format.
-   *
-   * @return A {@link String} containing the public key.
-   */
-  @JsonProperty("public_key")
-  String publicKey();
+    /**
+     * The public key of the channel and the key pair that was used to create the {@link #signature()}, in
+     * hexadecimal or the XRP Ledger's base58 format.
+     *
+     * @return A {@link String} containing the public key.
+     */
+    @JsonProperty("public_key")
+    String publicKey();
 
-  /**
-   * The signature to verify, in hexadecimal.
-   *
-   * @return A {@link String} containing the signature.
-   */
-  String signature();
-
+    /**
+     * The signature to verify, in hexadecimal.
+     *
+     * @return A {@link String} containing the signature.
+     */
+    String signature();
 }

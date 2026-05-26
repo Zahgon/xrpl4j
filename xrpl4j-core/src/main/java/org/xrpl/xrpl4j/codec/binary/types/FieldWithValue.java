@@ -19,24 +19,23 @@ package org.xrpl.xrpl4j.codec.binary.types;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.codec.binary.definitions.FieldInstance;
 
 @Immutable
 public interface FieldWithValue<T> extends Comparable<FieldWithValue<T>> {
 
-  static <T> ImmutableFieldWithValue.Builder<T> builder() {
-    return ImmutableFieldWithValue.builder();
-  }
+    static <T> ImmutableFieldWithValue.Builder<T> builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  FieldInstance field();
+    FieldInstance field();
 
-  T value();
+    T value();
 
-  @Override
-  @SuppressWarnings( {"NullableProblems", "rawtypes"})
-  default int compareTo(FieldWithValue<T> other) {
-    return this.field().compareTo(other.field());
-  }
+    @Override
+    @SuppressWarnings({ "NullableProblems", "rawtypes" })
+    default int compareTo(FieldWithValue<T> other) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

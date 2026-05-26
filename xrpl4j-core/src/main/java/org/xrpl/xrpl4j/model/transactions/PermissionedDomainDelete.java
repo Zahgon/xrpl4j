@@ -15,32 +15,32 @@ import org.xrpl.xrpl4j.model.ledger.PermissionedDomainObject;
 @JsonDeserialize(as = ImmutablePermissionedDomainDelete.class)
 public interface PermissionedDomainDelete extends Transaction {
 
-  /**
-   * Construct a {@code PermissionedDomainDelete} builder.
-   *
-   * @return An {@link ImmutablePermissionedDomainDelete.Builder}.
-   */
-  static ImmutablePermissionedDomainDelete.Builder builder() {
-    return ImmutablePermissionedDomainDelete.builder();
-  }
+    /**
+     * Construct a {@code PermissionedDomainDelete} builder.
+     *
+     * @return An {@link ImmutablePermissionedDomainDelete.Builder}.
+     */
+    static ImmutablePermissionedDomainDelete.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ledger entry ID of an existing permissioned domain to delete.
-   *
-   * @return A {@link Hash256} representing DomainID.
-   */
-  @JsonProperty("DomainID")
-  Hash256 domainId();
+    /**
+     * The ledger entry ID of an existing permissioned domain to delete.
+     *
+     * @return A {@link Hash256} representing DomainID.
+     */
+    @JsonProperty("DomainID")
+    Hash256 domainId();
 
-  /**
-   * Set of {@link TransactionFlags}'s for this {@link PermissionedDomainDelete}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}'s for this {@link PermissionedDomainDelete}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

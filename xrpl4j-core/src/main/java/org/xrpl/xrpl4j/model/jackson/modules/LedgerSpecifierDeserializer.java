@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -33,7 +32,6 @@ import com.google.common.primitives.UnsignedInteger;
 import org.xrpl.xrpl4j.model.client.common.LedgerIndex;
 import org.xrpl.xrpl4j.model.client.common.LedgerSpecifier;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
-
 import java.io.IOException;
 
 /**
@@ -41,42 +39,20 @@ import java.io.IOException;
  */
 public class LedgerSpecifierDeserializer extends StdDeserializer<LedgerSpecifier> {
 
-  /**
-   * No-args constructor.
-   */
-  protected LedgerSpecifierDeserializer() {
-    super(LedgerSpecifier.class);
-  }
-
-  @Override
-  public JsonDeserializer<LedgerSpecifier> unwrappingDeserializer(NameTransformer unwrapper) {
-    return new LedgerSpecifierDeserializer();
-  }
-
-  @Override
-  public LedgerSpecifier deserialize(JsonParser jsonParser, DeserializationContext context) throws IOException {
-    final ObjectMapper objectMapper = (ObjectMapper) jsonParser.getCodec();
-    final ObjectNode node = objectMapper.readTree(jsonParser);
-
-    final JsonNode ledgerHash = node.get("ledger_hash");
-    if (ledgerHash != null) {
-      return LedgerSpecifier.of(Hash256.of(ledgerHash.asText()));
-    } else {
-      final JsonNode ledgerIndex = node.get("ledger_index");
-      if (ledgerIndex.isNumber()) {
-        return LedgerSpecifier.of(LedgerIndex.of(UnsignedInteger.valueOf(ledgerIndex.asInt())));
-      } else {
-        switch (ledgerIndex.asText()) {
-          case "validated":
-            return LedgerSpecifier.VALIDATED;
-          case "current":
-            return LedgerSpecifier.CURRENT;
-          case "closed":
-            return LedgerSpecifier.CLOSED;
-          default:
-            throw new JsonParseException(jsonParser, "Unrecognized LedgerIndex shortcut " + ledgerIndex.toString());
-        }
-      }
+    /**
+     * No-args constructor.
+     */
+    protected LedgerSpecifierDeserializer() {
+        super(LedgerSpecifier.class);
     }
-  }
+
+    @Override
+    public JsonDeserializer<LedgerSpecifier> unwrappingDeserializer(NameTransformer unwrapper) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public LedgerSpecifier deserialize(JsonParser jsonParser, DeserializationContext context) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

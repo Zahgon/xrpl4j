@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -33,25 +32,22 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = ImmutableSignerEntryWrapper.class)
 public interface SignerEntryWrapper {
 
-  /**
-   * Construct a new wrapper for the given {@link SignerEntry}.
-   *
-   * @param entry A {@link SignerEntry}.
-   *
-   * @return A {@link SignerEntryWrapper} wrapping the given {@link SignerEntry}.
-   */
-  static SignerEntryWrapper of(SignerEntry entry) {
-    return ImmutableSignerEntryWrapper.builder()
-      .signerEntry(entry)
-      .build();
-  }
+    /**
+     * Construct a new wrapper for the given {@link SignerEntry}.
+     *
+     * @param entry A {@link SignerEntry}.
+     *
+     * @return A {@link SignerEntryWrapper} wrapping the given {@link SignerEntry}.
+     */
+    static SignerEntryWrapper of(SignerEntry entry) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link SignerEntry} that this wrapper wraps.
-   *
-   * @return A {@link SignerEntry}.
-   */
-  @JsonProperty("SignerEntry")
-  SignerEntry signerEntry();
-
+    /**
+     * The {@link SignerEntry} that this wrapper wraps.
+     *
+     * @return A {@link SignerEntry}.
+     */
+    @JsonProperty("SignerEntry")
+    SignerEntry signerEntry();
 }

@@ -8,7 +8,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.primitives.UnsignedLong;
 import org.immutables.value.Value.Immutable;
 import org.immutables.value.Value.Lazy;
-
 import java.math.BigDecimal;
 
 /**
@@ -20,57 +19,57 @@ import java.math.BigDecimal;
 @JsonDeserialize(as = ImmutableAggregatePriceSet.class)
 public interface AggregatePriceSet {
 
-  /**
-   * Construct a {@code AggregatePriceSet} builder.
-   *
-   * @return An {@link ImmutableAggregatePriceSet.Builder}.
-   */
-  static ImmutableAggregatePriceSet.Builder builder() {
-    return ImmutableAggregatePriceSet.builder();
-  }
+    /**
+     * Construct a {@code AggregatePriceSet} builder.
+     *
+     * @return An {@link ImmutableAggregatePriceSet.Builder}.
+     */
+    static ImmutableAggregatePriceSet.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The simple mean price.
-   *
-   * @return A {@link String}.
-   */
-  @JsonProperty("mean")
-  String meanString();
+    /**
+     * The simple mean price.
+     *
+     * @return A {@link String}.
+     */
+    @JsonProperty("mean")
+    String meanString();
 
-  /**
-   * The simple mean price as a {@link BigDecimal}.
-   *
-   * @return A {@link BigDecimal}.
-   */
-  @Lazy
-  @JsonIgnore
-  default BigDecimal mean() {
-    return new BigDecimal(meanString());
-  }
+    /**
+     * The simple mean price as a {@link BigDecimal}.
+     *
+     * @return A {@link BigDecimal}.
+     */
+    @Lazy
+    @JsonIgnore
+    default BigDecimal mean() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The size of the data set to calculate the mean.
-   *
-   * @return An {@link UnsignedLong}.
-   */
-  UnsignedLong size();
+    /**
+     * The size of the data set to calculate the mean.
+     *
+     * @return An {@link UnsignedLong}.
+     */
+    UnsignedLong size();
 
-  /**
-   * The standard deviation.
-   *
-   * @return A {@link String}.
-   */
-  @JsonProperty("standard_deviation")
-  String standardDeviationString();
+    /**
+     * The standard deviation.
+     *
+     * @return A {@link String}.
+     */
+    @JsonProperty("standard_deviation")
+    String standardDeviationString();
 
-  /**
-   * The standard deviation as a {@link BigDecimal}.
-   *
-   * @return A {@link BigDecimal}.
-   */
-  @Lazy
-  @JsonIgnore
-  default BigDecimal standardDeviation() {
-    return new BigDecimal(standardDeviationString());
-  }
+    /**
+     * The standard deviation as a {@link BigDecimal}.
+     *
+     * @return A {@link BigDecimal}.
+     */
+    @Lazy
+    @JsonIgnore
+    default BigDecimal standardDeviation() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

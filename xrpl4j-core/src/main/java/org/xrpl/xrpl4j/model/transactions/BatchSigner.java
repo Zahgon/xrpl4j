@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -32,7 +31,6 @@ import org.immutables.value.Value.Default;
 import org.xrpl.xrpl4j.codec.addresses.AddressCodec;
 import org.xrpl.xrpl4j.crypto.keys.PublicKey;
 import org.xrpl.xrpl4j.crypto.signing.Signature;
-
 import java.math.BigInteger;
 import java.util.Comparator;
 import java.util.List;
@@ -54,99 +52,65 @@ import java.util.stream.Collectors;
 @Beta
 public interface BatchSigner {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableBatchSigner.Builder}.
-   */
-  static ImmutableBatchSigner.Builder builder() {
-    return ImmutableBatchSigner.builder();
-  }
-
-  /**
-   * The account address of the signer. This must match either the outer transaction's Account or one of the inner
-   * transaction accounts.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Account")
-  Address account();
-
-  /**
-   * The signature for the transaction. Present for direct signing.
-   *
-   * @return An optionally-present {@link Signature}.
-   */
-  @JsonProperty("TxnSignature")
-  Optional<Signature> transactionSignature();
-
-  /**
-   * The public key used to create the signature. Present for direct signing.
-   *
-   * @return An optionally-present {@link PublicKey}.
-   */
-  @JsonProperty("SigningPubKey")
-  Optional<PublicKey> signingPublicKey();
-
-  @JsonIgnore
-  @Default
-  default boolean sortedSigners() {
-    return false;
-  }
-
-  /**
-   * The array of signers for multi-signing (sorted). Present when using multi-sig instead of direct signing.
-   *
-   * <p>Note: When building a BatchSigner, you can provide signers in any order, and they will be automatically
-   * sorted by account address for serialization and signing via the {@link #checkAndNormalize()} function.</p>
-   *
-   * @return A {@link List} of {@link SignerWrapper}s in the order they were added.
-   */
-  @Default
-  @JsonProperty("Signers")
-  default List<SignerWrapper> signers() {
-    return Lists.newArrayList();
-  }
-
-  /**
-   * Validates that the BatchSigner has either direct signing fields or multi-sig signers, but not both.
-   */
-  @Value.Check
-  default BatchSigner checkAndNormalize() {
-    boolean hasDirectSigning = signingPublicKey().isPresent() && transactionSignature().isPresent();
-    boolean hasMultiSig = !signers().isEmpty();
-
-    Preconditions.checkState(
-      hasDirectSigning || hasMultiSig,
-      "BatchSigner must have either (SigningPubKey and TxnSignature) or non-empty Signers array"
-    );
-
-    Preconditions.checkState(
-      !(hasDirectSigning && hasMultiSig),
-      "BatchSigner cannot have both direct signing fields and Signers array"
-    );
-
-    if (hasDirectSigning) {
-      Preconditions.checkState(
-        signingPublicKey().isPresent() && transactionSignature().isPresent(),
-        "Direct signing requires both SigningPubKey and TxnSignature"
-      );
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableBatchSigner.Builder}.
+     */
+    static ImmutableBatchSigner.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    if (hasMultiSig && !sortedSigners()) {
-      // Normalize the order of the signers by account address (required by XRPL)
-      return ImmutableBatchSigner.builder()
-        .from(this)
-        .signers(signers().stream()
-          .sorted(Comparator.comparing(signature -> new BigInteger(
-            AddressCodec.getInstance().decodeAccountId(signature.signer().account()).hexValue(), 16
-          )))
-          .collect(Collectors.toList())
-        )
-        .sortedSigners(true)
-        .build();
-    }
-    return this;
-  }
+    /**
+     * The account address of the signer. This must match either the outer transaction's Account or one of the inner
+     * transaction accounts.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Account")
+    Address account();
 
+    /**
+     * The signature for the transaction. Present for direct signing.
+     *
+     * @return An optionally-present {@link Signature}.
+     */
+    @JsonProperty("TxnSignature")
+    Optional<Signature> transactionSignature();
+
+    /**
+     * The public key used to create the signature. Present for direct signing.
+     *
+     * @return An optionally-present {@link PublicKey}.
+     */
+    @JsonProperty("SigningPubKey")
+    Optional<PublicKey> signingPublicKey();
+
+    @JsonIgnore
+    @Default
+    default boolean sortedSigners() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * The array of signers for multi-signing (sorted). Present when using multi-sig instead of direct signing.
+     *
+     * <p>Note: When building a BatchSigner, you can provide signers in any order, and they will be automatically
+     * sorted by account address for serialization and signing via the {@link #checkAndNormalize()} function.</p>
+     *
+     * @return A {@link List} of {@link SignerWrapper}s in the order they were added.
+     */
+    @Default
+    @JsonProperty("Signers")
+    default List<SignerWrapper> signers() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Validates that the BatchSigner has either direct signing fields or multi-sig signers, but not both.
+     */
+    @Value.Check
+    default BatchSigner checkAndNormalize() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

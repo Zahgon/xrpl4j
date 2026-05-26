@@ -14,27 +14,26 @@ import org.xrpl.xrpl4j.model.ledger.Issue;
 @JsonDeserialize(as = ImmutableAmmLedgerEntryParams.class)
 public interface AmmLedgerEntryParams {
 
-  /**
-   * Construct a {@code AmmLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableAmmLedgerEntryParams.Builder}.
-   */
-  static ImmutableAmmLedgerEntryParams.Builder builder() {
-    return ImmutableAmmLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code AmmLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableAmmLedgerEntryParams.Builder}.
+     */
+    static ImmutableAmmLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * One of the two assets in the AMM's pool.
-   *
-   * @return An {@link Issue}.
-   */
-  Issue asset();
+    /**
+     * One of the two assets in the AMM's pool.
+     *
+     * @return An {@link Issue}.
+     */
+    Issue asset();
 
-  /**
-   * The other of the two assets in the AMM's pool.
-   *
-   * @return An {@link Issue}.
-   */
-  Issue asset2();
-
+    /**
+     * The other of the two assets in the AMM's pool.
+     *
+     * @return An {@link Issue}.
+     */
+    Issue asset2();
 }

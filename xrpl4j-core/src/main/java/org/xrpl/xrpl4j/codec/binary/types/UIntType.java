@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.codec.binary.types;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.google.common.base.Preconditions;
@@ -32,24 +31,21 @@ import org.xrpl.xrpl4j.codec.addresses.UnsignedByteArray;
  */
 abstract class UIntType<T extends UIntType<T>> extends SerializedType<T> {
 
-  public UIntType(UnsignedLong value, int bitSize) {
-    super(UnsignedByteArray.fromHex(ByteUtils.padded(value.toString(16), bitSizeToHexLength(bitSize))));
-  }
+    public UIntType(UnsignedLong value, int bitSize) {
+        super(UnsignedByteArray.fromHex(ByteUtils.padded(value.toString(16), bitSizeToHexLength(bitSize))));
+    }
 
-  public UIntType(UnsignedByteArray value, int bitSize) {
-    super(UnsignedByteArray.fromHex(ByteUtils.padded(value.hexValue(), bitSizeToHexLength(bitSize))));
-    Preconditions.checkArgument(
-      value.length() == bitSize / 8,
-      String.format("Invalid %s length: %s", this.getClass().getSimpleName(), value.length())
-    );
-  }
+    public UIntType(UnsignedByteArray value, int bitSize) {
+        super(UnsignedByteArray.fromHex(ByteUtils.padded(value.hexValue(), bitSizeToHexLength(bitSize))));
+        Preconditions.checkArgument(value.length() == bitSize / 8, String.format("Invalid %s length: %s", this.getClass().getSimpleName(), value.length()));
+    }
 
-  private static int bitSizeToHexLength(int bitSize) {
-    return bitSize / 4;
-  }
+    private static int bitSizeToHexLength(int bitSize) {
+        return bitSize / 4;
+    }
 
-  @Override
-  public JsonNode toJson() {
-    return new TextNode(UnsignedLong.valueOf(toHex(), 16).toString());
-  }
+    @Override
+    public JsonNode toJson() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

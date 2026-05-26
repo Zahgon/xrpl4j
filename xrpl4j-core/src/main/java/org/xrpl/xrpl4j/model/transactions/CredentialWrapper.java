@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -34,21 +33,20 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = ImmutableCredentialWrapper.class)
 public interface CredentialWrapper {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableCredentialWrapper.Builder}.
-   */
-  static ImmutableCredentialWrapper.Builder builder() {
-    return ImmutableCredentialWrapper.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableCredentialWrapper.Builder}.
+     */
+    static ImmutableCredentialWrapper.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A credential.
-   *
-   * @return A {@link Credential}.
-   */
-  @JsonProperty("Credential")
-  Credential credential();
-
+    /**
+     * A credential.
+     *
+     * @return A {@link Credential}.
+     */
+    @JsonProperty("Credential")
+    Credential credential();
 }

@@ -16,50 +16,49 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @JsonDeserialize(as = ImmutableUnknownTransaction.class)
 public interface UnknownTransaction extends Transaction {
 
-  /**
-   * Construct a {@code UnknownTransaction} builder.
-   *
-   * @return An {@link ImmutableUnknownTransaction.Builder}.
-   */
-  static ImmutableUnknownTransaction.Builder builder() {
-    return ImmutableUnknownTransaction.builder();
-  }
+    /**
+     * Construct a {@code UnknownTransaction} builder.
+     *
+     * @return An {@link ImmutableUnknownTransaction.Builder}.
+     */
+    static ImmutableUnknownTransaction.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The actual transaction type found in the {@code "TransactionType"} field of the transaction JSON.
-   *
-   * <p>This has to be a {@link String} because {@link Transaction#transactionType()} is a {@link TransactionType},
-   * which only has an UNKNOWN variant. Because this method is also annotated with {@link JsonProperty} of
-   * "TransactionType", this essentially overrides the "TransactionType" field in JSON, but {@link #transactionType()}
-   * will always be {@link TransactionType#UNKNOWN} and this field will contain the actual "TransactionType" field.
-   *
-   * @return A {@link String} containing the transaction type from JSON.
-   */
-  @JsonProperty("TransactionType")
-  String unknownTransactionType();
+    /**
+     * The actual transaction type found in the {@code "TransactionType"} field of the transaction JSON.
+     *
+     * <p>This has to be a {@link String} because {@link Transaction#transactionType()} is a {@link TransactionType},
+     * which only has an UNKNOWN variant. Because this method is also annotated with {@link JsonProperty} of
+     * "TransactionType", this essentially overrides the "TransactionType" field in JSON, but {@link #transactionType()}
+     * will always be {@link TransactionType#UNKNOWN} and this field will contain the actual "TransactionType" field.
+     *
+     * @return A {@link String} containing the transaction type from JSON.
+     */
+    @JsonProperty("TransactionType")
+    String unknownTransactionType();
 
-  /**
-   * The {@link TransactionType} of this UnknownTransaction, which will always be {@link TransactionType#UNKNOWN}.
-   * {@link #unknownTransactionType()} contains the actual transaction type value.
-   *
-   * @return {@link TransactionType#UNKNOWN}.
-   */
-  @Override
-  @JsonIgnore
-  @Value.Derived
-  default TransactionType transactionType() {
-    return Transaction.super.transactionType();
-  }
+    /**
+     * The {@link TransactionType} of this UnknownTransaction, which will always be {@link TransactionType#UNKNOWN}.
+     * {@link #unknownTransactionType()} contains the actual transaction type value.
+     *
+     * @return {@link TransactionType#UNKNOWN}.
+     */
+    @Override
+    @JsonIgnore
+    @Value.Derived
+    default TransactionType transactionType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A set of {@link TransactionFlags}.
-   *
-   * @return A {@link TransactionFlags}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
-
+    /**
+     * A set of {@link TransactionFlags}.
+     *
+     * @return A {@link TransactionFlags}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

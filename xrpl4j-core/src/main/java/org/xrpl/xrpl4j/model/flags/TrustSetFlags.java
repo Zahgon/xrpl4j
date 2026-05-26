@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.flags;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.xrpl.xrpl4j.model.transactions.AccountSet;
 import org.xrpl.xrpl4j.model.transactions.TrustSet;
 
@@ -28,317 +27,285 @@ import org.xrpl.xrpl4j.model.transactions.TrustSet;
  */
 public class TrustSetFlags extends TransactionFlags {
 
-  /**
-   * Constant for an unset flag.
-   */
-  protected static final TrustSetFlags UNSET = new TrustSetFlags(0);
-
-  /**
-   * Constant {@link TrustSetFlags} for the {@code tfSetfAuth} flag.
-   */
-  protected static final TrustSetFlags SET_F_AUTH = new TrustSetFlags(0x00010000);
-
-  /**
-   * Constant {@link TrustSetFlags} for the {@code tfSetNoRipple} flag.
-   */
-  protected static final TrustSetFlags SET_NO_RIPPLE = new TrustSetFlags(0x00020000);
-
-  /**
-   * Constant {@link TrustSetFlags} for the {@code tfClearNoRipple} flag.
-   */
-  protected static final TrustSetFlags CLEAR_NO_RIPPLE = new TrustSetFlags(0x00040000);
-
-  /**
-   * Constant {@link TrustSetFlags} for the {@code tfSetFreeze} flag.
-   */
-  protected static final TrustSetFlags SET_FREEZE = new TrustSetFlags(0x00100000);
-
-  /**
-   * Constant {@link TrustSetFlags} for the {@code tfClearFreeze} flag.
-   */
-  protected static final TrustSetFlags CLEAR_FREEZE = new TrustSetFlags(0x00200000);
-
-  /**
-   * Constant {@link TrustSetFlags} for the {@code tfSetDeepFreeze} flag.
-   */
-  protected static final TrustSetFlags SET_DEEP_FREEZE = new TrustSetFlags(0x00400000);
-
-  /**
-   * Constant {@link TrustSetFlags} for the {@code tfClearDeepFreeze} flag.
-   */
-  protected static final TrustSetFlags CLEAR_DEEP_FREEZE = new TrustSetFlags(0x00800000);
-
-  /**
-   * Constant {@link TrustSetFlags} for the {@code tfInnerBatchTxn} flag. This flag is used to indicate that a
-   * transaction is an inner transaction of a Batch.
-   *
-   * @see "https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0056-batch"
-   */
-  public static final TrustSetFlags INNER_BATCH_TXN = new TrustSetFlags(TransactionFlags.INNER_BATCH_TXN.getValue());
-
-  private TrustSetFlags(long value) {
-    super(value);
-  }
-
-  private TrustSetFlags() {
-  }
-
-  /**
-   * Create a new {@link Builder}.
-   *
-   * @return A new {@link Builder}.
-   */
-  public static Builder builder() {
-    return new Builder();
-  }
-
-  private static TrustSetFlags of(
-    boolean tfFullyCanonicalSig,
-    boolean tfSetfAuth,
-    boolean tfSetNoRipple,
-    boolean tfClearNoRipple,
-    boolean tfSetFreeze,
-    boolean tfClearFreeze,
-    boolean tfSetDeepFreeze,
-    boolean tfClearDeepFreeze,
-    boolean tfInnerBatchTxn
-  ) {
-    return new TrustSetFlags(
-      Flags.of(
-        tfFullyCanonicalSig ? TransactionFlags.FULLY_CANONICAL_SIG : UNSET,
-        tfSetfAuth ? SET_F_AUTH : UNSET,
-        tfSetNoRipple ? SET_NO_RIPPLE : UNSET,
-        tfClearNoRipple ? CLEAR_NO_RIPPLE : UNSET,
-        tfSetFreeze ? SET_FREEZE : UNSET,
-        tfClearFreeze ? CLEAR_FREEZE : UNSET,
-        tfSetDeepFreeze ? SET_DEEP_FREEZE : UNSET,
-        tfClearDeepFreeze ? CLEAR_DEEP_FREEZE : UNSET,
-        tfInnerBatchTxn ? TransactionFlags.INNER_BATCH_TXN : UNSET).getValue()
-    );
-  }
-
-  /**
-   * Construct {@link TrustSetFlags} with a given value.
-   *
-   * @param value The long-number encoded flags value of this {@link TrustSetFlags}.
-   *
-   * @return New {@link TrustSetFlags}.
-   */
-  public static TrustSetFlags of(long value) {
-    return new TrustSetFlags(value);
-  }
-
-  /**
-   * Construct an empty instance of {@link TrustSetFlags}. Transactions with empty flags will not be serialized with a
-   * {@code Flags} field.
-   *
-   * @return An empty {@link TrustSetFlags}.
-   */
-  public static TrustSetFlags empty() {
-    return new TrustSetFlags();
-  }
-
-  /**
-   * Require a fully canonical signature.
-   *
-   * @return {@code true} if {@code tfFullyCanonicalSig} is set, otherwise {@code false}.
-   */
-  public boolean tfFullyCanonicalSig() {
-    return this.isSet(TransactionFlags.FULLY_CANONICAL_SIG);
-  }
-
-  /**
-   * Authorize the other party to hold currency issued by this account. (No effect unless using
-   * {@link AccountSet.AccountSetFlag#REQUIRE_AUTH}). Cannot be unset.
-   *
-   * @return {@code true} if {@code tfSetfAuth} is set, otherwise {@code false}.
-   */
-  public boolean tfSetfAuth() {
-    return this.isSet(SET_F_AUTH);
-  }
-
-  /**
-   * Enable the No Ripple flag, which blocks rippling between two trust lines of the same currency if this flag is
-   * enabled on both.
-   *
-   * @return {@code true} if {@code tfSetNoRipple} is set, otherwise {@code false}.
-   */
-  public boolean tfSetNoRipple() {
-    return this.isSet(SET_NO_RIPPLE);
-  }
-
-  /**
-   * Disable the No Ripple flag, allowing rippling on this trust line.
-   *
-   * @return {@code true} if {@code tfClearNoRipple} is set, otherwise {@code false}.
-   */
-  public boolean tfClearNoRipple() {
-    return this.isSet(CLEAR_NO_RIPPLE);
-  }
-
-  /**
-   * <a href="https://xrpl.org/freezes.html">Freeze</a> the trust line.
-   *
-   * @return {@code true} if {@code tfSetFreeze} is set, otherwise {@code false}.
-   */
-  public boolean tfSetFreeze() {
-    return this.isSet(SET_FREEZE);
-  }
-
-  /**
-   * <a href="https://xrpl.org/freezes.html">Unfreeze</a> the trust line.
-   *
-   * @return {@code true} if {@code tfClearFreeze} is set, otherwise {@code false}.
-   */
-  public boolean tfClearFreeze() {
-    return this.isSet(CLEAR_FREEZE);
-  }
-
-  /**
-   * <a href="https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0077-deep-freeze">Deep freeze</a> the trust line.
-   *
-   * @return {@code true} if {@code tfSetDeepFreeze} is set, otherwise {@code false}.
-   */
-  public boolean tfSetDeepFreeze() {
-    return this.isSet(SET_DEEP_FREEZE);
-  }
-
-  /**
-   * <a href="https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0077-deep-freeze">Clear deep freeze</a> on the
-   * trust line.
-   *
-   * @return {@code true} if {@code tfClearDeepFreeze} is set, otherwise {@code false}.
-   */
-  public boolean tfClearDeepFreeze() {
-    return this.isSet(CLEAR_DEEP_FREEZE);
-  }
-
-  /**
-   * Indicates that this transaction is an inner transaction of a Batch transaction.
-   *
-   * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
-   *
-   * @see "https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0056-batch"
-   */
-  public boolean tfInnerBatchTxn() {
-    return this.isSet(TrustSetFlags.INNER_BATCH_TXN);
-  }
-
-  /**
-   * A builder class for {@link TrustSetFlags}.
-   */
-  public static class Builder {
-
-    private boolean tfSetfAuth = false;
-    private boolean tfSetNoRipple = false;
-    private boolean tfClearNoRipple = false;
-    private boolean tfSetFreeze = false;
-    private boolean tfClearFreeze = false;
-    private boolean tfSetDeepFreeze = false;
-    private boolean tfClearDeepFreeze = false;
-    private boolean tfInnerBatchTxn = false;
+    /**
+     * Constant for an unset flag.
+     */
+    protected static final TrustSetFlags UNSET = new TrustSetFlags(0);
 
     /**
-     * Set {@code tfSetfAuth} to the given value.
-     *
-     * @param tfSetfAuth A boolean value.
-     *
-     * @return The same {@link Builder}.
+     * Constant {@link TrustSetFlags} for the {@code tfSetfAuth} flag.
      */
-    public Builder tfSetfAuth(boolean tfSetfAuth) {
-      this.tfSetfAuth = tfSetfAuth;
-      return this;
+    protected static final TrustSetFlags SET_F_AUTH = new TrustSetFlags(0x00010000);
+
+    /**
+     * Constant {@link TrustSetFlags} for the {@code tfSetNoRipple} flag.
+     */
+    protected static final TrustSetFlags SET_NO_RIPPLE = new TrustSetFlags(0x00020000);
+
+    /**
+     * Constant {@link TrustSetFlags} for the {@code tfClearNoRipple} flag.
+     */
+    protected static final TrustSetFlags CLEAR_NO_RIPPLE = new TrustSetFlags(0x00040000);
+
+    /**
+     * Constant {@link TrustSetFlags} for the {@code tfSetFreeze} flag.
+     */
+    protected static final TrustSetFlags SET_FREEZE = new TrustSetFlags(0x00100000);
+
+    /**
+     * Constant {@link TrustSetFlags} for the {@code tfClearFreeze} flag.
+     */
+    protected static final TrustSetFlags CLEAR_FREEZE = new TrustSetFlags(0x00200000);
+
+    /**
+     * Constant {@link TrustSetFlags} for the {@code tfSetDeepFreeze} flag.
+     */
+    protected static final TrustSetFlags SET_DEEP_FREEZE = new TrustSetFlags(0x00400000);
+
+    /**
+     * Constant {@link TrustSetFlags} for the {@code tfClearDeepFreeze} flag.
+     */
+    protected static final TrustSetFlags CLEAR_DEEP_FREEZE = new TrustSetFlags(0x00800000);
+
+    /**
+     * Constant {@link TrustSetFlags} for the {@code tfInnerBatchTxn} flag. This flag is used to indicate that a
+     * transaction is an inner transaction of a Batch.
+     *
+     * @see "https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0056-batch"
+     */
+    public static final TrustSetFlags INNER_BATCH_TXN = new TrustSetFlags(TransactionFlags.INNER_BATCH_TXN.getValue());
+
+    private TrustSetFlags(long value) {
+        super(value);
+    }
+
+    private TrustSetFlags() {
     }
 
     /**
-     * Set {@code tfSetNoRipple} to {@code true}.
+     * Create a new {@link Builder}.
      *
-     * @return The same {@link Builder}.
+     * @return A new {@link Builder}.
      */
-    public Builder tfSetNoRipple() {
-      this.tfSetNoRipple = true;
-      return this;
+    public static Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    private static TrustSetFlags of(boolean tfFullyCanonicalSig, boolean tfSetfAuth, boolean tfSetNoRipple, boolean tfClearNoRipple, boolean tfSetFreeze, boolean tfClearFreeze, boolean tfSetDeepFreeze, boolean tfClearDeepFreeze, boolean tfInnerBatchTxn) {
+        return new TrustSetFlags(Flags.of(tfFullyCanonicalSig ? TransactionFlags.FULLY_CANONICAL_SIG : UNSET, tfSetfAuth ? SET_F_AUTH : UNSET, tfSetNoRipple ? SET_NO_RIPPLE : UNSET, tfClearNoRipple ? CLEAR_NO_RIPPLE : UNSET, tfSetFreeze ? SET_FREEZE : UNSET, tfClearFreeze ? CLEAR_FREEZE : UNSET, tfSetDeepFreeze ? SET_DEEP_FREEZE : UNSET, tfClearDeepFreeze ? CLEAR_DEEP_FREEZE : UNSET, tfInnerBatchTxn ? TransactionFlags.INNER_BATCH_TXN : UNSET).getValue());
     }
 
     /**
-     * Set {@code tfClearNoRipple} to {@code true}.
+     * Construct {@link TrustSetFlags} with a given value.
      *
-     * @return The same {@link Builder}.
+     * @param value The long-number encoded flags value of this {@link TrustSetFlags}.
+     *
+     * @return New {@link TrustSetFlags}.
      */
-    public Builder tfClearNoRipple() {
-      this.tfClearNoRipple = true;
-      return this;
+    public static TrustSetFlags of(long value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     * Set {@code tfSetFreeze} to {@code true}.
+     * Construct an empty instance of {@link TrustSetFlags}. Transactions with empty flags will not be serialized with a
+     * {@code Flags} field.
      *
-     * @return The same {@link Builder}.
+     * @return An empty {@link TrustSetFlags}.
      */
-    public Builder tfSetFreeze() {
-      this.tfSetFreeze = true;
-      return this;
+    public static TrustSetFlags empty() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     * Set {@code tfClearFreeze} to {@code true}.
+     * Require a fully canonical signature.
      *
-     * @return The same {@link Builder}.
+     * @return {@code true} if {@code tfFullyCanonicalSig} is set, otherwise {@code false}.
      */
-    public Builder tfClearFreeze() {
-      this.tfClearFreeze = true;
-      return this;
+    public boolean tfFullyCanonicalSig() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     * Set {@code tfSetDeepFreeze} to {@code true}.
+     * Authorize the other party to hold currency issued by this account. (No effect unless using
+     * {@link AccountSet.AccountSetFlag#REQUIRE_AUTH}). Cannot be unset.
      *
-     * @return The same {@link Builder}.
+     * @return {@code true} if {@code tfSetfAuth} is set, otherwise {@code false}.
      */
-    public Builder tfSetDeepFreeze() {
-      this.tfSetDeepFreeze = true;
-      return this;
+    public boolean tfSetfAuth() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     * Set {@code tfClearDeepFreeze} to {@code true}.
+     * Enable the No Ripple flag, which blocks rippling between two trust lines of the same currency if this flag is
+     * enabled on both.
      *
-     * @return The same {@link Builder}.
+     * @return {@code true} if {@code tfSetNoRipple} is set, otherwise {@code false}.
      */
-    public Builder tfClearDeepFreeze() {
-      this.tfClearDeepFreeze = true;
-      return this;
+    public boolean tfSetNoRipple() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     * Set {@code tfInnerBatchTxn} to the given value.
+     * Disable the No Ripple flag, allowing rippling on this trust line.
      *
-     * @param tfInnerBatchTxn A boolean value.
-     *
-     * @return The same {@link Builder}.
+     * @return {@code true} if {@code tfClearNoRipple} is set, otherwise {@code false}.
      */
-    public Builder tfInnerBatchTxn(boolean tfInnerBatchTxn) {
-      this.tfInnerBatchTxn = tfInnerBatchTxn;
-      return this;
+    public boolean tfClearNoRipple() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     * Build a new {@link TrustSetFlags} from the current boolean values.
+     * <a href="https://xrpl.org/freezes.html">Freeze</a> the trust line.
      *
-     * @return A new {@link TrustSetFlags}.
+     * @return {@code true} if {@code tfSetFreeze} is set, otherwise {@code false}.
      */
-    public TrustSetFlags build() {
-      return TrustSetFlags.of(
-        true,
-        tfSetfAuth,
-        tfSetNoRipple,
-        tfClearNoRipple,
-        tfSetFreeze,
-        tfClearFreeze,
-        tfSetDeepFreeze,
-        tfClearDeepFreeze,
-        tfInnerBatchTxn
-      );
+    public boolean tfSetFreeze() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    /**
+     * <a href="https://xrpl.org/freezes.html">Unfreeze</a> the trust line.
+     *
+     * @return {@code true} if {@code tfClearFreeze} is set, otherwise {@code false}.
+     */
+    public boolean tfClearFreeze() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * <a href="https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0077-deep-freeze">Deep freeze</a> the trust line.
+     *
+     * @return {@code true} if {@code tfSetDeepFreeze} is set, otherwise {@code false}.
+     */
+    public boolean tfSetDeepFreeze() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * <a href="https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0077-deep-freeze">Clear deep freeze</a> on the
+     * trust line.
+     *
+     * @return {@code true} if {@code tfClearDeepFreeze} is set, otherwise {@code false}.
+     */
+    public boolean tfClearDeepFreeze() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Indicates that this transaction is an inner transaction of a Batch transaction.
+     *
+     * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
+     *
+     * @see "https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0056-batch"
+     */
+    public boolean tfInnerBatchTxn() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * A builder class for {@link TrustSetFlags}.
+     */
+    public static class Builder {
+
+        private boolean tfSetfAuth = false;
+
+        private boolean tfSetNoRipple = false;
+
+        private boolean tfClearNoRipple = false;
+
+        private boolean tfSetFreeze = false;
+
+        private boolean tfClearFreeze = false;
+
+        private boolean tfSetDeepFreeze = false;
+
+        private boolean tfClearDeepFreeze = false;
+
+        private boolean tfInnerBatchTxn = false;
+
+        /**
+         * Set {@code tfSetfAuth} to the given value.
+         *
+         * @param tfSetfAuth A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfSetfAuth(boolean tfSetfAuth) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfSetNoRipple} to {@code true}.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfSetNoRipple() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfClearNoRipple} to {@code true}.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfClearNoRipple() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfSetFreeze} to {@code true}.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfSetFreeze() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfClearFreeze} to {@code true}.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfClearFreeze() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfSetDeepFreeze} to {@code true}.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfSetDeepFreeze() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfClearDeepFreeze} to {@code true}.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfClearDeepFreeze() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfInnerBatchTxn} to the given value.
+         *
+         * @param tfInnerBatchTxn A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfInnerBatchTxn(boolean tfInnerBatchTxn) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Build a new {@link TrustSetFlags} from the current boolean values.
+         *
+         * @return A new {@link TrustSetFlags}.
+         */
+        public TrustSetFlags build() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+    }
 }

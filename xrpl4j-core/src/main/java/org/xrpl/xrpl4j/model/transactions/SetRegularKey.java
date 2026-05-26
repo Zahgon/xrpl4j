@@ -19,13 +19,11 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -40,37 +38,36 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableSetRegularKey.class)
 public interface SetRegularKey extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableSetRegularKey.Builder}.
-   */
-  static ImmutableSetRegularKey.Builder builder() {
-    return ImmutableSetRegularKey.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableSetRegularKey.Builder}.
+     */
+    static ImmutableSetRegularKey.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link SetRegularKey}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link SetRegularKey}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * An {@link Address} that indicates the regular key pair to be assigned to the account. If omitted,
-   * removes any existing regular key pair from the account. Must not match the master key pair for the address.
-   *
-   * @return The {@link Optional} {@link Address} indicating the regular key pair to use.
-   */
-  @JsonProperty("RegularKey")
-  Optional<Address> regularKey();
-
+    /**
+     * An {@link Address} that indicates the regular key pair to be assigned to the account. If omitted,
+     * removes any existing regular key pair from the account. Must not match the master key pair for the address.
+     *
+     * @return The {@link Optional} {@link Address} indicating the regular key pair to use.
+     */
+    @JsonProperty("RegularKey")
+    Optional<Address> regularKey();
 }

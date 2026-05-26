@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.google.common.primitives.UnsignedInteger;
 import org.xrpl.xrpl4j.model.transactions.TradingFee;
-
 import java.io.IOException;
 
 /**
@@ -13,15 +12,15 @@ import java.io.IOException;
  */
 public class TradingFeeDeserializer extends StdDeserializer<TradingFee> {
 
-  /**
-   * No-args constructor.
-   */
-  public TradingFeeDeserializer() {
-    super(TradingFee.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public TradingFeeDeserializer() {
+        super(TradingFee.class);
+    }
 
-  @Override
-  public TradingFee deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    return TradingFee.of(UnsignedInteger.valueOf(jsonParser.getLongValue()));
-  }
+    @Override
+    public TradingFee deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

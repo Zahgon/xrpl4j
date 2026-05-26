@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -33,7 +32,6 @@ import org.slf4j.LoggerFactory;
 import org.xrpl.xrpl4j.crypto.keys.PublicKey;
 import org.xrpl.xrpl4j.crypto.signing.Signature;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -43,273 +41,179 @@ import java.util.Optional;
  */
 public interface Transaction {
 
-  /**
-   * A bidirectional map of immutable transaction types to their corresponding {@link TransactionType}.
-   *
-   * <p>This is useful for polymorphic Jackson deserialization.
-   */
-  BiMap<Class<? extends Transaction>, TransactionType> typeMap =
-    new Builder<Class<? extends Transaction>, TransactionType>()
-      .put(ImmutableAccountSet.class, TransactionType.ACCOUNT_SET)
-      .put(ImmutableAccountDelete.class, TransactionType.ACCOUNT_DELETE)
-      .put(ImmutableCheckCancel.class, TransactionType.CHECK_CANCEL)
-      .put(ImmutableCheckCash.class, TransactionType.CHECK_CASH)
-      .put(ImmutableCheckCreate.class, TransactionType.CHECK_CREATE)
-      .put(ImmutableCredentialAccept.class, TransactionType.CREDENTIAL_ACCEPT)
-      .put(ImmutableCredentialCreate.class, TransactionType.CREDENTIAL_CREATE)
-      .put(ImmutableCredentialDelete.class, TransactionType.CREDENTIAL_DELETE)
-      .put(ImmutableDepositPreAuth.class, TransactionType.DEPOSIT_PRE_AUTH)
-      .put(ImmutableEnableAmendment.class, TransactionType.ENABLE_AMENDMENT)
-      .put(ImmutableEscrowCancel.class, TransactionType.ESCROW_CANCEL)
-      .put(ImmutableEscrowCreate.class, TransactionType.ESCROW_CREATE)
-      .put(ImmutableEscrowFinish.class, TransactionType.ESCROW_FINISH)
-      .put(ImmutableNfTokenBurn.class, TransactionType.NFTOKEN_BURN)
-      .put(ImmutableNfTokenMint.class, TransactionType.NFTOKEN_MINT)
-      .put(ImmutableNfTokenAcceptOffer.class, TransactionType.NFTOKEN_ACCEPT_OFFER)
-      .put(ImmutableNfTokenCancelOffer.class, TransactionType.NFTOKEN_CANCEL_OFFER)
-      .put(ImmutableNfTokenCreateOffer.class, TransactionType.NFTOKEN_CREATE_OFFER)
-      .put(ImmutableOfferCancel.class, TransactionType.OFFER_CANCEL)
-      .put(ImmutableOfferCreate.class, TransactionType.OFFER_CREATE)
-      .put(ImmutablePayment.class, TransactionType.PAYMENT)
-      .put(ImmutablePaymentChannelClaim.class, TransactionType.PAYMENT_CHANNEL_CLAIM)
-      .put(ImmutablePaymentChannelCreate.class, TransactionType.PAYMENT_CHANNEL_CREATE)
-      .put(ImmutablePaymentChannelFund.class, TransactionType.PAYMENT_CHANNEL_FUND)
-      .put(ImmutablePermissionedDomainSet.class, TransactionType.PERMISSIONED_DOMAIN_SET)
-      .put(ImmutablePermissionedDomainDelete.class, TransactionType.PERMISSIONED_DOMAIN_DELETE)
-      .put(ImmutableSetFee.class, TransactionType.SET_FEE)
-      .put(ImmutableSetRegularKey.class, TransactionType.SET_REGULAR_KEY)
-      .put(ImmutableSignerListSet.class, TransactionType.SIGNER_LIST_SET)
-      .put(ImmutableTrustSet.class, TransactionType.TRUST_SET)
-      .put(ImmutableTicketCreate.class, TransactionType.TICKET_CREATE)
-      .put(ImmutableUnlModify.class, TransactionType.UNL_MODIFY)
-      .put(ImmutableAmmBid.class, TransactionType.AMM_BID)
-      .put(ImmutableAmmCreate.class, TransactionType.AMM_CREATE)
-      .put(ImmutableAmmDeposit.class, TransactionType.AMM_DEPOSIT)
-      .put(ImmutableAmmVote.class, TransactionType.AMM_VOTE)
-      .put(ImmutableAmmWithdraw.class, TransactionType.AMM_WITHDRAW)
-      .put(ImmutableAmmDelete.class, TransactionType.AMM_DELETE)
-      .put(ImmutableClawback.class, TransactionType.CLAWBACK)
-      .put(ImmutableXChainAccountCreateCommit.class, TransactionType.XCHAIN_ACCOUNT_CREATE_COMMIT)
-      .put(ImmutableXChainAddAccountCreateAttestation.class, TransactionType.XCHAIN_ADD_ACCOUNT_CREATE_ATTESTATION)
-      .put(ImmutableXChainAddClaimAttestation.class, TransactionType.XCHAIN_ADD_CLAIM_ATTESTATION)
-      .put(ImmutableXChainClaim.class, TransactionType.XCHAIN_CLAIM)
-      .put(ImmutableXChainCommit.class, TransactionType.XCHAIN_COMMIT)
-      .put(ImmutableXChainCreateBridge.class, TransactionType.XCHAIN_CREATE_BRIDGE)
-      .put(ImmutableXChainCreateClaimId.class, TransactionType.XCHAIN_CREATE_CLAIM_ID)
-      .put(ImmutableXChainModifyBridge.class, TransactionType.XCHAIN_MODIFY_BRIDGE)
-      .put(ImmutableDidSet.class, TransactionType.DID_SET)
-      .put(ImmutableDidDelete.class, TransactionType.DID_DELETE)
-      .put(ImmutableOracleSet.class, TransactionType.ORACLE_SET)
-      .put(ImmutableOracleDelete.class, TransactionType.ORACLE_DELETE)
-      .put(ImmutableMpTokenAuthorize.class, TransactionType.MPT_AUTHORIZE)
-      .put(ImmutableMpTokenIssuanceCreate.class, TransactionType.MPT_ISSUANCE_CREATE)
-      .put(ImmutableMpTokenIssuanceDestroy.class, TransactionType.MPT_ISSUANCE_DESTROY)
-      .put(ImmutableMpTokenIssuanceSet.class, TransactionType.MPT_ISSUANCE_SET)
-      .put(ImmutableUnknownTransaction.class, TransactionType.UNKNOWN)
-      .put(ImmutableAmmClawback.class, TransactionType.AMM_CLAWBACK)
-      .put(ImmutableVaultCreate.class, TransactionType.VAULT_CREATE)
-      .put(ImmutableVaultSet.class, TransactionType.VAULT_SET)
-      .put(ImmutableVaultDelete.class, TransactionType.VAULT_DELETE)
-      .put(ImmutableVaultDeposit.class, TransactionType.VAULT_DEPOSIT)
-      .put(ImmutableVaultWithdraw.class, TransactionType.VAULT_WITHDRAW)
-      .put(ImmutableVaultClawback.class, TransactionType.VAULT_CLAWBACK)
-      .put(ImmutableBatch.class, TransactionType.BATCH)
-      .put(ImmutableLoanBrokerSet.class, TransactionType.LOAN_BROKER_SET)
-      .put(ImmutableLoanBrokerDelete.class, TransactionType.LOAN_BROKER_DELETE)
-      .put(ImmutableLoanBrokerCoverDeposit.class, TransactionType.LOAN_BROKER_COVER_DEPOSIT)
-      .put(ImmutableLoanBrokerCoverWithdraw.class, TransactionType.LOAN_BROKER_COVER_WITHDRAW)
-      .put(ImmutableLoanBrokerCoverClawback.class, TransactionType.LOAN_BROKER_COVER_CLAWBACK)
-      .put(ImmutableLoanSet.class, TransactionType.LOAN_SET)
-      .put(ImmutableLoanDelete.class, TransactionType.LOAN_DELETE)
-      .put(ImmutableLoanManage.class, TransactionType.LOAN_MANAGE)
-      .put(ImmutableLoanPay.class, TransactionType.LOAN_PAY)
-      .build();
+    /**
+     * A bidirectional map of immutable transaction types to their corresponding {@link TransactionType}.
+     *
+     * <p>This is useful for polymorphic Jackson deserialization.
+     */
+    BiMap<Class<? extends Transaction>, TransactionType> typeMap = new Builder<Class<? extends Transaction>, TransactionType>().put(ImmutableAccountSet.class, TransactionType.ACCOUNT_SET).put(ImmutableAccountDelete.class, TransactionType.ACCOUNT_DELETE).put(ImmutableCheckCancel.class, TransactionType.CHECK_CANCEL).put(ImmutableCheckCash.class, TransactionType.CHECK_CASH).put(ImmutableCheckCreate.class, TransactionType.CHECK_CREATE).put(ImmutableCredentialAccept.class, TransactionType.CREDENTIAL_ACCEPT).put(ImmutableCredentialCreate.class, TransactionType.CREDENTIAL_CREATE).put(ImmutableCredentialDelete.class, TransactionType.CREDENTIAL_DELETE).put(ImmutableDepositPreAuth.class, TransactionType.DEPOSIT_PRE_AUTH).put(ImmutableEnableAmendment.class, TransactionType.ENABLE_AMENDMENT).put(ImmutableEscrowCancel.class, TransactionType.ESCROW_CANCEL).put(ImmutableEscrowCreate.class, TransactionType.ESCROW_CREATE).put(ImmutableEscrowFinish.class, TransactionType.ESCROW_FINISH).put(ImmutableNfTokenBurn.class, TransactionType.NFTOKEN_BURN).put(ImmutableNfTokenMint.class, TransactionType.NFTOKEN_MINT).put(ImmutableNfTokenAcceptOffer.class, TransactionType.NFTOKEN_ACCEPT_OFFER).put(ImmutableNfTokenCancelOffer.class, TransactionType.NFTOKEN_CANCEL_OFFER).put(ImmutableNfTokenCreateOffer.class, TransactionType.NFTOKEN_CREATE_OFFER).put(ImmutableOfferCancel.class, TransactionType.OFFER_CANCEL).put(ImmutableOfferCreate.class, TransactionType.OFFER_CREATE).put(ImmutablePayment.class, TransactionType.PAYMENT).put(ImmutablePaymentChannelClaim.class, TransactionType.PAYMENT_CHANNEL_CLAIM).put(ImmutablePaymentChannelCreate.class, TransactionType.PAYMENT_CHANNEL_CREATE).put(ImmutablePaymentChannelFund.class, TransactionType.PAYMENT_CHANNEL_FUND).put(ImmutablePermissionedDomainSet.class, TransactionType.PERMISSIONED_DOMAIN_SET).put(ImmutablePermissionedDomainDelete.class, TransactionType.PERMISSIONED_DOMAIN_DELETE).put(ImmutableSetFee.class, TransactionType.SET_FEE).put(ImmutableSetRegularKey.class, TransactionType.SET_REGULAR_KEY).put(ImmutableSignerListSet.class, TransactionType.SIGNER_LIST_SET).put(ImmutableTrustSet.class, TransactionType.TRUST_SET).put(ImmutableTicketCreate.class, TransactionType.TICKET_CREATE).put(ImmutableUnlModify.class, TransactionType.UNL_MODIFY).put(ImmutableAmmBid.class, TransactionType.AMM_BID).put(ImmutableAmmCreate.class, TransactionType.AMM_CREATE).put(ImmutableAmmDeposit.class, TransactionType.AMM_DEPOSIT).put(ImmutableAmmVote.class, TransactionType.AMM_VOTE).put(ImmutableAmmWithdraw.class, TransactionType.AMM_WITHDRAW).put(ImmutableAmmDelete.class, TransactionType.AMM_DELETE).put(ImmutableClawback.class, TransactionType.CLAWBACK).put(ImmutableXChainAccountCreateCommit.class, TransactionType.XCHAIN_ACCOUNT_CREATE_COMMIT).put(ImmutableXChainAddAccountCreateAttestation.class, TransactionType.XCHAIN_ADD_ACCOUNT_CREATE_ATTESTATION).put(ImmutableXChainAddClaimAttestation.class, TransactionType.XCHAIN_ADD_CLAIM_ATTESTATION).put(ImmutableXChainClaim.class, TransactionType.XCHAIN_CLAIM).put(ImmutableXChainCommit.class, TransactionType.XCHAIN_COMMIT).put(ImmutableXChainCreateBridge.class, TransactionType.XCHAIN_CREATE_BRIDGE).put(ImmutableXChainCreateClaimId.class, TransactionType.XCHAIN_CREATE_CLAIM_ID).put(ImmutableXChainModifyBridge.class, TransactionType.XCHAIN_MODIFY_BRIDGE).put(ImmutableDidSet.class, TransactionType.DID_SET).put(ImmutableDidDelete.class, TransactionType.DID_DELETE).put(ImmutableOracleSet.class, TransactionType.ORACLE_SET).put(ImmutableOracleDelete.class, TransactionType.ORACLE_DELETE).put(ImmutableMpTokenAuthorize.class, TransactionType.MPT_AUTHORIZE).put(ImmutableMpTokenIssuanceCreate.class, TransactionType.MPT_ISSUANCE_CREATE).put(ImmutableMpTokenIssuanceDestroy.class, TransactionType.MPT_ISSUANCE_DESTROY).put(ImmutableMpTokenIssuanceSet.class, TransactionType.MPT_ISSUANCE_SET).put(ImmutableUnknownTransaction.class, TransactionType.UNKNOWN).put(ImmutableAmmClawback.class, TransactionType.AMM_CLAWBACK).put(ImmutableVaultCreate.class, TransactionType.VAULT_CREATE).put(ImmutableVaultSet.class, TransactionType.VAULT_SET).put(ImmutableVaultDelete.class, TransactionType.VAULT_DELETE).put(ImmutableVaultDeposit.class, TransactionType.VAULT_DEPOSIT).put(ImmutableVaultWithdraw.class, TransactionType.VAULT_WITHDRAW).put(ImmutableVaultClawback.class, TransactionType.VAULT_CLAWBACK).put(ImmutableBatch.class, TransactionType.BATCH).put(ImmutableLoanBrokerSet.class, TransactionType.LOAN_BROKER_SET).put(ImmutableLoanBrokerDelete.class, TransactionType.LOAN_BROKER_DELETE).put(ImmutableLoanBrokerCoverDeposit.class, TransactionType.LOAN_BROKER_COVER_DEPOSIT).put(ImmutableLoanBrokerCoverWithdraw.class, TransactionType.LOAN_BROKER_COVER_WITHDRAW).put(ImmutableLoanBrokerCoverClawback.class, TransactionType.LOAN_BROKER_COVER_CLAWBACK).put(ImmutableLoanSet.class, TransactionType.LOAN_SET).put(ImmutableLoanDelete.class, TransactionType.LOAN_DELETE).put(ImmutableLoanManage.class, TransactionType.LOAN_MANAGE).put(ImmutableLoanPay.class, TransactionType.LOAN_PAY).build();
 
-  /**
-   * The unique {@link Address} of the account that initiated this transaction.
-   *
-   * @return The {@link Address} of the account submitting this transaction.
-   */
-  @JsonProperty("Account")
-  Address account();
+    /**
+     * The unique {@link Address} of the account that initiated this transaction.
+     *
+     * @return The {@link Address} of the account submitting this transaction.
+     */
+    @JsonProperty("Account")
+    Address account();
 
-  /**
-   * The type of transaction.
-   *
-   * @return A {@link TransactionType}.
-   */
-  @JsonProperty("TransactionType")
-  @Value.Default // must be Default rather than Derived, otherwise Jackson treats "TransactionType" as an unknownField
-  default TransactionType transactionType() {
-    return typeMap.get(this.getClass());
-  }
-
-  /**
-   * The {@link String} representation of an integer amount of XRP, in drops, to be destroyed as a cost for distributing
-   * this Payment transaction to the network.
-   *
-   * <p>This field is auto-fillable
-   *
-   * @return An {@link XrpCurrencyAmount} representing the transaction cost.
-   *
-   * @see "https://xrpl.org/transaction-common-fields.html#auto-fillable-fields"
-   */
-  @JsonProperty("Fee")
-  XrpCurrencyAmount fee();
-
-  /**
-   * The sequence number of the account submitting the {@link Transaction}. A {@link Transaction} is only valid if the
-   * Sequence number is exactly 1 greater than the previous transaction from the same account.
-   *
-   * <p>This field is auto-fillable
-   *
-   * @return An {@link UnsignedInteger} representing the sequence of the transaction.
-   *
-   * @see "https://xrpl.org/transaction-common-fields.html#auto-fillable-fields"
-   */
-  @Value.Default
-  @JsonProperty("Sequence")
-  default UnsignedInteger sequence() {
-    return UnsignedInteger.ZERO;
-  }
-
-  /**
-   * The sequence number of the {@link org.xrpl.xrpl4j.model.ledger.TicketObject} to use in place of a
-   * {@link #sequence()} number. If this is provided, {@link #sequence()} must be 0. Cannot be used with
-   * {@link #accountTransactionId()}.
-   *
-   * @return An {@link UnsignedInteger} representing the ticket sequence of the transaction.
-   */
-  @JsonProperty("TicketSequence")
-  Optional<UnsignedInteger> ticketSequence();
-
-  /**
-   * Hash value identifying another transaction. If provided, this {@link Transaction} is only valid if the sending
-   * account's previously-sent transaction matches the provided hash.
-   *
-   * @return An {@link Optional} of type {@link Hash256} containing the account transaction ID.
-   */
-  @JsonProperty("AccountTxnID")
-  Optional<Hash256> accountTransactionId();
-
-  /**
-   * Highest ledger index this transaction can appear in. Specifying this field places a strict upper limit on how long
-   * the transaction can wait to be validated or rejected.
-   *
-   * @return An {@link Optional} of type {@link UnsignedInteger} representing the last ledger sequence.
-   */
-  @JsonProperty("LastLedgerSequence")
-  Optional<UnsignedInteger> lastLedgerSequence();
-
-  /**
-   * Additional arbitrary information used to identify this {@link Transaction}.
-   *
-   * @return A {@link List} of {@link MemoWrapper}s.
-   */
-  @JsonProperty("Memos")
-  List<MemoWrapper> memos();
-
-  /**
-   * Array of {@link SignerWrapper}s that represent a multi-signature which authorizes this {@link Transaction}.
-   *
-   * @return A {@link List} of {@link SignerWrapper}s.
-   */
-  @JsonProperty("Signers")
-  List<SignerWrapper> signers();
-
-  /**
-   * Arbitrary {@link UnsignedInteger} used to identify the reason for this {@link Transaction}, or a sender on whose
-   * behalf this {@link Transaction} is made.
-   *
-   * @return An {@link Optional} {@link UnsignedInteger} representing the source account's tag.
-   */
-  @JsonProperty("SourceTag")
-  Optional<UnsignedInteger> sourceTag();
-
-  /**
-   * The {@link PublicKey} that corresponds to the private key used to sign this transaction. If an empty string, ie
-   * {@link PublicKey#MULTI_SIGN_PUBLIC_KEY}, indicates a multi-signature is present in the
-   * {@link Transaction#signers()} field instead.
-   *
-   * @return A {@link PublicKey} containing the public key of the account submitting the transaction, or
-   *   {@link PublicKey#MULTI_SIGN_PUBLIC_KEY} if the transaction is multi-signed.
-   */
-  @JsonInclude(JsonInclude.Include.NON_ABSENT)
-  @JsonProperty("SigningPubKey")
-  @Value.Default
-  default PublicKey signingPublicKey() {
-    return PublicKey.MULTI_SIGN_PUBLIC_KEY;
-  }
-
-  /**
-   * The signature that verifies this transaction as originating from the account it says it is from.
-   *
-   * <p>This field is automatically added when signing this {@link Transaction}.
-   *
-   * @return An {@link Optional} {@link String} containing the transaction signature.
-   */
-  @JsonProperty("TxnSignature")
-  Optional<Signature> transactionSignature();
-
-  @JsonProperty("NetworkID")
-  Optional<NetworkId> networkId();
-
-  @JsonAnyGetter
-  @JsonInclude(Include.NON_ABSENT)
-  Map<String, Object> unknownFields();
-
-  /**
-   * Get the transaction flags polymorphically. Each transaction type implements its own flags() method with a specific
-   * return type.
-   *
-   * @return The {@link TransactionFlags} for this transaction type.
-   */
-  @Value.Auxiliary
-  @JsonIgnore
-  default TransactionFlags transactionFlags() {
-    // Design Note: Ideally, `Transaction` would declare a flags() method returning TransactionFlags, with each concrete
-    // transaction type overriding it to return a more specific type (e.g., PaymentFlags for Payment).
-    // While this pattern compiles in Java using covariant return types, the Immutables annotation processor
-    // cannot handle it. Immutables generates a warning that the builder's .from() method will not properly
-    // copy flags between instances, creating a subtle source of bugs.
-    //
-    // Two alternatives were considered:
-    // 1. Make Transaction generic: Transaction<T extends TransactionFlags>
-    // 2. Use reflection to invoke flags() on the concrete type (current approach)
-    //
-    // We chose option 2 because:
-    // - Making Transaction generic would require changes across the entire codebase (breaking change)
-    // - Even with generics, code working with Transaction references would still see TransactionFlags
-    //   (not the specific subtype), providing no practical benefit despite the refactoring cost
-    // - Reflection is contained to this single helper method and works transparently
-    try {
-      return (TransactionFlags) this.getClass().getMethod("flags").invoke(this);
-    } catch (Exception e) {
-      LoggerFactory.getLogger(Transaction.class).error("Failed to invoke flags() method", e);
-      return TransactionFlags.EMPTY;
+    /**
+     * The type of transaction.
+     *
+     * @return A {@link TransactionType}.
+     */
+    @JsonProperty("TransactionType")
+    // must be Default rather than Derived, otherwise Jackson treats "TransactionType" as an unknownField
+    @Value.Default
+    default TransactionType transactionType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  /**
-   * Used to prompt Immutables to add a `withTransactionSignature` builder helper to each Transaction subclass.
-   *
-   * @param signature The {@link Signature} to associate with this transaction.
-   *
-   * @return A new {@link Transaction} instance with the provided signature applied.
-   */
-  @JsonIgnore
-  Transaction withTransactionSignature(Signature signature);
+    /**
+     * The {@link String} representation of an integer amount of XRP, in drops, to be destroyed as a cost for distributing
+     * this Payment transaction to the network.
+     *
+     * <p>This field is auto-fillable
+     *
+     * @return An {@link XrpCurrencyAmount} representing the transaction cost.
+     *
+     * @see "https://xrpl.org/transaction-common-fields.html#auto-fillable-fields"
+     */
+    @JsonProperty("Fee")
+    XrpCurrencyAmount fee();
 
-  /**
-   * Used to prompt Immutables to add a `withSigners` builder helper to each Transaction subclass. Note: For this to
-   * work, the input type must be {@link Iterable} and not a concrete collection (to avoid conflicts with other
-   * generated builder methods related to collections).
-   *
-   * @param signers An {@link Iterable} of {@link SignerWrapper}s to be set for this transaction. Each
-   *                {@link SignerWrapper} wraps a {@link Signer} conforming to the XRPL transaction JSON structure.
-   *
-   * @return A new {@link Transaction} instance with the specified signers applied.
-   */
-  @JsonIgnore
-  Transaction withSigners(Iterable<? extends SignerWrapper> signers);
+    /**
+     * The sequence number of the account submitting the {@link Transaction}. A {@link Transaction} is only valid if the
+     * Sequence number is exactly 1 greater than the previous transaction from the same account.
+     *
+     * <p>This field is auto-fillable
+     *
+     * @return An {@link UnsignedInteger} representing the sequence of the transaction.
+     *
+     * @see "https://xrpl.org/transaction-common-fields.html#auto-fillable-fields"
+     */
+    @Value.Default
+    @JsonProperty("Sequence")
+    default UnsignedInteger sequence() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * The sequence number of the {@link org.xrpl.xrpl4j.model.ledger.TicketObject} to use in place of a
+     * {@link #sequence()} number. If this is provided, {@link #sequence()} must be 0. Cannot be used with
+     * {@link #accountTransactionId()}.
+     *
+     * @return An {@link UnsignedInteger} representing the ticket sequence of the transaction.
+     */
+    @JsonProperty("TicketSequence")
+    Optional<UnsignedInteger> ticketSequence();
+
+    /**
+     * Hash value identifying another transaction. If provided, this {@link Transaction} is only valid if the sending
+     * account's previously-sent transaction matches the provided hash.
+     *
+     * @return An {@link Optional} of type {@link Hash256} containing the account transaction ID.
+     */
+    @JsonProperty("AccountTxnID")
+    Optional<Hash256> accountTransactionId();
+
+    /**
+     * Highest ledger index this transaction can appear in. Specifying this field places a strict upper limit on how long
+     * the transaction can wait to be validated or rejected.
+     *
+     * @return An {@link Optional} of type {@link UnsignedInteger} representing the last ledger sequence.
+     */
+    @JsonProperty("LastLedgerSequence")
+    Optional<UnsignedInteger> lastLedgerSequence();
+
+    /**
+     * Additional arbitrary information used to identify this {@link Transaction}.
+     *
+     * @return A {@link List} of {@link MemoWrapper}s.
+     */
+    @JsonProperty("Memos")
+    List<MemoWrapper> memos();
+
+    /**
+     * Array of {@link SignerWrapper}s that represent a multi-signature which authorizes this {@link Transaction}.
+     *
+     * @return A {@link List} of {@link SignerWrapper}s.
+     */
+    @JsonProperty("Signers")
+    List<SignerWrapper> signers();
+
+    /**
+     * Arbitrary {@link UnsignedInteger} used to identify the reason for this {@link Transaction}, or a sender on whose
+     * behalf this {@link Transaction} is made.
+     *
+     * @return An {@link Optional} {@link UnsignedInteger} representing the source account's tag.
+     */
+    @JsonProperty("SourceTag")
+    Optional<UnsignedInteger> sourceTag();
+
+    /**
+     * The {@link PublicKey} that corresponds to the private key used to sign this transaction. If an empty string, ie
+     * {@link PublicKey#MULTI_SIGN_PUBLIC_KEY}, indicates a multi-signature is present in the
+     * {@link Transaction#signers()} field instead.
+     *
+     * @return A {@link PublicKey} containing the public key of the account submitting the transaction, or
+     *   {@link PublicKey#MULTI_SIGN_PUBLIC_KEY} if the transaction is multi-signed.
+     */
+    @JsonInclude(JsonInclude.Include.NON_ABSENT)
+    @JsonProperty("SigningPubKey")
+    @Value.Default
+    default PublicKey signingPublicKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * The signature that verifies this transaction as originating from the account it says it is from.
+     *
+     * <p>This field is automatically added when signing this {@link Transaction}.
+     *
+     * @return An {@link Optional} {@link String} containing the transaction signature.
+     */
+    @JsonProperty("TxnSignature")
+    Optional<Signature> transactionSignature();
+
+    @JsonProperty("NetworkID")
+    Optional<NetworkId> networkId();
+
+    @JsonAnyGetter
+    @JsonInclude(Include.NON_ABSENT)
+    Map<String, Object> unknownFields();
+
+    /**
+     * Get the transaction flags polymorphically. Each transaction type implements its own flags() method with a specific
+     * return type.
+     *
+     * @return The {@link TransactionFlags} for this transaction type.
+     */
+    @Value.Auxiliary
+    @JsonIgnore
+    default TransactionFlags transactionFlags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Used to prompt Immutables to add a `withTransactionSignature` builder helper to each Transaction subclass.
+     *
+     * @param signature The {@link Signature} to associate with this transaction.
+     *
+     * @return A new {@link Transaction} instance with the provided signature applied.
+     */
+    @JsonIgnore
+    Transaction withTransactionSignature(Signature signature);
+
+    /**
+     * Used to prompt Immutables to add a `withSigners` builder helper to each Transaction subclass. Note: For this to
+     * work, the input type must be {@link Iterable} and not a concrete collection (to avoid conflicts with other
+     * generated builder methods related to collections).
+     *
+     * @param signers An {@link Iterable} of {@link SignerWrapper}s to be set for this transaction. Each
+     *                {@link SignerWrapper} wraps a {@link Signer} conforming to the XRPL transaction JSON structure.
+     *
+     * @return A new {@link Transaction} instance with the specified signers applied.
+     */
+    @JsonIgnore
+    Transaction withSigners(Iterable<? extends SignerWrapper> signers);
 }

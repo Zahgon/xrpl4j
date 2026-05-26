@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -35,31 +34,30 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @JsonDeserialize(as = ImmutableSignerEntry.class)
 public interface SignerEntry {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableSignerEntry.Builder}.
-   */
-  static ImmutableSignerEntry.Builder builder() {
-    return ImmutableSignerEntry.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableSignerEntry.Builder}.
+     */
+    static ImmutableSignerEntry.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * An XRP Ledger classic {@link Address} whose signature contributes to the multi-signature. It does not need to be a
-   * funded address in the ledger.
-   *
-   * @return The {@link Address} of the signer.
-   */
-  @JsonProperty("Account")
-  Address account();
+    /**
+     * An XRP Ledger classic {@link Address} whose signature contributes to the multi-signature. It does not need to be a
+     * funded address in the ledger.
+     *
+     * @return The {@link Address} of the signer.
+     */
+    @JsonProperty("Account")
+    Address account();
 
-  /**
-   * The weight of a signature from this signer. A multi-signature is only valid if the sum weight of the
-   * signatures provided meets or exceeds the {@link SignerListObject#signerQuorum()} value.
-   *
-   * @return An {@link UnsignedInteger} representing the signer weight.
-   */
-  @JsonProperty("SignerWeight")
-  UnsignedInteger signerWeight();
-
+    /**
+     * The weight of a signature from this signer. A multi-signature is only valid if the sum weight of the
+     * signatures provided meets or exceeds the {@link SignerListObject#signerQuorum()} value.
+     *
+     * @return An {@link UnsignedInteger} representing the signer weight.
+     */
+    @JsonProperty("SignerWeight")
+    UnsignedInteger signerWeight();
 }

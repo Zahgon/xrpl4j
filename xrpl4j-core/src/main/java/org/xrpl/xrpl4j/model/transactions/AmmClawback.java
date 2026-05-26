@@ -7,7 +7,6 @@ import com.google.common.annotations.Beta;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.AmmClawbackFlags;
 import org.xrpl.xrpl4j.model.ledger.Issue;
-
 import java.util.Optional;
 
 /**
@@ -18,55 +17,55 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableAmmClawback.class)
 public interface AmmClawback extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableAmmClawback.Builder}.
-   */
-  static ImmutableAmmClawback.Builder builder() {
-    return ImmutableAmmClawback.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableAmmClawback.Builder}.
+     */
+    static ImmutableAmmClawback.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The address of the holder that has funds deposited in the AMM pool.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Holder")
-  Address holder();
+    /**
+     * The address of the holder that has funds deposited in the AMM pool.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Holder")
+    Address holder();
 
-  /**
-   * The asset in the AMM pool that the issuer is looking to claw back.
-   *
-   * @return An {@link Issue}.
-   */
-  @JsonProperty("Asset")
-  Issue asset();
+    /**
+     * The asset in the AMM pool that the issuer is looking to claw back.
+     *
+     * @return An {@link Issue}.
+     */
+    @JsonProperty("Asset")
+    Issue asset();
 
-  /**
-   * Other asset in the AMM pool that the issuer is looking to claw back.
-   *
-   * @return An {@link Issue}.
-   */
-  @JsonProperty("Asset2")
-  Issue asset2();
+    /**
+     * Other asset in the AMM pool that the issuer is looking to claw back.
+     *
+     * @return An {@link Issue}.
+     */
+    @JsonProperty("Asset2")
+    Issue asset2();
 
-  /**
-   * Optional field that specifies the maximum amount to clawback from the AMM pool.
-   *
-   * @return An {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  Optional<CurrencyAmount> amount();
+    /**
+     * Optional field that specifies the maximum amount to clawback from the AMM pool.
+     *
+     * @return An {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    Optional<CurrencyAmount> amount();
 
-  /**
-   * Transaction Flags for {@link AmmClawback}, with the only option being tfClawTwoAssets.
-   *
-   * @return {@link AmmClawbackFlags#UNSET} if field was not set, otherwise returns with the set flag.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default AmmClawbackFlags flags() {
-    return AmmClawbackFlags.empty();
-  }
+    /**
+     * Transaction Flags for {@link AmmClawback}, with the only option being tfClawTwoAssets.
+     *
+     * @return {@link AmmClawbackFlags#UNSET} if field was not set, otherwise returns with the set flag.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default AmmClawbackFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.nft;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -28,7 +27,6 @@ import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.client.XrplResult;
 import org.xrpl.xrpl4j.model.transactions.Marker;
 import org.xrpl.xrpl4j.model.transactions.NfTokenId;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -40,42 +38,42 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableNftSellOffersResult.class)
 public interface NftSellOffersResult extends XrplResult {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableNftSellOffersResult.Builder}.
-   */
-  static ImmutableNftSellOffersResult.Builder builder() {
-    return ImmutableNftSellOffersResult.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableNftSellOffersResult.Builder}.
+     */
+    static ImmutableNftSellOffersResult.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   *  The TokenID of the NFToken object.
-   *
-   *  @return the TokenID of the {@link org.xrpl.xrpl4j.model.client.accounts.NfTokenObject} object.
-   */
-  @JsonProperty("nft_id")
-  NfTokenId nfTokenId();
+    /**
+     *  The TokenID of the NFToken object.
+     *
+     *  @return the TokenID of the {@link org.xrpl.xrpl4j.model.client.accounts.NfTokenObject} object.
+     */
+    @JsonProperty("nft_id")
+    NfTokenId nfTokenId();
 
-  /**
-   * List of sell offers for a particular NFToken.
-   *
-   * @return {@link List} of all {@link SellOffer}s owned by an account.
-   */
-  List<SellOffer> offers();
+    /**
+     * List of sell offers for a particular NFToken.
+     *
+     * @return {@link List} of all {@link SellOffer}s owned by an account.
+     */
+    List<SellOffer> offers();
 
-  /**
-   * The limit, as specified in the {@link NftSellOffersRequestParams}.
-   *
-   * @return An optionally-present {@link UnsignedInteger}.
-   */
-  Optional<UnsignedInteger> limit();
+    /**
+     * The limit, as specified in the {@link NftSellOffersRequestParams}.
+     *
+     * @return An optionally-present {@link UnsignedInteger}.
+     */
+    Optional<UnsignedInteger> limit();
 
-  /**
-   * Server-defined value indicating the response is paginated. Pass this to the next call to resume where this
-   * call left off. Omitted when there are no additional pages after this one.
-   *
-   * @return An optionally-present {@link Marker} containing a marker.
-   */
-  Optional<Marker> marker();
+    /**
+     * Server-defined value indicating the response is paginated. Pass this to the next call to resume where this
+     * call left off. Omitted when there are no additional pages after this one.
+     *
+     * @return An optionally-present {@link Marker} containing a marker.
+     */
+    Optional<Marker> marker();
 }

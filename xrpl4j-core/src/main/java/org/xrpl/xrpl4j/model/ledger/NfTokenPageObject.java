@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -31,7 +30,6 @@ import org.xrpl.xrpl4j.model.flags.AccountRootFlags;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
 import org.xrpl.xrpl4j.model.transactions.XrpCurrencyAmount;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -44,76 +42,75 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableNfTokenPageObject.class)
 public interface NfTokenPageObject extends LedgerObject {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableNfTokenPageObject.Builder}.
-   */
-  static ImmutableNfTokenPageObject.Builder builder() {
-    return ImmutableNfTokenPageObject.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableNfTokenPageObject.Builder}.
+     */
+    static ImmutableNfTokenPageObject.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The type of ledger object, which will always be "NFTokenPage" in this case.
-   *
-   * @return Always returns {@link LedgerEntryType#ACCOUNT_ROOT}.
-   */
-  @JsonProperty("LedgerEntryType")
-  @Value.Derived
-  default LedgerEntryType ledgerEntryType() {
-    return LedgerEntryType.NFTOKEN_PAGE;
-  }
+    /**
+     * The type of ledger object, which will always be "NFTokenPage" in this case.
+     *
+     * @return Always returns {@link LedgerEntryType#ACCOUNT_ROOT}.
+     */
+    @JsonProperty("LedgerEntryType")
+    @Value.Derived
+    default LedgerEntryType ledgerEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The collection of NFToken objects contained in this NFTokenPage object. This specification places an upper bound
-   * of 32 NFToken objects per page. Objects are sorted from low to high with the NFTokenID used as the sorting
-   * parameter.
-   *
-   * @return A {@link List} of {@link NfToken}s.
-   */
-  @JsonProperty("NFTokens")
-  List<NfTokenWrapper> nfTokens();
+    /**
+     * The collection of NFToken objects contained in this NFTokenPage object. This specification places an upper bound
+     * of 32 NFToken objects per page. Objects are sorted from low to high with the NFTokenID used as the sorting
+     * parameter.
+     *
+     * @return A {@link List} of {@link NfToken}s.
+     */
+    @JsonProperty("NFTokens")
+    List<NfTokenWrapper> nfTokens();
 
-  /**
-   * The locator of the next page, if any.
-   *
-   * @return A {@link Hash256} containing the ID of the next page, or {@link Optional#empty()} if there is no next
-   *   page.
-   */
-  @JsonProperty("NextPageMin")
-  Optional<Hash256> nextPageMin();
+    /**
+     * The locator of the next page, if any.
+     *
+     * @return A {@link Hash256} containing the ID of the next page, or {@link Optional#empty()} if there is no next
+     *   page.
+     */
+    @JsonProperty("NextPageMin")
+    Optional<Hash256> nextPageMin();
 
-  /**
-   * The locator of the previous page, if any.
-   *
-   * @return A {@link Hash256} containing the ID of the previous page, or {@link Optional#empty()} if there is no
-   *   previous page.
-   */
-  @JsonProperty("PreviousPageMin")
-  Optional<Hash256> previousPageMin();
+    /**
+     * The locator of the previous page, if any.
+     *
+     * @return A {@link Hash256} containing the ID of the previous page, or {@link Optional#empty()} if there is no
+     *   previous page.
+     */
+    @JsonProperty("PreviousPageMin")
+    Optional<Hash256> previousPageMin();
 
-  /**
-   * Identifies the transaction ID of the transaction that most recently modified this NFTokenPage object.
-   *
-   * @return An optionally-present {@link Hash256}.
-   */
-  @JsonProperty("PreviousTxnID")
-  Optional<Hash256> previousTransactionId();
+    /**
+     * Identifies the transaction ID of the transaction that most recently modified this NFTokenPage object.
+     *
+     * @return An optionally-present {@link Hash256}.
+     */
+    @JsonProperty("PreviousTxnID")
+    Optional<Hash256> previousTransactionId();
 
-  /**
-   * The sequence of the ledger that contains the transaction that most recently modified this NFTokenPage object.
-   *
-   * @return A {@link LedgerIndex}.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  Optional<LedgerIndex> previousTransactionLedgerSequence();
+    /**
+     * The sequence of the ledger that contains the transaction that most recently modified this NFTokenPage object.
+     *
+     * @return A {@link LedgerIndex}.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    Optional<LedgerIndex> previousTransactionLedgerSequence();
 
-  /**
-   * The unique ID of this {@link NfTokenPageObject} ledger object.
-   *
-   * @return A {@link Hash256}.
-   * @see "https://xrpl.org/ledger-object-ids.html"
-   */
-  Hash256 index();
-
+    /**
+     * The unique ID of this {@link NfTokenPageObject} ledger object.
+     *
+     * @return A {@link Hash256}.
+     * @see "https://xrpl.org/ledger-object-ids.html"
+     */
+    Hash256 index();
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.accounts;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -29,7 +28,6 @@ import org.xrpl.xrpl4j.model.client.XrplResult;
 import org.xrpl.xrpl4j.model.client.common.LedgerIndex;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
-
 import java.util.Optional;
 
 /**
@@ -40,142 +38,138 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableGatewayBalancesResult.class)
 public interface GatewayBalancesResult extends XrplResult {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableGatewayBalancesResult.Builder}.
-   */
-  static ImmutableGatewayBalancesResult.Builder builder() {
-    return ImmutableGatewayBalancesResult.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableGatewayBalancesResult.Builder}.
+     */
+    static ImmutableGatewayBalancesResult.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link Address} of the account that issued the balances.
-   *
-   * @return The {@link Address} of the account.
-   */
-  Address account();
+    /**
+     * The {@link Address} of the account that issued the balances.
+     *
+     * @return The {@link Address} of the account.
+     */
+    Address account();
 
-  /**
-   * Total amounts held that are issued by others. In the recommended configuration, the issuing address
-   * should have none.
-   *
-   * @return The {@link GatewayBalancesAssets} issued to this account by others.
-   */
-  @Value.Default
-  default GatewayBalancesAssets assets() {
-    return GatewayBalancesAssets.builder().build();
-  }
+    /**
+     * Total amounts held that are issued by others. In the recommended configuration, the issuing address
+     * should have none.
+     *
+     * @return The {@link GatewayBalancesAssets} issued to this account by others.
+     */
+    @Value.Default
+    default GatewayBalancesAssets assets() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Amounts issued to the hotwallet addresses from the request. In the original JSON entity, the keys are addresses
-   * and the values are arrays of currency amounts they hold. The wrapping entity packages these in a
-   * {@link GatewayBalancesHotWallets} instance instead.
-   *
-   * @return The balances of the hotwallets field wrapped in a {@link GatewayBalancesHotWallets} instance.
-   */
-  @Value.Default
-  default GatewayBalancesHotWallets balances() {
-    return GatewayBalancesHotWallets.builder().build();
-  }
+    /**
+     * Amounts issued to the hotwallet addresses from the request. In the original JSON entity, the keys are addresses
+     * and the values are arrays of currency amounts they hold. The wrapping entity packages these in a
+     * {@link GatewayBalancesHotWallets} instance instead.
+     *
+     * @return The balances of the hotwallets field wrapped in a {@link GatewayBalancesHotWallets} instance.
+     */
+    @Value.Default
+    default GatewayBalancesHotWallets balances() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Total amounts issued to addresses not included in hotwallets. In the original JSON entity, this is presented
-   * as a map of currencies to the total value issued. The wrapping entity packages these in a
-   * {@link GatewayBalancesObligations} instance instead.
-   *
-   * @return The balances for obligations from this issuer to accounts not included in the hotwallets request
-   *   field, wrapped in a {@link GatewayBalancesObligations} instance.
-   */
-  @Value.Default
-  default GatewayBalancesObligations obligations() {
-    return GatewayBalancesObligations.builder().build();
-  }
+    /**
+     * Total amounts issued to addresses not included in hotwallets. In the original JSON entity, this is presented
+     * as a map of currencies to the total value issued. The wrapping entity packages these in a
+     * {@link GatewayBalancesObligations} instance instead.
+     *
+     * @return The balances for obligations from this issuer to accounts not included in the hotwallets request
+     *   field, wrapped in a {@link GatewayBalancesObligations} instance.
+     */
+    @Value.Default
+    default GatewayBalancesObligations obligations() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Amounts issued to addresses where the trustline is frozen. Note that any counterparties to a frozen trustline
-   * included in {@link GatewayBalancesRequestParams#hotWallets()} are not included in this field's balances.
-   *
-   * @return A {@link GatewayBalancesHotWallets}.
-   */
-  @Value.Default
-  @JsonProperty("frozen_balances")
-  default GatewayBalancesHotWallets frozenBalances() {
-    return GatewayBalancesHotWallets.builder().build();
-  }
+    /**
+     * Amounts issued to addresses where the trustline is frozen. Note that any counterparties to a frozen trustline
+     * included in {@link GatewayBalancesRequestParams#hotWallets()} are not included in this field's balances.
+     *
+     * @return A {@link GatewayBalancesHotWallets}.
+     */
+    @Value.Default
+    @JsonProperty("frozen_balances")
+    default GatewayBalancesHotWallets frozenBalances() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The identifying hash the ledger version that was used when retrieving this data.
-   *
-   * @return An optionally-present {@link org.xrpl.xrpl4j.model.transactions.Hash256}.
-   */
-  @JsonProperty("ledger_hash")
-  Optional<Hash256> ledgerHash();
+    /**
+     * The identifying hash the ledger version that was used when retrieving this data.
+     *
+     * @return An optionally-present {@link org.xrpl.xrpl4j.model.transactions.Hash256}.
+     */
+    @JsonProperty("ledger_hash")
+    Optional<Hash256> ledgerHash();
 
-  /**
-   * Get {@link #ledgerHash()}, or throw an {@link IllegalStateException} if {@link #ledgerHash()} is empty.
-   *
-   * @return The value of {@link #ledgerHash()}.
-   * @throws IllegalStateException If {@link #ledgerHash()} is empty.
-   */
-  @JsonIgnore
-  @Value.Auxiliary
-  default Hash256 ledgerHashSafe() {
-    return ledgerHash()
-      .orElseThrow(() -> new IllegalStateException("Result did not contain a ledgerHash."));
-  }
+    /**
+     * Get {@link #ledgerHash()}, or throw an {@link IllegalStateException} if {@link #ledgerHash()} is empty.
+     *
+     * @return The value of {@link #ledgerHash()}.
+     * @throws IllegalStateException If {@link #ledgerHash()} is empty.
+     */
+    @JsonIgnore
+    @Value.Auxiliary
+    default Hash256 ledgerHashSafe() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ledger index of the ledger version that was used when retrieving this data.
-   *
-   * @return An optionally-present {@link LedgerIndex} representing the ledger index of the response.
-   */
-  @JsonProperty("ledger_index")
-  Optional<LedgerIndex> ledgerIndex();
+    /**
+     * The ledger index of the ledger version that was used when retrieving this data.
+     *
+     * @return An optionally-present {@link LedgerIndex} representing the ledger index of the response.
+     */
+    @JsonProperty("ledger_index")
+    Optional<LedgerIndex> ledgerIndex();
 
-  /**
-   * Get {@link #ledgerIndex()}, or throw an {@link IllegalStateException} if {@link #ledgerIndex()} is empty.
-   *
-   * @return The value of {@link #ledgerIndex()}.
-   * @throws IllegalStateException If {@link #ledgerIndex()} is empty.
-   */
-  @JsonIgnore
-  @Value.Auxiliary
-  default LedgerIndex ledgerIndexSafe() {
-    return ledgerIndex()
-      .orElseThrow(() -> new IllegalStateException("Result did not contain a ledgerIndex."));
-  }
+    /**
+     * Get {@link #ledgerIndex()}, or throw an {@link IllegalStateException} if {@link #ledgerIndex()} is empty.
+     *
+     * @return The value of {@link #ledgerIndex()}.
+     * @throws IllegalStateException If {@link #ledgerIndex()} is empty.
+     */
+    @JsonIgnore
+    @Value.Auxiliary
+    default LedgerIndex ledgerIndexSafe() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ledger index of the current open ledger, which was used when retrieving this information.
-   *
-   * @return An optionally-present {@link LedgerIndex} representing the current ledger index.
-   */
-  @JsonProperty("ledger_current_index")
-  Optional<LedgerIndex> ledgerCurrentIndex();
+    /**
+     * The ledger index of the current open ledger, which was used when retrieving this information.
+     *
+     * @return An optionally-present {@link LedgerIndex} representing the current ledger index.
+     */
+    @JsonProperty("ledger_current_index")
+    Optional<LedgerIndex> ledgerCurrentIndex();
 
-  /**
-   * Get {@link #ledgerCurrentIndex()}, or throw an {@link IllegalStateException} if
-   * {@link #ledgerCurrentIndex()} is empty.
-   *
-   * @return The value of {@link #ledgerIndex()}.
-   * @throws IllegalStateException If {@link #ledgerIndex()} is empty.
-   */
-  @JsonIgnore
-  @Value.Auxiliary
-  default LedgerIndex ledgerCurrentIndexSafe() {
-    return ledgerCurrentIndex()
-      .orElseThrow(() -> new IllegalStateException("Result did not contain a ledgerCurrentIndex."));
-  }
+    /**
+     * Get {@link #ledgerCurrentIndex()}, or throw an {@link IllegalStateException} if
+     * {@link #ledgerCurrentIndex()} is empty.
+     *
+     * @return The value of {@link #ledgerIndex()}.
+     * @throws IllegalStateException If {@link #ledgerIndex()} is empty.
+     */
+    @JsonIgnore
+    @Value.Auxiliary
+    default LedgerIndex ledgerCurrentIndexSafe() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Whether or not the information in this response comes from a validated ledger version.
-   *
-   * @return {@code true} if the information is from a validated ledger, otherwise {@code false}.
-   */
-  @Value.Default
-  default boolean validated() {
-    return false;
-  }
-
+    /**
+     * Whether or not the information in this response comes from a validated ledger version.
+     *
+     * @return {@code true} if the information is from a validated ledger, otherwise {@code false}.
+     */
+    @Value.Default
+    default boolean validated() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.codec.binary.types;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value.Immutable;
@@ -32,14 +31,13 @@ import org.immutables.value.Value.Immutable;
 @JsonDeserialize(as = ImmutableAmount.class)
 interface Amount {
 
-  static ImmutableAmount.Builder builder() {
-    return ImmutableAmount.builder();
-  }
+    static ImmutableAmount.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  String currency();
+    String currency();
 
-  String value();
+    String value();
 
-  String issuer();
-
+    String issuer();
 }

@@ -19,13 +19,11 @@ package org.xrpl.xrpl4j.model.client.accounts;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.jackson.modules.GatewayBalancesAssetsDeserializer;
 import org.xrpl.xrpl4j.model.transactions.Address;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -39,23 +37,22 @@ import java.util.Map;
 @JsonDeserialize(as = ImmutableGatewayBalancesAssets.class, using = GatewayBalancesAssetsDeserializer.class)
 public interface GatewayBalancesAssets {
 
-  /**
-   * Constructs a builder for this class.
-   * @return An {@link ImmutableGatewayBalancesAssets.Builder}.
-   */
-  static ImmutableGatewayBalancesAssets.Builder builder() {
-    return ImmutableGatewayBalancesAssets.builder();
-  }
+    /**
+     * Constructs a builder for this class.
+     * @return An {@link ImmutableGatewayBalancesAssets.Builder}.
+     */
+    static ImmutableGatewayBalancesAssets.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The balances of issued currencies issued by the address which is the key of this map.
-   *
-   * @return A map of issued currencies, keyed by the issuer {@link Address} to a list of
-   *   {@link GatewayBalancesIssuedCurrencyAmount}s of currencies issued
-   */
-  @Value.Default
-  default Map<Address, List<GatewayBalancesIssuedCurrencyAmount>> balancesByIssuer() {
-    return Collections.emptyMap();
-  }
-
+    /**
+     * The balances of issued currencies issued by the address which is the key of this map.
+     *
+     * @return A map of issued currencies, keyed by the issuer {@link Address} to a list of
+     *   {@link GatewayBalancesIssuedCurrencyAmount}s of currencies issued
+     */
+    @Value.Default
+    default Map<Address, List<GatewayBalancesIssuedCurrencyAmount>> balancesByIssuer() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

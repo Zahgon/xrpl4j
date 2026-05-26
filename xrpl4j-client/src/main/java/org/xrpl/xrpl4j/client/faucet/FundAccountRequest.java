@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.client.faucet;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value.Immutable;
@@ -33,26 +32,25 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @JsonDeserialize(as = ImmutableFundAccountRequest.class)
 public interface FundAccountRequest {
 
-  static ImmutableFundAccountRequest.Builder builder() {
-    return ImmutableFundAccountRequest.builder();
-  }
+    static ImmutableFundAccountRequest.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Construct a {@link FundAccountRequest} for the given address.
-   *
-   * @param classicAddress The {@link Address} of the account to fund.
-   *
-   * @return A {@link FundAccountRequest}.
-   */
-  static FundAccountRequest of(Address classicAddress) {
-    return builder().destination(classicAddress).build();
-  }
+    /**
+     * Construct a {@link FundAccountRequest} for the given address.
+     *
+     * @param classicAddress The {@link Address} of the account to fund.
+     *
+     * @return A {@link FundAccountRequest}.
+     */
+    static FundAccountRequest of(Address classicAddress) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The account to be funded.
-   *
-   * @return The {@link Address} containing the classic address of the account.
-   */
-  Address destination();
-
+    /**
+     * The account to be funded.
+     *
+     * @return The {@link Address} containing the classic address of the account.
+     */
+    Address destination();
 }

@@ -10,7 +10,6 @@ import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.jackson.modules.AmountDeserializer;
 import org.xrpl.xrpl4j.model.jackson.modules.AmountSerializer;
 import org.xrpl.xrpl4j.model.ledger.Issue;
-
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -38,127 +37,96 @@ import java.util.Objects;
 @JsonDeserialize(as = ImmutableAmount.class, using = AmountDeserializer.class)
 public interface Amount {
 
-  /**
-   * An {@link Amount} representing zero.
-   */
-  Amount ZERO = Amount.of("0");
+    /**
+     * An {@link Amount} representing zero.
+     */
+    Amount ZERO = Amount.of("0");
 
-  /**
-   * Creates an {@link Amount} instance from the given string value.
-   *
-   * @param value A non-null {@link String} representing the value of the amount.
-   *
-   * @return A non-null {@link Amount} instance with the specified value.
-   *
-   * @throws NullPointerException if {@code value} is null.
-   */
-  static Amount of(final String value) {
-    Objects.requireNonNull(value);
-    return ImmutableAmount.builder().value(value).build();
-  }
-
-  /**
-   * The wire-format string representation of this amount. For XRP and MPT, this is a decimal integer string (optionally
-   * prefixed with {@code -}). For Issued Currency Amounts (IOUs), this may additionally contain a decimal point or
-   * scientific-notation exponent.
-   *
-   * @return A non-null {@link String}.
-   */
-  String value();
-
-  /**
-   * Whether this amount is negative.
-   *
-   * @return {@code true} if the drop count is negative; {@code false} otherwise.
-   */
-  @Auxiliary
-  @JsonIgnore
-  default boolean isNegative() {
-    return value().startsWith("-");
-  }
-
-  /**
-   * Whether this amount is zero.
-   *
-   * @return {@code true} if the value is numerically zero; {@code false} otherwise.
-   */
-  @Auxiliary
-  @JsonIgnore
-  default boolean isZero() {
-    return bigDecimalValue().signum() == 0;
-  }
-
-  /**
-   * Returns the value as a {@link BigDecimal} for arithmetic or comparison purposes.
-   *
-   * @return A {@link BigDecimal} representing this IOU amount.
-   */
-  @Auxiliary
-  @JsonIgnore
-  default BigDecimal bigDecimalValue() {
-    return new BigDecimal(value());
-  }
-
-  /**
-   * Converts this amount to a {@link CurrencyAmount} based on the provided {@link Issue}.
-   *
-   * @param issue The {@link Issue} representing the type of currency (e.g., XRP, IOU, or MPT) for which a corresponding
-   *              {@link CurrencyAmount} will be created. Must not be null.
-   *
-   * @return A {@link CurrencyAmount} instance that represents the current amount in the specific currency of the
-   *   provided {@link Issue}.
-   *
-   * @throws NullPointerException if {@code issue} is null.
-   */
-  @Auxiliary
-  @JsonIgnore
-  default CurrencyAmount toCurrencyAmount(final Issue issue) {
-    Objects.requireNonNull(issue);
-    return issue.map(
-      xrpIssue -> {
-        final boolean isNegative = this.isNegative();
-        final BigDecimal unsignedValueAsBigDecimal = new BigDecimal(this.value()).abs();
-
-        return XrpCurrencyAmount.ofDrops(
-          UnsignedLong.valueOf(unsignedValueAsBigDecimal.toBigIntegerExact()),
-          isNegative
-        );
-      },
-      iouIssue -> IssuedCurrencyAmount.builder()
-        .issuer(iouIssue.issuer())
-        .currency(iouIssue.currency())
-        .value(this.value())
-        .build(),
-      mptIssue -> MptCurrencyAmount.builder()
-        .mptIssuanceId(mptIssue.mptIssuanceId())
-        .value(this.value())
-        .build()
-    );
-  }
-
-  /**
-   * Normalizes the {@code value} field so that any numeric representation of zero (e.g. {@code "-0"}, {@code "0.00"},
-   * {@code "0e5"}) is canonicalized to the string {@code "0"}.
-   *
-   * <p>This method is invoked by the Immutables framework after every construction path — both via the
-   * builder and via {@code copyOf}/{@code with*} — so the normalization cannot be bypassed even when callers use
-   * {@code ImmutableAmount.builder()} directly.</p>
-   *
-   * @return {@code this} if the value is already canonical, or a new {@link Amount} whose {@code value()} is
-   *   {@code "0"} if the value is numerically zero.
-   */
-  @Check
-  default Amount normalizeValue() {
-    try {
-      if (this.isZero()) {
-        if ("0".equals(value())) {
-          return this;
-        }
-        return Amount.ZERO;
-      }
-    } catch (NumberFormatException e) {
-      // Not a numeric string — leave as-is; bigDecimalValue() will throw if called.
+    /**
+     * Creates an {@link Amount} instance from the given string value.
+     *
+     * @param value A non-null {@link String} representing the value of the amount.
+     *
+     * @return A non-null {@link Amount} instance with the specified value.
+     *
+     * @throws NullPointerException if {@code value} is null.
+     */
+    static Amount of(final String value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return this;
-  }
+
+    /**
+     * The wire-format string representation of this amount. For XRP and MPT, this is a decimal integer string (optionally
+     * prefixed with {@code -}). For Issued Currency Amounts (IOUs), this may additionally contain a decimal point or
+     * scientific-notation exponent.
+     *
+     * @return A non-null {@link String}.
+     */
+    String value();
+
+    /**
+     * Whether this amount is negative.
+     *
+     * @return {@code true} if the drop count is negative; {@code false} otherwise.
+     */
+    @Auxiliary
+    @JsonIgnore
+    default boolean isNegative() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Whether this amount is zero.
+     *
+     * @return {@code true} if the value is numerically zero; {@code false} otherwise.
+     */
+    @Auxiliary
+    @JsonIgnore
+    default boolean isZero() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Returns the value as a {@link BigDecimal} for arithmetic or comparison purposes.
+     *
+     * @return A {@link BigDecimal} representing this IOU amount.
+     */
+    @Auxiliary
+    @JsonIgnore
+    default BigDecimal bigDecimalValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Converts this amount to a {@link CurrencyAmount} based on the provided {@link Issue}.
+     *
+     * @param issue The {@link Issue} representing the type of currency (e.g., XRP, IOU, or MPT) for which a corresponding
+     *              {@link CurrencyAmount} will be created. Must not be null.
+     *
+     * @return A {@link CurrencyAmount} instance that represents the current amount in the specific currency of the
+     *   provided {@link Issue}.
+     *
+     * @throws NullPointerException if {@code issue} is null.
+     */
+    @Auxiliary
+    @JsonIgnore
+    default CurrencyAmount toCurrencyAmount(final Issue issue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Normalizes the {@code value} field so that any numeric representation of zero (e.g. {@code "-0"}, {@code "0.00"},
+     * {@code "0e5"}) is canonicalized to the string {@code "0"}.
+     *
+     * <p>This method is invoked by the Immutables framework after every construction path — both via the
+     * builder and via {@code copyOf}/{@code with*} — so the normalization cannot be bypassed even when callers use
+     * {@code ImmutableAmount.builder()} directly.</p>
+     *
+     * @return {@code this} if the value is already canonical, or a new {@link Amount} whose {@code value()} is
+     *   {@code "0"} if the value is numerically zero.
+     */
+    @Check
+    default Amount normalizeValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

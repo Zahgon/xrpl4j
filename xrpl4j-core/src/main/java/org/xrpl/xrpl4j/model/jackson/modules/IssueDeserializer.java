@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -30,7 +29,6 @@ import org.xrpl.xrpl4j.model.ledger.MptIssue;
 import org.xrpl.xrpl4j.model.ledger.XrpIssue;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.MpTokenIssuanceId;
-
 import java.io.IOException;
 
 /**
@@ -39,34 +37,15 @@ import java.io.IOException;
  */
 public class IssueDeserializer extends StdDeserializer<Issue> {
 
-  /**
-   * No-args constructor.
-   */
-  public IssueDeserializer() {
-    super(Issue.class);
-  }
-
-  @Override
-  public Issue deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-
-    if (node.has("mpt_issuance_id")) {
-      String mptIssuanceId = node.get("mpt_issuance_id").asText();
-      return MptIssue.builder()
-        .mptIssuanceId(MpTokenIssuanceId.of(mptIssuanceId))
-        .build();
-    } else if (node.has("currency")) {
-      String currency = node.get("currency").asText();
-      if ("XRP".equals(currency)) {
-        return XrpIssue.XRP;
-      }
-      String issuer = node.get("issuer").asText();
-      return IouIssue.builder()
-        .currency(currency)
-        .issuer(Address.of(issuer))
-        .build();
+    /**
+     * No-args constructor.
+     */
+    public IssueDeserializer() {
+        super(Issue.class);
     }
 
-    throw new IOException("Cannot deserialize Issue: must contain 'currency' or 'mpt_issuance_id' field");
-  }
+    @Override
+    public Issue deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

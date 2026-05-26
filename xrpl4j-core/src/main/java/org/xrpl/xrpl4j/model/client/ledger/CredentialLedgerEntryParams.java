@@ -17,34 +17,34 @@ import org.xrpl.xrpl4j.model.transactions.CredentialType;
 @JsonDeserialize(as = ImmutableCredentialLedgerEntryParams.class)
 public interface CredentialLedgerEntryParams {
 
-  /**
-   * Construct a {@code CredentialLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableCredentialLedgerEntryParams.Builder}.
-   */
-  static ImmutableCredentialLedgerEntryParams.Builder builder() {
-    return ImmutableCredentialLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code CredentialLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableCredentialLedgerEntryParams.Builder}.
+     */
+    static ImmutableCredentialLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The subject of the credential.
-   *
-   * @return The unique {@link Address} of the subject of this credential.
-   */
-  Address subject();
+    /**
+     * The subject of the credential.
+     *
+     * @return The unique {@link Address} of the subject of this credential.
+     */
+    Address subject();
 
-  /**
-   * The issuer of the credential.
-   *
-   * @return The unique {@link Address} of the issuer of this credential.
-   */
-  Address issuer();
+    /**
+     * The issuer of the credential.
+     *
+     * @return The unique {@link Address} of the issuer of this credential.
+     */
+    Address issuer();
 
-  /**
-   * A (hex-encoded) value to identify the type of credential from the issuer.
-   *
-   * @return A {@link CredentialType} defining the type of credential.
-   */
-  @JsonProperty("credential_type")
-  CredentialType credentialType();
+    /**
+     * A (hex-encoded) value to identify the type of credential from the issuer.
+     *
+     * @return A {@link CredentialType} defining the type of credential.
+     */
+    @JsonProperty("credential_type")
+    CredentialType credentialType();
 }

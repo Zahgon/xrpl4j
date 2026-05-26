@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.crypto.signing;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.xrpl.xrpl4j.codec.addresses.UnsignedByteArray;
 import org.xrpl.xrpl4j.crypto.keys.PrivateKeyReference;
 import org.xrpl.xrpl4j.crypto.keys.PrivateKeyable;
@@ -30,7 +29,6 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.Batch;
 import org.xrpl.xrpl4j.model.transactions.LoanSet;
 import org.xrpl.xrpl4j.model.transactions.Transaction;
-
 import java.util.Objects;
 
 /**
@@ -40,163 +38,119 @@ import java.util.Objects;
  */
 public abstract class AbstractTransactionSigner<P extends PrivateKeyable> implements TransactionSigner<P> {
 
-  private final SignatureUtils signatureUtils;
+    private final SignatureUtils signatureUtils;
 
-  /**
-   * Required-args Constructor.
-   *
-   * @param signatureUtils A {@link SignatureUtils}.
-   */
-  public AbstractTransactionSigner(final SignatureUtils signatureUtils) {
-    this.signatureUtils = Objects.requireNonNull(signatureUtils);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public <T extends Transaction> SingleSignedTransaction<T> sign(final P privateKeyable, final T transaction) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(transaction);
-
-    final Signature signature = signatureHelper(privateKeyable, transaction);
-
-    final Transaction transactionWithSignature = transaction.withTransactionSignature(signature);
-
-    return SingleSignedTransaction.<T>builder()
-      .unsignedTransaction(transaction)
-      .signature(signature)
-      .signedTransaction((T) transactionWithSignature)
-      .build();
-  }
-
-  @Override
-  public Signature sign(final P privateKeyable, final UnsignedClaim unsignedClaim) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(unsignedClaim);
-
-    final UnsignedByteArray signableBytes = signatureUtils.toSignableBytes(unsignedClaim);
-    return this.signatureHelper(privateKeyable, signableBytes);
-  }
-
-  @Override
-  public Signature sign(P privateKeyable, Attestation attestation) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(attestation);
-
-    final UnsignedByteArray signableBytes = this.signatureUtils.toSignableBytes(attestation);
-    return this.signatureHelper(privateKeyable, signableBytes);
-  }
-
-  @Override
-  public Signature signInner(final P privateKeyable, final Batch batchTransaction) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(batchTransaction);
-    final UnsignedByteArray signableBytes = this.signatureUtils.toSignableInnerBytes(batchTransaction);
-    return this.signatureHelper(privateKeyable, signableBytes);
-  }
-
-  @Override
-  public <T extends Transaction> Signature multiSign(final P privateKeyable, final T transaction) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(transaction);
-
-    final Address address = derivePublicKey(privateKeyable).deriveAddress();
-    final UnsignedByteArray signableTransactionBytes = this.signatureUtils.toMultiSignableBytes(transaction, address);
-    return this.signatureHelper(privateKeyable, signableTransactionBytes);
-  }
-
-  @Override
-  public Signature multiSignInner(final P privateKeyable, final Batch batchTransaction) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(batchTransaction);
-
-    final Address address = derivePublicKey(privateKeyable).deriveAddress();
-    final UnsignedByteArray signableBytes = this.signatureUtils.toMultiSignableInnerBytes(batchTransaction, address);
-
-    return this.signatureHelper(privateKeyable, signableBytes);
-  }
-
-  @Override
-  public Signature counterpartySign(final P privateKeyable, final LoanSet transaction) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(transaction);
-
-    return signatureHelper(privateKeyable, transaction);
-  }
-
-  @Override
-  public Signature counterpartyMultiSign(final P privateKeyable, final LoanSet transaction) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(transaction);
-
-    final Address address = derivePublicKey(privateKeyable).deriveAddress();
-    final UnsignedByteArray signableTransactionBytes = this.signatureUtils.toCounterpartyMultiSignableBytes(
-      transaction, address
-    );
-    return this.signatureHelper(privateKeyable, signableTransactionBytes);
-  }
-
-  /**
-   * Helper to serialize a {@link Transaction} to signable bytes and then generate a {@link Signature}.
-   *
-   * @param privateKeyable A {@link PrivateKeyReference} for the signing key.
-   * @param transaction    A {@link Transaction} to sign.
-   *
-   * @return A {@link Signature}.
-   */
-  private <T extends Transaction> Signature signatureHelper(final P privateKeyable, final T transaction) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(transaction);
-
-    final UnsignedByteArray signableTransactionBytes = this.signatureUtils.toSignableBytes(transaction);
-    return this.signatureHelper(privateKeyable, signableTransactionBytes);
-  }
-
-  /**
-   * Helper to generate a signature based upon an {@link UnsignedByteArray} of transaction bytes.
-   *
-   * @param privateKey               A {@link PrivateKeyReference} for the signing key.
-   * @param signableTransactionBytes A {@link UnsignedByteArray} of transaction bytes.
-   *
-   * @return A {@link Signature}.
-   */
-  private Signature signatureHelper(
-    final P privateKey, final UnsignedByteArray signableTransactionBytes
-  ) {
-    Objects.requireNonNull(privateKey);
-    Objects.requireNonNull(signableTransactionBytes);
-
-    final PublicKey publicKey = derivePublicKey(privateKey);
-    switch (publicKey.keyType()) {
-      case ED25519: {
-        return this.edDsaSign(privateKey, signableTransactionBytes);
-      }
-      case SECP256K1: {
-        return this.ecDsaSign(privateKey, signableTransactionBytes);
-      }
-      default: {
-        throw new IllegalArgumentException("Unhandled PrivateKey KeyType: {}" + privateKey);
-      }
+    /**
+     * Required-args Constructor.
+     *
+     * @param signatureUtils A {@link SignatureUtils}.
+     */
+    public AbstractTransactionSigner(final SignatureUtils signatureUtils) {
+        this.signatureUtils = Objects.requireNonNull(signatureUtils);
     }
-  }
 
-  /**
-   * Does the actual work of computing a signature using a ed25519 private-key, as locatable using {@code privateKey}.
-   *
-   * @param privateKey               A {@link P} used for signing.
-   * @param signableTransactionBytes A {@link UnsignedByteArray} to sign.
-   *
-   * @return A {@link Signature} with data that can be used to submit a transaction to the XRP Ledger.
-   */
-  protected abstract Signature edDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes);
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T extends Transaction> SingleSignedTransaction<T> sign(final P privateKeyable, final T transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Does the actual work of computing a signature using a secp256k1 private-key, as locatable using
-   * {@code privateKey}.
-   *
-   * @param privateKey               A {@link P} used for signing.
-   * @param signableTransactionBytes A {@link UnsignedByteArray} to sign.
-   *
-   * @return A {@link Signature} with data that can be used to submit a transaction to the XRP Ledger.
-   */
-  protected abstract Signature ecDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes);
+    @Override
+    public Signature sign(final P privateKeyable, final UnsignedClaim unsignedClaim) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public Signature sign(P privateKeyable, Attestation attestation) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public Signature signInner(final P privateKeyable, final Batch batchTransaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public <T extends Transaction> Signature multiSign(final P privateKeyable, final T transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public Signature multiSignInner(final P privateKeyable, final Batch batchTransaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public Signature counterpartySign(final P privateKeyable, final LoanSet transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public Signature counterpartyMultiSign(final P privateKeyable, final LoanSet transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Helper to serialize a {@link Transaction} to signable bytes and then generate a {@link Signature}.
+     *
+     * @param privateKeyable A {@link PrivateKeyReference} for the signing key.
+     * @param transaction    A {@link Transaction} to sign.
+     *
+     * @return A {@link Signature}.
+     */
+    private <T extends Transaction> Signature signatureHelper(final P privateKeyable, final T transaction) {
+        Objects.requireNonNull(privateKeyable);
+        Objects.requireNonNull(transaction);
+        final UnsignedByteArray signableTransactionBytes = this.signatureUtils.toSignableBytes(transaction);
+        return this.signatureHelper(privateKeyable, signableTransactionBytes);
+    }
+
+    /**
+     * Helper to generate a signature based upon an {@link UnsignedByteArray} of transaction bytes.
+     *
+     * @param privateKey               A {@link PrivateKeyReference} for the signing key.
+     * @param signableTransactionBytes A {@link UnsignedByteArray} of transaction bytes.
+     *
+     * @return A {@link Signature}.
+     */
+    private Signature signatureHelper(final P privateKey, final UnsignedByteArray signableTransactionBytes) {
+        Objects.requireNonNull(privateKey);
+        Objects.requireNonNull(signableTransactionBytes);
+        final PublicKey publicKey = derivePublicKey(privateKey);
+        switch(publicKey.keyType()) {
+            case ED25519:
+                {
+                    return this.edDsaSign(privateKey, signableTransactionBytes);
+                }
+            case SECP256K1:
+                {
+                    return this.ecDsaSign(privateKey, signableTransactionBytes);
+                }
+            default:
+                {
+                    throw new IllegalArgumentException("Unhandled PrivateKey KeyType: {}" + privateKey);
+                }
+        }
+    }
+
+    /**
+     * Does the actual work of computing a signature using a ed25519 private-key, as locatable using {@code privateKey}.
+     *
+     * @param privateKey               A {@link P} used for signing.
+     * @param signableTransactionBytes A {@link UnsignedByteArray} to sign.
+     *
+     * @return A {@link Signature} with data that can be used to submit a transaction to the XRP Ledger.
+     */
+    protected abstract Signature edDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes);
+
+    /**
+     * Does the actual work of computing a signature using a secp256k1 private-key, as locatable using
+     * {@code privateKey}.
+     *
+     * @param privateKey               A {@link P} used for signing.
+     * @param signableTransactionBytes A {@link UnsignedByteArray} to sign.
+     *
+     * @return A {@link Signature} with data that can be used to submit a transaction to the XRP Ledger.
+     */
+    protected abstract Signature ecDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes);
 }

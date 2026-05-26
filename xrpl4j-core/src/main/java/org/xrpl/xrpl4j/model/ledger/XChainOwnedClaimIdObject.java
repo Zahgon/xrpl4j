@@ -16,7 +16,6 @@ import org.xrpl.xrpl4j.model.transactions.XChainCommit;
 import org.xrpl.xrpl4j.model.transactions.XChainCount;
 import org.xrpl.xrpl4j.model.transactions.XChainCreateClaimId;
 import org.xrpl.xrpl4j.model.transactions.XrpCurrencyAmount;
-
 import java.util.List;
 
 /**
@@ -39,127 +38,127 @@ import java.util.List;
 @JsonDeserialize(as = ImmutableXChainOwnedClaimIdObject.class)
 public interface XChainOwnedClaimIdObject extends LedgerObject {
 
-  /**
-   * Construct a {@code XChainOwnedClaimIdObject} builder.
-   *
-   * @return An {@link ImmutableXChainOwnedClaimIdObject.Builder}.
-   */
-  static ImmutableXChainOwnedClaimIdObject.Builder builder() {
-    return ImmutableXChainOwnedClaimIdObject.builder();
-  }
+    /**
+     * Construct a {@code XChainOwnedClaimIdObject} builder.
+     *
+     * @return An {@link ImmutableXChainOwnedClaimIdObject.Builder}.
+     */
+    static ImmutableXChainOwnedClaimIdObject.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The type of ledger object, which will always be "XChainOwnedClaimID" in this case.
-   *
-   * @return Always returns {@link LedgerEntryType#XCHAIN_OWNED_CLAIM_ID}.
-   */
-  @JsonProperty("LedgerEntryType")
-  @Value.Derived
-  default LedgerEntryType ledgerEntryType() {
-    return LedgerEntryType.XCHAIN_OWNED_CLAIM_ID;
-  }
+    /**
+     * The type of ledger object, which will always be "XChainOwnedClaimID" in this case.
+     *
+     * @return Always returns {@link LedgerEntryType#XCHAIN_OWNED_CLAIM_ID}.
+     */
+    @JsonProperty("LedgerEntryType")
+    @Value.Derived
+    default LedgerEntryType ledgerEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A bit-map of boolean flags. No flags are defined for {@link XChainOwnedClaimIdObject}, so this value is always 0.
-   *
-   * @return Always {@link Flags#UNSET}.
-   */
-  @JsonProperty("Flags")
-  @Value.Derived
-  default Flags flags() {
-    return Flags.UNSET;
-  }
+    /**
+     * A bit-map of boolean flags. No flags are defined for {@link XChainOwnedClaimIdObject}, so this value is always 0.
+     *
+     * @return Always {@link Flags#UNSET}.
+     */
+    @JsonProperty("Flags")
+    @Value.Derived
+    default Flags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The account that owns this object.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Account")
-  Address account();
+    /**
+     * The account that owns this object.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Account")
+    Address account();
 
-  /**
-   * The door accounts and assets of the bridge this object correlates to.
-   *
-   * @return An {@link XChainBridge}.
-   */
-  @JsonProperty("XChainBridge")
-  @SuppressWarnings("MethodName")
-  XChainBridge xChainBridge();
+    /**
+     * The door accounts and assets of the bridge this object correlates to.
+     *
+     * @return An {@link XChainBridge}.
+     */
+    @JsonProperty("XChainBridge")
+    @SuppressWarnings("MethodName")
+    XChainBridge xChainBridge();
 
-  /**
-   * The unique sequence number for a cross-chain transfer.
-   *
-   * @return An {@link XChainClaimId}.
-   */
-  @JsonProperty("XChainClaimID")
-  @SuppressWarnings("MethodName")
-  XChainClaimId xChainClaimId();
+    /**
+     * The unique sequence number for a cross-chain transfer.
+     *
+     * @return An {@link XChainClaimId}.
+     */
+    @JsonProperty("XChainClaimID")
+    @SuppressWarnings("MethodName")
+    XChainClaimId xChainClaimId();
 
-  /**
-   * The account that must send the corresponding {@link org.xrpl.xrpl4j.model.transactions.XChainCommit} on the source
-   * chain. The destination may be specified in the {@link org.xrpl.xrpl4j.model.transactions.XChainCommit} transaction,
-   * which means that if the OtherChainSource isn't specified, another account can try to specify a different
-   * destination and steal the funds. This also allows tracking only a single set of signatures, since we know which
-   * account will send the {@link org.xrpl.xrpl4j.model.transactions.XChainCommit} transaction.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("OtherChainSource")
-  Address otherChainSource();
+    /**
+     * The account that must send the corresponding {@link org.xrpl.xrpl4j.model.transactions.XChainCommit} on the source
+     * chain. The destination may be specified in the {@link org.xrpl.xrpl4j.model.transactions.XChainCommit} transaction,
+     * which means that if the OtherChainSource isn't specified, another account can try to specify a different
+     * destination and steal the funds. This also allows tracking only a single set of signatures, since we know which
+     * account will send the {@link org.xrpl.xrpl4j.model.transactions.XChainCommit} transaction.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("OtherChainSource")
+    Address otherChainSource();
 
-  /**
-   * Attestations collected from the witness servers. This includes the parameters needed to recreate the message that
-   * was signed, including the amount, which chain (locking or issuing), optional destination, and reward account for
-   * that signature.
-   *
-   * @return A {@link List} of {@link XChainClaimAttestation}s.
-   */
-  @JsonProperty("XChainClaimAttestations")
-  @SuppressWarnings("MethodName")
-  List<XChainClaimAttestation> xChainClaimAttestations();
+    /**
+     * Attestations collected from the witness servers. This includes the parameters needed to recreate the message that
+     * was signed, including the amount, which chain (locking or issuing), optional destination, and reward account for
+     * that signature.
+     *
+     * @return A {@link List} of {@link XChainClaimAttestation}s.
+     */
+    @JsonProperty("XChainClaimAttestations")
+    @SuppressWarnings("MethodName")
+    List<XChainClaimAttestation> xChainClaimAttestations();
 
-  /**
-   * The total amount to pay the witness servers for their signatures. It must be at least the value of SignatureReward
-   * in the Bridge ledger object.
-   *
-   * @return An {@link XrpCurrencyAmount}.
-   */
-  @JsonProperty("SignatureReward")
-  XrpCurrencyAmount signatureReward();
+    /**
+     * The total amount to pay the witness servers for their signatures. It must be at least the value of SignatureReward
+     * in the Bridge ledger object.
+     *
+     * @return An {@link XrpCurrencyAmount}.
+     */
+    @JsonProperty("SignatureReward")
+    XrpCurrencyAmount signatureReward();
 
-  /**
-   * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
-   * of multiple pages.
-   *
-   * <p>Note: The object does not contain a direct link to the owner directory containing it, since that value can be
-   * derived from the Account.
-   *
-   * @return A {@link String} containing the owner node hint.
-   */
-  @JsonProperty("OwnerNode")
-  String ownerNode();
+    /**
+     * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
+     * of multiple pages.
+     *
+     * <p>Note: The object does not contain a direct link to the owner directory containing it, since that value can be
+     * derived from the Account.
+     *
+     * @return A {@link String} containing the owner node hint.
+     */
+    @JsonProperty("OwnerNode")
+    String ownerNode();
 
-  /**
-   * The identifying hash of the transaction that most recently modified this object.
-   *
-   * @return A {@link Hash256} containing the previous transaction hash.
-   */
-  @JsonProperty("PreviousTxnID")
-  Hash256 previousTransactionId();
+    /**
+     * The identifying hash of the transaction that most recently modified this object.
+     *
+     * @return A {@link Hash256} containing the previous transaction hash.
+     */
+    @JsonProperty("PreviousTxnID")
+    Hash256 previousTransactionId();
 
-  /**
-   * The index of the ledger that contains the transaction that most recently modified this object.
-   *
-   * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  UnsignedInteger previousTransactionLedgerSequence();
+    /**
+     * The index of the ledger that contains the transaction that most recently modified this object.
+     *
+     * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    UnsignedInteger previousTransactionLedgerSequence();
 
-  /**
-   * The unique ID of the {@link XChainOwnedClaimIdObject}.
-   *
-   * @return A {@link Hash256} containing the ID.
-   */
-  Hash256 index();
+    /**
+     * The unique ID of the {@link XChainOwnedClaimIdObject}.
+     *
+     * @return A {@link Hash256} containing the ID.
+     */
+    Hash256 index();
 }

@@ -13,7 +13,6 @@ import org.xrpl.xrpl4j.model.ledger.ImmutableAuctionSlot;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.IssuedCurrencyAmount;
 import org.xrpl.xrpl4j.model.transactions.TradingFee;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,59 +30,55 @@ import java.util.stream.Collectors;
 @Beta
 public interface MetaAuctionSlot {
 
-  /**
-   * The current owner of this auction slot.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Account")
-  Optional<Address> account();
+    /**
+     * The current owner of this auction slot.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Account")
+    Optional<Address> account();
 
-  /**
-   * A list of at most 4 additional accounts that are authorized to trade at the discounted fee for this AMM instance.
-   *
-   * @return A {@link List} of {@link MetaAuthAccountWrapper}s.
-   */
-  @JsonProperty("AuthAccounts")
-  List<MetaAuthAccountWrapper> authAccounts();
+    /**
+     * A list of at most 4 additional accounts that are authorized to trade at the discounted fee for this AMM instance.
+     *
+     * @return A {@link List} of {@link MetaAuthAccountWrapper}s.
+     */
+    @JsonProperty("AuthAccounts")
+    List<MetaAuthAccountWrapper> authAccounts();
 
-  /**
-   * Extracts all the addresses found in the {@link MetaAuthAccount}s found in {@link #authAccounts()}.
-   *
-   * @return A {@link List} of {@link Address}.
-   */
-  @JsonIgnore
-  @Value.Derived
-  default List<Address> authAccountsAddresses() {
-    return authAccounts().stream()
-      .map(MetaAuthAccountWrapper::authAccount)
-      .map(MetaAuthAccount::account)
-      .collect(Collectors.toList());
-  }
+    /**
+     * Extracts all the addresses found in the {@link MetaAuthAccount}s found in {@link #authAccounts()}.
+     *
+     * @return A {@link List} of {@link Address}.
+     */
+    @JsonIgnore
+    @Value.Derived
+    default List<Address> authAccountsAddresses() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The trading fee to be charged to the auction owner. By default this is 0, meaning that the auction owner can trade
-   * at no fee instead of the standard fee for this AMM.
-   *
-   * @return A {@link TradingFee}.
-   */
-  @JsonProperty("DiscountedFee")
-  Optional<TradingFee> discountedFee();
+    /**
+     * The trading fee to be charged to the auction owner. By default this is 0, meaning that the auction owner can trade
+     * at no fee instead of the standard fee for this AMM.
+     *
+     * @return A {@link TradingFee}.
+     */
+    @JsonProperty("DiscountedFee")
+    Optional<TradingFee> discountedFee();
 
-  /**
-   * The amount the auction owner paid to win this slot, in LP Tokens.
-   *
-   * @return An {@link IssuedCurrencyAmount}.
-   */
-  @JsonProperty("Price")
-  Optional<IssuedCurrencyAmount> price();
+    /**
+     * The amount the auction owner paid to win this slot, in LP Tokens.
+     *
+     * @return An {@link IssuedCurrencyAmount}.
+     */
+    @JsonProperty("Price")
+    Optional<IssuedCurrencyAmount> price();
 
-  /**
-   * The time when this slot expires, in seconds since the Ripple Epoch.
-   *
-   * @return An {@link UnsignedInteger}
-   */
-  @JsonProperty("Expiration")
-  Optional<UnsignedInteger> expiration();
-
+    /**
+     * The time when this slot expires, in seconds since the Ripple Epoch.
+     *
+     * @return An {@link UnsignedInteger}
+     */
+    @JsonProperty("Expiration")
+    Optional<UnsignedInteger> expiration();
 }

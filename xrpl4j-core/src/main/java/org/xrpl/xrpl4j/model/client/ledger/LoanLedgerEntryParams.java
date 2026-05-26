@@ -21,29 +21,28 @@ import org.xrpl.xrpl4j.model.transactions.Hash256;
 @JsonDeserialize(as = ImmutableLoanLedgerEntryParams.class)
 public interface LoanLedgerEntryParams {
 
-  /**
-   * Construct a {@code LoanLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableLoanLedgerEntryParams.Builder}.
-   */
-  static ImmutableLoanLedgerEntryParams.Builder builder() {
-    return ImmutableLoanLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code LoanLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableLoanLedgerEntryParams.Builder}.
+     */
+    static ImmutableLoanLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The LoanBrokerID of the LoanBroker associated with the Loan.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("loan_broker_id")
-  Hash256 loanBrokerId();
+    /**
+     * The LoanBrokerID of the LoanBroker associated with the Loan.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("loan_broker_id")
+    Hash256 loanBrokerId();
 
-  /**
-   * The LoanSequence of the Loan.
-   *
-   * @return An {@link UnsignedInteger}.
-   */
-  @JsonProperty("loan_seq")
-  UnsignedInteger loanSeq();
-
+    /**
+     * The LoanSequence of the Loan.
+     *
+     * @return An {@link UnsignedInteger}.
+     */
+    @JsonProperty("loan_seq")
+    UnsignedInteger loanSeq();
 }

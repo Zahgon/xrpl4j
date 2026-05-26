@@ -19,14 +19,12 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.primitives.UnsignedLong;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -40,57 +38,57 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutablePaymentChannelFund.class)
 public interface PaymentChannelFund extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutablePaymentChannelFund.Builder}.
-   */
-  static ImmutablePaymentChannelFund.Builder builder() {
-    return ImmutablePaymentChannelFund.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutablePaymentChannelFund.Builder}.
+     */
+    static ImmutablePaymentChannelFund.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link PaymentChannelFund}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link PaymentChannelFund}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The unique ID of the channel to fund.
-   *
-   * @return A {@link Hash256} containing the channel ID.
-   */
-  @JsonProperty("Channel")
-  Hash256 channel();
+    /**
+     * The unique ID of the channel to fund.
+     *
+     * @return A {@link Hash256} containing the channel ID.
+     */
+    @JsonProperty("Channel")
+    Hash256 channel();
 
-  /**
-   * Amount of XRP, in drops to add to the channel. This field is required, therefore it is not possible to
-   * set the {@link #expiration()} without adding value to the channel.  However, you can change the expiration
-   * and add a negligible amount of XRP (like 1 drop) to the channel.
-   *
-   * @return An {@link XrpCurrencyAmount} representing the amount of the payment channel.
-   */
-  @JsonProperty("Amount")
-  XrpCurrencyAmount amount();
+    /**
+     * Amount of XRP, in drops to add to the channel. This field is required, therefore it is not possible to
+     * set the {@link #expiration()} without adding value to the channel.  However, you can change the expiration
+     * and add a negligible amount of XRP (like 1 drop) to the channel.
+     *
+     * @return An {@link XrpCurrencyAmount} representing the amount of the payment channel.
+     */
+    @JsonProperty("Amount")
+    XrpCurrencyAmount amount();
 
-  /**
-   * New Expiration time to set for the channel, in seconds since the Ripple Epoch. This must be later than
-   * either the current time plus the SettleDelay of the channel, or the existing Expiration of the channel.
-   * After the Expiration time, any transaction that would access the channel closes the channel without
-   * taking its normal action. Any unspent XRP is returned to the source address when the channel closes.
-   * (Expiration is separate from the channel's immutable CancelAfter time.)
-   *
-   * @return An {@link Optional} of type {@link UnsignedLong}.
-   */
-  @JsonProperty("Expiration")
-  Optional<UnsignedLong> expiration();
+    /**
+     * New Expiration time to set for the channel, in seconds since the Ripple Epoch. This must be later than
+     * either the current time plus the SettleDelay of the channel, or the existing Expiration of the channel.
+     * After the Expiration time, any transaction that would access the channel closes the channel without
+     * taking its normal action. Any unspent XRP is returned to the source address when the channel closes.
+     * (Expiration is separate from the channel's immutable CancelAfter time.)
+     *
+     * @return An {@link Optional} of type {@link UnsignedLong}.
+     */
+    @JsonProperty("Expiration")
+    Optional<UnsignedLong> expiration();
 }

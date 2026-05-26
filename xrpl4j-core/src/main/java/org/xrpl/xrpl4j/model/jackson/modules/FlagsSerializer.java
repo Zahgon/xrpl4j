@@ -19,13 +19,11 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import org.xrpl.xrpl4j.model.flags.Flags;
 import org.xrpl.xrpl4j.model.transactions.Address;
-
 import java.io.IOException;
 
 /**
@@ -33,22 +31,20 @@ import java.io.IOException;
  */
 public class FlagsSerializer extends StdScalarSerializer<Flags> {
 
-  /**
-   * No-args constructor.
-   */
-  public FlagsSerializer() {
-    super(Flags.class, false);
-  }
-
-  @Override
-  public void serialize(Flags flags, JsonGenerator gen, SerializerProvider provider) throws IOException {
-    if (!flags.isEmpty()) {
-      gen.writeNumber(flags.getValue());
+    /**
+     * No-args constructor.
+     */
+    public FlagsSerializer() {
+        super(Flags.class, false);
     }
-  }
 
-  @Override
-  public boolean isEmpty(SerializerProvider provider, Flags value) {
-    return value == null || value.isEmpty();
-  }
+    @Override
+    public void serialize(Flags flags, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public boolean isEmpty(SerializerProvider provider, Flags value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

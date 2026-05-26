@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.channels;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -34,21 +33,20 @@ import org.xrpl.xrpl4j.model.client.XrplResult;
 @JsonDeserialize(as = ImmutableChannelVerifyResult.class)
 public interface ChannelVerifyResult extends XrplResult {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableChannelVerifyResult.Builder}.
-   */
-  static ImmutableChannelVerifyResult.Builder builder() {
-    return ImmutableChannelVerifyResult.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableChannelVerifyResult.Builder}.
+     */
+    static ImmutableChannelVerifyResult.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * If {@code true}, the signature is valid for the stated amount, channel, and public key.
-   *
-   * @return {@code true} if the signature was valid, otherwise {@code false}.
-   */
-  @JsonProperty("signature_verified")
-  boolean signatureVerified();
-
+    /**
+     * If {@code true}, the signature is valid for the stated amount, channel, and public key.
+     *
+     * @return {@code true} if the signature was valid, otherwise {@code false}.
+     */
+    @JsonProperty("signature_verified")
+    boolean signatureVerified();
 }

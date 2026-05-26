@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -28,7 +27,6 @@ import com.google.common.primitives.UnsignedInteger;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.flags.OfferCreateFlags;
-
 import java.util.Optional;
 
 /**
@@ -42,75 +40,72 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableOfferCreate.class)
 public interface OfferCreate extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableOfferCreate.Builder}.
-   */
-  static ImmutableOfferCreate.Builder builder() {
-    return ImmutableOfferCreate.builder();
-  }
-
-  /**
-   * Set of {@link OfferCreateFlags}s for this {@link OfferCreate}.
-   *
-   * @return The {@link OfferCreateFlags} for this transaction.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default OfferCreateFlags flags() {
-    return OfferCreateFlags.empty();
-  }
-
-  /**
-   * An offer to delete first, specified in the same way as an Offer Cancel.
-   *
-   * @return An {@link Optional} of type {@link UnsignedInteger} representing the offer sequence.
-   */
-  @JsonProperty("OfferSequence")
-  Optional<UnsignedInteger> offerSequence();
-
-  /**
-   * The amount and type of currency being requested by the offer creator.
-   *
-   * @return A {@link CurrencyAmount} representing the amount being requested.
-   */
-  @JsonProperty("TakerPays")
-  CurrencyAmount takerPays();
-
-  /**
-   * The amount and type of currency being provided by the offer creator.
-   *
-   * @return A {@link CurrencyAmount} representing the amount being offered.
-   */
-  @JsonProperty("TakerGets")
-  CurrencyAmount takerGets();
-
-  /**
-   * Time after which the Check is no longer valid, in
-   * <a href="https://xrpl.org/basic-data-types.html#specifying-time">seconds since the Ripple Epoch</a>.
-   *
-   * @return An {@link Optional} of type {@link UnsignedInteger} representing the expiration time.
-   */
-  @JsonProperty("Expiration")
-  Optional<UnsignedInteger> expiration();
-
-  /**
-   * The permissioned domain that the offer must be a part of.
-   *
-   * @return A {@link Hash256} representing DomainID.
-   */
-  @JsonProperty("DomainID")
-  Optional<Hash256> domainId();
-
-  /**
-   * Validates tfHybrid flag cannot be set if the offer doesn't have a DomainID.
-   */
-  @Value.Check
-  default void check() {
-    if (!domainId().isPresent()) {
-      Preconditions.checkState(!flags().tfHybrid(),
-        "tfHybrid flag cannot be set if the offer doesn't have a DomainID.");
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableOfferCreate.Builder}.
+     */
+    static ImmutableOfferCreate.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    /**
+     * Set of {@link OfferCreateFlags}s for this {@link OfferCreate}.
+     *
+     * @return The {@link OfferCreateFlags} for this transaction.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default OfferCreateFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * An offer to delete first, specified in the same way as an Offer Cancel.
+     *
+     * @return An {@link Optional} of type {@link UnsignedInteger} representing the offer sequence.
+     */
+    @JsonProperty("OfferSequence")
+    Optional<UnsignedInteger> offerSequence();
+
+    /**
+     * The amount and type of currency being requested by the offer creator.
+     *
+     * @return A {@link CurrencyAmount} representing the amount being requested.
+     */
+    @JsonProperty("TakerPays")
+    CurrencyAmount takerPays();
+
+    /**
+     * The amount and type of currency being provided by the offer creator.
+     *
+     * @return A {@link CurrencyAmount} representing the amount being offered.
+     */
+    @JsonProperty("TakerGets")
+    CurrencyAmount takerGets();
+
+    /**
+     * Time after which the Check is no longer valid, in
+     * <a href="https://xrpl.org/basic-data-types.html#specifying-time">seconds since the Ripple Epoch</a>.
+     *
+     * @return An {@link Optional} of type {@link UnsignedInteger} representing the expiration time.
+     */
+    @JsonProperty("Expiration")
+    Optional<UnsignedInteger> expiration();
+
+    /**
+     * The permissioned domain that the offer must be a part of.
+     *
+     * @return A {@link Hash256} representing DomainID.
+     */
+    @JsonProperty("DomainID")
+    Optional<Hash256> domainId();
+
+    /**
+     * Validates tfHybrid flag cannot be set if the offer doesn't have a DomainID.
+     */
+    @Value.Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

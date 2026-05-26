@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -35,32 +34,31 @@ import org.xrpl.xrpl4j.model.transactions.Transaction;
 @JsonDeserialize(as = ImmutableSubmitMultiSignedRequestParams.class)
 public interface SubmitMultiSignedRequestParams extends XrplRequestParams {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableSubmitMultiSignedRequestParams.Builder}.
-   */
-  static ImmutableSubmitMultiSignedRequestParams.Builder builder() {
-    return ImmutableSubmitMultiSignedRequestParams.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableSubmitMultiSignedRequestParams.Builder}.
+     */
+    static ImmutableSubmitMultiSignedRequestParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Construct a {@link SubmitMultiSignedRequestParams} with the given {@link Transaction}.
-   *
-   * @param multiSigTransaction A {@link Transaction} that has been signed by multiple accounts.
-   *
-   * @return A {@link SubmitMultiSignedRequestParams} populated with the given {@link Transaction}.
-   */
-  static SubmitMultiSignedRequestParams of(Transaction multiSigTransaction) {
-    return SubmitMultiSignedRequestParams.builder().transaction(multiSigTransaction).build();
-  }
+    /**
+     * Construct a {@link SubmitMultiSignedRequestParams} with the given {@link Transaction}.
+     *
+     * @param multiSigTransaction A {@link Transaction} that has been signed by multiple accounts.
+     *
+     * @return A {@link SubmitMultiSignedRequestParams} populated with the given {@link Transaction}.
+     */
+    static SubmitMultiSignedRequestParams of(Transaction multiSigTransaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link Transaction} to submit.
-   *
-   * @return The {@link Transaction} to submit.
-   */
-  @JsonProperty("tx_json")
-  Transaction transaction();
-
+    /**
+     * The {@link Transaction} to submit.
+     *
+     * @return The {@link Transaction} to submit.
+     */
+    @JsonProperty("tx_json")
+    Transaction transaction();
 }

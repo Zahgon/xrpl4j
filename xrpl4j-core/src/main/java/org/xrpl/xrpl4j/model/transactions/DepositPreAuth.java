@@ -19,14 +19,12 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Preconditions;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -44,127 +42,86 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableDepositPreAuth.class)
 public interface DepositPreAuth extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableDepositPreAuth.Builder}.
-   */
-  static ImmutableDepositPreAuth.Builder builder() {
-    return ImmutableDepositPreAuth.builder();
-  }
-
-  /**
-   * Set of {@link TransactionFlags}s for this {@link DepositPreAuth}, which only allows the {@code tfFullyCanonicalSig}
-   * flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
-
-  /**
-   * The XRP Ledger {@link Address} of the sender to preauthorize.
-   *
-   * @return An {@link Optional} of type {@link Address} of the sender to preauthorize.
-   */
-  @JsonProperty("Authorize")
-  Optional<Address> authorize();
-
-  /**
-   * The XRP Ledger {@link Address} of a sender whose preauthorization should be revoked.
-   *
-   * @return An {@link Optional} of type {@link Address} of the sender to unauthorize.
-   */
-  @JsonProperty("Unauthorize")
-  Optional<Address> unauthorize();
-
-  /**
-   * The {@link CredentialWrapper}'s to preauthorize.
-   *
-   * @return A list of type {@link CredentialWrapper} to preauthorize.
-   */
-  @JsonProperty("AuthorizeCredentials")
-  List<CredentialWrapper> authorizeCredentials();
-
-  /**
-   * The {@link CredentialWrapper}'s whose preauthorization should be revoked.
-   *
-   * @return A list of type {@link CredentialWrapper} to unauthorize.
-   */
-  @JsonProperty("UnauthorizeCredentials")
-  List<CredentialWrapper> unauthorizeCredentials();
-
-  /**
-   * Validate that exactly one of {@link DepositPreAuth#authorize()} or {@link DepositPreAuth#unauthorize()} or
-   * {@link DepositPreAuth#authorizeCredentials()} or {@link DepositPreAuth#unauthorizeCredentials()} is present.
-   */
-  @Value.Check
-  default void validateExactOneFieldPresence() {
-    int fieldsPresent = 0;
-    if (authorize().isPresent()) {
-      fieldsPresent++;
-    }
-    if (unauthorize().isPresent()) {
-      fieldsPresent++;
-    }
-    if (!authorizeCredentials().isEmpty()) {
-      fieldsPresent++;
-    }
-    if (!unauthorizeCredentials().isEmpty()) {
-      fieldsPresent++;
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableDepositPreAuth.Builder}.
+     */
+    static ImmutableDepositPreAuth.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    Preconditions.checkArgument(fieldsPresent == 1,
-      "Exactly one of Authorize, Unauthorize, AuthorizeCredentials, or UnauthorizeCredentials must be present.");
-  }
-
-  /**
-   * Validate {@link DepositPreAuth#authorizeCredentials()} and {@link DepositPreAuth#unauthorizeCredentials()} has less
-   * than or equal to 8 credentials.
-   */
-  @Value.Check
-  default void validateCredentialList() {
-    if (!authorizeCredentials().isEmpty()) {
-      Preconditions.checkArgument(
-        authorizeCredentials().size() <= 8,
-        "AuthorizeCredentials should have less than or equal to 8 credentials."
-      );
+    /**
+     * Set of {@link TransactionFlags}s for this {@link DepositPreAuth}, which only allows the {@code tfFullyCanonicalSig}
+     * flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    if (!unauthorizeCredentials().isEmpty()) {
-      Preconditions.checkArgument(
-        unauthorizeCredentials().size() <= 8,
-        "UnauthorizeCredentials should have less than or equal to 8 credentials."
-      );
-    }
-  }
+    /**
+     * The XRP Ledger {@link Address} of the sender to preauthorize.
+     *
+     * @return An {@link Optional} of type {@link Address} of the sender to preauthorize.
+     */
+    @JsonProperty("Authorize")
+    Optional<Address> authorize();
 
-  /**
-   * Validate {@link DepositPreAuth#authorizeCredentials()} and {@link DepositPreAuth#unauthorizeCredentials()} has
-   * unique credentials each.
-   */
-  @Value.Check
-  default void validateForUniqueValues() {
-    if (!authorizeCredentials().isEmpty()) {
-      final List<CredentialWrapper> credentials = authorizeCredentials();
-      Preconditions.checkArgument(
-        new HashSet<>(credentials).size() == credentials.size(),
-        "AuthorizeCredentials should have unique credentials."
-      );
+    /**
+     * The XRP Ledger {@link Address} of a sender whose preauthorization should be revoked.
+     *
+     * @return An {@link Optional} of type {@link Address} of the sender to unauthorize.
+     */
+    @JsonProperty("Unauthorize")
+    Optional<Address> unauthorize();
+
+    /**
+     * The {@link CredentialWrapper}'s to preauthorize.
+     *
+     * @return A list of type {@link CredentialWrapper} to preauthorize.
+     */
+    @JsonProperty("AuthorizeCredentials")
+    List<CredentialWrapper> authorizeCredentials();
+
+    /**
+     * The {@link CredentialWrapper}'s whose preauthorization should be revoked.
+     *
+     * @return A list of type {@link CredentialWrapper} to unauthorize.
+     */
+    @JsonProperty("UnauthorizeCredentials")
+    List<CredentialWrapper> unauthorizeCredentials();
+
+    /**
+     * Validate that exactly one of {@link DepositPreAuth#authorize()} or {@link DepositPreAuth#unauthorize()} or
+     * {@link DepositPreAuth#authorizeCredentials()} or {@link DepositPreAuth#unauthorizeCredentials()} is present.
+     */
+    @Value.Check
+    default void validateExactOneFieldPresence() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    if (!unauthorizeCredentials().isEmpty()) {
-      final List<CredentialWrapper> credentials = unauthorizeCredentials();
-      Preconditions.checkArgument(
-        new HashSet<>(credentials).size() == credentials.size(),
-        "UnauthorizeCredentials should have unique credentials."
-      );
+    /**
+     * Validate {@link DepositPreAuth#authorizeCredentials()} and {@link DepositPreAuth#unauthorizeCredentials()} has less
+     * than or equal to 8 credentials.
+     */
+    @Value.Check
+    default void validateCredentialList() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    /**
+     * Validate {@link DepositPreAuth#authorizeCredentials()} and {@link DepositPreAuth#unauthorizeCredentials()} has
+     * unique credentials each.
+     */
+    @Value.Check
+    default void validateForUniqueValues() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

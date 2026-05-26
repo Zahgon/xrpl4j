@@ -20,29 +20,27 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @JsonDeserialize(as = ImmutableVaultLedgerEntryParams.class)
 public interface VaultLedgerEntryParams {
 
-  /**
-   * Construct a {@code VaultLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableVaultLedgerEntryParams.Builder}.
-   */
-  static ImmutableVaultLedgerEntryParams.Builder builder() {
-    return ImmutableVaultLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code VaultLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableVaultLedgerEntryParams.Builder}.
+     */
+    static ImmutableVaultLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The owner of the Vault.
-   *
-   * @return The {@link Address} of the vault owner.
-   */
-  Address owner();
+    /**
+     * The owner of the Vault.
+     *
+     * @return The {@link Address} of the vault owner.
+     */
+    Address owner();
 
-  /**
-   * The Sequence Number of the transaction that created the Vault. If the transaction used a Ticket,
-   * this should be the TicketSequence value.
-   *
-   * @return An {@link UnsignedInteger}.
-   */
-  UnsignedInteger seq();
-
+    /**
+     * The Sequence Number of the transaction that created the Vault. If the transaction used a Ticket,
+     * this should be the TicketSequence value.
+     *
+     * @return An {@link UnsignedInteger}.
+     */
+    UnsignedInteger seq();
 }
-

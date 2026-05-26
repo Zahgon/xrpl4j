@@ -19,26 +19,23 @@ import org.immutables.value.Value.Immutable;
 @JsonDeserialize(as = ImmutableXChainCreateAccountAttestation.class)
 public interface XChainCreateAccountAttestation {
 
-  /**
-   * Construct an {@link XChainCreateAccountAttestation} containing the specified {@link XChainCreateAccountProofSig}.
-   *
-   * @param proofSig An {@link XChainCreateAccountProofSig}.
-   *
-   * @return An {@link XChainCreateAccountAttestation}.
-   */
-  static XChainCreateAccountAttestation of(XChainCreateAccountProofSig proofSig) {
-    return ImmutableXChainCreateAccountAttestation.builder()
-      .xChainCreateAccountProofSig(proofSig)
-      .build();
-  }
+    /**
+     * Construct an {@link XChainCreateAccountAttestation} containing the specified {@link XChainCreateAccountProofSig}.
+     *
+     * @param proofSig An {@link XChainCreateAccountProofSig}.
+     *
+     * @return An {@link XChainCreateAccountAttestation}.
+     */
+    static XChainCreateAccountAttestation of(XChainCreateAccountProofSig proofSig) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * An {@link XChainCreateAccountProofSig}.
-   *
-   * @return An {@link XChainCreateAccountProofSig}.
-   */
-  @JsonProperty("XChainCreateAccountProofSig")
-  @SuppressWarnings("MethodName")
-  XChainCreateAccountProofSig xChainCreateAccountProofSig();
-
+    /**
+     * An {@link XChainCreateAccountProofSig}.
+     *
+     * @return An {@link XChainCreateAccountProofSig}.
+     */
+    @JsonProperty("XChainCreateAccountProofSig")
+    @SuppressWarnings("MethodName")
+    XChainCreateAccountProofSig xChainCreateAccountProofSig();
 }

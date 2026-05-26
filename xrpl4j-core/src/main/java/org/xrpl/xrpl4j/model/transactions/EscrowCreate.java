@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -29,7 +28,6 @@ import com.google.common.primitives.UnsignedLong;
 import com.ripple.cryptoconditions.Condition;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -47,104 +45,99 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableEscrowCreate.class)
 public interface EscrowCreate extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableEscrowCreate.Builder}.
-   */
-  static ImmutableEscrowCreate.Builder builder() {
-    return ImmutableEscrowCreate.builder();
-  }
-
-  /**
-   * Set of {@link TransactionFlags}s for this {@link EscrowCreate}, which only allows the {@code tfFullyCanonicalSig}
-   * flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
-
-  /**
-   * Amount of tokens to deduct from the sender's balance and escrow. Once escrowed, the tokens can either go to the
-   * {@link EscrowCreate#destination()} address (after the {@link EscrowCreate#finishAfter()} time) or returned to the
-   * sender (after the {@link EscrowCreate#cancelAfter()} time).
-   *
-   * <p>Can be one of:
-   * <ul>
-   *   <li>{@link XrpCurrencyAmount} - XRP in drops</li>
-   *   <li>{@link IssuedCurrencyAmount} - IOU tokens (requires issuer's {@code lsfAllowTrustLineLocking} flag)</li>
-   *   <li>{@link MptCurrencyAmount} - MPT tokens (requires {@code lsfMPTCanEscrow} and {@code lsfMPTCanTransfer}
-   *   flags)</li>
-   * </ul>
-   *
-   * @return A {@link CurrencyAmount} representing the amount of the escrow.
-   */
-  @JsonProperty("Amount")
-  CurrencyAmount amount();
-
-  /**
-   * Address to receive escrowed tokens.
-   *
-   * @return The {@link Address} of the destination account.
-   */
-  @JsonProperty("Destination")
-  Address destination();
-
-  /**
-   * Arbitrary tag to further specify the destination for this escrowed payment, such as a hosted recipient at the
-   * destination address.
-   *
-   * @return An {@link Optional} of type {@link UnsignedInteger} representing the tag of the destination account.
-   */
-  @JsonProperty("DestinationTag")
-  Optional<UnsignedInteger> destinationTag();
-
-  /**
-   * The time, in seconds since the Ripple Epoch, when this escrow expires.
-   *
-   * <p>This value is immutable - the tokens can only be returned to the sender after this time.
-   *
-   * @return An {@link Optional} of type {@link UnsignedLong} representing the cancel after time.
-   */
-  @JsonProperty("CancelAfter")
-  Optional<UnsignedLong> cancelAfter();
-
-  /**
-   * The time, in seconds since the Ripple Epoch, when the escrowed tokens can be released to the recipient.
-   *
-   * <p>This value is immutable - the tokens cannot move until this time is reached.
-   *
-   * @return An {@link Optional} of type {@link UnsignedLong} representing the finish after time.
-   */
-  @JsonProperty("FinishAfter")
-  Optional<UnsignedLong> finishAfter();
-
-  /**
-   * Hex value representing a PREIMAGE-SHA-256 crypto-condition. The tokens can only be delivered to the recipient if
-   * this condition is fulfilled.
-   *
-   * @return An {@link Optional} of type {@link Condition} containing the escrow condition.
-   */
-  @JsonProperty("Condition")
-  Optional<Condition> condition();
-
-  /**
-   * Validate cancelAfter, finishAfter, and condition fields.
-   */
-  @Value.Check
-  default void check() {
-    if (cancelAfter().isPresent() && finishAfter().isPresent()) {
-      Preconditions.checkState(
-        finishAfter().get().compareTo(cancelAfter().get()) < 0,
-        "If both CancelAfter and FinishAfter are specified, the FinishAfter time must be before the CancelAfter time."
-      );
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableEscrowCreate.Builder}.
+     */
+    static ImmutableEscrowCreate.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    /**
+     * Set of {@link TransactionFlags}s for this {@link EscrowCreate}, which only allows the {@code tfFullyCanonicalSig}
+     * flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Amount of tokens to deduct from the sender's balance and escrow. Once escrowed, the tokens can either go to the
+     * {@link EscrowCreate#destination()} address (after the {@link EscrowCreate#finishAfter()} time) or returned to the
+     * sender (after the {@link EscrowCreate#cancelAfter()} time).
+     *
+     * <p>Can be one of:
+     * <ul>
+     *   <li>{@link XrpCurrencyAmount} - XRP in drops</li>
+     *   <li>{@link IssuedCurrencyAmount} - IOU tokens (requires issuer's {@code lsfAllowTrustLineLocking} flag)</li>
+     *   <li>{@link MptCurrencyAmount} - MPT tokens (requires {@code lsfMPTCanEscrow} and {@code lsfMPTCanTransfer}
+     *   flags)</li>
+     * </ul>
+     *
+     * @return A {@link CurrencyAmount} representing the amount of the escrow.
+     */
+    @JsonProperty("Amount")
+    CurrencyAmount amount();
+
+    /**
+     * Address to receive escrowed tokens.
+     *
+     * @return The {@link Address} of the destination account.
+     */
+    @JsonProperty("Destination")
+    Address destination();
+
+    /**
+     * Arbitrary tag to further specify the destination for this escrowed payment, such as a hosted recipient at the
+     * destination address.
+     *
+     * @return An {@link Optional} of type {@link UnsignedInteger} representing the tag of the destination account.
+     */
+    @JsonProperty("DestinationTag")
+    Optional<UnsignedInteger> destinationTag();
+
+    /**
+     * The time, in seconds since the Ripple Epoch, when this escrow expires.
+     *
+     * <p>This value is immutable - the tokens can only be returned to the sender after this time.
+     *
+     * @return An {@link Optional} of type {@link UnsignedLong} representing the cancel after time.
+     */
+    @JsonProperty("CancelAfter")
+    Optional<UnsignedLong> cancelAfter();
+
+    /**
+     * The time, in seconds since the Ripple Epoch, when the escrowed tokens can be released to the recipient.
+     *
+     * <p>This value is immutable - the tokens cannot move until this time is reached.
+     *
+     * @return An {@link Optional} of type {@link UnsignedLong} representing the finish after time.
+     */
+    @JsonProperty("FinishAfter")
+    Optional<UnsignedLong> finishAfter();
+
+    /**
+     * Hex value representing a PREIMAGE-SHA-256 crypto-condition. The tokens can only be delivered to the recipient if
+     * this condition is fulfilled.
+     *
+     * @return An {@link Optional} of type {@link Condition} containing the escrow condition.
+     */
+    @JsonProperty("Condition")
+    Optional<Condition> condition();
+
+    /**
+     * Validate cancelAfter, finishAfter, and condition fields.
+     */
+    @Value.Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

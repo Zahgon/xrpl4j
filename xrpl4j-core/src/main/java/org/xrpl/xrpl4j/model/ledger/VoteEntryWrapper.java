@@ -18,26 +18,23 @@ import org.immutables.value.Value;
 @Beta
 public interface VoteEntryWrapper {
 
-  /**
-   * Construct a {@link VoteEntryWrapper} containing the specified
-   * {@link VoteEntry}.
-   *
-   * @param voteEntry A {@link VoteEntry}.
-   *
-   * @return A {@link VoteEntryWrapper}.
-   */
-  static VoteEntryWrapper of(VoteEntry voteEntry) {
-    return ImmutableVoteEntryWrapper.builder()
-      .voteEntry(voteEntry)
-      .build();
-  }
+    /**
+     * Construct a {@link VoteEntryWrapper} containing the specified
+     * {@link VoteEntry}.
+     *
+     * @param voteEntry A {@link VoteEntry}.
+     *
+     * @return A {@link VoteEntryWrapper}.
+     */
+    static VoteEntryWrapper of(VoteEntry voteEntry) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A {@link VoteEntry}.
-   *
-   * @return A {@link VoteEntry}.
-   */
-  @JsonProperty("VoteEntry")
-  VoteEntry voteEntry();
-
+    /**
+     * A {@link VoteEntry}.
+     *
+     * @return A {@link VoteEntry}.
+     */
+    @JsonProperty("VoteEntry")
+    VoteEntry voteEntry();
 }

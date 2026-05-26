@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.crypto.signing;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -38,63 +37,63 @@ import org.xrpl.xrpl4j.model.jackson.modules.SignatureSerializer;
 @JsonDeserialize(as = ImmutableSignature.class, using = SignatureDeserializer.class)
 public interface Signature {
 
-  /**
-   * Static builder.
-   *
-   * @param unsignedByteArray A {@link UnsignedByteArray}.
-   *
-   * @return A {@link Signature}.
-   */
-  static Signature of(final UnsignedByteArray unsignedByteArray) {
-    return Signature.builder().value(unsignedByteArray).build();
-  }
+    /**
+     * Static builder.
+     *
+     * @param unsignedByteArray A {@link UnsignedByteArray}.
+     *
+     * @return A {@link Signature}.
+     */
+    static Signature of(final UnsignedByteArray unsignedByteArray) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Static builder.
-   *
-   * @param signatureBytesBase16 A base16-encoded {@link String} containing the bytes of a signature.
-   *
-   * @return A {@link Signature}.
-   */
-  static Signature fromBase16(final String signatureBytesBase16) {
-    return Signature.builder().value(UnsignedByteArray.fromHex(signatureBytesBase16)).build();
-  }
+    /**
+     * Static builder.
+     *
+     * @param signatureBytesBase16 A base16-encoded {@link String} containing the bytes of a signature.
+     *
+     * @return A {@link Signature}.
+     */
+    static Signature fromBase16(final String signatureBytesBase16) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Instantiates a new builder.
-   *
-   * @return A {@link ImmutableSignature.Builder}.
-   */
-  static ImmutableSignature.Builder builder() {
-    return ImmutableSignature.builder();
-  }
+    /**
+     * Instantiates a new builder.
+     *
+     * @return A {@link ImmutableSignature.Builder}.
+     */
+    static ImmutableSignature.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The bytes of this signature.
-   *
-   * @return A {@link UnsignedByteArray}.
-   */
-  UnsignedByteArray value();
+    /**
+     * The bytes of this signature.
+     *
+     * @return A {@link UnsignedByteArray}.
+     */
+    UnsignedByteArray value();
 
-  /**
-   * Accessor for this signature as a base16-encoded (HEX) string.
-   *
-   * @return A {@link String}.
-   */
-  @Lazy
-  @JsonIgnore
-  default String base16Value() {
-    return BaseEncoding.base16().encode(value().toByteArray());
-  }
+    /**
+     * Accessor for this signature as a base16-encoded (HEX) string.
+     *
+     * @return A {@link String}.
+     */
+    @Lazy
+    @JsonIgnore
+    default String base16Value() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Accessor for this signature as a base16-encoded (HEX) string.
-   *
-   * @return A {@link String}.
-   */
-  @Lazy
-  @JsonIgnore
-  default String hexValue() {
-    return base16Value();
-  }
+    /**
+     * Accessor for this signature as a base16-encoded (HEX) string.
+     *
+     * @return A {@link String}.
+     */
+    @Lazy
+    @JsonIgnore
+    default String hexValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

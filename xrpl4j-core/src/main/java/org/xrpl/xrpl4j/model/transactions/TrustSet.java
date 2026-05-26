@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -28,7 +27,6 @@ import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.Flags;
 import org.xrpl.xrpl4j.model.flags.PaymentFlags;
 import org.xrpl.xrpl4j.model.flags.TrustSetFlags;
-
 import java.util.Optional;
 
 /**
@@ -39,53 +37,52 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableTrustSet.class)
 public interface TrustSet extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableTrustSet.Builder}.
-   */
-  static ImmutableTrustSet.Builder builder() {
-    return ImmutableTrustSet.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableTrustSet.Builder}.
+     */
+    static ImmutableTrustSet.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TrustSetFlags}s for this {@link TrustSet}, which have been properly combined to yield a
-   * {@link TrustSetFlags} object containing the {@link Long} representation of the set bits.
-   *
-   * <p>The value of the flags can either be set manually, or constructed using {@link TrustSetFlags.Builder}.
-   *
-   * @return The {@link TrustSetFlags} for this transaction.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TrustSetFlags flags() {
-    return TrustSetFlags.empty();
-  }
+    /**
+     * Set of {@link TrustSetFlags}s for this {@link TrustSet}, which have been properly combined to yield a
+     * {@link TrustSetFlags} object containing the {@link Long} representation of the set bits.
+     *
+     * <p>The value of the flags can either be set manually, or constructed using {@link TrustSetFlags.Builder}.
+     *
+     * @return The {@link TrustSetFlags} for this transaction.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TrustSetFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link IssuedCurrencyAmount} defining the trust line to create or modify.
-   *
-   * @return An {@link IssuedCurrencyAmount} containing the amount of the trust line.
-   */
-  @JsonProperty("LimitAmount")
-  IssuedCurrencyAmount limitAmount();
+    /**
+     * The {@link IssuedCurrencyAmount} defining the trust line to create or modify.
+     *
+     * @return An {@link IssuedCurrencyAmount} containing the amount of the trust line.
+     */
+    @JsonProperty("LimitAmount")
+    IssuedCurrencyAmount limitAmount();
 
-  /**
-   * Value incoming balances on this trust line at the ratio of this number per 1,000,000,000 units.
-   * A value of 0 is shorthand for treating balances at face value.
-   *
-   * @return An {@link Optional} of type {@link UnsignedInteger} defining the inbound quality.
-   */
-  @JsonProperty("QualityIn")
-  Optional<UnsignedInteger> qualityIn();
+    /**
+     * Value incoming balances on this trust line at the ratio of this number per 1,000,000,000 units.
+     * A value of 0 is shorthand for treating balances at face value.
+     *
+     * @return An {@link Optional} of type {@link UnsignedInteger} defining the inbound quality.
+     */
+    @JsonProperty("QualityIn")
+    Optional<UnsignedInteger> qualityIn();
 
-  /**
-   * Value outgoing balances on this trust line at the ratio of this number per 1,000,000,000 units.
-   * A value of 0 is shorthand for treating balances at face value.
-   *
-   * @return An {@link Optional} of type {@link UnsignedInteger} defining the outbound quality.
-   */
-  @JsonProperty("QualityOut")
-  Optional<UnsignedInteger> qualityOut();
-
+    /**
+     * Value outgoing balances on this trust line at the ratio of this number per 1,000,000,000 units.
+     * A value of 0 is shorthand for treating balances at face value.
+     *
+     * @return An {@link Optional} of type {@link UnsignedInteger} defining the outbound quality.
+     */
+    @JsonProperty("QualityOut")
+    Optional<UnsignedInteger> qualityOut();
 }

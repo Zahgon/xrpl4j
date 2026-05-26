@@ -19,11 +19,9 @@ package org.xrpl.xrpl4j.model.client;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
-
 import java.util.Optional;
 
 /**
@@ -34,39 +32,39 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableFinality.class)
 public interface Finality {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableFinality.Builder}.
-   */
-  static ImmutableFinality.Builder builder() {
-    return ImmutableFinality.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableFinality.Builder}.
+     */
+    static ImmutableFinality.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Get {@link FinalityStatus} status value for a transaction.
-   *
-   * @return {@link FinalityStatus} value for a
-   *   {@link org.xrpl.xrpl4j.model.transactions.Transaction}.
-   */
-  FinalityStatus finalityStatus();
+    /**
+     * Get {@link FinalityStatus} status value for a transaction.
+     *
+     * @return {@link FinalityStatus} value for a
+     *   {@link org.xrpl.xrpl4j.model.transactions.Transaction}.
+     */
+    FinalityStatus finalityStatus();
 
-  /**
-   * The rippled server summarizes transaction results with result codes, which appear in fields such as engine_result
-   * and meta.TransactionResult. These codes are grouped into several categories of with different prefixes.
-   *
-   * @return A {@link String} containing the result of the submission.
-   * @see "https://xrpl.org/transaction-results.html#transaction-results"
-   */
-  Optional<String> resultCode();
+    /**
+     * The rippled server summarizes transaction results with result codes, which appear in fields such as engine_result
+     * and meta.TransactionResult. These codes are grouped into several categories of with different prefixes.
+     *
+     * @return A {@link String} containing the result of the submission.
+     * @see "https://xrpl.org/transaction-results.html#transaction-results"
+     */
+    Optional<String> resultCode();
 
-  /**
-   * Text result code indicating the preliminary result of the transaction.
-   *
-   * @return The #result() value for the particular transaction.
-   */
-  @Value.Auxiliary
-  default String resultCodeSafe() {
-    return resultCode().orElseThrow(() -> new IllegalStateException("Finality does not contain resultCode."));
-  }
+    /**
+     * Text result code indicating the preliminary result of the transaction.
+     *
+     * @return The #result() value for the particular transaction.
+     */
+    @Value.Auxiliary
+    default String resultCodeSafe() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

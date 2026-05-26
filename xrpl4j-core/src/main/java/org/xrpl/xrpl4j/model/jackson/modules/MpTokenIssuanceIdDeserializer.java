@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.xrpl.xrpl4j.model.transactions.MpTokenIssuanceId;
-
 import java.io.IOException;
 
 /**
@@ -32,15 +30,15 @@ import java.io.IOException;
  */
 public class MpTokenIssuanceIdDeserializer extends StdDeserializer<MpTokenIssuanceId> {
 
-  /**
-   * No-args constructor.
-   */
-  public MpTokenIssuanceIdDeserializer() {
-    super(MpTokenIssuanceId.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public MpTokenIssuanceIdDeserializer() {
+        super(MpTokenIssuanceId.class);
+    }
 
-  @Override
-  public MpTokenIssuanceId deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    return MpTokenIssuanceId.of(jsonParser.getText());
-  }
+    @Override
+    public MpTokenIssuanceId deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

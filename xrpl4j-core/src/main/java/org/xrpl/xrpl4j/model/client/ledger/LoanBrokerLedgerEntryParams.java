@@ -20,28 +20,27 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @JsonDeserialize(as = ImmutableLoanBrokerLedgerEntryParams.class)
 public interface LoanBrokerLedgerEntryParams {
 
-  /**
-   * Construct a {@code LoanBrokerLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableLoanBrokerLedgerEntryParams.Builder}.
-   */
-  static ImmutableLoanBrokerLedgerEntryParams.Builder builder() {
-    return ImmutableLoanBrokerLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code LoanBrokerLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableLoanBrokerLedgerEntryParams.Builder}.
+     */
+    static ImmutableLoanBrokerLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The owner of the LoanBroker.
-   *
-   * @return The {@link Address} of the LoanBroker owner.
-   */
-  Address owner();
+    /**
+     * The owner of the LoanBroker.
+     *
+     * @return The {@link Address} of the LoanBroker owner.
+     */
+    Address owner();
 
-  /**
-   * The Sequence Number of the transaction that created the LoanBroker. If the transaction used a Ticket,
-   * this should be the TicketSequence value.
-   *
-   * @return An {@link UnsignedInteger}.
-   */
-  UnsignedInteger seq();
-
+    /**
+     * The Sequence Number of the transaction that created the LoanBroker. If the transaction used a Ticket,
+     * this should be the TicketSequence value.
+     *
+     * @return An {@link UnsignedInteger}.
+     */
+    UnsignedInteger seq();
 }

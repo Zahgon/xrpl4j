@@ -19,40 +19,39 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @Beta
 public interface VaultDeposit extends Transaction {
 
-  /**
-   * Construct a {@code VaultDeposit} builder.
-   *
-   * @return An {@link ImmutableVaultDeposit.Builder}.
-   */
-  static ImmutableVaultDeposit.Builder builder() {
-    return ImmutableVaultDeposit.builder();
-  }
+    /**
+     * Construct a {@code VaultDeposit} builder.
+     *
+     * @return An {@link ImmutableVaultDeposit.Builder}.
+     */
+    static ImmutableVaultDeposit.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link VaultDeposit}.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link VaultDeposit}.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ID of the Vault to deposit into.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("VaultID")
-  Hash256 vaultId();
+    /**
+     * The ID of the Vault to deposit into.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("VaultID")
+    Hash256 vaultId();
 
-  /**
-   * The amount of vault asset to deposit.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  CurrencyAmount amount();
-
+    /**
+     * The amount of vault asset to deposit.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    CurrencyAmount amount();
 }

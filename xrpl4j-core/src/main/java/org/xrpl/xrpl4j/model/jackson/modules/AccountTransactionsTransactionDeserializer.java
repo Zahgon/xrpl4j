@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -34,7 +33,6 @@ import org.xrpl.xrpl4j.model.client.accounts.AccountTransactionsTransaction;
 import org.xrpl.xrpl4j.model.client.common.LedgerIndex;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
 import org.xrpl.xrpl4j.model.transactions.Transaction;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -46,40 +44,17 @@ import java.util.Set;
  */
 public class AccountTransactionsTransactionDeserializer extends StdDeserializer<AccountTransactionsTransaction<?>> {
 
-  public static final Set<String> EXTRA_TRANSACTION_FIELDS = Sets.newHashSet("ledger_index", "date", "hash");
+    public static final Set<String> EXTRA_TRANSACTION_FIELDS = Sets.newHashSet("ledger_index", "date", "hash");
 
-  /**
-   * No-args constructor.
-   */
-  public AccountTransactionsTransactionDeserializer() {
-    super(AccountTransactionsTransaction.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public AccountTransactionsTransactionDeserializer() {
+        super(AccountTransactionsTransaction.class);
+    }
 
-  @Override
-  public AccountTransactionsTransaction<?> deserialize(
-    JsonParser jsonParser,
-    DeserializationContext ctxt
-  ) throws IOException {
-    ObjectMapper objectMapper = (ObjectMapper) jsonParser.getCodec();
-    ObjectNode node = objectMapper.readTree(jsonParser);
-
-    long ledgerIndex = node.get("ledger_index").asLong(-1L);
-    String hash = node.get("hash").asText();
-    Optional<UnsignedLong> closeDate = Optional.ofNullable(node.get("date"))
-      .map(JsonNode::asLong)
-      .map(UnsignedLong::valueOf);
-
-    // The Transaction is @JsonUnwrapped in AccountTransactionsTransaction, which means these three fields
-    // get added to the Transaction.unknownFields Map. To prevent that, we simply remove them from the JSON, because
-    // they should only show up in AccountTransactionsTransaction
-    node.remove(EXTRA_TRANSACTION_FIELDS);
-    Transaction transaction = objectMapper.readValue(node.toString(), Transaction.class);
-
-    return AccountTransactionsTransaction.builder()
-      .transaction(transaction)
-      .ledgerIndex(LedgerIndex.of(UnsignedInteger.valueOf(ledgerIndex)))
-      .hash(Hash256.of(hash))
-      .closeDate(closeDate)
-      .build();
-  }
+    @Override
+    public AccountTransactionsTransaction<?> deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

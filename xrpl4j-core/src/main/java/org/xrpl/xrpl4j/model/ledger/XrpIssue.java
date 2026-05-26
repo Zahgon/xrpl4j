@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
@@ -32,19 +31,18 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = ImmutableXrpIssue.class)
 public interface XrpIssue extends Issue {
 
-  /**
-   * The singleton XrpIssue instance.
-   */
-  XrpIssue XRP = ImmutableXrpIssue.builder().build();
+    /**
+     * The singleton XrpIssue instance.
+     */
+    XrpIssue XRP = ImmutableXrpIssue.builder().build();
 
-  /**
-   * The currency code, which is always "XRP".
-   *
-   * @return The {@link String} "XRP".
-   */
-  @Value.Derived
-  default String currency() {
-    return "XRP";
-  }
-
+    /**
+     * The currency code, which is always "XRP".
+     *
+     * @return The {@link String} "XRP".
+     */
+    @Value.Derived
+    default String currency() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

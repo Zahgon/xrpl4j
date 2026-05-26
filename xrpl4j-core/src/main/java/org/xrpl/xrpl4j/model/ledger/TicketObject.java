@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -39,82 +38,82 @@ import org.xrpl.xrpl4j.model.transactions.TicketCreate;
 @JsonDeserialize(as = ImmutableTicketObject.class)
 public interface TicketObject extends LedgerObject {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableTicketObject.Builder}.
-   */
-  static ImmutableTicketObject.Builder builder() {
-    return ImmutableTicketObject.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableTicketObject.Builder}.
+     */
+    static ImmutableTicketObject.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The type of ledger object. In this case, always "SignerList".
-   *
-   * @return Always {@link LedgerEntryType#SIGNER_LIST}.
-   */
-  @JsonProperty("LedgerEntryType")
-  @Value.Derived
-  default LedgerEntryType ledgerEntryType() {
-    return LedgerEntryType.TICKET;
-  }
+    /**
+     * The type of ledger object. In this case, always "SignerList".
+     *
+     * @return Always {@link LedgerEntryType#SIGNER_LIST}.
+     */
+    @JsonProperty("LedgerEntryType")
+    @Value.Derived
+    default LedgerEntryType ledgerEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A bit-map of Boolean flags enabled for this Ticket. Currently, there are no flags defined for Tickets.
-   *
-   * @return Always returns {@link Flags#UNSET}.
-   */
-  @JsonProperty("Flags")
-  @Value.Derived
-  default Flags flags() {
-    return Flags.UNSET;
-  }
+    /**
+     * A bit-map of Boolean flags enabled for this Ticket. Currently, there are no flags defined for Tickets.
+     *
+     * @return Always returns {@link Flags#UNSET}.
+     */
+    @JsonProperty("Flags")
+    @Value.Derived
+    default Flags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The account that owns this Ticket.
-   *
-   * @return The account that owns this Ticket, as an {@link Address}.
-   */
-  @JsonProperty("Account")
-  Address account();
+    /**
+     * The account that owns this Ticket.
+     *
+     * @return The account that owns this Ticket, as an {@link Address}.
+     */
+    @JsonProperty("Account")
+    Address account();
 
-  /**
-   * A hint indicating which page of the owner directory links to this object, in case the directory
-   * consists of multiple pages.
-   *
-   * @return A {@link String} containing the hint.
-   */
-  @JsonProperty("OwnerNode")
-  String ownerNode();
+    /**
+     * A hint indicating which page of the owner directory links to this object, in case the directory
+     * consists of multiple pages.
+     *
+     * @return A {@link String} containing the hint.
+     */
+    @JsonProperty("OwnerNode")
+    String ownerNode();
 
-  /**
-   * The identifying hash of the transaction that most recently modified this object.
-   *
-   * @return A {@link Hash256} containing the previous transaction hash.
-   */
-  @JsonProperty("PreviousTxnID")
-  Hash256 previousTransactionId();
+    /**
+     * The identifying hash of the transaction that most recently modified this object.
+     *
+     * @return A {@link Hash256} containing the previous transaction hash.
+     */
+    @JsonProperty("PreviousTxnID")
+    Hash256 previousTransactionId();
 
-  /**
-   * The index of the ledger that contains the transaction that most recently modified this object.
-   *
-   * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  UnsignedInteger previousTransactionLedgerSequence();
+    /**
+     * The index of the ledger that contains the transaction that most recently modified this object.
+     *
+     * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    UnsignedInteger previousTransactionLedgerSequence();
 
-  /**
-   * The Sequence Number this Ticket sets aside.
-   *
-   * @return An {@link UnsignedInteger} denoting the sequence number.
-   */
-  @JsonProperty("TicketSequence")
-  UnsignedInteger ticketSequence();
+    /**
+     * The Sequence Number this Ticket sets aside.
+     *
+     * @return An {@link UnsignedInteger} denoting the sequence number.
+     */
+    @JsonProperty("TicketSequence")
+    UnsignedInteger ticketSequence();
 
-  /**
-   * The unique ID of the {@link TicketObject}.
-   *
-   * @return A {@link Hash256}.
-   */
-  Hash256 index();
+    /**
+     * The unique ID of the {@link TicketObject}.
+     *
+     * @return A {@link Hash256}.
+     */
+    Hash256 index();
 }

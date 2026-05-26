@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import org.xrpl.xrpl4j.model.transactions.MpTokenMetadata;
-
 import java.io.IOException;
 
 /**
@@ -32,15 +30,15 @@ import java.io.IOException;
  */
 public class MpTokenMetadataSerializer extends StdScalarSerializer<MpTokenMetadata> {
 
-  /**
-   * No-args constructor.
-   */
-  public MpTokenMetadataSerializer() {
-    super(MpTokenMetadata.class, false);
-  }
+    /**
+     * No-args constructor.
+     */
+    public MpTokenMetadataSerializer() {
+        super(MpTokenMetadata.class, false);
+    }
 
-  @Override
-  public void serialize(MpTokenMetadata value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-    gen.writeString(value.value());
-  }
+    @Override
+    public void serialize(MpTokenMetadata value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

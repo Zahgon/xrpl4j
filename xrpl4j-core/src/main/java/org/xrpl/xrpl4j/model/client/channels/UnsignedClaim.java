@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.channels;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -38,29 +37,28 @@ import org.xrpl.xrpl4j.model.transactions.XrpCurrencyAmount;
 @JsonDeserialize(as = ImmutableUnsignedClaim.class)
 public interface UnsignedClaim {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableUnsignedClaim.Builder}.
-   */
-  static ImmutableUnsignedClaim.Builder builder() {
-    return ImmutableUnsignedClaim.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableUnsignedClaim.Builder}.
+     */
+    static ImmutableUnsignedClaim.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The Channel ID of the channel that provides the XRP.
-   *
-   * @return A {@link Hash256} containing the Channel ID.
-   */
-  @JsonProperty("Channel")
-  Hash256 channel();
+    /**
+     * The Channel ID of the channel that provides the XRP.
+     *
+     * @return A {@link Hash256} containing the Channel ID.
+     */
+    @JsonProperty("Channel")
+    Hash256 channel();
 
-  /**
-   * The amount of XRP, in drops, that the signature of this claim authorizes.
-   *
-   * @return An {@link XrpCurrencyAmount} representing the amount of the claim.
-   */
-  @JsonProperty("Amount")
-  XrpCurrencyAmount amount();
-
+    /**
+     * The amount of XRP, in drops, that the signature of this claim authorizes.
+     *
+     * @return An {@link XrpCurrencyAmount} representing the amount of the claim.
+     */
+    @JsonProperty("Amount")
+    XrpCurrencyAmount amount();
 }

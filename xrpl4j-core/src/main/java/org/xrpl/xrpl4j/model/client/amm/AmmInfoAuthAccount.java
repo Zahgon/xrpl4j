@@ -18,33 +18,30 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @Beta
 public interface AmmInfoAuthAccount {
 
-  /**
-   * Construct a {@code AmmInfoAuthAccount} builder.
-   *
-   * @return An {@link ImmutableAmmInfoAuthAccount.Builder}.
-   */
-  static ImmutableAmmInfoAuthAccount.Builder builder() {
-    return ImmutableAmmInfoAuthAccount.builder();
-  }
+    /**
+     * Construct a {@code AmmInfoAuthAccount} builder.
+     *
+     * @return An {@link ImmutableAmmInfoAuthAccount.Builder}.
+     */
+    static ImmutableAmmInfoAuthAccount.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Construct an {@link AmmInfoAuthAccount} containing the given {@link Address}.
-   *
-   * @param account An {@link Address}.
-   *
-   * @return An {@link AmmInfoAuthAccount} containing the address.
-   */
-  static AmmInfoAuthAccount of(Address account) {
-    return builder()
-      .account(account)
-      .build();
-  }
+    /**
+     * Construct an {@link AmmInfoAuthAccount} containing the given {@link Address}.
+     *
+     * @param account An {@link Address}.
+     *
+     * @return An {@link AmmInfoAuthAccount} containing the address.
+     */
+    static AmmInfoAuthAccount of(Address account) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The address of the authorized account.
-   *
-   * @return An {@link Address}.
-   */
-  Address account();
-
+    /**
+     * The address of the authorized account.
+     *
+     * @return An {@link Address}.
+     */
+    Address account();
 }

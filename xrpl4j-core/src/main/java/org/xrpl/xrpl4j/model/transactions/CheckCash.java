@@ -19,14 +19,12 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Preconditions;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -44,65 +42,63 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableCheckCash.class)
 public interface CheckCash extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableCheckCash.Builder}.
-   */
-  static ImmutableCheckCash.Builder builder() {
-    return ImmutableCheckCash.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableCheckCash.Builder}.
+     */
+    static ImmutableCheckCash.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link CheckCash}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link CheckCash}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ID of the Check ledger object to cash, as a 64-character hexadecimal string.
-   *
-   * @return A {@link Hash256} containing the Check ID.
-   */
-  @JsonProperty("CheckID")
-  Hash256 checkId();
+    /**
+     * The ID of the Check ledger object to cash, as a 64-character hexadecimal string.
+     *
+     * @return A {@link Hash256} containing the Check ID.
+     */
+    @JsonProperty("CheckID")
+    Hash256 checkId();
 
-  /**
-   * Redeem the Check for exactly this amount, if possible.
-   * The currency must match that of the {@link CheckCreate#sendMax()}SendMax of the corresponding {@link CheckCreate}
-   * transaction. You must provide either this field or {@link CheckCash#deliverMin()}.
-   *
-   * @return An {@link Optional} of type {@link CurrencyAmount} containing the check amount.
-   */
-  @JsonProperty("Amount")
-  Optional<CurrencyAmount> amount();
+    /**
+     * Redeem the Check for exactly this amount, if possible.
+     * The currency must match that of the {@link CheckCreate#sendMax()}SendMax of the corresponding {@link CheckCreate}
+     * transaction. You must provide either this field or {@link CheckCash#deliverMin()}.
+     *
+     * @return An {@link Optional} of type {@link CurrencyAmount} containing the check amount.
+     */
+    @JsonProperty("Amount")
+    Optional<CurrencyAmount> amount();
 
-  /**
-   * Redeem the Check for at least this amount and for as much as possible.
-   * The currency must match that of the {@link CheckCreate#sendMax()}SendMax of the corresponding {@link CheckCreate}
-   * transaction. You must provide either this field or {@link CheckCash#amount()}.
-   *
-   * @return An {@link Optional} of type {@link CurrencyAmount} containing the minimum delivery amount for this check.
-   */
-  @JsonProperty("DeliverMin")
-  Optional<CurrencyAmount> deliverMin();
+    /**
+     * Redeem the Check for at least this amount and for as much as possible.
+     * The currency must match that of the {@link CheckCreate#sendMax()}SendMax of the corresponding {@link CheckCreate}
+     * transaction. You must provide either this field or {@link CheckCash#amount()}.
+     *
+     * @return An {@link Optional} of type {@link CurrencyAmount} containing the minimum delivery amount for this check.
+     */
+    @JsonProperty("DeliverMin")
+    Optional<CurrencyAmount> deliverMin();
 
-  /**
-   * Ensure that either {@link CheckCash#amount()} or {@link CheckCash#deliverMin()} is present, but not both.
-   */
-  @Value.Check
-  default void validateOnlyOneAmountSet() {
-    Preconditions.checkArgument((amount().isPresent() || deliverMin().isPresent()) &&
-        !(amount().isPresent() && deliverMin().isPresent()),
-      "The CheckCash transaction must include either amount or deliverMin, but not both.");
-  }
+    /**
+     * Ensure that either {@link CheckCash#amount()} or {@link CheckCash#deliverMin()} is present, but not both.
+     */
+    @Value.Check
+    default void validateOnlyOneAmountSet() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

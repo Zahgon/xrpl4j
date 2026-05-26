@@ -19,14 +19,12 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.primitives.UnsignedInteger;
 import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.transactions.metadata.AffectedNode;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -42,77 +40,77 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableTransactionMetadata.class)
 public interface TransactionMetadata {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableTransactionMetadata.Builder}.
-   */
-  static ImmutableTransactionMetadata.Builder builder() {
-    return ImmutableTransactionMetadata.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableTransactionMetadata.Builder}.
+     */
+    static ImmutableTransactionMetadata.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The transaction's position within the ledger that included it. This is zero-indexed. For example, the value 2 means
-   * it was the 3rd transaction in that ledger.
-   *
-   * @return index of transaction within ledger.
-   */
-  @JsonProperty("TransactionIndex")
-  UnsignedInteger transactionIndex();
+    /**
+     * The transaction's position within the ledger that included it. This is zero-indexed. For example, the value 2 means
+     * it was the 3rd transaction in that ledger.
+     *
+     * @return index of transaction within ledger.
+     */
+    @JsonProperty("TransactionIndex")
+    UnsignedInteger transactionIndex();
 
-  /**
-   * A result code indicating whether the transaction succeeded or how it failed.
-   *
-   * @return transaction result code.
-   */
-  @JsonProperty("TransactionResult")
-  String transactionResult();
+    /**
+     * A result code indicating whether the transaction succeeded or how it failed.
+     *
+     * @return transaction result code.
+     */
+    @JsonProperty("TransactionResult")
+    String transactionResult();
 
-  /**
-   * The Currency Amount actually received by the Destination account. Use this field to determine how much was
-   * delivered, regardless of whether the transaction is a partial payment. Omitted for non-Payment transactions.
-   *
-   * @return delivered amount for payments, otherwise empty for non-payments.
-   */
-  @JsonProperty("delivered_amount")
-  Optional<CurrencyAmount> deliveredAmount();
+    /**
+     * The Currency Amount actually received by the Destination account. Use this field to determine how much was
+     * delivered, regardless of whether the transaction is a partial payment. Omitted for non-Payment transactions.
+     *
+     * @return delivered amount for payments, otherwise empty for non-payments.
+     */
+    @JsonProperty("delivered_amount")
+    Optional<CurrencyAmount> deliveredAmount();
 
-  /**
-   * The {@link NfTokenId} of the {@link org.xrpl.xrpl4j.model.ledger.NfToken} that was changed as a result of this
-   * transaction. Only present in metadata for {@link NfTokenMint} and {@link NfTokenAcceptOffer} transactions.
-   *
-   * @return An optionally-present {@link NfTokenId}.
-   */
-  @JsonProperty("nftoken_id")
-  Optional<NfTokenId> nfTokenId();
+    /**
+     * The {@link NfTokenId} of the {@link org.xrpl.xrpl4j.model.ledger.NfToken} that was changed as a result of this
+     * transaction. Only present in metadata for {@link NfTokenMint} and {@link NfTokenAcceptOffer} transactions.
+     *
+     * @return An optionally-present {@link NfTokenId}.
+     */
+    @JsonProperty("nftoken_id")
+    Optional<NfTokenId> nfTokenId();
 
-  /**
-   * The {@link NfTokenId}s of the {@link org.xrpl.xrpl4j.model.ledger.NfToken}s changed by a {@link NfTokenCancelOffer}
-   * transaction. Only present in metadata for {@link NfTokenCancelOffer} transactions.
-   *
-   * @return A {@link List} of {@link NfTokenId}s.
-   */
-  @JsonProperty("nftoken_ids")
-  List<NfTokenId> nfTokenIds();
+    /**
+     * The {@link NfTokenId}s of the {@link org.xrpl.xrpl4j.model.ledger.NfToken}s changed by a {@link NfTokenCancelOffer}
+     * transaction. Only present in metadata for {@link NfTokenCancelOffer} transactions.
+     *
+     * @return A {@link List} of {@link NfTokenId}s.
+     */
+    @JsonProperty("nftoken_ids")
+    List<NfTokenId> nfTokenIds();
 
-  /**
-   * The {@link MpTokenIssuanceId} of the {@link org.xrpl.xrpl4j.model.ledger.MpTokenIssuanceObject} created
-   * via an {@link MpTokenIssuanceCreate} transaction.
-   *
-   * @return An {@link Optional} {@link MpTokenIssuanceId}.
-   */
-  @JsonProperty("mpt_issuance_id")
-  Optional<MpTokenIssuanceId> mpTokenIssuanceId();
+    /**
+     * The {@link MpTokenIssuanceId} of the {@link org.xrpl.xrpl4j.model.ledger.MpTokenIssuanceObject} created
+     * via an {@link MpTokenIssuanceCreate} transaction.
+     *
+     * @return An {@link Optional} {@link MpTokenIssuanceId}.
+     */
+    @JsonProperty("mpt_issuance_id")
+    Optional<MpTokenIssuanceId> mpTokenIssuanceId();
 
-  /**
-   * The ID of the offer created by {@link NfTokenCreateOffer} transactions. Only present in metadata for
-   * {@link NfTokenCreateOffer} transactions.
-   *
-   * @return An optionally-present {@link Hash256} denoting the offer ID.
-   */
-  @JsonProperty("offer_id")
-  Optional<Hash256> offerId();
+    /**
+     * The ID of the offer created by {@link NfTokenCreateOffer} transactions. Only present in metadata for
+     * {@link NfTokenCreateOffer} transactions.
+     *
+     * @return An optionally-present {@link Hash256} denoting the offer ID.
+     */
+    @JsonProperty("offer_id")
+    Optional<Hash256> offerId();
 
-  @JsonProperty("AffectedNodes")
-  List<AffectedNode> affectedNodes();
+    @JsonProperty("AffectedNodes")
+    List<AffectedNode> affectedNodes();
 }

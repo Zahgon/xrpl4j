@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.flags;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.xrpl.xrpl4j.model.transactions.AmmClawback;
 
 /**
@@ -27,54 +26,53 @@ import org.xrpl.xrpl4j.model.transactions.AmmClawback;
  */
 public class AmmClawbackFlags extends TransactionFlags {
 
-  /**
-   * Constant {@link AmmDepositFlags} for the {@code tfClawTwoAssets} flag.
-   */
-  public static final AmmClawbackFlags CLAW_TWO_ASSETS = new AmmClawbackFlags(0x00000001);
+    /**
+     * Constant {@link AmmDepositFlags} for the {@code tfClawTwoAssets} flag.
+     */
+    public static final AmmClawbackFlags CLAW_TWO_ASSETS = new AmmClawbackFlags(0x00000001);
 
-  /**
-   * Constant {@link AmmDepositFlags} for an unset value for "flags".
-   */
-  public static final AmmClawbackFlags UNSET = new AmmClawbackFlags(0L);
+    /**
+     * Constant {@link AmmDepositFlags} for an unset value for "flags".
+     */
+    public static final AmmClawbackFlags UNSET = new AmmClawbackFlags(0L);
 
-  /**
-   * Constant {@link AmmClawbackFlags} for the {@code tfInnerBatchTxn} flag.
-   */
-  public static final AmmClawbackFlags INNER_BATCH_TXN = new AmmClawbackFlags(
-    TransactionFlags.INNER_BATCH_TXN.getValue());
+    /**
+     * Constant {@link AmmClawbackFlags} for the {@code tfInnerBatchTxn} flag.
+     */
+    public static final AmmClawbackFlags INNER_BATCH_TXN = new AmmClawbackFlags(TransactionFlags.INNER_BATCH_TXN.getValue());
 
-  private AmmClawbackFlags(long value) {
-    super(value);
-  }
+    private AmmClawbackFlags(long value) {
+        super(value);
+    }
 
-  private AmmClawbackFlags() {
-  }
+    private AmmClawbackFlags() {
+    }
 
-  /**
-   * Construct an empty instance of {@link AmmClawbackFlags}. Transactions with empty flags will not be serialized with
-   * a {@code Flags} field.
-   *
-   * @return An empty {@link AmmClawbackFlags}.
-   */
-  public static AmmClawbackFlags empty() {
-    return new AmmClawbackFlags();
-  }
+    /**
+     * Construct an empty instance of {@link AmmClawbackFlags}. Transactions with empty flags will not be serialized with
+     * a {@code Flags} field.
+     *
+     * @return An empty {@link AmmClawbackFlags}.
+     */
+    public static AmmClawbackFlags empty() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Whether the {@code tfClawTwoAssets} flag is set.
-   *
-   * @return {@code true} if {@code tfLPToken} is set, otherwise {@code false}.
-   */
-  public boolean tfClawTwoAssets() {
-    return this.isSet(CLAW_TWO_ASSETS);
-  }
+    /**
+     * Whether the {@code tfClawTwoAssets} flag is set.
+     *
+     * @return {@code true} if {@code tfLPToken} is set, otherwise {@code false}.
+     */
+    public boolean tfClawTwoAssets() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Whether the {@code tfInnerBatchTxn} flag is set.
-   *
-   * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
-   */
-  public boolean tfInnerBatchTxn() {
-    return this.isSet(INNER_BATCH_TXN);
-  }
+    /**
+     * Whether the {@code tfInnerBatchTxn} flag is set.
+     *
+     * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
+     */
+    public boolean tfInnerBatchTxn() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

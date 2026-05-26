@@ -19,9 +19,7 @@ package org.xrpl.xrpl4j.model.client.common;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Objects;
 
 /**
@@ -30,59 +28,50 @@ import java.util.Objects;
  */
 public class LedgerIndexShortcut {
 
-  /**
-   * Request information about a rippled server's current working version of the ledger.
-   */
-  public static final LedgerIndexShortcut CURRENT = new LedgerIndexShortcut("current");
+    /**
+     * Request information about a rippled server's current working version of the ledger.
+     */
+    public static final LedgerIndexShortcut CURRENT = new LedgerIndexShortcut("current");
 
-  /**
-   * Request information about for the most recent ledger that has been validated by consensus.
-   */
-  public static final LedgerIndexShortcut VALIDATED = new LedgerIndexShortcut("validated");
+    /**
+     * Request information about for the most recent ledger that has been validated by consensus.
+     */
+    public static final LedgerIndexShortcut VALIDATED = new LedgerIndexShortcut("validated");
 
-  /**
-   * Request information about the most recent ledger that has been closed for modifications and proposed for
-   * validation.
-   */
-  public static final LedgerIndexShortcut CLOSED = new LedgerIndexShortcut("closed");
+    /**
+     * Request information about the most recent ledger that has been closed for modifications and proposed for
+     * validation.
+     */
+    public static final LedgerIndexShortcut CLOSED = new LedgerIndexShortcut("closed");
 
-  @JsonValue
-  private final String value;
+    @JsonValue
+    private final String value;
 
-  private LedgerIndexShortcut(String value) {
-    this.value = value;
-  }
-
-  /**
-   * Accessor for the value of this shortcut.
-   *
-   * @return {@link String}
-   */
-  public String getValue() {
-    return value;
-  }
-
-  @Override
-  public String toString() {
-    return getValue();
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (this == other) {
-      return true;
-    }
-    if (!(other instanceof LedgerIndexShortcut)) {
-      return false;
+    private LedgerIndexShortcut(String value) {
+        this.value = value;
     }
 
-    LedgerIndexShortcut that = (LedgerIndexShortcut) other;
+    /**
+     * Accessor for the value of this shortcut.
+     *
+     * @return {@link String}
+     */
+    public String getValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-    return Objects.equals(value, that.value);
-  }
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public int hashCode() {
-    return value != null ? value.hashCode() : 0;
-  }
+    @Override
+    public boolean equals(Object other) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

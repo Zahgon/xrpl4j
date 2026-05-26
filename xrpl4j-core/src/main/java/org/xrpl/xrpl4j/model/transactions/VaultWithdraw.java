@@ -7,7 +7,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.primitives.UnsignedInteger;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -23,56 +22,55 @@ import java.util.Optional;
 @Beta
 public interface VaultWithdraw extends Transaction {
 
-  /**
-   * Construct a {@code VaultWithdraw} builder.
-   *
-   * @return An {@link ImmutableVaultWithdraw.Builder}.
-   */
-  static ImmutableVaultWithdraw.Builder builder() {
-    return ImmutableVaultWithdraw.builder();
-  }
+    /**
+     * Construct a {@code VaultWithdraw} builder.
+     *
+     * @return An {@link ImmutableVaultWithdraw.Builder}.
+     */
+    static ImmutableVaultWithdraw.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link VaultWithdraw}.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link VaultWithdraw}.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ID of the Vault to withdraw from.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("VaultID")
-  Hash256 vaultId();
+    /**
+     * The ID of the Vault to withdraw from.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("VaultID")
+    Hash256 vaultId();
 
-  /**
-   * The amount to withdraw. Can be vault asset (withdraw) or vault shares (redeem).
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  CurrencyAmount amount();
+    /**
+     * The amount to withdraw. Can be vault asset (withdraw) or vault shares (redeem).
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    CurrencyAmount amount();
 
-  /**
-   * The account to receive the withdrawn assets. If omitted, the submitting account receives the assets.
-   *
-   * @return An optionally-present {@link Address}.
-   */
-  @JsonProperty("Destination")
-  Optional<Address> destination();
+    /**
+     * The account to receive the withdrawn assets. If omitted, the submitting account receives the assets.
+     *
+     * @return An optionally-present {@link Address}.
+     */
+    @JsonProperty("Destination")
+    Optional<Address> destination();
 
-  /**
-   * A tag for the destination account.
-   *
-   * @return An optionally-present {@link UnsignedInteger}.
-   */
-  @JsonProperty("DestinationTag")
-  Optional<UnsignedInteger> destinationTag();
-
+    /**
+     * A tag for the destination account.
+     *
+     * @return An optionally-present {@link UnsignedInteger}.
+     */
+    @JsonProperty("DestinationTag")
+    Optional<UnsignedInteger> destinationTag();
 }

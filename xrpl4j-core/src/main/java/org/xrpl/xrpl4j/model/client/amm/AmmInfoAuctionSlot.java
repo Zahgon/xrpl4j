@@ -10,7 +10,6 @@ import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.IssuedCurrencyAmount;
 import org.xrpl.xrpl4j.model.transactions.TradingFee;
-
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -28,64 +27,63 @@ import java.util.List;
 @Beta
 public interface AmmInfoAuctionSlot {
 
-  /**
-   * Construct a {@code AmmInfoAuctionSlot} builder.
-   *
-   * @return An {@link ImmutableAmmInfoAuctionSlot.Builder}.
-   */
-  static ImmutableAmmInfoAuctionSlot.Builder builder() {
-    return ImmutableAmmInfoAuctionSlot.builder();
-  }
+    /**
+     * Construct a {@code AmmInfoAuctionSlot} builder.
+     *
+     * @return An {@link ImmutableAmmInfoAuctionSlot.Builder}.
+     */
+    static ImmutableAmmInfoAuctionSlot.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The current owner of this auction slot.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("account")
-  Address account();
+    /**
+     * The current owner of this auction slot.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("account")
+    Address account();
 
-  /**
-   * A list of at most 4 additional accounts that are authorized to trade at the discounted fee for this AMM instance.
-   *
-   * @return A {@link List} of {@link AmmInfoAuthAccount}s.
-   */
-  @JsonProperty("auth_accounts")
-  List<AmmInfoAuthAccount> authAccounts();
+    /**
+     * A list of at most 4 additional accounts that are authorized to trade at the discounted fee for this AMM instance.
+     *
+     * @return A {@link List} of {@link AmmInfoAuthAccount}s.
+     */
+    @JsonProperty("auth_accounts")
+    List<AmmInfoAuthAccount> authAccounts();
 
-  /**
-   * The trading fee to be charged to the auction owner. By default this is 0, meaning that the auction owner can trade
-   * at no fee instead of the standard fee for this AMM.
-   *
-   * @return A {@link TradingFee}.
-   */
-  @JsonProperty("discounted_fee")
-  TradingFee discountedFee();
+    /**
+     * The trading fee to be charged to the auction owner. By default this is 0, meaning that the auction owner can trade
+     * at no fee instead of the standard fee for this AMM.
+     *
+     * @return A {@link TradingFee}.
+     */
+    @JsonProperty("discounted_fee")
+    TradingFee discountedFee();
 
-  /**
-   * The time when this slot expires, as a {@link ZonedDateTime}.
-   *
-   * @return An {@link ZonedDateTime}
-   */
-  @JsonProperty("expiration")
-  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", locale = "en_US")
-  ZonedDateTime expiration();
+    /**
+     * The time when this slot expires, as a {@link ZonedDateTime}.
+     *
+     * @return An {@link ZonedDateTime}
+     */
+    @JsonProperty("expiration")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", locale = "en_US")
+    ZonedDateTime expiration();
 
-  /**
-   * The amount the auction owner paid to win this slot, in LP Tokens.
-   *
-   * @return An {@link IssuedCurrencyAmount}.
-   */
-  @JsonProperty("price")
-  IssuedCurrencyAmount price();
+    /**
+     * The amount the auction owner paid to win this slot, in LP Tokens.
+     *
+     * @return An {@link IssuedCurrencyAmount}.
+     */
+    @JsonProperty("price")
+    IssuedCurrencyAmount price();
 
-  /**
-   * An {@link UnsignedInteger} between 1 and 20 denoting the time slot used for the continuous auction slot pricing
-   * mechanism of the AMM.
-   *
-   * @return An {@link UnsignedInteger}.
-   */
-  @JsonProperty("time_interval")
-  UnsignedInteger timeInterval();
-
+    /**
+     * An {@link UnsignedInteger} between 1 and 20 denoting the time slot used for the continuous auction slot pricing
+     * mechanism of the AMM.
+     *
+     * @return An {@link UnsignedInteger}.
+     */
+    @JsonProperty("time_interval")
+    UnsignedInteger timeInterval();
 }

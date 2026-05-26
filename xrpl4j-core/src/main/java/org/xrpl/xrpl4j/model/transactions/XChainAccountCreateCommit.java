@@ -7,7 +7,6 @@ import com.google.common.annotations.Beta;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -22,60 +21,59 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableXChainAccountCreateCommit.class)
 public interface XChainAccountCreateCommit extends Transaction {
 
-  /**
-   * Construct a {@code XChainAccountCreateCommit} builder.
-   *
-   * @return An {@link ImmutableXChainAccountCreateCommit.Builder}.
-   */
-  static ImmutableXChainAccountCreateCommit.Builder builder() {
-    return ImmutableXChainAccountCreateCommit.builder();
-  }
+    /**
+     * Construct a {@code XChainAccountCreateCommit} builder.
+     *
+     * @return An {@link ImmutableXChainAccountCreateCommit.Builder}.
+     */
+    static ImmutableXChainAccountCreateCommit.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link XChainAccountCreateCommit}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * @return A set of {@link TransactionFlags}, default is {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link XChainAccountCreateCommit}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * @return A set of {@link TransactionFlags}, default is {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The amount, in drops of XRP, to use for account creation. This must be greater than or equal to the
-   * {@code MinAccountCreateAmount} specified in the {@code Bridge} ledger object.
-   *
-   * @return An {@link XrpCurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  XrpCurrencyAmount amount();
+    /**
+     * The amount, in drops of XRP, to use for account creation. This must be greater than or equal to the
+     * {@code MinAccountCreateAmount} specified in the {@code Bridge} ledger object.
+     *
+     * @return An {@link XrpCurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    XrpCurrencyAmount amount();
 
-  /**
-   * The destination account on the destination chain.
-   *
-   * @return The {@link Address} of the destination account.
-   */
-  @JsonProperty("Destination")
-  Address destination();
+    /**
+     * The destination account on the destination chain.
+     *
+     * @return The {@link Address} of the destination account.
+     */
+    @JsonProperty("Destination")
+    Address destination();
 
-  /**
-   * The amount, in XRP, to be used to reward the witness servers for providing signatures. This must match the amount
-   * on the {@code Bridge} ledger object.
-   *
-   * @return An optionally-present {@link XrpCurrencyAmount}.
-   */
-  @JsonProperty("SignatureReward")
-  Optional<XrpCurrencyAmount> signatureReward();
+    /**
+     * The amount, in XRP, to be used to reward the witness servers for providing signatures. This must match the amount
+     * on the {@code Bridge} ledger object.
+     *
+     * @return An optionally-present {@link XrpCurrencyAmount}.
+     */
+    @JsonProperty("SignatureReward")
+    Optional<XrpCurrencyAmount> signatureReward();
 
-  /**
-   * The bridge to create accounts for.
-   *
-   * @return An {@link XChainBridge}.
-   */
-  @JsonProperty("XChainBridge")
-  @SuppressWarnings("MethodName")
-  XChainBridge xChainBridge();
-
+    /**
+     * The bridge to create accounts for.
+     *
+     * @return An {@link XChainBridge}.
+     */
+    @JsonProperty("XChainBridge")
+    @SuppressWarnings("MethodName")
+    XChainBridge xChainBridge();
 }

@@ -19,47 +19,46 @@ import org.xrpl.xrpl4j.model.ledger.Issue;
 @JsonDeserialize(as = ImmutableXChainBridge.class)
 public interface XChainBridge {
 
-  /**
-   * Construct a {@code XChainBridge} builder.
-   *
-   * @return An {@link ImmutableXChainBridge.Builder}.
-   */
-  static ImmutableXChainBridge.Builder builder() {
-    return ImmutableXChainBridge.builder();
-  }
+    /**
+     * Construct a {@code XChainBridge} builder.
+     *
+     * @return An {@link ImmutableXChainBridge.Builder}.
+     */
+    static ImmutableXChainBridge.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The door account on the issuing chain. For an XRP-XRP bridge, this must be the genesis account (the account that is
-   * created when the network is first started, which contains all of the XRP).
-   *
-   * @return The {@link Address} of the door account.
-   */
-  @JsonProperty("IssuingChainDoor")
-  Address issuingChainDoor();
+    /**
+     * The door account on the issuing chain. For an XRP-XRP bridge, this must be the genesis account (the account that is
+     * created when the network is first started, which contains all of the XRP).
+     *
+     * @return The {@link Address} of the door account.
+     */
+    @JsonProperty("IssuingChainDoor")
+    Address issuingChainDoor();
 
-  /**
-   * The asset that is minted and burned on the issuing chain. For an IOU-IOU bridge, the issuer of the asset must be
-   * the door account on the issuing chain, to avoid supply issues.
-   *
-   * @return An {@link Issue}.
-   */
-  @JsonProperty("IssuingChainIssue")
-  Issue issuingChainIssue();
+    /**
+     * The asset that is minted and burned on the issuing chain. For an IOU-IOU bridge, the issuer of the asset must be
+     * the door account on the issuing chain, to avoid supply issues.
+     *
+     * @return An {@link Issue}.
+     */
+    @JsonProperty("IssuingChainIssue")
+    Issue issuingChainIssue();
 
-  /**
-   * The door account on the locking chain.
-   *
-   * @return The {@link Address} of the door account.
-   */
-  @JsonProperty("LockingChainDoor")
-  Address lockingChainDoor();
+    /**
+     * The door account on the locking chain.
+     *
+     * @return The {@link Address} of the door account.
+     */
+    @JsonProperty("LockingChainDoor")
+    Address lockingChainDoor();
 
-  /**
-   * The asset that is locked and unlocked on the locking chain.
-   *
-   * @return An {@link Issue}.
-   */
-  @JsonProperty("LockingChainIssue")
-  Issue lockingChainIssue();
-
+    /**
+     * The asset that is locked and unlocked on the locking chain.
+     *
+     * @return An {@link Issue}.
+     */
+    @JsonProperty("LockingChainIssue")
+    Issue lockingChainIssue();
 }

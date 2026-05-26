@@ -15,27 +15,26 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @JsonDeserialize(as = ImmutableOfferLedgerEntryParams.class)
 public interface OfferLedgerEntryParams {
 
-  /**
-   * Construct a {@code OfferLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableOfferLedgerEntryParams.Builder}.
-   */
-  static ImmutableOfferLedgerEntryParams.Builder builder() {
-    return ImmutableOfferLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code OfferLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableOfferLedgerEntryParams.Builder}.
+     */
+    static ImmutableOfferLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The account that placed the offer.
-   *
-   * @return The {@link Address} of the account.
-   */
-  Address account();
+    /**
+     * The account that placed the offer.
+     *
+     * @return The {@link Address} of the account.
+     */
+    Address account();
 
-  /**
-   * The Sequence Number of the transaction that created the Offer entry.
-   *
-   * @return An {@link UnsignedInteger}.
-   */
-  UnsignedInteger seq();
-
+    /**
+     * The Sequence Number of the transaction that created the Offer entry.
+     *
+     * @return An {@link UnsignedInteger}.
+     */
+    UnsignedInteger seq();
 }

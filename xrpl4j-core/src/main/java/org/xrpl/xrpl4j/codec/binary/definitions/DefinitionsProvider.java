@@ -19,9 +19,7 @@ package org.xrpl.xrpl4j.codec.binary.definitions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.xrpl.xrpl4j.codec.binary.BinaryCodecObjectMapperFactory;
-
 import java.util.function.Supplier;
 
 /**
@@ -29,10 +27,9 @@ import java.util.function.Supplier;
  */
 public interface DefinitionsProvider extends Supplier<Definitions> {
 
-  DefinitionsProvider INSTANCE = new DefaultDefinitionsProvider(BinaryCodecObjectMapperFactory.getObjectMapper());
+    DefinitionsProvider INSTANCE = new DefaultDefinitionsProvider(BinaryCodecObjectMapperFactory.getObjectMapper());
 
-  static DefinitionsProvider getInstance() {
-    return INSTANCE;
-  }
-
+    static DefinitionsProvider getInstance() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

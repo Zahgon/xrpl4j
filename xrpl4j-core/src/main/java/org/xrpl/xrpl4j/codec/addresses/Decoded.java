@@ -19,9 +19,7 @@ package org.xrpl.xrpl4j.codec.addresses;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.immutables.value.Value;
-
 import java.util.Optional;
 
 /**
@@ -30,34 +28,33 @@ import java.util.Optional;
 @Value.Immutable
 public interface Decoded {
 
-  /**
-   * Get a new {@link ImmutableDecoded.Builder} instance.
-   *
-   * @return A {@link ImmutableDecoded.Builder}.
-   */
-  static ImmutableDecoded.Builder builder() {
-    return ImmutableDecoded.builder();
-  }
+    /**
+     * Get a new {@link ImmutableDecoded.Builder} instance.
+     *
+     * @return A {@link ImmutableDecoded.Builder}.
+     */
+    static ImmutableDecoded.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link Version} of the decoded Base58 {@link String}.
-   *
-   * @return A {@link Version}.
-   */
-  Version version();
+    /**
+     * The {@link Version} of the decoded Base58 {@link String}.
+     *
+     * @return A {@link Version}.
+     */
+    Version version();
 
-  /**
-   * The bytes of the decoded Base58 {@link String}.
-   *
-   * @return An {@link UnsignedByteArray}.
-   */
-  UnsignedByteArray bytes();
+    /**
+     * The bytes of the decoded Base58 {@link String}.
+     *
+     * @return An {@link UnsignedByteArray}.
+     */
+    UnsignedByteArray bytes();
 
-  /**
-   * The {@link KeyType} of the decoded Base58 {@link String}.
-   *
-   * @return An optionally present {@link KeyType}.
-   */
-  Optional<KeyType> type();
-
+    /**
+     * The {@link KeyType} of the decoded Base58 {@link String}.
+     *
+     * @return An optionally present {@link KeyType}.
+     */
+    Optional<KeyType> type();
 }

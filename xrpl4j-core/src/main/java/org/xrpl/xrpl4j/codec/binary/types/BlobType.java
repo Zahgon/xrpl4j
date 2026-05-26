@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.codec.binary.types;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.JsonNode;
 import org.xrpl.xrpl4j.codec.addresses.UnsignedByteArray;
 import org.xrpl.xrpl4j.codec.binary.serdes.BinaryParser;
@@ -29,22 +28,21 @@ import org.xrpl.xrpl4j.codec.binary.serdes.BinaryParser;
  */
 public class BlobType extends SerializedType<BlobType> {
 
-  public BlobType() {
-    this(UnsignedByteArray.empty());
-  }
+    public BlobType() {
+        this(UnsignedByteArray.empty());
+    }
 
-  public BlobType(UnsignedByteArray list) {
-    super(list);
-  }
+    public BlobType(UnsignedByteArray list) {
+        super(list);
+    }
 
-  @Override
-  public BlobType fromParser(BinaryParser parser, int lengthHint) {
-    return new BlobType(parser.read(lengthHint));
-  }
+    @Override
+    public BlobType fromParser(BinaryParser parser, int lengthHint) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public BlobType fromJson(JsonNode node) {
-    return new BlobType(UnsignedByteArray.fromHex(node.asText()));
-  }
-
+    @Override
+    public BlobType fromJson(JsonNode node) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

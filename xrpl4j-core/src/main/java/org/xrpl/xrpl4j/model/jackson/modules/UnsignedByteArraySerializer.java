@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import org.xrpl.xrpl4j.codec.addresses.UnsignedByteArray;
-
 import java.io.IOException;
 
 /**
@@ -32,15 +30,15 @@ import java.io.IOException;
  */
 public class UnsignedByteArraySerializer extends StdSerializer<UnsignedByteArray> {
 
-  /**
-   * No-args Constructor.
-   */
-  public UnsignedByteArraySerializer() {
-    super(UnsignedByteArray.class);
-  }
+    /**
+     * No-args Constructor.
+     */
+    public UnsignedByteArraySerializer() {
+        super(UnsignedByteArray.class);
+    }
 
-  @Override
-  public void serialize(UnsignedByteArray value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-    gen.writeString(value.hexValue());
-  }
+    @Override
+    public void serialize(UnsignedByteArray value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

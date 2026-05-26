@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.client.accounts;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.jackson.modules.GatewayBalancesObligationsDeserializer;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -36,24 +34,24 @@ import java.util.List;
 @JsonDeserialize(as = ImmutableGatewayBalancesObligations.class, using = GatewayBalancesObligationsDeserializer.class)
 public interface GatewayBalancesObligations {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableGatewayBalancesObligations.Builder}
-   */
-  static ImmutableGatewayBalancesObligations.Builder builder() {
-    return ImmutableGatewayBalancesObligations.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableGatewayBalancesObligations.Builder}
+     */
+    static ImmutableGatewayBalancesObligations.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The balances of issued currencies from the issuer in the results that are not
-   * includes in the hotwallet balances.
-   *
-   * @return A list of {@link GatewayBalancesIssuedCurrencyAmount}s for issued currencies not
-   *   included in the hotwallet balances.
-   */
-  @Value.Default
-  default List<GatewayBalancesIssuedCurrencyAmount> balances() {
-    return Collections.emptyList();
-  }
+    /**
+     * The balances of issued currencies from the issuer in the results that are not
+     * includes in the hotwallet balances.
+     *
+     * @return A list of {@link GatewayBalancesIssuedCurrencyAmount}s for issued currencies not
+     *   included in the hotwallet balances.
+     */
+    @Value.Default
+    default List<GatewayBalancesIssuedCurrencyAmount> balances() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

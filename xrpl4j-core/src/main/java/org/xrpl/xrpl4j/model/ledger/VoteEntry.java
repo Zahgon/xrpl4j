@@ -21,37 +21,36 @@ import org.xrpl.xrpl4j.model.transactions.VoteWeight;
 @Beta
 public interface VoteEntry {
 
-  /**
-   * Construct a {@code VoteEntry} builder.
-   *
-   * @return An {@link ImmutableVoteEntry.Builder}.
-   */
-  static ImmutableVoteEntry.Builder builder() {
-    return ImmutableVoteEntry.builder();
-  }
+    /**
+     * Construct a {@code VoteEntry} builder.
+     *
+     * @return An {@link ImmutableVoteEntry.Builder}.
+     */
+    static ImmutableVoteEntry.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The address of the LP who voted.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Account")
-  Address account();
+    /**
+     * The address of the LP who voted.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Account")
+    Address account();
 
-  /**
-   * The trading fee that the LP voted for.
-   *
-   * @return A {@link TradingFee}.
-   */
-  @JsonProperty("TradingFee")
-  TradingFee tradingFee();
+    /**
+     * The trading fee that the LP voted for.
+     *
+     * @return A {@link TradingFee}.
+     */
+    @JsonProperty("TradingFee")
+    TradingFee tradingFee();
 
-  /**
-   * The weight of the LP's vote.
-   *
-   * @return The {@link VoteWeight}.
-   */
-  @JsonProperty("VoteWeight")
-  VoteWeight voteWeight();
-
+    /**
+     * The weight of the LP's vote.
+     *
+     * @return The {@link VoteWeight}.
+     */
+    @JsonProperty("VoteWeight")
+    VoteWeight voteWeight();
 }

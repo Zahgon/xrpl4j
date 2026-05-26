@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -35,28 +34,28 @@ import org.xrpl.xrpl4j.model.transactions.CredentialType;
 @JsonDeserialize(as = ImmutableDepositPreAuthCredential.class)
 public interface DepositPreAuthCredential {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableDepositPreAuthCredential.Builder}.
-   */
-  static ImmutableDepositPreAuthCredential.Builder builder() {
-    return ImmutableDepositPreAuthCredential.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableDepositPreAuthCredential.Builder}.
+     */
+    static ImmutableDepositPreAuthCredential.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The issuer of the credential.
-   *
-   * @return The unique {@link Address} of the issuer this credential.
-   */
-  @JsonProperty("issuer")
-  Address issuer();
+    /**
+     * The issuer of the credential.
+     *
+     * @return The unique {@link Address} of the issuer this credential.
+     */
+    @JsonProperty("issuer")
+    Address issuer();
 
-  /**
-   * A (hex-encoded) value to identify the type of credential from the issuer.
-   *
-   * @return A {@link CredentialType} defining the type of credential.
-   */
-  @JsonProperty("credential_type")
-  CredentialType credentialType();
+    /**
+     * A (hex-encoded) value to identify the type of credential from the issuer.
+     *
+     * @return A {@link CredentialType} defining the type of credential.
+     */
+    @JsonProperty("credential_type")
+    CredentialType credentialType();
 }

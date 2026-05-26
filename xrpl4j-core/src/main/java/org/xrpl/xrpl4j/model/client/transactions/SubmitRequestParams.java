@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -34,23 +33,22 @@ import org.xrpl.xrpl4j.model.client.XrplRequestParams;
 @JsonDeserialize(as = ImmutableSubmitRequestParams.class)
 public interface SubmitRequestParams extends XrplRequestParams {
 
-  /**
-   * Construct a {@link SubmitRequestParams} containing the given transaction blob as its only parameter.
-   *
-   * @param blobHex The binary serialized transaction to submit, as a hexadecimal encoded {@link String}.
-   *
-   * @return A new {@link SubmitRequestParams}.
-   */
-  static SubmitRequestParams of(String blobHex) {
-    return ImmutableSubmitRequestParams.builder().txBlob(blobHex).build();
-  }
+    /**
+     * Construct a {@link SubmitRequestParams} containing the given transaction blob as its only parameter.
+     *
+     * @param blobHex The binary serialized transaction to submit, as a hexadecimal encoded {@link String}.
+     *
+     * @return A new {@link SubmitRequestParams}.
+     */
+    static SubmitRequestParams of(String blobHex) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The hex encoded {@link String} containing a signed, binary encoded transaction.
-   *
-   * @return A {@link String} containing the transaction blob.
-   */
-  @JsonProperty("tx_blob")
-  String txBlob();
-
+    /**
+     * The hex encoded {@link String} containing a signed, binary encoded transaction.
+     *
+     * @return A {@link String} containing the transaction blob.
+     */
+    @JsonProperty("tx_blob")
+    String txBlob();
 }

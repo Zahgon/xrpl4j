@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.codec.binary;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value.Immutable;
@@ -32,12 +31,11 @@ import org.immutables.value.Value.Immutable;
 @JsonDeserialize(as = ImmutableFieldHeader.class)
 public interface FieldHeader {
 
-  static ImmutableFieldHeader.Builder builder() {
-    return ImmutableFieldHeader.builder();
-  }
+    static ImmutableFieldHeader.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  int fieldCode();
+    int fieldCode();
 
-  int typeCode();
-
+    int typeCode();
 }

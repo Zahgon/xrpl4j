@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -41,53 +40,50 @@ import org.immutables.value.Value.Check;
 @Beta
 public interface RawTransactionWrapper {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableRawTransactionWrapper.Builder}.
-   */
-  static ImmutableRawTransactionWrapper.Builder builder() {
-    return ImmutableRawTransactionWrapper.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableRawTransactionWrapper.Builder}.
+     */
+    static ImmutableRawTransactionWrapper.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Construct a {@link RawTransactionWrapper} wrapping the given {@link Transaction}.
-   *
-   * @param transaction A {@link Transaction} to wrap.
-   *
-   * @return A {@link RawTransactionWrapper}.
-   */
-  static RawTransactionWrapper of(Transaction transaction) {
-    return builder().rawTransaction(transaction).build();
-  }
+    /**
+     * Construct a {@link RawTransactionWrapper} wrapping the given {@link Transaction}.
+     *
+     * @param transaction A {@link Transaction} to wrap.
+     *
+     * @return A {@link RawTransactionWrapper}.
+     */
+    static RawTransactionWrapper of(Transaction transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The inner transaction. This transaction must:
-   * <ul>
-   *   <li>Have the {@code tfInnerBatchTxn} flag set</li>
-   *   <li>Have a fee of 0</li>
-   *   <li>Have an empty {@code SigningPubKey}</li>
-   *   <li>Not have a {@code TxnSignature}</li>
-   * </ul>
-   *
-   * @return A {@link Transaction}.
-   */
-  @JsonProperty("RawTransaction")
-  Transaction rawTransaction();
+    /**
+     * The inner transaction. This transaction must:
+     * <ul>
+     *   <li>Have the {@code tfInnerBatchTxn} flag set</li>
+     *   <li>Have a fee of 0</li>
+     *   <li>Have an empty {@code SigningPubKey}</li>
+     *   <li>Not have a {@code TxnSignature}</li>
+     * </ul>
+     *
+     * @return A {@link Transaction}.
+     */
+    @JsonProperty("RawTransaction")
+    Transaction rawTransaction();
 
-  /**
-   * Validates the state of the {@code RawTransactionWrapper}.
-   *
-   * <p>Ensures that the transaction wrapped by this instance satisfies the requirement of being an inner transaction
-   * by verifying that the {@code tfInnerBatchTxn} flag is set on the transaction.
-   *
-   * @throws IllegalArgumentException if the {@code tfInnerBatchTxn} flag is not set on the wrapped transaction.
-   */
-  @Check
-  default void check() {
-    Preconditions.checkArgument(
-      rawTransaction().transactionFlags().tfInnerBatchTxn(),
-      "Inner transaction must have the `tfInnerBatchTxn` flag set."
-    );
-  }
+    /**
+     * Validates the state of the {@code RawTransactionWrapper}.
+     *
+     * <p>Ensures that the transaction wrapped by this instance satisfies the requirement of being an inner transaction
+     * by verifying that the {@code tfInnerBatchTxn} flag is set on the transaction.
+     *
+     * @throws IllegalArgumentException if the {@code tfInnerBatchTxn} flag is not set on the wrapped transaction.
+     */
+    @Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

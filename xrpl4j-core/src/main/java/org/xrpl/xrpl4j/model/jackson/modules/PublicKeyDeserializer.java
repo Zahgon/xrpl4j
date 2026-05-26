@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.xrpl.xrpl4j.crypto.keys.PublicKey;
-
 import java.io.IOException;
 
 /**
@@ -32,16 +30,15 @@ import java.io.IOException;
  */
 public class PublicKeyDeserializer extends StdDeserializer<PublicKey> {
 
-  /**
-   * No-args constructor.
-   */
-  public PublicKeyDeserializer() {
-    super(PublicKey.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public PublicKeyDeserializer() {
+        super(PublicKey.class);
+    }
 
-  @Override
-  public PublicKey deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    return PublicKey.fromBase16EncodedPublicKey(jsonParser.getText());
-  }
-
+    @Override
+    public PublicKey deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

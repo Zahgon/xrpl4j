@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions.metadata;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -32,7 +31,6 @@ import org.xrpl.xrpl4j.model.ledger.LedgerObject;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
 import org.xrpl.xrpl4j.model.transactions.TicketCreate;
-
 import java.util.Optional;
 
 /**
@@ -44,55 +42,55 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableMetaTicketObject.class)
 public interface MetaTicketObject extends MetaLedgerObject {
 
-  /**
-   * A bit-map of Boolean flags enabled for this Ticket. Currently, there are no flags defined for Tickets.
-   *
-   * @return Always returns {@link Flags#UNSET}.
-   */
-  @JsonProperty("Flags")
-  @Value.Derived
-  default Flags flags() {
-    return Flags.UNSET;
-  }
+    /**
+     * A bit-map of Boolean flags enabled for this Ticket. Currently, there are no flags defined for Tickets.
+     *
+     * @return Always returns {@link Flags#UNSET}.
+     */
+    @JsonProperty("Flags")
+    @Value.Derived
+    default Flags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The account that owns this Ticket.
-   *
-   * @return The account that owns this Ticket, as an {@link Address}.
-   */
-  @JsonProperty("Account")
-  Optional<Address> account();
+    /**
+     * The account that owns this Ticket.
+     *
+     * @return The account that owns this Ticket, as an {@link Address}.
+     */
+    @JsonProperty("Account")
+    Optional<Address> account();
 
-  /**
-   * A hint indicating which page of the owner directory links to this object, in case the directory
-   * consists of multiple pages.
-   *
-   * @return A {@link String} containing the hint.
-   */
-  @JsonProperty("OwnerNode")
-  Optional<String> ownerNode();
+    /**
+     * A hint indicating which page of the owner directory links to this object, in case the directory
+     * consists of multiple pages.
+     *
+     * @return A {@link String} containing the hint.
+     */
+    @JsonProperty("OwnerNode")
+    Optional<String> ownerNode();
 
-  /**
-   * The identifying hash of the transaction that most recently modified this object.
-   *
-   * @return A {@link Hash256} containing the previous transaction hash.
-   */
-  @JsonProperty("PreviousTxnID")
-  Optional<Hash256> previousTransactionId();
+    /**
+     * The identifying hash of the transaction that most recently modified this object.
+     *
+     * @return A {@link Hash256} containing the previous transaction hash.
+     */
+    @JsonProperty("PreviousTxnID")
+    Optional<Hash256> previousTransactionId();
 
-  /**
-   * The index of the ledger that contains the transaction that most recently modified this object.
-   *
-   * @return An {@link LedgerIndex} representing the previous transaction ledger sequence.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  Optional<LedgerIndex> previousTransactionLedgerSequence();
+    /**
+     * The index of the ledger that contains the transaction that most recently modified this object.
+     *
+     * @return An {@link LedgerIndex} representing the previous transaction ledger sequence.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    Optional<LedgerIndex> previousTransactionLedgerSequence();
 
-  /**
-   * The Sequence Number this Ticket sets aside.
-   *
-   * @return An {@link UnsignedInteger} denoting the sequence number.
-   */
-  @JsonProperty("TicketSequence")
-  Optional<UnsignedInteger> ticketSequence();
+    /**
+     * The Sequence Number this Ticket sets aside.
+     *
+     * @return An {@link UnsignedInteger} denoting the sequence number.
+     */
+    @JsonProperty("TicketSequence")
+    Optional<UnsignedInteger> ticketSequence();
 }

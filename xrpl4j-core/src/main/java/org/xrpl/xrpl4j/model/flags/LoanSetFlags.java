@@ -12,91 +12,87 @@ import org.xrpl.xrpl4j.model.transactions.LoanSet;
 @Beta
 public class LoanSetFlags extends TransactionFlags {
 
-  /**
-   * Constant {@link LoanSetFlags} for the {@code tfLoanOverpayment} flag.
-   */
-  public static final LoanSetFlags LOAN_OVERPAYMENT = new LoanSetFlags(0x00010000L);
-
-  private LoanSetFlags(long value) {
-    super(value);
-  }
-
-  private LoanSetFlags() {
-  }
-
-  /**
-   * Create a new {@link Builder}.
-   *
-   * @return A new {@link Builder}.
-   */
-  public static Builder builder() {
-    return new Builder();
-  }
-
-  /**
-   * Construct {@link LoanSetFlags} with a given value.
-   *
-   * @param value The long-number encoded flags value of this {@link LoanSetFlags}.
-   *
-   * @return New {@link LoanSetFlags}.
-   */
-  public static LoanSetFlags of(long value) {
-    return new LoanSetFlags(value);
-  }
-
-  private static LoanSetFlags of(boolean tfFullyCanonicalSig, boolean tfLoanOverpayment) {
-    long value = Flags.of(
-      tfFullyCanonicalSig ? TransactionFlags.FULLY_CANONICAL_SIG : UNSET,
-      tfLoanOverpayment ? LOAN_OVERPAYMENT : UNSET
-    ).getValue();
-    return new LoanSetFlags(value);
-  }
-
-  /**
-   * Construct an empty instance of {@link LoanSetFlags}. Transactions with empty flags will not be serialized with
-   * a {@code Flags} field.
-   *
-   * @return An empty {@link LoanSetFlags}.
-   */
-  public static LoanSetFlags empty() {
-    return new LoanSetFlags();
-  }
-
-  /**
-   * Indicates that the loan supports overpayments.
-   *
-   * @return {@code true} if {@code tfLoanOverpayment} is set, otherwise {@code false}.
-   */
-  public boolean tfLoanOverpayment() {
-    return this.isSet(LoanSetFlags.LOAN_OVERPAYMENT);
-  }
-
-  /**
-   * A builder class for {@link LoanSetFlags} flags.
-   */
-  public static class Builder {
-
-    private boolean tfLoanOverpayment = false;
-
     /**
-     * Set {@code tfLoanOverpayment} to the given value.
-     *
-     * @param tfLoanOverpayment A boolean value.
-     *
-     * @return The same {@link Builder}.
+     * Constant {@link LoanSetFlags} for the {@code tfLoanOverpayment} flag.
      */
-    public Builder tfLoanOverpayment(boolean tfLoanOverpayment) {
-      this.tfLoanOverpayment = tfLoanOverpayment;
-      return this;
+    public static final LoanSetFlags LOAN_OVERPAYMENT = new LoanSetFlags(0x00010000L);
+
+    private LoanSetFlags(long value) {
+        super(value);
+    }
+
+    private LoanSetFlags() {
     }
 
     /**
-     * Build a new {@link LoanSetFlags} from the current boolean values.
+     * Create a new {@link Builder}.
      *
-     * @return A new {@link LoanSetFlags}.
+     * @return A new {@link Builder}.
      */
-    public LoanSetFlags build() {
-      return LoanSetFlags.of(true, tfLoanOverpayment);
+    public static Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    /**
+     * Construct {@link LoanSetFlags} with a given value.
+     *
+     * @param value The long-number encoded flags value of this {@link LoanSetFlags}.
+     *
+     * @return New {@link LoanSetFlags}.
+     */
+    public static LoanSetFlags of(long value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    private static LoanSetFlags of(boolean tfFullyCanonicalSig, boolean tfLoanOverpayment) {
+        long value = Flags.of(tfFullyCanonicalSig ? TransactionFlags.FULLY_CANONICAL_SIG : UNSET, tfLoanOverpayment ? LOAN_OVERPAYMENT : UNSET).getValue();
+        return new LoanSetFlags(value);
+    }
+
+    /**
+     * Construct an empty instance of {@link LoanSetFlags}. Transactions with empty flags will not be serialized with
+     * a {@code Flags} field.
+     *
+     * @return An empty {@link LoanSetFlags}.
+     */
+    public static LoanSetFlags empty() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Indicates that the loan supports overpayments.
+     *
+     * @return {@code true} if {@code tfLoanOverpayment} is set, otherwise {@code false}.
+     */
+    public boolean tfLoanOverpayment() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * A builder class for {@link LoanSetFlags} flags.
+     */
+    public static class Builder {
+
+        private boolean tfLoanOverpayment = false;
+
+        /**
+         * Set {@code tfLoanOverpayment} to the given value.
+         *
+         * @param tfLoanOverpayment A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfLoanOverpayment(boolean tfLoanOverpayment) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Build a new {@link LoanSetFlags} from the current boolean values.
+         *
+         * @return A new {@link LoanSetFlags}.
+         */
+        public LoanSetFlags build() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+    }
 }

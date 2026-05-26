@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -31,7 +30,6 @@ import org.xrpl.xrpl4j.model.transactions.CurrencyAmount;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
 import org.xrpl.xrpl4j.model.transactions.NfTokenId;
 import org.xrpl.xrpl4j.model.transactions.XrpCurrencyAmount;
-
 import java.util.Optional;
 
 /**
@@ -43,115 +41,115 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableNfTokenOfferObject.class)
 public interface NfTokenOfferObject extends LedgerObject {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableNfTokenOfferObject.Builder}.
-   */
-  static ImmutableNfTokenOfferObject.Builder builder() {
-    return ImmutableNfTokenOfferObject.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableNfTokenOfferObject.Builder}.
+     */
+    static ImmutableNfTokenOfferObject.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The type of ledger object. In this case, this is always "NfTokenOffer".
-   *
-   * @return Always {@link LedgerObject.LedgerEntryType#NFTOKEN_OFFER}.
-   */
-  @JsonProperty("LedgerEntryType")
-  @Value.Derived
-  default LedgerEntryType ledgerEntryType() {
-    return LedgerEntryType.NFTOKEN_OFFER;
-  }
+    /**
+     * The type of ledger object. In this case, this is always "NfTokenOffer".
+     *
+     * @return Always {@link LedgerObject.LedgerEntryType#NFTOKEN_OFFER}.
+     */
+    @JsonProperty("LedgerEntryType")
+    @Value.Derived
+    default LedgerEntryType ledgerEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The amount expected or offered for the token.
-   *
-   * @return The {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  CurrencyAmount amount();
+    /**
+     * The amount expected or offered for the token.
+     *
+     * @return The {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    CurrencyAmount amount();
 
-  /**
-   * {@link Address} of the source account that created and owns the offer.
-   *
-   * @return The {@link Address} of the NfTokenOffer owner.
-   */
-  @JsonProperty("Owner")
-  Address owner();
+    /**
+     * {@link Address} of the source account that created and owns the offer.
+     *
+     * @return The {@link Address} of the NfTokenOffer owner.
+     */
+    @JsonProperty("Owner")
+    Address owner();
 
-  /**
-   * The identifying hash of the transaction that most recently modified this object.
-   *
-   * @return A {@link Hash256} containing the previous transaction hash.
-   */
-  @JsonProperty("PreviousTxnID")
-  Hash256 previousTransactionId();
+    /**
+     * The identifying hash of the transaction that most recently modified this object.
+     *
+     * @return A {@link Hash256} containing the previous transaction hash.
+     */
+    @JsonProperty("PreviousTxnID")
+    Hash256 previousTransactionId();
 
-  /**
-   * The index of the ledger that contains the transaction that most recently modified this object.
-   *
-   * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  UnsignedInteger previousTransactionLedgerSequence();
+    /**
+     * The index of the ledger that contains the transaction that most recently modified this object.
+     *
+     * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    UnsignedInteger previousTransactionLedgerSequence();
 
-  /**
-   * The TokenId of the NfToken for which the offer has been created.
-   *
-   * @return {@link org.xrpl.xrpl4j.model.transactions.NfTokenId} of the NfToken.
-   */
-  @JsonProperty("NFTokenID")
-  NfTokenId nfTokenId();
+    /**
+     * The TokenId of the NfToken for which the offer has been created.
+     *
+     * @return {@link org.xrpl.xrpl4j.model.transactions.NfTokenId} of the NfToken.
+     */
+    @JsonProperty("NFTokenID")
+    NfTokenId nfTokenId();
 
-  /**
-   * A time after which this offer is considered unfunded, as the number of seconds since
-   * the Ripple Epoch.
-   *
-   * @return The offer's expiration.
-   */
-  Optional<UnsignedInteger> expiration();
+    /**
+     * A time after which this offer is considered unfunded, as the number of seconds since
+     * the Ripple Epoch.
+     *
+     * @return The offer's expiration.
+     */
+    Optional<UnsignedInteger> expiration();
 
-  /**
-   * The intended recipient of the {@link org.xrpl.xrpl4j.model.client.accounts.NfTokenObject}.
-   * This address will receive the NFToken when the offer is accepted.
-   *
-   * @return The {@link Address} of the destination.
-   */
-  @JsonProperty("Destination")
-  Optional<Address> destination();
+    /**
+     * The intended recipient of the {@link org.xrpl.xrpl4j.model.client.accounts.NfTokenObject}.
+     * This address will receive the NFToken when the offer is accepted.
+     *
+     * @return The {@link Address} of the destination.
+     */
+    @JsonProperty("Destination")
+    Optional<Address> destination();
 
-  /**
-   * A hint indicating which page of the sender's owner directory links to this object, in case the directory
-   * consists of multiple pages.
-   * Note: The object does not contain a direct link to the owner directory containing it,
-   * since that value can be derived from the Account.
-   *
-   * @return A {@link String} containing the hint.
-   */
-  @JsonProperty("OwnerNode")
-  Optional<String> ownerNode();
+    /**
+     * A hint indicating which page of the sender's owner directory links to this object, in case the directory
+     * consists of multiple pages.
+     * Note: The object does not contain a direct link to the owner directory containing it,
+     * since that value can be derived from the Account.
+     *
+     * @return A {@link String} containing the hint.
+     */
+    @JsonProperty("OwnerNode")
+    Optional<String> ownerNode();
 
-  /**
-   * A hint indicating which page of the token buy or sell offer directory links to this object.
-   *
-   * @return A {@link String} containing the hint.
-   */
-  @JsonProperty("NFTokenOfferNode")
-  Optional<String> offerNode();
+    /**
+     * A hint indicating which page of the token buy or sell offer directory links to this object.
+     *
+     * @return A {@link String} containing the hint.
+     */
+    @JsonProperty("NFTokenOfferNode")
+    Optional<String> offerNode();
 
-  /**
-   * A set of boolean {@link NfTokenOfferFlags} containing options
-   * enabled for this object.
-   *
-   * @return The {@link NfTokenOfferFlags} for this object.
-   */
-  @JsonProperty("Flags")
-  NfTokenOfferFlags flags();
+    /**
+     * A set of boolean {@link NfTokenOfferFlags} containing options
+     * enabled for this object.
+     *
+     * @return The {@link NfTokenOfferFlags} for this object.
+     */
+    @JsonProperty("Flags")
+    NfTokenOfferFlags flags();
 
-  /**
-   * The unique ID of this {@link NfTokenOfferObject}.
-   *
-   * @return A {@link Hash256} containing the ID.
-   */
-  Hash256 index();
+    /**
+     * The unique ID of this {@link NfTokenOfferObject}.
+     *
+     * @return A {@link Hash256} containing the ID.
+     */
+    Hash256 index();
 }

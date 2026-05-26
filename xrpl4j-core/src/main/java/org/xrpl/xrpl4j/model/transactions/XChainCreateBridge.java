@@ -7,7 +7,6 @@ import com.google.common.annotations.Beta;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -22,51 +21,50 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableXChainCreateBridge.class)
 public interface XChainCreateBridge extends Transaction {
 
-  /**
-   * Construct a {@code XChainCreateBridge} builder.
-   *
-   * @return An {@link ImmutableXChainCreateBridge.Builder}.
-   */
-  static ImmutableXChainCreateBridge.Builder builder() {
-    return ImmutableXChainCreateBridge.builder();
-  }
+    /**
+     * Construct a {@code XChainCreateBridge} builder.
+     *
+     * @return An {@link ImmutableXChainCreateBridge.Builder}.
+     */
+    static ImmutableXChainCreateBridge.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link XChainCreateBridge}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * @return A set of {@link TransactionFlags}, default is {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link XChainCreateBridge}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * @return A set of {@link TransactionFlags}, default is {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The minimum amount, in XRP, required for a {@link XChainAccountCreateCommit} transaction. If this isn't present,
-   * the {@link XChainAccountCreateCommit} transaction will fail. This field can only be present on XRP-XRP bridges.
-   *
-   * @return An optionally-present {@link XrpCurrencyAmount}.
-   */
-  @JsonProperty("MinAccountCreateAmount")
-  Optional<XrpCurrencyAmount> minAccountCreateAmount();
+    /**
+     * The minimum amount, in XRP, required for a {@link XChainAccountCreateCommit} transaction. If this isn't present,
+     * the {@link XChainAccountCreateCommit} transaction will fail. This field can only be present on XRP-XRP bridges.
+     *
+     * @return An optionally-present {@link XrpCurrencyAmount}.
+     */
+    @JsonProperty("MinAccountCreateAmount")
+    Optional<XrpCurrencyAmount> minAccountCreateAmount();
 
-  /**
-   * The total amount to pay the witness servers for their signatures. This amount will be split among the signers.
-   *
-   * @return An {@link XrpCurrencyAmount}.
-   */
-  @JsonProperty("SignatureReward")
-  XrpCurrencyAmount signatureReward();
+    /**
+     * The total amount to pay the witness servers for their signatures. This amount will be split among the signers.
+     *
+     * @return An {@link XrpCurrencyAmount}.
+     */
+    @JsonProperty("SignatureReward")
+    XrpCurrencyAmount signatureReward();
 
-  /**
-   * The bridge (door accounts and assets) to create.
-   *
-   * @return An {@link XChainBridge}.
-   */
-  @JsonProperty("XChainBridge")
-  @SuppressWarnings("MethodName")
-  XChainBridge xChainBridge();
-
+    /**
+     * The bridge (door accounts and assets) to create.
+     *
+     * @return An {@link XChainBridge}.
+     */
+    @JsonProperty("XChainBridge")
+    @SuppressWarnings("MethodName")
+    XChainBridge xChainBridge();
 }

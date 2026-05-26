@@ -22,37 +22,36 @@ import org.xrpl.xrpl4j.model.transactions.VoteWeight;
 @Beta
 public interface AmmInfoVoteEntry {
 
-  /**
-   * Construct a {@code AmmInfoVoteEntry} builder.
-   *
-   * @return An {@link ImmutableAmmInfoVoteEntry.Builder}.
-   */
-  static ImmutableAmmInfoVoteEntry.Builder builder() {
-    return ImmutableAmmInfoVoteEntry.builder();
-  }
+    /**
+     * Construct a {@code AmmInfoVoteEntry} builder.
+     *
+     * @return An {@link ImmutableAmmInfoVoteEntry.Builder}.
+     */
+    static ImmutableAmmInfoVoteEntry.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The address of the LP who voted.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("account")
-  Address account();
+    /**
+     * The address of the LP who voted.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("account")
+    Address account();
 
-  /**
-   * The trading fee that the LP voted for.
-   *
-   * @return A {@link TradingFee}.
-   */
-  @JsonProperty("trading_fee")
-  TradingFee tradingFee();
+    /**
+     * The trading fee that the LP voted for.
+     *
+     * @return A {@link TradingFee}.
+     */
+    @JsonProperty("trading_fee")
+    TradingFee tradingFee();
 
-  /**
-   * The weight of the LP's vote.
-   *
-   * @return The {@link VoteWeight}.
-   */
-  @JsonProperty("vote_weight")
-  VoteWeight voteWeight();
-
+    /**
+     * The weight of the LP's vote.
+     *
+     * @return The {@link VoteWeight}.
+     */
+    @JsonProperty("vote_weight")
+    VoteWeight voteWeight();
 }

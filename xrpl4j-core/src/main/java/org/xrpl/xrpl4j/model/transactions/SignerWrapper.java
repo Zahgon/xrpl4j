@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -33,31 +32,31 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = ImmutableSignerWrapper.class)
 public interface SignerWrapper {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableSignerWrapper.Builder}.
-   */
-  static ImmutableSignerWrapper.Builder builder() {
-    return ImmutableSignerWrapper.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableSignerWrapper.Builder}.
+     */
+    static ImmutableSignerWrapper.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Construct a {@link SignerWrapper} wrapping the given {@link Signer}.
-   *
-   * @param signer A {@link Signer}.
-   *
-   * @return A {@link SignerWrapper}.
-   */
-  static SignerWrapper of(Signer signer) {
-    return builder().signer(signer).build();
-  }
+    /**
+     * Construct a {@link SignerWrapper} wrapping the given {@link Signer}.
+     *
+     * @param signer A {@link Signer}.
+     *
+     * @return A {@link SignerWrapper}.
+     */
+    static SignerWrapper of(Signer signer) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link Signer} that this wrapper wraps.
-   *
-   * @return The {@link Signer} that this wrapper wraps.
-   */
-  @JsonProperty("Signer")
-  Signer signer();
+    /**
+     * The {@link Signer} that this wrapper wraps.
+     *
+     * @return The {@link Signer} that this wrapper wraps.
+     */
+    @JsonProperty("Signer")
+    Signer signer();
 }

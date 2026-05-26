@@ -10,7 +10,6 @@ import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.crypto.keys.PublicKey;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.CurrencyAmount;
-
 import java.util.Optional;
 
 /**
@@ -24,63 +23,62 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableXChainClaimProofSig.class)
 public interface XChainClaimProofSig {
 
-  /**
-   * Construct a {@code XChainClaimProofSig} builder.
-   *
-   * @return An {@link ImmutableXChainClaimProofSig.Builder}.
-   */
-  static ImmutableXChainClaimProofSig.Builder builder() {
-    return ImmutableXChainClaimProofSig.builder();
-  }
+    /**
+     * Construct a {@code XChainClaimProofSig} builder.
+     *
+     * @return An {@link ImmutableXChainClaimProofSig.Builder}.
+     */
+    static ImmutableXChainClaimProofSig.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The account on the door account's signer list that is signing the transaction.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("AttestationSignerAccount")
-  Address attestationSignerAccount();
+    /**
+     * The account on the door account's signer list that is signing the transaction.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("AttestationSignerAccount")
+    Address attestationSignerAccount();
 
-  /**
-   * The public key used to verify the signature.
-   *
-   * @return A {@link PublicKey}.
-   */
-  @JsonProperty("PublicKey")
-  PublicKey publicKey();
+    /**
+     * The public key used to verify the signature.
+     *
+     * @return A {@link PublicKey}.
+     */
+    @JsonProperty("PublicKey")
+    PublicKey publicKey();
 
-  /**
-   * The amount to claim in the {@link org.xrpl.xrpl4j.model.transactions.XChainCommit} transaction on the destination
-   * chain.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  CurrencyAmount amount();
+    /**
+     * The amount to claim in the {@link org.xrpl.xrpl4j.model.transactions.XChainCommit} transaction on the destination
+     * chain.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    CurrencyAmount amount();
 
-  /**
-   * The account that should receive this signer's share of the SignatureReward.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("AttestationRewardAccount")
-  Address attestationRewardAccount();
+    /**
+     * The account that should receive this signer's share of the SignatureReward.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("AttestationRewardAccount")
+    Address attestationRewardAccount();
 
-  /**
-   * A boolean representing the chain where the event occurred.
-   *
-   * @return {@code true} if the event occurred on the locking chain, otherwise {@code false}.
-   */
-  @JsonProperty("WasLockingChainSend")
-  @JsonFormat(shape = Shape.NUMBER)
-  boolean wasLockingChainSend();
+    /**
+     * A boolean representing the chain where the event occurred.
+     *
+     * @return {@code true} if the event occurred on the locking chain, otherwise {@code false}.
+     */
+    @JsonProperty("WasLockingChainSend")
+    @JsonFormat(shape = Shape.NUMBER)
+    boolean wasLockingChainSend();
 
-  /**
-   * The destination account for the funds on the destination chain.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Destination")
-  Optional<Address> destination();
-
+    /**
+     * The destination account for the funds on the destination chain.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Destination")
+    Optional<Address> destination();
 }

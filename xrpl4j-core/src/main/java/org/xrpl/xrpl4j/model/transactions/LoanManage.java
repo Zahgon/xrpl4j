@@ -20,51 +20,39 @@ import org.xrpl.xrpl4j.model.flags.LoanManageFlags;
 @Beta
 public interface LoanManage extends Transaction {
 
-  /**
-   * Construct a {@code LoanManage} builder.
-   *
-   * @return An {@link ImmutableLoanManage.Builder}.
-   */
-  static ImmutableLoanManage.Builder builder() {
-    return ImmutableLoanManage.builder();
-  }
+    /**
+     * Construct a {@code LoanManage} builder.
+     *
+     * @return An {@link ImmutableLoanManage.Builder}.
+     */
+    static ImmutableLoanManage.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link LoanManageFlags}s for this {@link LoanManage}.
-   *
-   * @return A {@link LoanManageFlags}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default LoanManageFlags flags() {
-    return LoanManageFlags.empty();
-  }
+    /**
+     * Set of {@link LoanManageFlags}s for this {@link LoanManage}.
+     *
+     * @return A {@link LoanManageFlags}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default LoanManageFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ID of the Loan object to be updated.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("LoanID")
-  Hash256 loanId();
+    /**
+     * The ID of the Loan object to be updated.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("LoanID")
+    Hash256 loanId();
 
-  /**
-   * Validates LoanManage data verification preconditions per the Lending Protocol spec section 3.10.4.1.
-   */
-  @Value.Check
-  default void check() {
-    Preconditions.checkArgument(
-      !loanId().equals(Hash256.ZERO),
-      "LoanID must not be zero."
-    );
-
-    // tfLoanDefault, tfLoanImpair, tfLoanUnimpair are mutually exclusive.
-    int flagCount = (flags().tfLoanDefault() ? 1 : 0) +
-      (flags().tfLoanImpair() ? 1 : 0) +
-      (flags().tfLoanUnimpair() ? 1 : 0);
-    Preconditions.checkArgument(
-      flagCount <= 1,
-      "At most one of tfLoanDefault, tfLoanImpair, or tfLoanUnimpair may be set."
-    );
-  }
+    /**
+     * Validates LoanManage data verification preconditions per the Lending Protocol spec section 3.10.4.1.
+     */
+    @Value.Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.nft;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -30,7 +29,6 @@ import org.xrpl.xrpl4j.model.client.XrplRequestParams;
 import org.xrpl.xrpl4j.model.client.common.LedgerSpecifier;
 import org.xrpl.xrpl4j.model.transactions.Marker;
 import org.xrpl.xrpl4j.model.transactions.NfTokenId;
-
 import java.util.Optional;
 
 /**
@@ -41,50 +39,48 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableNftSellOffersRequestParams.class)
 public interface NftSellOffersRequestParams extends XrplRequestParams {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableNftSellOffersRequestParams.Builder}.
-   */
-  static ImmutableNftSellOffersRequestParams.Builder builder() {
-    return ImmutableNftSellOffersRequestParams.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableNftSellOffersRequestParams.Builder}.
+     */
+    static ImmutableNftSellOffersRequestParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The TokenID of the NFToken object.
-   *
-   * @return the TokenID of the {@link org.xrpl.xrpl4j.model.client.accounts.NfTokenObject} object.
-   */
-  @JsonProperty("nft_id")
-  NfTokenId nfTokenId();
+    /**
+     * The TokenID of the NFToken object.
+     *
+     * @return the TokenID of the {@link org.xrpl.xrpl4j.model.client.accounts.NfTokenObject} object.
+     */
+    @JsonProperty("nft_id")
+    NfTokenId nfTokenId();
 
-  /**
-   * Specifies the ledger version to request. A ledger version can be specified by ledger hash,
-   * numerical ledger index, or a shortcut value.
-   *
-   * @return A {@link LedgerSpecifier} specifying the ledger version to request.
-   */
-  @JsonUnwrapped
-  @Value.Default
-  // This field was missing in xrpl4j <= 3.1.2. Normally, this would be a required field, but in order
-  // to not make a breaking change, this needs to be defaulted. rippled will default to "validated" for you,
-  // so defaulting to LedgerSpecifier.VALIDATED preserves the existing 3.x.x behavior.
-  default LedgerSpecifier ledgerSpecifier() {
-    return LedgerSpecifier.VALIDATED;
-  }
+    /**
+     * Specifies the ledger version to request. A ledger version can be specified by ledger hash,
+     * numerical ledger index, or a shortcut value.
+     *
+     * @return A {@link LedgerSpecifier} specifying the ledger version to request.
+     */
+    @JsonUnwrapped
+    @Value.Default
+    default // so defaulting to LedgerSpecifier.VALIDATED preserves the existing 3.x.x behavior.
+    LedgerSpecifier ledgerSpecifier() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Limit the number of sell offers for the {@link NfTokenId}. The server is not required to honor
-   * this value. Must be within the inclusive range 10 to 400.
-   *
-   * @return An optionally-present {@link UnsignedInteger} representing the response limit.
-   */
-  Optional<UnsignedInteger> limit();
+    /**
+     * Limit the number of sell offers for the {@link NfTokenId}. The server is not required to honor
+     * this value. Must be within the inclusive range 10 to 400.
+     *
+     * @return An optionally-present {@link UnsignedInteger} representing the response limit.
+     */
+    Optional<UnsignedInteger> limit();
 
-  /**
-   * Value from a previous paginated response. Resume retrieving data where that response left off.
-   *
-   * @return An optionally-present {@link String} containing the marker.
-   */
-  Optional<Marker> marker();
+    /**
+     * Value from a previous paginated response. Resume retrieving data where that response left off.
+     *
+     * @return An optionally-present {@link String} containing the marker.
+     */
+    Optional<Marker> marker();
 }

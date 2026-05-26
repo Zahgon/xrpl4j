@@ -19,14 +19,12 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Preconditions;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.PaymentChannelClaimFlags;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -64,106 +62,96 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutablePaymentChannelClaim.class)
 public interface PaymentChannelClaim extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutablePaymentChannelClaim.Builder}.
-   */
-  static ImmutablePaymentChannelClaim.Builder builder() {
-    return ImmutablePaymentChannelClaim.builder();
-  }
-
-  /**
-   * Bit-map of boolean {@link PaymentChannelClaimFlags} to set for this transaction.
-   *
-   * @return The {@link PaymentChannelClaimFlags} for this transaction.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default PaymentChannelClaimFlags flags() {
-    return PaymentChannelClaimFlags.empty();
-  }
-
-  /**
-   * The unique ID of the channel, as a {@link Hash256}.
-   *
-   * @return A {@link Hash256} representing the channel ID.
-   */
-  @JsonProperty("Channel")
-  Hash256 channel();
-
-  /**
-   * Total amount of XRP, in drops, delivered by this channel after processing this claim. Required to deliver XRP. Must
-   * be more than the total amount delivered by the channel so far, but not greater than the {@link #amount()} of the
-   * signed claim. Must be provided except when closing the channel.
-   *
-   * @return An {@link Optional} of type {@link XrpCurrencyAmount} representing the payment channel balance.
-   */
-  @JsonProperty("Balance")
-  Optional<XrpCurrencyAmount> balance();
-
-  /**
-   * The amount of XRP, in drops, authorized by the {@link #signature()}. This must match the amount in the signed
-   * message. This is the cumulative amount of XRP that can be dispensed by the channel, including XRP previously
-   * redeemed.
-   *
-   * @return An {@link Optional} of type {@link XrpCurrencyAmount} representing the payment channel amount.
-   */
-  @JsonProperty("Amount")
-  Optional<XrpCurrencyAmount> amount();
-
-  /**
-   * The signature of this claim, in hexadecimal form. The signed message contains the channel ID and the amount of the
-   * claim. Required unless the sender of the transaction is the source address of the channel.
-   *
-   * @return An {@link Optional} of type {@link String} containing the payment channel signature.
-   */
-  @JsonProperty("Signature")
-  Optional<String> signature();
-
-  /**
-   * The public key used for the {@link #signature()}, as hexadecimal. This must match the PublicKey stored in the
-   * ledger for the channel. Required unless the sender of the transaction is the source address of the channel and the
-   * {@link #signature()} field is omitted. (The transaction includes the public key so that rippled can check the
-   * validity of the signature before trying to apply the transaction to the ledger.)
-   *
-   * @return An {@link Optional} of type {@link String} containing the public key used to sign this payment channel.
-   */
-  @JsonProperty("PublicKey")
-  Optional<String> publicKey();
-
-  /**
-   * Set of Credentials to authorize a deposit made by this transaction. Each member of the array must be the ledger
-   * entry ID of a Credential entry in the ledger.
-   *
-   * @return A list of type {@link Hash256}.
-   */
-  @JsonProperty("CredentialIDs")
-  List<Hash256> credentialIds();
-
-  /**
-   * Validate {@link PaymentChannelClaim#credentialIds} has less than or equal to 8 credentials.
-   */
-  @Value.Check
-  default void validateCredentialIdsLength() {
-    if (!credentialIds().isEmpty()) {
-      Preconditions.checkArgument(
-        credentialIds().size() <= 8,
-        "CredentialIDs should have less than or equal to 8 items."
-      );
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutablePaymentChannelClaim.Builder}.
+     */
+    static ImmutablePaymentChannelClaim.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  /**
-   * Validate {@link PaymentChannelClaim#credentialIds} are unique.
-   */
-  @Value.Check
-  default void validateUniqueCredentialIds() {
-    if (!credentialIds().isEmpty()) {
-      Preconditions.checkArgument(
-        new HashSet<>(credentialIds()).size() == credentialIds().size(),
-        "CredentialIDs should have unique values."
-      );
+    /**
+     * Bit-map of boolean {@link PaymentChannelClaimFlags} to set for this transaction.
+     *
+     * @return The {@link PaymentChannelClaimFlags} for this transaction.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default PaymentChannelClaimFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    /**
+     * The unique ID of the channel, as a {@link Hash256}.
+     *
+     * @return A {@link Hash256} representing the channel ID.
+     */
+    @JsonProperty("Channel")
+    Hash256 channel();
+
+    /**
+     * Total amount of XRP, in drops, delivered by this channel after processing this claim. Required to deliver XRP. Must
+     * be more than the total amount delivered by the channel so far, but not greater than the {@link #amount()} of the
+     * signed claim. Must be provided except when closing the channel.
+     *
+     * @return An {@link Optional} of type {@link XrpCurrencyAmount} representing the payment channel balance.
+     */
+    @JsonProperty("Balance")
+    Optional<XrpCurrencyAmount> balance();
+
+    /**
+     * The amount of XRP, in drops, authorized by the {@link #signature()}. This must match the amount in the signed
+     * message. This is the cumulative amount of XRP that can be dispensed by the channel, including XRP previously
+     * redeemed.
+     *
+     * @return An {@link Optional} of type {@link XrpCurrencyAmount} representing the payment channel amount.
+     */
+    @JsonProperty("Amount")
+    Optional<XrpCurrencyAmount> amount();
+
+    /**
+     * The signature of this claim, in hexadecimal form. The signed message contains the channel ID and the amount of the
+     * claim. Required unless the sender of the transaction is the source address of the channel.
+     *
+     * @return An {@link Optional} of type {@link String} containing the payment channel signature.
+     */
+    @JsonProperty("Signature")
+    Optional<String> signature();
+
+    /**
+     * The public key used for the {@link #signature()}, as hexadecimal. This must match the PublicKey stored in the
+     * ledger for the channel. Required unless the sender of the transaction is the source address of the channel and the
+     * {@link #signature()} field is omitted. (The transaction includes the public key so that rippled can check the
+     * validity of the signature before trying to apply the transaction to the ledger.)
+     *
+     * @return An {@link Optional} of type {@link String} containing the public key used to sign this payment channel.
+     */
+    @JsonProperty("PublicKey")
+    Optional<String> publicKey();
+
+    /**
+     * Set of Credentials to authorize a deposit made by this transaction. Each member of the array must be the ledger
+     * entry ID of a Credential entry in the ledger.
+     *
+     * @return A list of type {@link Hash256}.
+     */
+    @JsonProperty("CredentialIDs")
+    List<Hash256> credentialIds();
+
+    /**
+     * Validate {@link PaymentChannelClaim#credentialIds} has less than or equal to 8 credentials.
+     */
+    @Value.Check
+    default void validateCredentialIdsLength() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Validate {@link PaymentChannelClaim#credentialIds} are unique.
+     */
+    @Value.Check
+    default void validateUniqueCredentialIds() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

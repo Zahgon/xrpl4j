@@ -13,7 +13,6 @@ import org.xrpl.xrpl4j.model.ledger.LedgerObject;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.CurrencyAmount;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -35,206 +34,204 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableBookOffersOffer.class)
 public interface BookOffersOffer {
 
-  /**
-   * Construct a {@code BookOffersOffer} builder.
-   *
-   * @return An {@link ImmutableBookOffersOffer.Builder}.
-   */
-  static ImmutableBookOffersOffer.Builder builder() {
-    return ImmutableBookOffersOffer.builder();
-  }
+    /**
+     * Construct a {@code BookOffersOffer} builder.
+     *
+     * @return An {@link ImmutableBookOffersOffer.Builder}.
+     */
+    static ImmutableBookOffersOffer.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The value 0x006F, mapped to the string "Offer", indicates that this object is a
-   * {@link org.xrpl.xrpl4j.model.ledger.OfferObject} object.
-   *
-   * @return Always {@link org.xrpl.xrpl4j.model.ledger.LedgerObject.LedgerEntryType#OFFER}.
-   */
-  @JsonProperty("LedgerEntryType")
-  @Value.Derived
-  default LedgerObject.LedgerEntryType ledgerEntryType() {
-    return LedgerObject.LedgerEntryType.OFFER;
-  }
+    /**
+     * The value 0x006F, mapped to the string "Offer", indicates that this object is a
+     * {@link org.xrpl.xrpl4j.model.ledger.OfferObject} object.
+     *
+     * @return Always {@link org.xrpl.xrpl4j.model.ledger.LedgerObject.LedgerEntryType#OFFER}.
+     */
+    @JsonProperty("LedgerEntryType")
+    @Value.Derived
+    default LedgerObject.LedgerEntryType ledgerEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The sender of the {@link org.xrpl.xrpl4j.model.ledger.OfferObject}. Cashing the
-   * {@link org.xrpl.xrpl4j.model.ledger.OfferObject} debits this address's balance.
-   *
-   * @return The {@link Address} of the offer sender.
-   */
-  @JsonProperty("Account")
-  Address account();
+    /**
+     * The sender of the {@link org.xrpl.xrpl4j.model.ledger.OfferObject}. Cashing the
+     * {@link org.xrpl.xrpl4j.model.ledger.OfferObject} debits this address's balance.
+     *
+     * @return The {@link Address} of the offer sender.
+     */
+    @JsonProperty("Account")
+    Address account();
 
-  /**
-   * A bit-map of boolean flags.
-   *
-   * @return A {@link OfferFlags}.
-   */
-  @JsonProperty("Flags")
-  OfferFlags flags();
+    /**
+     * A bit-map of boolean flags.
+     *
+     * @return A {@link OfferFlags}.
+     */
+    @JsonProperty("Flags")
+    OfferFlags flags();
 
-  /**
-   * The sequence number of the {@link org.xrpl.xrpl4j.model.transactions.OfferCreate} transaction that created this
-   * offer.
-   *
-   * @return An {@link UnsignedInteger} representing the sequence number.
-   */
-  @JsonProperty("Sequence")
-  UnsignedInteger sequence();
+    /**
+     * The sequence number of the {@link org.xrpl.xrpl4j.model.transactions.OfferCreate} transaction that created this
+     * offer.
+     *
+     * @return An {@link UnsignedInteger} representing the sequence number.
+     */
+    @JsonProperty("Sequence")
+    UnsignedInteger sequence();
 
-  /**
-   * The remaining amount and type of currency requested by the offer creator.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("TakerPays")
-  CurrencyAmount takerPays();
+    /**
+     * The remaining amount and type of currency requested by the offer creator.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("TakerPays")
+    CurrencyAmount takerPays();
 
+    /**
+     * The remaining amount and type of currency being provided by the offer creator.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("TakerGets")
+    CurrencyAmount takerGets();
 
-  /**
-   * The remaining amount and type of currency being provided by the offer creator.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("TakerGets")
-  CurrencyAmount takerGets();
+    /**
+     * The ID of the Offer Directory that links to this offer.
+     *
+     * @return A {@link Hash256} containing the ID.
+     */
+    @JsonProperty("BookDirectory")
+    Hash256 bookDirectory();
 
+    /**
+     * A hint indicating which page of the offer directory links to this object, in case the directory consists of
+     * multiple pages.
+     *
+     * @return A {@link String} containing the hint.
+     */
+    @JsonProperty("BookNode")
+    String bookNode();
 
-  /**
-   * The ID of the Offer Directory that links to this offer.
-   *
-   * @return A {@link Hash256} containing the ID.
-   */
-  @JsonProperty("BookDirectory")
-  Hash256 bookDirectory();
+    /**
+     * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
+     * of multiple pages. Note: The object does not contain a direct link to the owner directory containing it, since that
+     * value can be derived from the Account.
+     *
+     * @return A {@link String} containing the hint.
+     */
+    @JsonProperty("OwnerNode")
+    String ownerNode();
 
-  /**
-   * A hint indicating which page of the offer directory links to this object, in case the directory consists of
-   * multiple pages.
-   *
-   * @return A {@link String} containing the hint.
-   */
-  @JsonProperty("BookNode")
-  String bookNode();
+    /**
+     * The identifying hash of the transaction that most recently modified this object.
+     *
+     * @return A {@link Hash256} containing the previous transaction hash.
+     */
+    @JsonProperty("PreviousTxnID")
+    Hash256 previousTransactionId();
 
-  /**
-   * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
-   * of multiple pages. Note: The object does not contain a direct link to the owner directory containing it, since that
-   * value can be derived from the Account.
-   *
-   * @return A {@link String} containing the hint.
-   */
-  @JsonProperty("OwnerNode")
-  String ownerNode();
+    /**
+     * The index of the ledger that contains the transaction that most recently modified this object.
+     *
+     * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    UnsignedInteger previousTransactionLedgerSequence();
 
-  /**
-   * The identifying hash of the transaction that most recently modified this object.
-   *
-   * @return A {@link Hash256} containing the previous transaction hash.
-   */
-  @JsonProperty("PreviousTxnID")
-  Hash256 previousTransactionId();
+    /**
+     * Indicates the time after which this offer is considered expired, in
+     * <a href="https://xrpl.org/basic-data-types.html#specifying-time">seconds since the Ripple Epoch</a>.
+     *
+     * @return An {@link Optional} of type {@link UnsignedInteger} representing the expiration of this offer.
+     */
+    @JsonProperty("Expiration")
+    Optional<UnsignedInteger> expiration();
 
-  /**
-   * The index of the ledger that contains the transaction that most recently modified this object.
-   *
-   * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  UnsignedInteger previousTransactionLedgerSequence();
+    /**
+     * The unique ID of the {@link org.xrpl.xrpl4j.model.ledger.OfferObject}.
+     *
+     * @return A {@link Hash256} containing the ID.
+     */
+    Hash256 index();
 
-  /**
-   * Indicates the time after which this offer is considered expired, in
-   * <a href="https://xrpl.org/basic-data-types.html#specifying-time">seconds since the Ripple Epoch</a>.
-   *
-   * @return An {@link Optional} of type {@link UnsignedInteger} representing the expiration of this offer.
-   */
-  @JsonProperty("Expiration")
-  Optional<UnsignedInteger> expiration();
+    /**
+     * Amount of the TakerGets currency the side placing the offer has available to be traded. (XRP is represented as
+     * drops; any other currency is represented as a decimal value.) If a trader has multiple offers in the same book,
+     * only the highest-ranked offer includes this field.
+     *
+     * <p>Use {@link #ownerFunds()} to get this value as a {@link BigDecimal}.
+     *
+     * @return An {@link Optional} {@link String}.
+     */
+    @JsonProperty("owner_funds")
+    Optional<String> ownerFundsString();
 
-  /**
-   * The unique ID of the {@link org.xrpl.xrpl4j.model.ledger.OfferObject}.
-   *
-   * @return A {@link Hash256} containing the ID.
-   */
-  Hash256 index();
+    /**
+     * Gets the value of {@link #ownerFundsString()} as a {@link BigDecimal}.
+     *
+     * @return An {@link Optional} {@link BigDecimal}.
+     */
+    @Value.Derived
+    @JsonIgnore
+    default Optional<BigDecimal> ownerFunds() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Amount of the TakerGets currency the side placing the offer has available to be traded. (XRP is represented as
-   * drops; any other currency is represented as a decimal value.) If a trader has multiple offers in the same book,
-   * only the highest-ranked offer includes this field.
-   *
-   * <p>Use {@link #ownerFunds()} to get this value as a {@link BigDecimal}.
-   *
-   * @return An {@link Optional} {@link String}.
-   */
-  @JsonProperty("owner_funds")
-  Optional<String> ownerFundsString();
+    /**
+     * The maximum amount of currency that the taker can get, given the funding status of the offer.
+     *
+     * @return An {@link Optional} {@link CurrencyAmount}. Only present in partially funded offers.
+     */
+    @JsonProperty("taker_gets_funded")
+    Optional<CurrencyAmount> takerGetsFunded();
 
-  /**
-   * Gets the value of {@link #ownerFundsString()} as a {@link BigDecimal}.
-   *
-   * @return An {@link Optional} {@link BigDecimal}.
-   */
-  @Value.Derived
-  @JsonIgnore
-  default Optional<BigDecimal> ownerFunds() {
-    return ownerFundsString().map(BigDecimal::new);
-  }
+    /**
+     * The maximum amount of currency that the taker would pay, given the funding status of the offer.
+     *
+     * @return An {@link Optional} {@link CurrencyAmount}. Only present in partially funded offers.
+     */
+    @JsonProperty("taker_pays_funded")
+    Optional<CurrencyAmount> takerPaysFunded();
 
-  /**
-   * The maximum amount of currency that the taker can get, given the funding status of the offer.
-   *
-   * @return An {@link Optional} {@link CurrencyAmount}. Only present in partially funded offers.
-   */
-  @JsonProperty("taker_gets_funded")
-  Optional<CurrencyAmount> takerGetsFunded();
+    /**
+     * The exchange rate, as the ratio {@link #takerPays()} divided by {@link #takerGets()}. For fairness, offers that
+     * have the same quality are automatically taken first-in, first-out. (In other words, if multiple people offer to
+     * exchange currency at the same rate, the oldest offer is taken first.)
+     *
+     * <p>Use {@link #quality()} to get this value as a {@link BigDecimal}.
+     *
+     * @return A {@link String} containing the quality.
+     */
+    @JsonProperty("quality")
+    String qualityString();
 
-  /**
-   * The maximum amount of currency that the taker would pay, given the funding status of the offer.
-   *
-   * @return An {@link Optional} {@link CurrencyAmount}. Only present in partially funded offers.
-   */
-  @JsonProperty("taker_pays_funded")
-  Optional<CurrencyAmount> takerPaysFunded();
+    /**
+     * Get the value of {@link #qualityString()} as a {@link BigDecimal}.
+     *
+     * @return A {@link BigDecimal}.
+     */
+    @Value.Derived
+    @JsonIgnore
+    default BigDecimal quality() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The exchange rate, as the ratio {@link #takerPays()} divided by {@link #takerGets()}. For fairness, offers that
-   * have the same quality are automatically taken first-in, first-out. (In other words, if multiple people offer to
-   * exchange currency at the same rate, the oldest offer is taken first.)
-   *
-   * <p>Use {@link #quality()} to get this value as a {@link BigDecimal}.
-   *
-   * @return A {@link String} containing the quality.
-   */
-  @JsonProperty("quality")
-  String qualityString();
+    /**
+     * The permissioned domain that the offer is part of.
+     *
+     * @return A {@link Hash256} representing DomainID.
+     */
+    @JsonProperty("DomainID")
+    Optional<Hash256> domainId();
 
-  /**
-   * Get the value of {@link #qualityString()} as a {@link BigDecimal}.
-   *
-   * @return A {@link BigDecimal}.
-   */
-  @Value.Derived
-  @JsonIgnore
-  default BigDecimal quality() {
-    return new BigDecimal(qualityString());
-  }
-
-  /**
-   * The permissioned domain that the offer is part of.
-   *
-   * @return A {@link Hash256} representing DomainID.
-   */
-  @JsonProperty("DomainID")
-  Optional<Hash256> domainId();
-
-  /**
-   * An additional list of order book directories that this offer belongs to. Currently, this field only applicable to
-   * hybrid offers.
-   *
-   * @return A list of {@link BookWrapper} representing order book directories.
-   */
-  @JsonProperty("AdditionalBooks")
-  List<BookWrapper> additionalBooks();
+    /**
+     * An additional list of order book directories that this offer belongs to. Currently, this field only applicable to
+     * hybrid offers.
+     *
+     * @return A list of {@link BookWrapper} representing order book directories.
+     */
+    @JsonProperty("AdditionalBooks")
+    List<BookWrapper> additionalBooks();
 }

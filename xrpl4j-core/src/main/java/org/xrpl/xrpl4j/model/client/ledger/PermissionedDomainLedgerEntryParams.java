@@ -16,28 +16,28 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @JsonDeserialize(as = ImmutablePermissionedDomainLedgerEntryParams.class)
 public interface PermissionedDomainLedgerEntryParams {
 
-  /**
-   * Construct a {@code PermissionedDomainLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutablePermissionedDomainLedgerEntryParams.Builder}.
-   */
-  static ImmutablePermissionedDomainLedgerEntryParams.Builder builder() {
-    return ImmutablePermissionedDomainLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code PermissionedDomainLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutablePermissionedDomainLedgerEntryParams.Builder}.
+     */
+    static ImmutablePermissionedDomainLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The owner of the permissioned domain.
-   *
-   * @return The unique {@link Address} of the owner of this
-   *   {@link org.xrpl.xrpl4j.model.ledger.PermissionedDomainObject}.
-   */
-  Address account();
+    /**
+     * The owner of the permissioned domain.
+     *
+     * @return The unique {@link Address} of the owner of this
+     *   {@link org.xrpl.xrpl4j.model.ledger.PermissionedDomainObject}.
+     */
+    Address account();
 
-  /**
-   * The Sequence Number of the transaction that created the
-   * {@link org.xrpl.xrpl4j.model.ledger.PermissionedDomainObject}.
-   *
-   * @return An {@link UnsignedInteger} representing transaction sequence.
-   */
-  UnsignedInteger seq();
+    /**
+     * The Sequence Number of the transaction that created the
+     * {@link org.xrpl.xrpl4j.model.ledger.PermissionedDomainObject}.
+     *
+     * @return An {@link UnsignedInteger} representing transaction sequence.
+     */
+    UnsignedInteger seq();
 }

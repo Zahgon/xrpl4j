@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.client.common;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.google.common.base.Preconditions;
 import com.google.common.primitives.UnsignedInteger;
 import com.google.common.primitives.UnsignedLong;
 import org.xrpl.xrpl4j.model.immutables.FluentCompareTo;
-
 import java.util.Objects;
 
 /**
@@ -34,120 +32,104 @@ import java.util.Objects;
  */
 public class LedgerIndex {
 
-  private final UnsignedInteger value;
+    private final UnsignedInteger value;
 
-  /**
-   * Public constructor.
-   *
-   * @param value The ledger index value as a {@link String}.
-   */
-  private LedgerIndex(UnsignedInteger value) {
-    this.value = value;
-  }
-
-  /**
-   * Construct a {@link LedgerIndex} from an {@link UnsignedInteger}.
-   *
-   * @param value An {@link UnsignedInteger} specifying a ledger index.
-   *
-   * @return A {@link LedgerIndex} with the given value.
-   *
-   * @throws NullPointerException if value is null
-   */
-  public static LedgerIndex of(UnsignedInteger value) {
-    Objects.requireNonNull(value);
-    return new LedgerIndex(value);
-  }
-
-  /**
-   * Accessor for an unsigned integer value.
-   *
-   * @return A {@link UnsignedInteger}.
-   */
-  public UnsignedInteger unsignedIntegerValue() {
-    return value;
-  }
-
-  /**
-   * Add an {@link UnsignedInteger} to this {@link LedgerIndex}.
-   *
-   * @param other The {@link UnsignedInteger} to add to this {@link LedgerIndex}.
-   *
-   * @return The sum of the {@link UnsignedInteger} and this {@link LedgerIndex}'s {@link UnsignedInteger} value.
-   */
-  public LedgerIndex plus(UnsignedInteger other) {
-    checkAdditionOverflow(other);
-    return LedgerIndex.of(unsignedIntegerValue().plus(other));
-  }
-
-  /**
-   * Add another {@link LedgerIndex} to this {@link LedgerIndex}.
-   *
-   * @param other The {@link LedgerIndex} to add to this {@link LedgerIndex}.
-   *
-   * @return The sum of the {@link LedgerIndex}' and this {@link LedgerIndex}'s {@link UnsignedLong} value.
-   */
-  public LedgerIndex plus(LedgerIndex other) {
-    return plus(other.unsignedIntegerValue());
-  }
-
-  /**
-   * Subtract a {@link LedgerIndex} from this {@link LedgerIndex}.
-   *
-   * @param other Another {@link LedgerIndex} to subtract.
-   *
-   * @return A {@link LedgerIndex} wrapping the difference of the two wrapped {@link UnsignedLong} values of this {@link
-   *   LedgerIndex} and {@code other}.
-   */
-  public LedgerIndex minus(LedgerIndex other) {
-    return minus(other.unsignedIntegerValue());
-  }
-
-  /**
-   * Subtract an {@link UnsignedInteger} from this {@link LedgerIndex}.
-   *
-   * @param value An {@link UnsignedInteger} to subtract.
-   *
-   * @return A {@link LedgerIndex} wrapping the difference of this {@link LedgerIndex}'s value and {@code value}.
-   */
-  public LedgerIndex minus(UnsignedInteger value) {
-    checkSubtractionOverflow(value);
-    return LedgerIndex.of(this.unsignedIntegerValue().minus(value));
-  }
-
-  private void checkAdditionOverflow(UnsignedInteger addedValue) {
-    Preconditions.checkArgument(
-      FluentCompareTo.is(UnsignedInteger.MAX_VALUE.minus(addedValue)).greaterThanEqualTo(this.unsignedIntegerValue()),
-      String.format("Value too large. Adding %s would cause an overflow.", addedValue)
-    );
-  }
-
-  private void checkSubtractionOverflow(UnsignedInteger subtractedValue) {
-    Preconditions.checkArgument(
-      FluentCompareTo.is(subtractedValue).lessThanOrEqualTo(this.unsignedIntegerValue()),
-      String.format("Value too large. Subtracting %s would cause an overflow.", subtractedValue)
-    );
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
+    /**
+     * Public constructor.
+     *
+     * @param value The ledger index value as a {@link String}.
+     */
+    private LedgerIndex(UnsignedInteger value) {
+        this.value = value;
     }
-    if (!(obj instanceof LedgerIndex)) {
-      return false;
+
+    /**
+     * Construct a {@link LedgerIndex} from an {@link UnsignedInteger}.
+     *
+     * @param value An {@link UnsignedInteger} specifying a ledger index.
+     *
+     * @return A {@link LedgerIndex} with the given value.
+     *
+     * @throws NullPointerException if value is null
+     */
+    public static LedgerIndex of(UnsignedInteger value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    LedgerIndex that = (LedgerIndex) obj;
-    return Objects.equals(value, that.value);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(value);
-  }
+    /**
+     * Accessor for an unsigned integer value.
+     *
+     * @return A {@link UnsignedInteger}.
+     */
+    public UnsignedInteger unsignedIntegerValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public String toString() {
-    return this.value.toString();
-  }
+    /**
+     * Add an {@link UnsignedInteger} to this {@link LedgerIndex}.
+     *
+     * @param other The {@link UnsignedInteger} to add to this {@link LedgerIndex}.
+     *
+     * @return The sum of the {@link UnsignedInteger} and this {@link LedgerIndex}'s {@link UnsignedInteger} value.
+     */
+    public LedgerIndex plus(UnsignedInteger other) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Add another {@link LedgerIndex} to this {@link LedgerIndex}.
+     *
+     * @param other The {@link LedgerIndex} to add to this {@link LedgerIndex}.
+     *
+     * @return The sum of the {@link LedgerIndex}' and this {@link LedgerIndex}'s {@link UnsignedLong} value.
+     */
+    public LedgerIndex plus(LedgerIndex other) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Subtract a {@link LedgerIndex} from this {@link LedgerIndex}.
+     *
+     * @param other Another {@link LedgerIndex} to subtract.
+     *
+     * @return A {@link LedgerIndex} wrapping the difference of the two wrapped {@link UnsignedLong} values of this {@link
+     *   LedgerIndex} and {@code other}.
+     */
+    public LedgerIndex minus(LedgerIndex other) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Subtract an {@link UnsignedInteger} from this {@link LedgerIndex}.
+     *
+     * @param value An {@link UnsignedInteger} to subtract.
+     *
+     * @return A {@link LedgerIndex} wrapping the difference of this {@link LedgerIndex}'s value and {@code value}.
+     */
+    public LedgerIndex minus(UnsignedInteger value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    private void checkAdditionOverflow(UnsignedInteger addedValue) {
+        Preconditions.checkArgument(FluentCompareTo.is(UnsignedInteger.MAX_VALUE.minus(addedValue)).greaterThanEqualTo(this.unsignedIntegerValue()), String.format("Value too large. Adding %s would cause an overflow.", addedValue));
+    }
+
+    private void checkSubtractionOverflow(UnsignedInteger subtractedValue) {
+        Preconditions.checkArgument(FluentCompareTo.is(subtractedValue).lessThanOrEqualTo(this.unsignedIntegerValue()), String.format("Value too large. Subtracting %s would cause an overflow.", subtractedValue));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

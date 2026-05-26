@@ -19,11 +19,9 @@ package org.xrpl.xrpl4j.crypto.keys;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.codec.addresses.Base58;
 import org.xrpl.xrpl4j.codec.addresses.UnsignedByteArray;
-
 import java.util.Objects;
 
 /**
@@ -32,44 +30,40 @@ import java.util.Objects;
 @Value.Immutable
 public interface Base58EncodedSecret {
 
-  /**
-   * Instantiates a new builder.
-   *
-   * @return A {@link ImmutableBase58EncodedSecret.Builder}.
-   */
-  static ImmutableBase58EncodedSecret.Builder builder() {
-    return ImmutableBase58EncodedSecret.builder();
-  }
+    /**
+     * Instantiates a new builder.
+     *
+     * @return A {@link ImmutableBase58EncodedSecret.Builder}.
+     */
+    static ImmutableBase58EncodedSecret.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Construct a {@link Base58EncodedSecret} from a base58-encoded {@link String}.
-   *
-   * @param base58EncodedSecret A base58-encoded {@link String}.
-   *
-   * @return A {@link Base58EncodedSecret}.
-   */
-  static Base58EncodedSecret of(final String base58EncodedSecret) {
-    Objects.requireNonNull(base58EncodedSecret);
-    return Base58EncodedSecret.builder()
-      .value(base58EncodedSecret)
-      .build();
-  }
+    /**
+     * Construct a {@link Base58EncodedSecret} from a base58-encoded {@link String}.
+     *
+     * @param base58EncodedSecret A base58-encoded {@link String}.
+     *
+     * @return A {@link Base58EncodedSecret}.
+     */
+    static Base58EncodedSecret of(final String base58EncodedSecret) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The value of Base58 Encoded Secret.
-   *
-   * @return An instance of {@link String}.
-   */
-  String value();
+    /**
+     * The value of Base58 Encoded Secret.
+     *
+     * @return An instance of {@link String}.
+     */
+    String value();
 
-  /**
-   * The decoded value of Base58 Encoded Secret.
-   *
-   * @return An instance of {@link UnsignedByteArray}.
-   */
-  @Value.Derived
-  default UnsignedByteArray decodedValueBytes() {
-    return UnsignedByteArray.of(Base58.decode(value()));
-  }
-
+    /**
+     * The decoded value of Base58 Encoded Secret.
+     *
+     * @return An instance of {@link UnsignedByteArray}.
+     */
+    @Value.Derived
+    default UnsignedByteArray decodedValueBytes() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

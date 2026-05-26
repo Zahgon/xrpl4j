@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -27,7 +26,6 @@ import com.google.common.primitives.UnsignedInteger;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 import org.xrpl.xrpl4j.model.ledger.SignerEntryWrapper;
-
 import java.util.List;
 
 /**
@@ -39,48 +37,47 @@ import java.util.List;
 @JsonDeserialize(as = ImmutableSignerListSet.class)
 public interface SignerListSet extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableSignerListSet.Builder}.
-   */
-  static ImmutableSignerListSet.Builder builder() {
-    return ImmutableSignerListSet.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableSignerListSet.Builder}.
+     */
+    static ImmutableSignerListSet.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link SignerListSet}, which only allows the {@code tfFullyCanonicalSig}
-   * flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link SignerListSet}, which only allows the {@code tfFullyCanonicalSig}
+     * flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A target number for the signer weights. A multi-signature from this list is valid only if the sum weights of the
-   * signatures provided is greater than or equal to this value. To delete a signer list, use the value 0.
-   *
-   * @return An {@link UnsignedInteger} representing the singer quorum.
-   */
-  @JsonProperty("SignerQuorum")
-  UnsignedInteger signerQuorum();
+    /**
+     * A target number for the signer weights. A multi-signature from this list is valid only if the sum weights of the
+     * signatures provided is greater than or equal to this value. To delete a signer list, use the value 0.
+     *
+     * @return An {@link UnsignedInteger} representing the singer quorum.
+     */
+    @JsonProperty("SignerQuorum")
+    UnsignedInteger signerQuorum();
 
-  /**
-   * (Omitted when deleting) Array of {@link org.xrpl.xrpl4j.model.ledger.SignerEntry} objects, indicating the addresses
-   * and weights of signers in this list. This signer list must have at least 1 member and no more than 8 members. No
-   * {@link Address} may appear more than once in the list, nor may the {@link #account()} submitting the transaction
-   * appear in the list.
-   *
-   * @return A {@link List} of {@link SignerEntryWrapper}s.
-   */
-  @JsonProperty("SignerEntries")
-  List<SignerEntryWrapper> signerEntries();
-
+    /**
+     * (Omitted when deleting) Array of {@link org.xrpl.xrpl4j.model.ledger.SignerEntry} objects, indicating the addresses
+     * and weights of signers in this list. This signer list must have at least 1 member and no more than 8 members. No
+     * {@link Address} may appear more than once in the list, nor may the {@link #account()} submitting the transaction
+     * appear in the list.
+     *
+     * @return A {@link List} of {@link SignerEntryWrapper}s.
+     */
+    @JsonProperty("SignerEntries")
+    List<SignerEntryWrapper> signerEntries();
 }

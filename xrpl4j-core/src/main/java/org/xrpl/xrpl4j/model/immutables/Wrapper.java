@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.immutables;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.immutables.value.Value;
 
 /**
@@ -29,38 +28,31 @@ import org.immutables.value.Value;
  */
 public abstract class Wrapper<T extends Comparable<T>> implements Comparable<Wrapper<T>> {
 
-  /**
-   * The wrapped value.
-   *
-   * @return The wrapped value.
-   */
-  @Value.Parameter
-  public abstract T value();
+    /**
+     * The wrapped value.
+     *
+     * @return The wrapped value.
+     */
+    @Value.Parameter
+    public abstract T value();
 
-  @Override
-  public int compareTo(Wrapper<T> otherWrapped) {
-    return value().compareTo(otherWrapped.value());
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-
-    if (obj != null && obj instanceof Wrapper) {
-      Object otherValue = ((Wrapper) obj).value();
-      if (otherValue != null) {
-        return otherValue.equals(value());
-      }
+    @Override
+    public int compareTo(Wrapper<T> otherWrapped) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return false;
-  }
 
-  @Override
-  public int hashCode() {
-    return value().hashCode();
-  }
+    @Override
+    public boolean equals(Object obj) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public String toString() {
-    return getClass().getSimpleName() + "(" + value() + ")";
-  }
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

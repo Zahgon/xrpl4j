@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -34,30 +33,29 @@ import org.xrpl.xrpl4j.model.transactions.Hash256;
 @JsonDeserialize(as = ImmutableBook.class)
 public interface Book {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableBook.Builder}.
-   */
-  static ImmutableBook.Builder builder() {
-    return ImmutableBook.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableBook.Builder}.
+     */
+    static ImmutableBook.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ID of the Offer Directory that links to this offer.
-   *
-   * @return A {@link Hash256} containing the ID.
-   */
-  @JsonProperty("BookDirectory")
-  Hash256 bookDirectory();
+    /**
+     * The ID of the Offer Directory that links to this offer.
+     *
+     * @return A {@link Hash256} containing the ID.
+     */
+    @JsonProperty("BookDirectory")
+    Hash256 bookDirectory();
 
-  /**
-   * A hint indicating which page of the offer directory links to this object, in case the directory consists of
-   * multiple pages.
-   *
-   * @return A {@link String} containing the hint.
-   */
-  @JsonProperty("BookNode")
-  String bookNode();
-
+    /**
+     * A hint indicating which page of the offer directory links to this object, in case the directory consists of
+     * multiple pages.
+     *
+     * @return A {@link String} containing the hint.
+     */
+    @JsonProperty("BookNode")
+    String bookNode();
 }

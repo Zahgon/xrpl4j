@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.accounts;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -31,7 +30,6 @@ import org.xrpl.xrpl4j.model.transactions.CurrencyAmount;
 import org.xrpl.xrpl4j.model.transactions.NfTokenId;
 import org.xrpl.xrpl4j.model.transactions.NfTokenUri;
 import org.xrpl.xrpl4j.model.transactions.TransferFee;
-
 import java.util.Optional;
 
 /**
@@ -42,70 +40,70 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableNfTokenObject.class)
 public interface NfTokenObject {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableNfTokenObject.Builder}.
-   */
-  static ImmutableNfTokenObject.Builder builder() {
-    return ImmutableNfTokenObject.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableNfTokenObject.Builder}.
+     */
+    static ImmutableNfTokenObject.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The unique NFTokenID of the token.
-   *
-   * @return The unique NFTokenID of the token.
-   */
-  @JsonProperty("NFTokenID")
-  NfTokenId nfTokenId();
+    /**
+     * The unique NFTokenID of the token.
+     *
+     * @return The unique NFTokenID of the token.
+     */
+    @JsonProperty("NFTokenID")
+    NfTokenId nfTokenId();
 
-  /**
-   * The URI for the data of the token.
-   *
-   * @return The URI for the data of the token.
-   */
-  @JsonProperty("URI")
-  Optional<NfTokenUri> uri();
+    /**
+     * The URI for the data of the token.
+     *
+     * @return The URI for the data of the token.
+     */
+    @JsonProperty("URI")
+    Optional<NfTokenUri> uri();
 
-  /**
-   * A bit-map of boolean flags enabled for this NFToken.
-   *
-   * @return An {@link NfTokenFlags} for this NFToken.
-   */
-  @JsonProperty("Flags")
-  NfTokenFlags flags();
+    /**
+     * A bit-map of boolean flags enabled for this NFToken.
+     *
+     * @return An {@link NfTokenFlags} for this NFToken.
+     */
+    @JsonProperty("Flags")
+    NfTokenFlags flags();
 
-  /**
-   * The account that issued this NFToken.
-   *
-   * @return The {@link Address} of the issuer.
-   */
-  @JsonProperty("Issuer")
-  Address issuer();
+    /**
+     * The account that issued this NFToken.
+     *
+     * @return The {@link Address} of the issuer.
+     */
+    @JsonProperty("Issuer")
+    Address issuer();
 
-  /**
-   * The unscrambled version of this token's taxon. Several tokens with the same taxon might represent instances of a
-   * limited series.
-   *
-   * @return An {@link UnsignedInteger} representing the taxon.
-   */
-  @JsonProperty("NFTokenTaxon")
-  UnsignedInteger taxon();
+    /**
+     * The unscrambled version of this token's taxon. Several tokens with the same taxon might represent instances of a
+     * limited series.
+     *
+     * @return An {@link UnsignedInteger} representing the taxon.
+     */
+    @JsonProperty("NFTokenTaxon")
+    UnsignedInteger taxon();
 
-  /**
-   * The token sequence number of this NFToken, which is unique for its issuer.
-   *
-   * @return An {@link UnsignedInteger} representing the sequence.
-   */
-  @JsonProperty("nft_serial")
-  UnsignedInteger nftSerial();
+    /**
+     * The token sequence number of this NFToken, which is unique for its issuer.
+     *
+     * @return An {@link UnsignedInteger} representing the sequence.
+     */
+    @JsonProperty("nft_serial")
+    UnsignedInteger nftSerial();
 
-  /**
-   * Specifies the fee charged by the issuer for secondary sales of the Token,
-   * if such sales are allowed. This field will only be present if the `lsfTransferable` flag is set.
-   *
-   * @return An {@link Optional} {@link TransferFee}.
-   */
-  @JsonProperty("TransferFee")
-  Optional<TransferFee> transferFee();
+    /**
+     * Specifies the fee charged by the issuer for secondary sales of the Token,
+     * if such sales are allowed. This field will only be present if the `lsfTransferable` flag is set.
+     *
+     * @return An {@link Optional} {@link TransferFee}.
+     */
+    @JsonProperty("TransferFee")
+    Optional<TransferFee> transferFee();
 }

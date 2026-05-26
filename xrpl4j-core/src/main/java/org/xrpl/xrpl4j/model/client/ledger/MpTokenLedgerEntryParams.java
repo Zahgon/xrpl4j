@@ -16,28 +16,27 @@ import org.xrpl.xrpl4j.model.transactions.MpTokenIssuanceId;
 @JsonDeserialize(as = ImmutableMpTokenLedgerEntryParams.class)
 public interface MpTokenLedgerEntryParams {
 
-  /**
-   * Construct a {@code MpTokenLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableMpTokenLedgerEntryParams.Builder}.
-   */
-  static ImmutableMpTokenLedgerEntryParams.Builder builder() {
-    return ImmutableMpTokenLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code MpTokenLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableMpTokenLedgerEntryParams.Builder}.
+     */
+    static ImmutableMpTokenLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link MpTokenIssuanceId} of the issuance.
-   *
-   * @return An {@link MpTokenIssuanceId}.
-   */
-  @JsonProperty("mpt_issuance_id")
-  MpTokenIssuanceId mpTokenIssuanceId();
+    /**
+     * The {@link MpTokenIssuanceId} of the issuance.
+     *
+     * @return An {@link MpTokenIssuanceId}.
+     */
+    @JsonProperty("mpt_issuance_id")
+    MpTokenIssuanceId mpTokenIssuanceId();
 
-  /**
-   * The account that owns the {@link org.xrpl.xrpl4j.model.ledger.MpTokenObject}.
-   *
-   * @return An {@link Address}.
-   */
-  Address account();
-
+    /**
+     * The account that owns the {@link org.xrpl.xrpl4j.model.ledger.MpTokenObject}.
+     *
+     * @return An {@link Address}.
+     */
+    Address account();
 }

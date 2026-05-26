@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import org.xrpl.xrpl4j.model.transactions.CredentialType;
-
 import java.io.IOException;
 
 /**
@@ -32,15 +30,15 @@ import java.io.IOException;
  */
 public class CredentialTypeSerializer extends StdScalarSerializer<CredentialType> {
 
-  /**
-   * No-args constructor.
-   */
-  public CredentialTypeSerializer() {
-    super(CredentialType.class, false);
-  }
+    /**
+     * No-args constructor.
+     */
+    public CredentialTypeSerializer() {
+        super(CredentialType.class, false);
+    }
 
-  @Override
-  public void serialize(CredentialType credType, JsonGenerator gen, SerializerProvider provider) throws IOException {
-    gen.writeString(credType.value());
-  }
+    @Override
+    public void serialize(CredentialType credType, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

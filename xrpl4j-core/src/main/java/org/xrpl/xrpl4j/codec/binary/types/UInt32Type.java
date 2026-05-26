@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.codec.binary.types;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.LongNode;
 import com.google.common.primitives.UnsignedLong;
@@ -30,26 +29,26 @@ import org.xrpl.xrpl4j.codec.binary.serdes.BinaryParser;
  */
 public class UInt32Type extends UIntType<UInt32Type> {
 
-  public UInt32Type() {
-    this(UnsignedLong.ZERO);
-  }
+    public UInt32Type() {
+        this(UnsignedLong.ZERO);
+    }
 
-  public UInt32Type(UnsignedLong value) {
-    super(value, 32);
-  }
+    public UInt32Type(UnsignedLong value) {
+        super(value, 32);
+    }
 
-  @Override
-  public UInt32Type fromParser(BinaryParser parser) {
-    return new UInt32Type(parser.readUInt32());
-  }
+    @Override
+    public UInt32Type fromParser(BinaryParser parser) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public UInt32Type fromJson(JsonNode value) {
-    return new UInt32Type(UnsignedLong.valueOf(value.asText()));
-  }
+    @Override
+    public UInt32Type fromJson(JsonNode value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public JsonNode toJson() {
-    return new LongNode(UnsignedLong.valueOf(toHex(), 16).longValue());
-  }
+    @Override
+    public JsonNode toJson() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

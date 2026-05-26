@@ -21,41 +21,40 @@ import org.xrpl.xrpl4j.model.ledger.Issue;
 @Beta
 public interface AmmDelete extends Transaction {
 
-  /**
-   * Construct a {@code AmmDelete} builder.
-   *
-   * @return An {@link ImmutableAmmDelete.Builder}.
-   */
-  static ImmutableAmmDelete.Builder builder() {
-    return ImmutableAmmDelete.builder();
-  }
+    /**
+     * Construct a {@code AmmDelete} builder.
+     *
+     * @return An {@link ImmutableAmmDelete.Builder}.
+     */
+    static ImmutableAmmDelete.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link AmmDelete}, which only allows the {@code tfFullyCanonicalSig}
-   * flag, which is deprecated.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link AmmDelete}, which only allows the {@code tfFullyCanonicalSig}
+     * flag, which is deprecated.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The definition for one of the assets in the AMM's pool.
-   *
-   * @return An {@link Issue}.
-   */
-  @JsonProperty("Asset")
-  Issue asset();
+    /**
+     * The definition for one of the assets in the AMM's pool.
+     *
+     * @return An {@link Issue}.
+     */
+    @JsonProperty("Asset")
+    Issue asset();
 
-  /**
-   * The definition for the other asset in the AMM's pool.
-   *
-   * @return An {@link Issue}.
-   */
-  @JsonProperty("Asset2")
-  Issue asset2();
-
+    /**
+     * The definition for the other asset in the AMM's pool.
+     *
+     * @return An {@link Issue}.
+     */
+    @JsonProperty("Asset2")
+    Issue asset2();
 }

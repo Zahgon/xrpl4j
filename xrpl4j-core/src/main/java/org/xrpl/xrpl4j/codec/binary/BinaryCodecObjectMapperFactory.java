@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.codec.binary;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.json.JsonWriteFeature;
@@ -32,18 +31,9 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 
 public class BinaryCodecObjectMapperFactory {
 
-  private static ObjectMapper objectMapper = JsonMapper.builder()
-    .addModule(new Jdk8Module())
-    .addModule(new GuavaModule())
-    .configure(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN, true)
-    .configure(JsonWriteFeature.WRITE_NUMBERS_AS_STRINGS, false)
-    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true)
-    .serializationInclusion(JsonInclude.Include.NON_EMPTY)
-    .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
-    .build();
+    private static ObjectMapper objectMapper = JsonMapper.builder().addModule(new Jdk8Module()).addModule(new GuavaModule()).configure(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN, true).configure(JsonWriteFeature.WRITE_NUMBERS_AS_STRINGS, false).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true).serializationInclusion(JsonInclude.Include.NON_EMPTY).enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES).build();
 
-  public static ObjectMapper getObjectMapper() {
-    return objectMapper;
-  }
-
+    public static ObjectMapper getObjectMapper() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

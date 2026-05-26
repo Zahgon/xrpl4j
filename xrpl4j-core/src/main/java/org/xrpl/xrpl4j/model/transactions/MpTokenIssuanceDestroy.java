@@ -8,7 +8,6 @@ import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.flags.MpTokenIssuanceCreateFlags;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 import org.xrpl.xrpl4j.model.transactions.ImmutableMpTokenIssuanceDestroy.Builder;
-
 import java.util.Optional;
 
 /**
@@ -19,36 +18,35 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableMpTokenIssuanceDestroy.class)
 public interface MpTokenIssuanceDestroy extends Transaction {
 
-  /**
-   * Construct a {@code MpTokenIssuanceDestroy} builder.
-   *
-   * @return An {@link Builder}.
-   */
-  static Builder builder() {
-    return ImmutableMpTokenIssuanceDestroy.builder();
-  }
+    /**
+     * Construct a {@code MpTokenIssuanceDestroy} builder.
+     *
+     * @return An {@link Builder}.
+     */
+    static Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link MpTokenIssuanceDestroy}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link MpTokenIssuanceDestroy}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link MpTokenIssuanceId} of the issuance to destroy.
-   *
-   * @return An {@link MpTokenIssuanceId}.
-   */
-  @JsonProperty("MPTokenIssuanceID")
-  MpTokenIssuanceId mpTokenIssuanceId();
-
+    /**
+     * The {@link MpTokenIssuanceId} of the issuance to destroy.
+     *
+     * @return An {@link MpTokenIssuanceId}.
+     */
+    @JsonProperty("MPTokenIssuanceID")
+    MpTokenIssuanceId mpTokenIssuanceId();
 }

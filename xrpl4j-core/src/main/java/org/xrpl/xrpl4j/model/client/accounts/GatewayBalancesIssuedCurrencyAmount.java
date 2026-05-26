@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.accounts;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
@@ -38,30 +37,30 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = ImmutableGatewayBalancesIssuedCurrencyAmount.class)
 public interface GatewayBalancesIssuedCurrencyAmount {
 
-  /**
-   * Construct a builder.
-   *
-   * @return {@link ImmutableGatewayBalancesIssuedCurrencyAmount.Builder}
-   */
-  static ImmutableGatewayBalancesIssuedCurrencyAmount.Builder builder() {
-    return ImmutableGatewayBalancesIssuedCurrencyAmount.builder();
-  }
+    /**
+     * Construct a builder.
+     *
+     * @return {@link ImmutableGatewayBalancesIssuedCurrencyAmount.Builder}
+     */
+    static ImmutableGatewayBalancesIssuedCurrencyAmount.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Quoted decimal representation of the amount of currency. This can include scientific notation, such as 1.23e11
-   * meaning 123,000,000,000. Both e and E may be used. Note that while this implementation merely holds a {@link
-   * String} with no value restrictions, the XRP Ledger does not tolerate unlimited precision values. Instead, non-XRP
-   * values (i.e., values held in this object) can have up to 16 decimal digits of precision, with a maximum value of
-   * 9999999999999999e80. The smallest positive non-XRP value is 1e-81.
-   *
-   * @return A {@link String} containing the amount of this issued currency.
-   */
-  String value();
+    /**
+     * Quoted decimal representation of the amount of currency. This can include scientific notation, such as 1.23e11
+     * meaning 123,000,000,000. Both e and E may be used. Note that while this implementation merely holds a {@link
+     * String} with no value restrictions, the XRP Ledger does not tolerate unlimited precision values. Instead, non-XRP
+     * values (i.e., values held in this object) can have up to 16 decimal digits of precision, with a maximum value of
+     * 9999999999999999e80. The smallest positive non-XRP value is 1e-81.
+     *
+     * @return A {@link String} containing the amount of this issued currency.
+     */
+    String value();
 
-  /**
-   * Arbitrary code for currency to issue. Cannot be XRP.
-   *
-   * @return A {@link String} containing the currency code.
-   */
-  String currency();
+    /**
+     * Arbitrary code for currency to issue. Cannot be XRP.
+     *
+     * @return A {@link String} containing the currency code.
+     */
+    String currency();
 }

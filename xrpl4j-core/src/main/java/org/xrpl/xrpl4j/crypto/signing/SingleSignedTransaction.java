@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.crypto.signing;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Preconditions;
@@ -38,49 +37,31 @@ import org.xrpl.xrpl4j.model.transactions.Transaction;
 @JsonDeserialize(as = ImmutableSingleSignedTransaction.class)
 public interface SingleSignedTransaction<T extends Transaction> extends SignedTransaction<T> {
 
-  /**
-   * A builder.
-   *
-   * @return An {@link ImmutableSingleSignedTransaction.Builder}.
-   */
-  static <T extends Transaction> ImmutableSingleSignedTransaction.Builder<T> builder() {
-    return ImmutableSingleSignedTransaction.builder();
-  }
+    /**
+     * A builder.
+     *
+     * @return An {@link ImmutableSingleSignedTransaction.Builder}.
+     */
+    static <T extends Transaction> ImmutableSingleSignedTransaction.Builder<T> builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Validates the state of the transaction to ensure that it does not already include a signature. This method asserts
-   * that the unsigned transaction associated with the object does not have an existing signature. Transactions with an
-   * existing signature are not valid for signing again.
-   *
-   * @throws IllegalArgumentException if the unsigned transaction already contains a signature.
-   */
-  @Check
-  default void check() {
+    /**
+     * Validates the state of the transaction to ensure that it does not already include a signature. This method asserts
+     * that the unsigned transaction associated with the object does not have an existing signature. Transactions with an
+     * existing signature are not valid for signing again.
+     *
+     * @throws IllegalArgumentException if the unsigned transaction already contains a signature.
+     */
+    @Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-    // signers are reserved for multisig
-    Preconditions.checkArgument(
-      this.unsignedTransaction().signers().isEmpty(),
-      "Transactions to be single-signed must not have Signers."
-    );
-
-    Preconditions.checkArgument(
-      !this.unsignedTransaction().transactionSignature().isPresent(),
-      "Transactions to be single-signed must not already be signed."
-    );
-
-    // TODO: Once https://github.com/XRPLF/xrpl4j/pull/684 is merged, we should update this check to use the new
-    // empty public key constant (and update the error message).
-    Preconditions.checkArgument(
-      !this.unsignedTransaction().signingPublicKey().equals(PublicKey.MULTI_SIGN_PUBLIC_KEY),
-      "Transactions to be single-signed must not set `signingPublicKey` to the multisig (empty) public key."
-    );
-  }
-
-  /**
-   * The signature and public key used to sign.
-   *
-   * @return A byte-array.
-   */
-  Signature signature();
-
+    /**
+     * The signature and public key used to sign.
+     *
+     * @return A byte-array.
+     */
+    Signature signature();
 }

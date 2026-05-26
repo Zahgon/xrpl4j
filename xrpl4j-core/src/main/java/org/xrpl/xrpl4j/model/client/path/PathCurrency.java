@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.client.path;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.transactions.Address;
-
 import java.util.Optional;
 
 /**
@@ -36,41 +34,38 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutablePathCurrency.class)
 public interface PathCurrency {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutablePathCurrency.Builder}.
-   */
-  static ImmutablePathCurrency.Builder builder() {
-    return ImmutablePathCurrency.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutablePathCurrency.Builder}.
+     */
+    static ImmutablePathCurrency.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Construct a {@link PathCurrency} with the specified currency code and no issuer.
-   *
-   * @param currency A {@link String} of either a 3 character currency code, or a 40 character hexadecimal encoded
-   *                 currency code value.
-   *
-   * @return A new {@link PathCurrency}.
-   */
-  static PathCurrency of(String currency) {
-    return builder()
-      .currency(currency)
-      .build();
-  }
+    /**
+     * Construct a {@link PathCurrency} with the specified currency code and no issuer.
+     *
+     * @param currency A {@link String} of either a 3 character currency code, or a 40 character hexadecimal encoded
+     *                 currency code value.
+     *
+     * @return A new {@link PathCurrency}.
+     */
+    static PathCurrency of(String currency) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Either a 3 character currency code, or a 40 character hexadecimal encoded currency code value.
-   *
-   * @return A {@link String} containing the currency code.
-   */
-  String currency();
+    /**
+     * Either a 3 character currency code, or a 40 character hexadecimal encoded currency code value.
+     *
+     * @return A {@link String} containing the currency code.
+     */
+    String currency();
 
-  /**
-   * The {@link Address} of the issuer of the currency.
-   *
-   * @return The optionally-present {@link Address} of the issuer account.
-   */
-  Optional<Address> issuer();
-
+    /**
+     * The {@link Address} of the issuer of the currency.
+     *
+     * @return The optionally-present {@link Address} of the issuer account.
+     */
+    Optional<Address> issuer();
 }

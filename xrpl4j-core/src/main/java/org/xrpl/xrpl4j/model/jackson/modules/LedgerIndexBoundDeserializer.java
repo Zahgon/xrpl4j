@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.xrpl.xrpl4j.model.client.common.LedgerIndexBound;
-
 import java.io.IOException;
 
 /**
@@ -32,15 +30,15 @@ import java.io.IOException;
  */
 public class LedgerIndexBoundDeserializer extends StdDeserializer<LedgerIndexBound> {
 
-  /**
-   * No-args constructor.
-   */
-  protected LedgerIndexBoundDeserializer() {
-    super(LedgerIndexBound.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    protected LedgerIndexBoundDeserializer() {
+        super(LedgerIndexBound.class);
+    }
 
-  @Override
-  public LedgerIndexBound deserialize(JsonParser jsonParser, DeserializationContext context) throws IOException {
-    return LedgerIndexBound.of(jsonParser.getValueAsLong());
-  }
+    @Override
+    public LedgerIndexBound deserialize(JsonParser jsonParser, DeserializationContext context) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

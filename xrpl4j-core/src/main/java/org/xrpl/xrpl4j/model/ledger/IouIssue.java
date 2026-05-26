@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
@@ -33,27 +32,26 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @JsonDeserialize(as = ImmutableIouIssue.class)
 public interface IouIssue extends Issue {
 
-  /**
-   * Construct an {@code IouIssue} builder.
-   *
-   * @return An {@link ImmutableIouIssue.Builder}.
-   */
-  static ImmutableIouIssue.Builder builder() {
-    return ImmutableIouIssue.builder();
-  }
+    /**
+     * Construct an {@code IouIssue} builder.
+     *
+     * @return An {@link ImmutableIouIssue.Builder}.
+     */
+    static ImmutableIouIssue.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Either a 3 character currency code, or a 40 character hexadecimal encoded currency code value.
-   *
-   * @return A {@link String} containing the currency code.
-   */
-  String currency();
+    /**
+     * Either a 3 character currency code, or a 40 character hexadecimal encoded currency code value.
+     *
+     * @return A {@link String} containing the currency code.
+     */
+    String currency();
 
-  /**
-   * The {@link Address} of the issuer of the currency.
-   *
-   * @return The {@link Address} of the issuer account.
-   */
-  Address issuer();
-
+    /**
+     * The {@link Address} of the issuer of the currency.
+     *
+     * @return The {@link Address} of the issuer account.
+     */
+    Address issuer();
 }

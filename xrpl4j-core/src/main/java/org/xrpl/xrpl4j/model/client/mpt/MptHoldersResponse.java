@@ -9,7 +9,6 @@ import org.xrpl.xrpl4j.model.client.XrplResult;
 import org.xrpl.xrpl4j.model.client.common.LedgerIndex;
 import org.xrpl.xrpl4j.model.transactions.Marker;
 import org.xrpl.xrpl4j.model.transactions.MpTokenIssuanceId;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -21,25 +20,25 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableMptHoldersResponse.class)
 public interface MptHoldersResponse extends XrplResult {
 
-  /**
-   * Construct a {@code MptHoldersResponse} builder.
-   *
-   * @return An {@link ImmutableMptHoldersResponse.Builder}.
-   */
-  static ImmutableMptHoldersResponse.Builder builder() {
-    return ImmutableMptHoldersResponse.builder();
-  }
+    /**
+     * Construct a {@code MptHoldersResponse} builder.
+     *
+     * @return An {@link ImmutableMptHoldersResponse.Builder}.
+     */
+    static ImmutableMptHoldersResponse.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @JsonProperty("mpt_issuance_id")
-  MpTokenIssuanceId mpTokenIssuanceId();
+    @JsonProperty("mpt_issuance_id")
+    MpTokenIssuanceId mpTokenIssuanceId();
 
-  @JsonProperty("mptokens")
-  List<MptHoldersMpToken> mpTokens();
+    @JsonProperty("mptokens")
+    List<MptHoldersMpToken> mpTokens();
 
-  Optional<Marker> marker();
+    Optional<Marker> marker();
 
-  Optional<UnsignedInteger> limit();
+    Optional<UnsignedInteger> limit();
 
-  @JsonProperty("ledger_index")
-  LedgerIndex ledgerIndex();
+    @JsonProperty("ledger_index")
+    LedgerIndex ledgerIndex();
 }

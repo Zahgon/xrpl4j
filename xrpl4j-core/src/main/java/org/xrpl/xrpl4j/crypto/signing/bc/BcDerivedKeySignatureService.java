@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.crypto.signing.bc;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.CaffeineSpec;
 import com.github.benmanes.caffeine.cache.LoadingCache;
@@ -51,7 +50,6 @@ import org.xrpl.xrpl4j.model.transactions.Batch;
 import org.xrpl.xrpl4j.model.transactions.LoanSet;
 import org.xrpl.xrpl4j.model.transactions.Signer;
 import org.xrpl.xrpl4j.model.transactions.Transaction;
-
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
@@ -66,309 +64,214 @@ import java.util.Set;
  */
 public class BcDerivedKeySignatureService implements SignatureService<PrivateKeyReference> {
 
-  private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+    private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
 
-  private final LoadingCache<PrivateKeyReference, BcSingleKeyTransactionSigner> transactionSignerCache;
+    private final LoadingCache<PrivateKeyReference, BcSingleKeyTransactionSigner> transactionSignerCache;
 
-  private final ServerSecretSupplier serverSecretSupplier;
+    private final ServerSecretSupplier serverSecretSupplier;
 
-  // Supplied to the loading cache on each create.
-  private final BcSignatureService commonBcSignatureService;
+    // Supplied to the loading cache on each create.
+    private final BcSignatureService commonBcSignatureService;
 
-  /**
-   * Required-args Constructor.
-   *
-   * @param serverSecretSupplier A {@link ServerSecretSupplier} that can be used to generate seed values, which can
-   */
-  public BcDerivedKeySignatureService(final ServerSecretSupplier serverSecretSupplier) {
-    this(
-      serverSecretSupplier,
-      CaffeineSpec.parse("maximumSize=10000,expireAfterWrite=30s")
-    );
-  }
-
-  /**
-   * Required-args Constructor.
-   *
-   * @param serverSecretSupplier A {@link ServerSecretSupplier} that can be used to generate seed values, which can
-   * @param caffeineSpec         A {@link CaffeineSpec} that can be initialized externally to configure the Caffeine
-   *                             cache constructed by this service.
-   */
-  public BcDerivedKeySignatureService(
-    final ServerSecretSupplier serverSecretSupplier,
-    final CaffeineSpec caffeineSpec
-  ) {
-    this.serverSecretSupplier = Objects.requireNonNull(serverSecretSupplier);
-    this.transactionSignerCache = Caffeine.from(Objects.requireNonNull(caffeineSpec))
-      .build(this::constructTransactionSigner);
-
-    this.commonBcSignatureService = new BcSignatureService(
-      SignatureUtils.getInstance(),
-      new Ed25519Signer(),
-      new ECDSASigner(new HMacDSAKCalculator(new SHA256Digest()))
-    );
-  }
-
-  @Override
-  public PublicKey derivePublicKey(final PrivateKeyReference privateKeyable) {
-    Objects.requireNonNull(privateKeyable);
-    return this.getTransactionSigner(privateKeyable).getPublicKey();
-  }
-
-  @Override
-  public <T extends Transaction> SingleSignedTransaction<T> sign(
-    final PrivateKeyReference privateKeyReference, final T transaction
-  ) {
-    Objects.requireNonNull(privateKeyReference);
-    Objects.requireNonNull(transaction);
-
-    return this.getTransactionSigner(privateKeyReference).sign(transaction);
-  }
-
-  @Override
-  public Signature sign(final PrivateKeyReference privateKeyReference, final UnsignedClaim unsignedClaim) {
-    return getTransactionSigner(privateKeyReference).sign(unsignedClaim);
-  }
-
-  @Override
-  public Signature sign(final PrivateKeyReference privateKeyReference, final Attestation attestation) {
-    return getTransactionSigner(privateKeyReference).sign(attestation);
-  }
-
-  @Override
-  public <T extends Transaction> Signature multiSign(
-    final PrivateKeyReference privateKeyReference, final T transaction
-  ) {
-    Objects.requireNonNull(privateKeyReference);
-    Objects.requireNonNull(transaction);
-    return getTransactionSigner(privateKeyReference).multiSign(transaction);
-  }
-
-  @Override
-  public Signature signInner(final PrivateKeyReference privateKeyable, final Batch batchTransaction) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(batchTransaction);
-    return getTransactionSigner(privateKeyable).signInner(batchTransaction);
-  }
-
-  @Override
-  public Signature multiSignInner(final PrivateKeyReference privateKeyable, final Batch batchTransaction) {
-    Objects.requireNonNull(privateKeyable);
-    Objects.requireNonNull(batchTransaction);
-    return getTransactionSigner(privateKeyable).multiSignInner(batchTransaction);
-  }
-
-  @Override
-  public Signature counterpartySign(final PrivateKeyReference privateKeyReference, final LoanSet transaction) {
-    Objects.requireNonNull(privateKeyReference);
-    Objects.requireNonNull(transaction);
-    return getTransactionSigner(privateKeyReference).counterpartySign(transaction);
-  }
-
-  @Override
-  public Signature counterpartyMultiSign(final PrivateKeyReference privateKeyReference, final LoanSet transaction) {
-    Objects.requireNonNull(privateKeyReference);
-    Objects.requireNonNull(transaction);
-    return getTransactionSigner(privateKeyReference).counterpartyMultiSign(transaction);
-  }
-
-  @Override
-  public <T extends Transaction> Signer multiSignToSigner(PrivateKeyReference privateKeyable, T transaction) {
-    return getTransactionSigner(privateKeyable).multiSignToSigner(transaction);
-  }
-
-  @Override
-  public <T extends Transaction> boolean verify(
-    final Signer signer, final T unsignedTransaction
-  ) {
-    Objects.requireNonNull(signer);
-    Objects.requireNonNull(unsignedTransaction);
-
-    return this.commonBcSignatureService.verify(signer, unsignedTransaction);
-  }
-
-  @Override
-  public <T extends Transaction> boolean verifyMultiSigned(
-    final Set<Signer> signerSet,
-    final T unsignedTransaction,
-    final int minSigners
-  ) {
-    Objects.requireNonNull(signerSet);
-    Objects.requireNonNull(unsignedTransaction);
-    Preconditions.checkArgument(minSigners > 0, "Valid multisigned transactions must have at least 1 signer");
-
-    final long numValidSignatures = signerSet.stream()
-      // Check signature against all public keys, hoping for a valid verification against one.
-      .map(signer -> this.commonBcSignatureService.verifyMultiSigned(
-          Sets.newHashSet(signer), unsignedTransaction, 1
-        )
-      )
-      .filter($ -> $) // Only count it if it's 'true'
-      .count();
-
-    return numValidSignatures >= minSigners;
-  }
-
-  //////////////////
-  // Private Helpers
-  //////////////////
-
-  /**
-   * Construct a new {@link BcSingleKeyTransactionSigner} using the provided {@code privateKeyReference}.
-   *
-   * @param privateKeyReference A {@link PrivateKeyReference} with information about a private key.
-   *
-   * @return A {@link BcSingleKeyTransactionSigner}.
-   */
-  @VisibleForTesting
-  final BcSingleKeyTransactionSigner constructTransactionSigner(final PrivateKeyReference privateKeyReference) {
-    Objects.requireNonNull(privateKeyReference);
-
-    final KeyPair keyPair;
-    if (KeyType.ED25519 == privateKeyReference.keyType()) {
-      final Seed seed = this.generateEd25519XrplSeed(privateKeyReference.keyIdentifier());
-      keyPair = seed.deriveKeyPair();
-    } else if (KeyType.SECP256K1 == privateKeyReference.keyType()) {
-      final Seed seed = this.generateSecp256k1Seed(privateKeyReference.keyIdentifier());
-      keyPair = seed.deriveKeyPair();
-    } else {
-      throw new IllegalArgumentException("Invalid KeyType: " + privateKeyReference.keyType());
+    /**
+     * Required-args Constructor.
+     *
+     * @param serverSecretSupplier A {@link ServerSecretSupplier} that can be used to generate seed values, which can
+     */
+    public BcDerivedKeySignatureService(final ServerSecretSupplier serverSecretSupplier) {
+        this(serverSecretSupplier, CaffeineSpec.parse("maximumSize=10000,expireAfterWrite=30s"));
     }
 
-    return new BcSingleKeyTransactionSigner(keyPair.privateKey(), commonBcSignatureService);
-  }
-
-  /**
-   * Deterministically generate a {@link Seed} based upon the supplied XRPL account identifier and a server-secret that
-   * is loaded into memory.
-   *
-   * @param accountIdentifier A {@link String} that is combined with an in-memory server secret to deterministically
-   *                          generate a seed for entropy.
-   *
-   * @return A {@link Seed} that can be used to generate an XRPL public/private key pair.
-   *
-   * @see "https://xrpl.org/cryptographic-keys.html#key-derivation"
-   */
-  @VisibleForTesting
-  final Seed generateEd25519XrplSeed(final String accountIdentifier) {
-    Objects.requireNonNull(accountIdentifier);
-
-    final ServerSecret serverSecretBytes = serverSecretSupplier.get();
-    byte[] passphraseBytes = EMPTY_BYTE_ARRAY; // <-- to avoid an NPE in the "finally" block.
-    try {
-      passphraseBytes = Hashing.hmacSha512(
-          serverSecretBytes.value()) // <-- This is equivalent to the `passphraseBytes` in the xrpl.org docs.
-        .hashBytes(accountIdentifier.getBytes()).asBytes();
-      return Seed.ed25519SeedFromPassphrase(Passphrase.of(passphraseBytes));
-    } finally {
-      // Zero-out all bytes in the both arrays so secret material exists in-memory for as little time as possible.
-      serverSecretBytes.destroy();
-      Arrays.fill(passphraseBytes, (byte) 0);
-    }
-  }
-
-  /**
-   * Deterministically generate a {@link Seed} based upon the supplied XRPL account identifier and a server-secret that
-   * is loaded into memory.
-   *
-   * @param accountIdentifier A {@link String} that is combined with an in-memory server secret to deterministically
-   *                          generate a seed for entropy.
-   *
-   * @return A {@link Seed} that can be used to generate an XRPL public/private key pair.
-   *
-   * @see "https://xrpl.org/cryptographic-keys.html#key-derivation"
-   */
-  @VisibleForTesting
-  final Seed generateSecp256k1Seed(final String accountIdentifier) {
-    Objects.requireNonNull(accountIdentifier);
-
-    final ServerSecret serverSecretBytes = serverSecretSupplier.get();
-    byte[] passphraseBytes = EMPTY_BYTE_ARRAY; // <-- to avoid an NPE in the "finally" block.
-    try {
-      passphraseBytes = Hashing.hmacSha512(
-          serverSecretBytes.value()) // <-- This is equivalent to the `passphraseBytes` in the xrpl.org docs.
-        .hashBytes(accountIdentifier.getBytes()).asBytes();
-      return Seed.secp256k1SeedFromPassphrase(Passphrase.of(passphraseBytes));
-    } finally {
-      // Zero-out all bytes in the both arrays so secret material exists in-memory for as little time as possible.
-      serverSecretBytes.destroy();
-      Arrays.fill(passphraseBytes, (byte) 0);
-    }
-  }
-
-  /**
-   * Helper method to return an instance of {@link BcSingleKeyTransactionSigner} or else throw an exception.
-   *
-   * @param privateKeyReference The {@link PrivateKeyReference} of the key to return.
-   *
-   * @return A {@link BcSingleKeyTransactionSigner}.
-   */
-  private BcSingleKeyTransactionSigner getTransactionSigner(final PrivateKeyReference privateKeyReference) {
-    Objects.requireNonNull(privateKeyReference);
-
-    // Try to load from the loading cache...
-    return this.transactionSignerCache.get(privateKeyReference);
-  }
-
-  /**
-   * <p>A transaction signer that uses BouncyCastle internally with a single private key.</p>
-   *
-   * <p>WARNING: This implementation utilizes in-memory private-key material. Consider using an alternative
-   * implementation that relies upon {@link PrivateKeyReference} instead for improved security.</p>
-   */
-  private static class BcSingleKeyTransactionSigner {
-
-    private final PrivateKey privateKey;
-    private final BcSignatureService bcSignatureService;
-
-    public BcSingleKeyTransactionSigner(final PrivateKey privateKey, final BcSignatureService bcSignatureService) {
-      this.privateKey = Objects.requireNonNull(privateKey);
-      this.bcSignatureService = Objects.requireNonNull(bcSignatureService);
+    /**
+     * Required-args Constructor.
+     *
+     * @param serverSecretSupplier A {@link ServerSecretSupplier} that can be used to generate seed values, which can
+     * @param caffeineSpec         A {@link CaffeineSpec} that can be initialized externally to configure the Caffeine
+     *                             cache constructed by this service.
+     */
+    public BcDerivedKeySignatureService(final ServerSecretSupplier serverSecretSupplier, final CaffeineSpec caffeineSpec) {
+        this.serverSecretSupplier = Objects.requireNonNull(serverSecretSupplier);
+        this.transactionSignerCache = Caffeine.from(Objects.requireNonNull(caffeineSpec)).build(this::constructTransactionSigner);
+        this.commonBcSignatureService = new BcSignatureService(SignatureUtils.getInstance(), new Ed25519Signer(), new ECDSASigner(new HMacDSAKCalculator(new SHA256Digest())));
     }
 
-    public final <T extends Transaction> SingleSignedTransaction<T> sign(final T transaction) {
-      return bcSignatureService.sign(this.privateKey, transaction);
+    @Override
+    public PublicKey derivePublicKey(final PrivateKeyReference privateKeyable) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public Signature sign(final UnsignedClaim unsignedClaim) {
-      Objects.requireNonNull(unsignedClaim);
-      return bcSignatureService.sign(this.privateKey, unsignedClaim);
+    @Override
+    public <T extends Transaction> SingleSignedTransaction<T> sign(final PrivateKeyReference privateKeyReference, final T transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public Signature sign(final Attestation attestation) {
-      Objects.requireNonNull(attestation);
-      return bcSignatureService.sign(this.privateKey, attestation);
+    @Override
+    public Signature sign(final PrivateKeyReference privateKeyReference, final UnsignedClaim unsignedClaim) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public <T extends Transaction> Signature multiSign(final T transaction) {
-      return bcSignatureService.multiSign(this.privateKey, transaction);
+    @Override
+    public Signature sign(final PrivateKeyReference privateKeyReference, final Attestation attestation) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    // @deprecated See comment in `TransactionSigner#multiSignToSigner`.
-    @Deprecated
-    public <T extends Transaction> Signer multiSignToSigner(T transaction) {
-      return bcSignatureService.multiSignToSigner(this.privateKey, transaction);
+    @Override
+    public <T extends Transaction> Signature multiSign(final PrivateKeyReference privateKeyReference, final T transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public final Signature signInner(final Batch transaction) {
-      return bcSignatureService.signInner(this.privateKey, transaction);
+    @Override
+    public Signature signInner(final PrivateKeyReference privateKeyable, final Batch batchTransaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public final Signature multiSignInner(final Batch transaction) {
-      return bcSignatureService.multiSignInner(this.privateKey, transaction);
+    @Override
+    public Signature multiSignInner(final PrivateKeyReference privateKeyable, final Batch batchTransaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public final Signature counterpartySign(final LoanSet transaction) {
-      return bcSignatureService.counterpartySign(this.privateKey, transaction);
+    @Override
+    public Signature counterpartySign(final PrivateKeyReference privateKeyReference, final LoanSet transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public final Signature counterpartyMultiSign(final LoanSet transaction) {
-      return bcSignatureService.counterpartyMultiSign(this.privateKey, transaction);
+    @Override
+    public Signature counterpartyMultiSign(final PrivateKeyReference privateKeyReference, final LoanSet transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public PublicKey getPublicKey() {
-      return BcKeyUtils.toPublicKey(this.privateKey);
+    @Override
+    public <T extends Transaction> Signer multiSignToSigner(PrivateKeyReference privateKeyable, T transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
+    @Override
+    public <T extends Transaction> boolean verify(final Signer signer, final T unsignedTransaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public <T extends Transaction> boolean verifyMultiSigned(final Set<Signer> signerSet, final T unsignedTransaction, final int minSigners) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    //////////////////
+    // Private Helpers
+    //////////////////
+    /**
+     * Construct a new {@link BcSingleKeyTransactionSigner} using the provided {@code privateKeyReference}.
+     *
+     * @param privateKeyReference A {@link PrivateKeyReference} with information about a private key.
+     *
+     * @return A {@link BcSingleKeyTransactionSigner}.
+     */
+    @VisibleForTesting
+    final BcSingleKeyTransactionSigner constructTransactionSigner(final PrivateKeyReference privateKeyReference) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Deterministically generate a {@link Seed} based upon the supplied XRPL account identifier and a server-secret that
+     * is loaded into memory.
+     *
+     * @param accountIdentifier A {@link String} that is combined with an in-memory server secret to deterministically
+     *                          generate a seed for entropy.
+     *
+     * @return A {@link Seed} that can be used to generate an XRPL public/private key pair.
+     *
+     * @see "https://xrpl.org/cryptographic-keys.html#key-derivation"
+     */
+    @VisibleForTesting
+    final Seed generateEd25519XrplSeed(final String accountIdentifier) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Deterministically generate a {@link Seed} based upon the supplied XRPL account identifier and a server-secret that
+     * is loaded into memory.
+     *
+     * @param accountIdentifier A {@link String} that is combined with an in-memory server secret to deterministically
+     *                          generate a seed for entropy.
+     *
+     * @return A {@link Seed} that can be used to generate an XRPL public/private key pair.
+     *
+     * @see "https://xrpl.org/cryptographic-keys.html#key-derivation"
+     */
+    @VisibleForTesting
+    final Seed generateSecp256k1Seed(final String accountIdentifier) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Helper method to return an instance of {@link BcSingleKeyTransactionSigner} or else throw an exception.
+     *
+     * @param privateKeyReference The {@link PrivateKeyReference} of the key to return.
+     *
+     * @return A {@link BcSingleKeyTransactionSigner}.
+     */
+    private BcSingleKeyTransactionSigner getTransactionSigner(final PrivateKeyReference privateKeyReference) {
+        Objects.requireNonNull(privateKeyReference);
+        // Try to load from the loading cache...
+        return this.transactionSignerCache.get(privateKeyReference);
+    }
+
+    /**
+     * <p>A transaction signer that uses BouncyCastle internally with a single private key.</p>
+     *
+     * <p>WARNING: This implementation utilizes in-memory private-key material. Consider using an alternative
+     * implementation that relies upon {@link PrivateKeyReference} instead for improved security.</p>
+     */
+    private static class BcSingleKeyTransactionSigner {
+
+        private final PrivateKey privateKey;
+
+        private final BcSignatureService bcSignatureService;
+
+        public BcSingleKeyTransactionSigner(final PrivateKey privateKey, final BcSignatureService bcSignatureService) {
+            this.privateKey = Objects.requireNonNull(privateKey);
+            this.bcSignatureService = Objects.requireNonNull(bcSignatureService);
+        }
+
+        public final <T extends Transaction> SingleSignedTransaction<T> sign(final T transaction) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public Signature sign(final UnsignedClaim unsignedClaim) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public Signature sign(final Attestation attestation) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public <T extends Transaction> Signature multiSign(final T transaction) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        // @deprecated See comment in `TransactionSigner#multiSignToSigner`.
+        @Deprecated
+        public <T extends Transaction> Signer multiSignToSigner(T transaction) {
+            return bcSignatureService.multiSignToSigner(this.privateKey, transaction);
+        }
+
+        public final Signature signInner(final Batch transaction) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public final Signature multiSignInner(final Batch transaction) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public final Signature counterpartySign(final LoanSet transaction) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public final Signature counterpartyMultiSign(final LoanSet transaction) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public PublicKey getPublicKey() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+    }
 }

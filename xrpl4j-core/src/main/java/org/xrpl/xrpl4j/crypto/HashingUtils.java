@@ -19,13 +19,10 @@ package org.xrpl.xrpl4j.crypto;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import static java.util.Arrays.copyOfRange;
-
 import com.google.common.hash.Hashing;
 import org.xrpl.xrpl4j.codec.addresses.UnsignedByte;
 import org.xrpl.xrpl4j.codec.addresses.UnsignedByteArray;
-
 import java.util.Objects;
 
 /**
@@ -33,46 +30,37 @@ import java.util.Objects;
  */
 public class HashingUtils {
 
-  /**
-   * Compute a SHA-512 hash of the given bytes and return the first half of the result.
-   *
-   * @param bytes The bytes to half hash.
-   *
-   * @return An {@link UnsignedByteArray} containing the first half of the SHA-512 hash of bytes.
-   */
-  public static UnsignedByteArray sha512Half(final UnsignedByteArray bytes) {
-    Objects.requireNonNull(bytes);
-    return sha512Half(bytes.toByteArray());
-  }
+    /**
+     * Compute a SHA-512 hash of the given bytes and return the first half of the result.
+     *
+     * @param bytes The bytes to half hash.
+     *
+     * @return An {@link UnsignedByteArray} containing the first half of the SHA-512 hash of bytes.
+     */
+    public static UnsignedByteArray sha512Half(final UnsignedByteArray bytes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Compute a SHA-512 hash of the given bytes and return the first half of the result.
-   *
-   * @param bytes The bytes to half hash.
-   *
-   * @return An {@link UnsignedByteArray} containing the first half of the SHA-512 hash of bytes.
-   */
-  public static UnsignedByteArray sha512Half(final byte[] bytes) {
-    Objects.requireNonNull(bytes);
-    return UnsignedByteArray.of(copyOfRange(Hashing.sha512().hashBytes(bytes).asBytes(), 0, 32));
-  }
+    /**
+     * Compute a SHA-512 hash of the given bytes and return the first half of the result.
+     *
+     * @param bytes The bytes to half hash.
+     *
+     * @return An {@link UnsignedByteArray} containing the first half of the SHA-512 hash of bytes.
+     */
+    public static UnsignedByteArray sha512Half(final byte[] bytes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Add an Unsigned 32-bit integer to an {@link UnsignedByteArray}.
-   *
-   * @param bytes        An {@link UnsignedByteArray} to append to.
-   * @param integerToAdd An {@link Integer} with 4 signed bytes to add to bytes.
-   *
-   * @return The resulting {@link UnsignedByteArray}.
-   */
-  public static UnsignedByteArray addUInt32(final UnsignedByteArray bytes, final Integer integerToAdd) {
-    Objects.requireNonNull(bytes);
-    Objects.requireNonNull(integerToAdd);
-
-    bytes.append(UnsignedByte.of((byte) ((integerToAdd >>> 24)) & 0xFF));
-    bytes.append(UnsignedByte.of((byte) ((integerToAdd >>> 16)) & 0xFF));
-    bytes.append(UnsignedByte.of((byte) ((integerToAdd >>> 8)) & 0xFF));
-    bytes.append(UnsignedByte.of((byte) ((integerToAdd) & 0xFF)));
-    return bytes;
-  }
+    /**
+     * Add an Unsigned 32-bit integer to an {@link UnsignedByteArray}.
+     *
+     * @param bytes        An {@link UnsignedByteArray} to append to.
+     * @param integerToAdd An {@link Integer} with 4 signed bytes to add to bytes.
+     *
+     * @return The resulting {@link UnsignedByteArray}.
+     */
+    public static UnsignedByteArray addUInt32(final UnsignedByteArray bytes, final Integer integerToAdd) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

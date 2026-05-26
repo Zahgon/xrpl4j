@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import org.xrpl.xrpl4j.model.transactions.AssetPrice;
-
 import java.io.IOException;
 
 /**
@@ -12,16 +11,15 @@ import java.io.IOException;
  */
 public class AssetPriceSerializer extends StdScalarSerializer<AssetPrice> {
 
-  /**
-   * No-args constructor.
-   */
-  public AssetPriceSerializer() {
-    super(AssetPrice.class, false);
-  }
+    /**
+     * No-args constructor.
+     */
+    public AssetPriceSerializer() {
+        super(AssetPrice.class, false);
+    }
 
-  @Override
-  public void serialize(AssetPrice count, JsonGenerator gen, SerializerProvider provider) throws IOException {
-    // sfAssetPrice is an STUInt64s, which in JSON is represented as a hex-encoded String.
-    gen.writeString(count.value().toString(16));
-  }
+    @Override
+    public void serialize(AssetPrice count, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

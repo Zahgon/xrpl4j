@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.admin;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -35,21 +34,20 @@ import org.xrpl.xrpl4j.model.client.common.LedgerIndex;
 @JsonDeserialize(as = ImmutableAcceptLedgerResult.class)
 public interface AcceptLedgerResult extends XrplResult {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableAcceptLedgerResult.Builder}.
-   */
-  static ImmutableAcceptLedgerResult.Builder builder() {
-    return ImmutableAcceptLedgerResult.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableAcceptLedgerResult.Builder}.
+     */
+    static ImmutableAcceptLedgerResult.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The Ledger Index of the current open ledger these stats describe.
-   *
-   * @return A {@link LedgerIndex} denoting the current ledger index.
-   */
-  @JsonProperty("ledger_current_index")
-  LedgerIndex ledgerCurrentIndex();
-
+    /**
+     * The Ledger Index of the current open ledger these stats describe.
+     *
+     * @return A {@link LedgerIndex} denoting the current ledger index.
+     */
+    @JsonProperty("ledger_current_index")
+    LedgerIndex ledgerCurrentIndex();
 }

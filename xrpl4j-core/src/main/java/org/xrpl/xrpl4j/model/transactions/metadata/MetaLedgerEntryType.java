@@ -12,131 +12,93 @@ import org.immutables.value.Value.Derived;
 @JsonDeserialize(as = ImmutableMetaLedgerEntryType.class)
 public interface MetaLedgerEntryType {
 
-  MetaLedgerEntryType ACCOUNT_ROOT = MetaLedgerEntryType.of("AccountRoot");
-  MetaLedgerEntryType AMENDMENTS = MetaLedgerEntryType.of("Amendments");
-  MetaLedgerEntryType CHECK = MetaLedgerEntryType.of("Check");
-  MetaLedgerEntryType CREDENTIAL = MetaLedgerEntryType.of("Credential");
-  MetaLedgerEntryType DEPOSIT_PRE_AUTH = MetaLedgerEntryType.of("DepositPreauth");
-  MetaLedgerEntryType DIRECTORY_NODE = MetaLedgerEntryType.of("DirectoryNode");
-  MetaLedgerEntryType ESCROW = MetaLedgerEntryType.of("Escrow");
-  MetaLedgerEntryType FEE_SETTINGS = MetaLedgerEntryType.of("FeeSettings");
-  MetaLedgerEntryType LEDGER_HASHES = MetaLedgerEntryType.of("LedgerHashes");
-  MetaLedgerEntryType NEGATIVE_UNL = MetaLedgerEntryType.of("NegativeUNL");
-  MetaLedgerEntryType NFTOKEN_OFFER = MetaLedgerEntryType.of("NFTokenOffer");
-  MetaLedgerEntryType OFFER = MetaLedgerEntryType.of("Offer");
-  MetaLedgerEntryType PAY_CHANNEL = MetaLedgerEntryType.of("PayChannel");
-  MetaLedgerEntryType RIPPLE_STATE = MetaLedgerEntryType.of("RippleState");
-  MetaLedgerEntryType SIGNER_LIST = MetaLedgerEntryType.of("SignerList");
-  MetaLedgerEntryType TICKET = MetaLedgerEntryType.of("Ticket");
-  MetaLedgerEntryType NFTOKEN_PAGE = MetaLedgerEntryType.of("NFTokenPage");
-  MetaLedgerEntryType AMM = MetaLedgerEntryType.of("AMM");
-  MetaLedgerEntryType PERMISSIONED_DOMAIN = MetaLedgerEntryType.of("PermissionedDomain");
+    MetaLedgerEntryType ACCOUNT_ROOT = MetaLedgerEntryType.of("AccountRoot");
 
-  @Beta
-  MetaLedgerEntryType BRIDGE = MetaLedgerEntryType.of("Bridge");
+    MetaLedgerEntryType AMENDMENTS = MetaLedgerEntryType.of("Amendments");
 
-  @Beta
-  MetaLedgerEntryType XCHAIN_OWNED_CREATE_ACCOUNT_CLAIM_ID = MetaLedgerEntryType.of(
-    "XChainOwnedCreateAccountClaimID"
-  );
+    MetaLedgerEntryType CHECK = MetaLedgerEntryType.of("Check");
 
-  @Beta
-  MetaLedgerEntryType XCHAIN_OWNED_CLAIM_ID = MetaLedgerEntryType.of("XChainOwnedClaimID");
+    MetaLedgerEntryType CREDENTIAL = MetaLedgerEntryType.of("Credential");
 
-  @Beta
-  MetaLedgerEntryType DID = MetaLedgerEntryType.of("DID");
+    MetaLedgerEntryType DEPOSIT_PRE_AUTH = MetaLedgerEntryType.of("DepositPreauth");
 
-  @Beta
-  MetaLedgerEntryType ORACLE = MetaLedgerEntryType.of("Oracle");
+    MetaLedgerEntryType DIRECTORY_NODE = MetaLedgerEntryType.of("DirectoryNode");
 
-  MetaLedgerEntryType MP_TOKEN_ISSUANCE = MetaLedgerEntryType.of("MPTokenIssuance");
-  MetaLedgerEntryType MP_TOKEN = MetaLedgerEntryType.of("MPToken");
+    MetaLedgerEntryType ESCROW = MetaLedgerEntryType.of("Escrow");
 
-  @Beta
-  MetaLedgerEntryType VAULT = MetaLedgerEntryType.of("Vault");
+    MetaLedgerEntryType FEE_SETTINGS = MetaLedgerEntryType.of("FeeSettings");
 
-  @Beta
-  MetaLedgerEntryType LOAN_BROKER = MetaLedgerEntryType.of("LoanBroker");
+    MetaLedgerEntryType LEDGER_HASHES = MetaLedgerEntryType.of("LedgerHashes");
 
-  @Beta
-  MetaLedgerEntryType LOAN = MetaLedgerEntryType.of("Loan");
+    MetaLedgerEntryType NEGATIVE_UNL = MetaLedgerEntryType.of("NegativeUNL");
 
+    MetaLedgerEntryType NFTOKEN_OFFER = MetaLedgerEntryType.of("NFTokenOffer");
 
-  /**
-   * Construct a new {@link MetaLedgerEntryType} from a {@link String}.
-   *
-   * @param value The {@link String} value.
-   *
-   * @return A {@link MetaLedgerEntryType} wrapping the supplied value.
-   */
-  static MetaLedgerEntryType of(String value) {
-    return ImmutableMetaLedgerEntryType.builder()
-      .value(value)
-      .build();
-  }
+    MetaLedgerEntryType OFFER = MetaLedgerEntryType.of("Offer");
 
-  /**
-   * Get the {@link MetaLedgerObject} concrete type associated with this {@link MetaLedgerEntryType}.
-   *
-   * @return A {@link Class} of {@link MetaLedgerObject}.
-   */
-  @Derived
-  @JsonIgnore
-  default Class<? extends MetaLedgerObject> ledgerObjectType() {
-    switch (this.value()) {
-      case "AccountRoot":
-        return MetaAccountRootObject.class;
-      case "Check":
-        return MetaCheckObject.class;
-      case "Credential":
-        return MetaCredentialObject.class;
-      case "DepositPreauth":
-        return MetaDepositPreAuthObject.class;
-      case "Escrow":
-        return MetaEscrowObject.class;
-      case "NFTokenOffer":
-        return MetaNfTokenOfferObject.class;
-      case "Offer":
-        return MetaOfferObject.class;
-      case "PayChannel":
-        return MetaPayChannelObject.class;
-      case "RippleState":
-        return MetaRippleStateObject.class;
-      case "SignerList":
-        return MetaSignerListObject.class;
-      case "Ticket":
-        return MetaTicketObject.class;
-      case "NFTokenPage":
-        return MetaNfTokenPageObject.class;
-      case "AMM":
-        return MetaAmmObject.class;
-      case "Bridge":
-        return MetaBridgeObject.class;
-      case "XChainOwnedClaimID":
-        return MetaXChainOwnedClaimIdObject.class;
-      case "XChainOwnedCreateAccountClaimID":
-        return MetaXChainOwnedCreateAccountClaimIdObject.class;
-      case "DID":
-        return MetaDidObject.class;
-      case "Oracle":
-        return MetaOracleObject.class;
-      case "MPTokenIssuance":
-        return MetaMpTokenIssuanceObject.class;
-      case "MPToken":
-        return MetaMpTokenObject.class;
-      case "PermissionedDomain":
-        return MetaPermissionedDomainObject.class;
-      case "Vault":
-        return MetaVaultObject.class;
-      case "LoanBroker":
-        return MetaLoanBrokerObject.class;
-      case "Loan":
-        return MetaLoanObject.class;
-      default:
-        return MetaUnknownObject.class;
+    MetaLedgerEntryType PAY_CHANNEL = MetaLedgerEntryType.of("PayChannel");
+
+    MetaLedgerEntryType RIPPLE_STATE = MetaLedgerEntryType.of("RippleState");
+
+    MetaLedgerEntryType SIGNER_LIST = MetaLedgerEntryType.of("SignerList");
+
+    MetaLedgerEntryType TICKET = MetaLedgerEntryType.of("Ticket");
+
+    MetaLedgerEntryType NFTOKEN_PAGE = MetaLedgerEntryType.of("NFTokenPage");
+
+    MetaLedgerEntryType AMM = MetaLedgerEntryType.of("AMM");
+
+    MetaLedgerEntryType PERMISSIONED_DOMAIN = MetaLedgerEntryType.of("PermissionedDomain");
+
+    @Beta
+    MetaLedgerEntryType BRIDGE = MetaLedgerEntryType.of("Bridge");
+
+    @Beta
+    MetaLedgerEntryType XCHAIN_OWNED_CREATE_ACCOUNT_CLAIM_ID = MetaLedgerEntryType.of("XChainOwnedCreateAccountClaimID");
+
+    @Beta
+    MetaLedgerEntryType XCHAIN_OWNED_CLAIM_ID = MetaLedgerEntryType.of("XChainOwnedClaimID");
+
+    @Beta
+    MetaLedgerEntryType DID = MetaLedgerEntryType.of("DID");
+
+    @Beta
+    MetaLedgerEntryType ORACLE = MetaLedgerEntryType.of("Oracle");
+
+    MetaLedgerEntryType MP_TOKEN_ISSUANCE = MetaLedgerEntryType.of("MPTokenIssuance");
+
+    MetaLedgerEntryType MP_TOKEN = MetaLedgerEntryType.of("MPToken");
+
+    @Beta
+    MetaLedgerEntryType VAULT = MetaLedgerEntryType.of("Vault");
+
+    @Beta
+    MetaLedgerEntryType LOAN_BROKER = MetaLedgerEntryType.of("LoanBroker");
+
+    @Beta
+    MetaLedgerEntryType LOAN = MetaLedgerEntryType.of("Loan");
+
+    /**
+     * Construct a new {@link MetaLedgerEntryType} from a {@link String}.
+     *
+     * @param value The {@link String} value.
+     *
+     * @return A {@link MetaLedgerEntryType} wrapping the supplied value.
+     */
+    static MetaLedgerEntryType of(String value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  String value();
+    /**
+     * Get the {@link MetaLedgerObject} concrete type associated with this {@link MetaLedgerEntryType}.
+     *
+     * @return A {@link Class} of {@link MetaLedgerObject}.
+     */
+    @Derived
+    @JsonIgnore
+    default Class<? extends MetaLedgerObject> ledgerObjectType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
+    String value();
 }

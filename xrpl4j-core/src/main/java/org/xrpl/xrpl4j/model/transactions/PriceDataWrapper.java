@@ -14,16 +14,15 @@ import org.immutables.value.Value.Immutable;
 @JsonDeserialize(as = ImmutablePriceDataWrapper.class)
 public interface PriceDataWrapper {
 
-  static PriceDataWrapper of(PriceData priceData) {
-    return ImmutablePriceDataWrapper.builder().priceData(priceData).build();
-  }
+    static PriceDataWrapper of(PriceData priceData) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The price data.
-   *
-   * @return A {@link PriceData}.
-   */
-  @JsonProperty("PriceData")
-  PriceData priceData();
-
+    /**
+     * The price data.
+     *
+     * @return A {@link PriceData}.
+     */
+    @JsonProperty("PriceData")
+    PriceData priceData();
 }

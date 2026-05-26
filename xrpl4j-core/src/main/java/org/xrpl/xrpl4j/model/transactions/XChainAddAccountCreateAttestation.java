@@ -11,7 +11,6 @@ import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.crypto.keys.PublicKey;
 import org.xrpl.xrpl4j.crypto.signing.Signature;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -26,120 +25,119 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableXChainAddAccountCreateAttestation.class)
 public interface XChainAddAccountCreateAttestation extends Transaction {
 
-  /**
-   * Construct a {@code XChainAddAccountCreateAttestation} builder.
-   *
-   * @return An {@link ImmutableXChainAddAccountCreateAttestation.Builder}.
-   */
-  static ImmutableXChainAddAccountCreateAttestation.Builder builder() {
-    return ImmutableXChainAddAccountCreateAttestation.builder();
-  }
+    /**
+     * Construct a {@code XChainAddAccountCreateAttestation} builder.
+     *
+     * @return An {@link ImmutableXChainAddAccountCreateAttestation.Builder}.
+     */
+    static ImmutableXChainAddAccountCreateAttestation.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link XChainAddAccountCreateAttestation}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * @return A set of {@link TransactionFlags}, default is {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link XChainAddAccountCreateAttestation}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * @return A set of {@link TransactionFlags}, default is {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The amount committed by the {@code XChainAccountCreateCommit} transaction on the source chain.
-   *
-   * @return An {@link XrpCurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  XrpCurrencyAmount amount();
+    /**
+     * The amount committed by the {@code XChainAccountCreateCommit} transaction on the source chain.
+     *
+     * @return An {@link XrpCurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    XrpCurrencyAmount amount();
 
-  /**
-   * The account that should receive this signer's share of the {@link #signatureReward()}.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("AttestationRewardAccount")
-  Address attestationRewardAccount();
+    /**
+     * The account that should receive this signer's share of the {@link #signatureReward()}.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("AttestationRewardAccount")
+    Address attestationRewardAccount();
 
-  /**
-   * The account on the door account's signer list that is signing the transaction.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("AttestationSignerAccount")
-  Address attestationSignerAccount();
+    /**
+     * The account on the door account's signer list that is signing the transaction.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("AttestationSignerAccount")
+    Address attestationSignerAccount();
 
-  /**
-   * The destination account for the funds on the destination chain.
-   *
-   * @return The {@link Address} of the destination account.
-   */
-  @JsonProperty("Destination")
-  Address destination();
+    /**
+     * The destination account for the funds on the destination chain.
+     *
+     * @return The {@link Address} of the destination account.
+     */
+    @JsonProperty("Destination")
+    Address destination();
 
-  /**
-   * The account on the source chain that submitted the {@code XChainAccountCreateCommit} transaction that triggered the
-   * event associated with the attestation.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("OtherChainSource")
-  Address otherChainSource();
+    /**
+     * The account on the source chain that submitted the {@code XChainAccountCreateCommit} transaction that triggered the
+     * event associated with the attestation.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("OtherChainSource")
+    Address otherChainSource();
 
-  /**
-   * The public key used to verify the signature.
-   *
-   * @return A {@link PublicKey}.
-   */
-  @JsonProperty("PublicKey")
-  PublicKey publicKey();
+    /**
+     * The public key used to verify the signature.
+     *
+     * @return A {@link PublicKey}.
+     */
+    @JsonProperty("PublicKey")
+    PublicKey publicKey();
 
-  /**
-   * The signature attesting to the event on the other chain.
-   *
-   * @return A {@link Signature}.
-   */
-  @JsonProperty("Signature")
-  Signature signature();
+    /**
+     * The signature attesting to the event on the other chain.
+     *
+     * @return A {@link Signature}.
+     */
+    @JsonProperty("Signature")
+    Signature signature();
 
-  /**
-   * The signature reward paid in the {@code XChainAccountCreateCommit} transaction.
-   *
-   * @return An optionally-present {@link XrpCurrencyAmount}.
-   */
-  @JsonProperty("SignatureReward")
-  Optional<XrpCurrencyAmount> signatureReward();
+    /**
+     * The signature reward paid in the {@code XChainAccountCreateCommit} transaction.
+     *
+     * @return An optionally-present {@link XrpCurrencyAmount}.
+     */
+    @JsonProperty("SignatureReward")
+    Optional<XrpCurrencyAmount> signatureReward();
 
-  /**
-   * A boolean representing the chain where the event occurred.
-   *
-   * <p>Note that this field is typed as a {@code boolean} but is represented by an integer (0 or 1) in JSON
-   * and treated as a UInt8 in XRPL binary format.</p>
-   *
-   * @return {@code true} if the locking chain was the sender, otherwise {@code false}.
-   */
-  @JsonProperty("WasLockingChainSend")
-  @JsonFormat(shape = Shape.NUMBER)
-  boolean wasLockingChainSend();
+    /**
+     * A boolean representing the chain where the event occurred.
+     *
+     * <p>Note that this field is typed as a {@code boolean} but is represented by an integer (0 or 1) in JSON
+     * and treated as a UInt8 in XRPL binary format.</p>
+     *
+     * @return {@code true} if the locking chain was the sender, otherwise {@code false}.
+     */
+    @JsonProperty("WasLockingChainSend")
+    @JsonFormat(shape = Shape.NUMBER)
+    boolean wasLockingChainSend();
 
-  /**
-   * The counter that represents the order that the claims must be processed in.
-   *
-   * @return An {@link XChainCount}.
-   */
-  @JsonProperty("XChainAccountCreateCount")
-  @SuppressWarnings("MethodName")
-  XChainCount xChainAccountCreateCount();
+    /**
+     * The counter that represents the order that the claims must be processed in.
+     *
+     * @return An {@link XChainCount}.
+     */
+    @JsonProperty("XChainAccountCreateCount")
+    @SuppressWarnings("MethodName")
+    XChainCount xChainAccountCreateCount();
 
-  /**
-   * The bridge associated with the attestation.
-   *
-   * @return An {@link XChainBridge}.
-   */
-  @JsonProperty("XChainBridge")
-  @SuppressWarnings("MethodName")
-  XChainBridge xChainBridge();
-
+    /**
+     * The bridge associated with the attestation.
+     *
+     * @return An {@link XChainBridge}.
+     */
+    @JsonProperty("XChainBridge")
+    @SuppressWarnings("MethodName")
+    XChainBridge xChainBridge();
 }

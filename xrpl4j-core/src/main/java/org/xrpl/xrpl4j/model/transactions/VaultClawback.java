@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.annotations.Beta;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -21,64 +20,55 @@ import java.util.Optional;
 @Beta
 public interface VaultClawback extends Transaction {
 
-  /**
-   * Construct a {@code VaultClawback} builder.
-   *
-   * @return An {@link ImmutableVaultClawback.Builder}.
-   */
-  static ImmutableVaultClawback.Builder builder() {
-    return ImmutableVaultClawback.builder();
-  }
+    /**
+     * Construct a {@code VaultClawback} builder.
+     *
+     * @return An {@link ImmutableVaultClawback.Builder}.
+     */
+    static ImmutableVaultClawback.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link VaultClawback}.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link VaultClawback}.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ID of the Vault to clawback from.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("VaultID")
-  Hash256 vaultId();
+    /**
+     * The ID of the Vault to clawback from.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("VaultID")
+    Hash256 vaultId();
 
-  /**
-   * The account from which to clawback vault shares.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Holder")
-  Address holder();
+    /**
+     * The account from which to clawback vault shares.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Holder")
+    Address holder();
 
-  /**
-   * The amount to clawback. When Amount is 0/absent, clawback all funds, up to the total shares the Holder owns.
-   *
-   * @return An optionally-present {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  Optional<CurrencyAmount> amount();
+    /**
+     * The amount to clawback. When Amount is 0/absent, clawback all funds, up to the total shares the Holder owns.
+     *
+     * @return An optionally-present {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    Optional<CurrencyAmount> amount();
 
-  /**
-   * Validates that the amount, if present, is not XRP.
-   */
-  @Value.Check
-  default void check() {
-    amount().ifPresent(amt -> amt.handle(
-      xrpAmount -> {
-        throw new IllegalArgumentException(
-          "VaultClawback amount cannot be XRP."
-        );
-      },
-      issuedCurrencyAmount -> { },
-      mptCurrencyAmount -> { }
-    ));
-  }
-
+    /**
+     * Validates that the amount, if present, is not XRP.
+     */
+    @Value.Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

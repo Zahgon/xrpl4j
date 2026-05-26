@@ -20,42 +20,39 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @Beta
 public interface LoanBrokerDelete extends Transaction {
 
-  /**
-   * Construct a {@code LoanBrokerDelete} builder.
-   *
-   * @return An {@link ImmutableLoanBrokerDelete.Builder}.
-   */
-  static ImmutableLoanBrokerDelete.Builder builder() {
-    return ImmutableLoanBrokerDelete.builder();
-  }
+    /**
+     * Construct a {@code LoanBrokerDelete} builder.
+     *
+     * @return An {@link ImmutableLoanBrokerDelete.Builder}.
+     */
+    static ImmutableLoanBrokerDelete.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link LoanBrokerDelete}.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link LoanBrokerDelete}.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The Loan Broker ID that the transaction is deleting.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("LoanBrokerID")
-  Hash256 loanBrokerId();
+    /**
+     * The Loan Broker ID that the transaction is deleting.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("LoanBrokerID")
+    Hash256 loanBrokerId();
 
-  /**
-   * Validates LoanBrokerDelete data verification preconditions.
-   */
-  @Value.Check
-  default void check() {
-    Preconditions.checkArgument(
-      !loanBrokerId().equals(Hash256.ZERO),
-      "LoanBrokerID must not be zero."
-    );
-  }
+    /**
+     * Validates LoanBrokerDelete data verification preconditions.
+     */
+    @Value.Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

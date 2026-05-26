@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.flags;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.xrpl.xrpl4j.model.transactions.NfTokenCreateOffer;
 
 /**
@@ -27,126 +26,114 @@ import org.xrpl.xrpl4j.model.transactions.NfTokenCreateOffer;
  */
 public class NfTokenCreateOfferFlags extends TransactionFlags {
 
-  /**
-   * Constant {@link NfTokenCreateOfferFlags} for the {@code tfSellNFToken} flag.
-   */
-  public static final NfTokenCreateOfferFlags SELL_NFTOKEN = new NfTokenCreateOfferFlags(0x00000001);
-
-  /**
-   * Constant {@link NfTokenCreateOfferFlags} for the {@code tfInnerBatchTxn} flag.
-   */
-  public static final NfTokenCreateOfferFlags INNER_BATCH_TXN =
-    new NfTokenCreateOfferFlags(TransactionFlags.INNER_BATCH_TXN.getValue());
-
-  private NfTokenCreateOfferFlags(long value) {
-    super(value);
-  }
-
-  private NfTokenCreateOfferFlags() {
-  }
-
-  /**
-   * Create a new {@link Builder}.
-   *
-   * @return A new {@link Builder}.
-   */
-  public static Builder builder() {
-    return new Builder();
-  }
-
-  private static NfTokenCreateOfferFlags of(
-    boolean tfFullyCanonicalSig,
-    boolean tfSellToken,
-    boolean tfInnerBatchTxn
-  ) {
-    return new NfTokenCreateOfferFlags(
-      TransactionFlags.of(
-        tfFullyCanonicalSig ? TransactionFlags.FULLY_CANONICAL_SIG : UNSET,
-        tfSellToken ? SELL_NFTOKEN : UNSET,
-        tfInnerBatchTxn ? INNER_BATCH_TXN : UNSET
-      ).getValue()
-    );
-  }
-
-  /**
-   * Construct {@link NfTokenCreateOfferFlags} with a given value.
-   *
-   * @param value The long-number encoded flags value of this {@link NfTokenCreateOfferFlags}.
-   *
-   * @return New {@link NfTokenCreateOfferFlags}.
-   */
-  public static NfTokenCreateOfferFlags of(long value) {
-    return new NfTokenCreateOfferFlags(value);
-  }
-
-  /**
-   * Construct an empty instance of {@link NfTokenCreateOfferFlags}. Transactions with empty flags will not be
-   * serialized with a {@code Flags} field.
-   *
-   * @return An empty {@link NfTokenCreateOfferFlags}.
-   */
-  public static NfTokenCreateOfferFlags empty() {
-    return new NfTokenCreateOfferFlags();
-  }
-
-  /**
-   * If set, indicates that the minted token may be burned by the issuer even if the issuer does not currently hold the
-   * token. The current holder of the token may always burn it.
-   *
-   * @return {@code true} if {@code tfBurnable} is set, otherwise {@code false}.
-   */
-  public boolean tfSellNfToken() {
-    return this.isSet(SELL_NFTOKEN);
-  }
-
-  /**
-   * Whether the {@code tfInnerBatchTxn} flag is set.
-   *
-   * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
-   */
-  public boolean tfInnerBatchTxn() {
-    return this.isSet(INNER_BATCH_TXN);
-  }
-
-  /**
-   * A builder class for {@link NfTokenCreateOfferFlags}.
-   */
-  public static class Builder {
-
-    boolean tfSellNfToken = false;
-    boolean tfInnerBatchTxn = false;
+    /**
+     * Constant {@link NfTokenCreateOfferFlags} for the {@code tfSellNFToken} flag.
+     */
+    public static final NfTokenCreateOfferFlags SELL_NFTOKEN = new NfTokenCreateOfferFlags(0x00000001);
 
     /**
-     * Set {@code tfSellToken} to the given value.
-     *
-     * @param tfSellNfToken A boolean value.
-     *
-     * @return The same {@link NfTokenMintFlags.Builder}.
+     * Constant {@link NfTokenCreateOfferFlags} for the {@code tfInnerBatchTxn} flag.
      */
-    public Builder tfSellToken(boolean tfSellNfToken) {
-      this.tfSellNfToken = tfSellNfToken;
-      return this;
+    public static final NfTokenCreateOfferFlags INNER_BATCH_TXN = new NfTokenCreateOfferFlags(TransactionFlags.INNER_BATCH_TXN.getValue());
+
+    private NfTokenCreateOfferFlags(long value) {
+        super(value);
+    }
+
+    private NfTokenCreateOfferFlags() {
     }
 
     /**
-     * Set {@code tfInnerBatchTxn} to the given value.
+     * Create a new {@link Builder}.
      *
-     * @param tfInnerBatchTxn A boolean value.
-     *
-     * @return The same {@link Builder}.
+     * @return A new {@link Builder}.
      */
-    public Builder tfInnerBatchTxn(boolean tfInnerBatchTxn) {
-      this.tfInnerBatchTxn = tfInnerBatchTxn;
-      return this;
+    public static Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    private static NfTokenCreateOfferFlags of(boolean tfFullyCanonicalSig, boolean tfSellToken, boolean tfInnerBatchTxn) {
+        return new NfTokenCreateOfferFlags(TransactionFlags.of(tfFullyCanonicalSig ? TransactionFlags.FULLY_CANONICAL_SIG : UNSET, tfSellToken ? SELL_NFTOKEN : UNSET, tfInnerBatchTxn ? INNER_BATCH_TXN : UNSET).getValue());
     }
 
     /**
-     * Build a new {@link NfTokenCreateOfferFlags} from the current boolean values.
+     * Construct {@link NfTokenCreateOfferFlags} with a given value.
      *
-     * @return A new {@link NfTokenCreateOfferFlags}.
+     * @param value The long-number encoded flags value of this {@link NfTokenCreateOfferFlags}.
+     *
+     * @return New {@link NfTokenCreateOfferFlags}.
      */
-    public NfTokenCreateOfferFlags build() {
-      return NfTokenCreateOfferFlags.of(true, tfSellNfToken, tfInnerBatchTxn);
+    public static NfTokenCreateOfferFlags of(long value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    /**
+     * Construct an empty instance of {@link NfTokenCreateOfferFlags}. Transactions with empty flags will not be
+     * serialized with a {@code Flags} field.
+     *
+     * @return An empty {@link NfTokenCreateOfferFlags}.
+     */
+    public static NfTokenCreateOfferFlags empty() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * If set, indicates that the minted token may be burned by the issuer even if the issuer does not currently hold the
+     * token. The current holder of the token may always burn it.
+     *
+     * @return {@code true} if {@code tfBurnable} is set, otherwise {@code false}.
+     */
+    public boolean tfSellNfToken() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Whether the {@code tfInnerBatchTxn} flag is set.
+     *
+     * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
+     */
+    public boolean tfInnerBatchTxn() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * A builder class for {@link NfTokenCreateOfferFlags}.
+     */
+    public static class Builder {
+
+        boolean tfSellNfToken = false;
+
+        boolean tfInnerBatchTxn = false;
+
+        /**
+         * Set {@code tfSellToken} to the given value.
+         *
+         * @param tfSellNfToken A boolean value.
+         *
+         * @return The same {@link NfTokenMintFlags.Builder}.
+         */
+        public Builder tfSellToken(boolean tfSellNfToken) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfInnerBatchTxn} to the given value.
+         *
+         * @param tfInnerBatchTxn A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfInnerBatchTxn(boolean tfInnerBatchTxn) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Build a new {@link NfTokenCreateOfferFlags} from the current boolean values.
+         *
+         * @return A new {@link NfTokenCreateOfferFlags}.
+         */
+        public NfTokenCreateOfferFlags build() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+    }
 }

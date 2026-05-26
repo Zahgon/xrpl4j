@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,7 +34,6 @@ import org.xrpl.xrpl4j.model.jackson.modules.TransactionResultDeserializer;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
 import org.xrpl.xrpl4j.model.transactions.Transaction;
 import org.xrpl.xrpl4j.model.transactions.TransactionMetadata;
-
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -49,91 +47,89 @@ import java.util.Optional;
 @JsonDeserialize(using = TransactionResultDeserializer.class)
 public interface TransactionResult<TxnType extends Transaction> extends XrplResult {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @param <T> The actual type of {@link Transaction}.
-   *
-   * @return An {@link ImmutableTransactionResult.Builder}
-   */
-  static <T extends Transaction> ImmutableTransactionResult.Builder<T> builder() {
-    return ImmutableTransactionResult.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @param <T> The actual type of {@link Transaction}.
+     *
+     * @return An {@link ImmutableTransactionResult.Builder}
+     */
+    static <T extends Transaction> ImmutableTransactionResult.Builder<T> builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link Transaction} that was returned as a result of the "tx" call.
-   *
-   * @return A {@link Transaction} of type {@link TxnType}.
-   */
-  @JsonUnwrapped
-  TxnType transaction();
+    /**
+     * The {@link Transaction} that was returned as a result of the "tx" call.
+     *
+     * @return A {@link Transaction} of type {@link TxnType}.
+     */
+    @JsonUnwrapped
+    TxnType transaction();
 
-  /**
-   * The ledger index of the ledger that includes this {@link Transaction}.
-   *
-   * @return An optionally-present {@link LedgerIndex}.
-   */
-  @JsonProperty("ledger_index")
-  Optional<LedgerIndex> ledgerIndex();
+    /**
+     * The ledger index of the ledger that includes this {@link Transaction}.
+     *
+     * @return An optionally-present {@link LedgerIndex}.
+     */
+    @JsonProperty("ledger_index")
+    Optional<LedgerIndex> ledgerIndex();
 
-  /**
-   * Get {@link #ledgerIndex()}, or throw an {@link IllegalStateException} if {@link #ledgerIndex()} is empty.
-   *
-   * @return The value of {@link #ledgerIndex()}.
-   *
-   * @throws IllegalStateException If {@link #ledgerIndex()} is empty.
-   */
-  @JsonIgnore
-  @Value.Auxiliary
-  default LedgerIndex ledgerIndexSafe() {
-    return ledgerIndex()
-      .orElseThrow(() -> new IllegalStateException("Result did not contain a ledgerIndex."));
-  }
+    /**
+     * Get {@link #ledgerIndex()}, or throw an {@link IllegalStateException} if {@link #ledgerIndex()} is empty.
+     *
+     * @return The value of {@link #ledgerIndex()}.
+     *
+     * @throws IllegalStateException If {@link #ledgerIndex()} is empty.
+     */
+    @JsonIgnore
+    @Value.Auxiliary
+    default LedgerIndex ledgerIndexSafe() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The identifying hash of the {@link Transaction}.
-   *
-   * @return The {@link Hash256} of {@link #transaction()}.
-   */
-  Hash256 hash();
+    /**
+     * The identifying hash of the {@link Transaction}.
+     *
+     * @return The {@link Hash256} of {@link #transaction()}.
+     */
+    Hash256 hash();
 
-  /**
-   * {@code true} if this data is from a validated ledger version; If {@code false}, this data is not final.
-   *
-   * @return {@code true} if this data is from a validated ledger version; If {@code false}, this data is not final.
-   */
-  @Value.Default
-  default boolean validated() {
-    return false;
-  }
+    /**
+     * {@code true} if this data is from a validated ledger version; If {@code false}, this data is not final.
+     *
+     * @return {@code true} if this data is from a validated ledger version; If {@code false}, this data is not final.
+     */
+    @Value.Default
+    default boolean validated() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Metadata about the transaction if this data is from a validated ledger version.
-   *
-   * @return metadata or empty for non-validated transactions.
-   */
-  @JsonProperty("meta")
-  @JsonAlias("metaData")
-  Optional<TransactionMetadata> metadata();
+    /**
+     * Metadata about the transaction if this data is from a validated ledger version.
+     *
+     * @return metadata or empty for non-validated transactions.
+     */
+    @JsonProperty("meta")
+    @JsonAlias("metaData")
+    Optional<TransactionMetadata> metadata();
 
-  /**
-   * The approximate close time (using Ripple Epoch) of the ledger containing this transaction. This is an undocumented
-   * field.
-   *
-   * @return An optionally-present {@link UnsignedLong}.
-   */
-  @JsonProperty("date")
-  Optional<UnsignedLong> closeDate();
+    /**
+     * The approximate close time (using Ripple Epoch) of the ledger containing this transaction. This is an undocumented
+     * field.
+     *
+     * @return An optionally-present {@link UnsignedLong}.
+     */
+    @JsonProperty("date")
+    Optional<UnsignedLong> closeDate();
 
-  /**
-   * The approximate close time in UTC offset. This is derived from undocumented field.
-   *
-   * @return An optionally-present {@link ZonedDateTime}.
-   */
-  @JsonIgnore
-  @Value.Auxiliary
-  default Optional<ZonedDateTime> closeDateHuman() {
-    return closeDate().map(TimeUtils::xrplTimeToZonedDateTime);
-  }
-
+    /**
+     * The approximate close time in UTC offset. This is derived from undocumented field.
+     *
+     * @return An optionally-present {@link ZonedDateTime}.
+     */
+    @JsonIgnore
+    @Value.Auxiliary
+    default Optional<ZonedDateTime> closeDateHuman() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

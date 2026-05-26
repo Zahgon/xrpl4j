@@ -24,72 +24,71 @@ import org.xrpl.xrpl4j.model.transactions.XrpCurrencyAmount;
 @JsonDeserialize(as = ImmutableXChainCreateAccountProofSig.class)
 public interface XChainCreateAccountProofSig {
 
-  /**
-   * Construct a {@code XChainCreateAccountProofSig} builder.
-   *
-   * @return An {@link ImmutableXChainCreateAccountProofSig.Builder}.
-   */
-  static ImmutableXChainCreateAccountProofSig.Builder builder() {
-    return ImmutableXChainCreateAccountProofSig.builder();
-  }
+    /**
+     * Construct a {@code XChainCreateAccountProofSig} builder.
+     *
+     * @return An {@link ImmutableXChainCreateAccountProofSig.Builder}.
+     */
+    static ImmutableXChainCreateAccountProofSig.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The amount committed by the {@link org.xrpl.xrpl4j.model.transactions.XChainAccountCreateCommit} transaction on the
-   * source chain.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  CurrencyAmount amount();
+    /**
+     * The amount committed by the {@link org.xrpl.xrpl4j.model.transactions.XChainAccountCreateCommit} transaction on the
+     * source chain.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    CurrencyAmount amount();
 
-  /**
-   * The total amount, in XRP, to be rewarded for providing a signature for cross-chain transfer or for signing for the
-   * cross-chain reward. This amount will be split among the signers.
-   *
-   * @return An {@link XrpCurrencyAmount}.
-   */
-  @JsonProperty("SignatureReward")
-  XrpCurrencyAmount signatureReward();
+    /**
+     * The total amount, in XRP, to be rewarded for providing a signature for cross-chain transfer or for signing for the
+     * cross-chain reward. This amount will be split among the signers.
+     *
+     * @return An {@link XrpCurrencyAmount}.
+     */
+    @JsonProperty("SignatureReward")
+    XrpCurrencyAmount signatureReward();
 
-  /**
-   * The account that should receive this signer's share of the {@link #signatureReward()}.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("AttestationRewardAccount")
-  Address attestationRewardAccount();
+    /**
+     * The account that should receive this signer's share of the {@link #signatureReward()}.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("AttestationRewardAccount")
+    Address attestationRewardAccount();
 
-  /**
-   * The account on the door account's signer list that is signing the transaction.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("AttestationSignerAccount")
-  Address attestationSignerAccount();
+    /**
+     * The account on the door account's signer list that is signing the transaction.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("AttestationSignerAccount")
+    Address attestationSignerAccount();
 
-  /**
-   * The destination account for the funds on the destination chain.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Destination")
-  Address destination();
+    /**
+     * The destination account for the funds on the destination chain.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Destination")
+    Address destination();
 
-  /**
-   * The public key used to verify the signature.
-   *
-   * @return A {@link PublicKey}.
-   */
-  @JsonProperty("PublicKey")
-  PublicKey publicKey();
+    /**
+     * The public key used to verify the signature.
+     *
+     * @return A {@link PublicKey}.
+     */
+    @JsonProperty("PublicKey")
+    PublicKey publicKey();
 
-  /**
-   * A boolean representing the chain where the event occurred.
-   *
-   * @return {@code true} if the event occurred on the locking chain, otherwise {@code false}.
-   */
-  @JsonProperty("WasLockingChainSend")
-  @JsonFormat(shape = Shape.NUMBER)
-  boolean wasLockingChainSend();
-
+    /**
+     * A boolean representing the chain where the event occurred.
+     *
+     * @return {@code true} if the event occurred on the locking chain, otherwise {@code false}.
+     */
+    @JsonProperty("WasLockingChainSend")
+    @JsonFormat(shape = Shape.NUMBER)
+    boolean wasLockingChainSend();
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions.metadata;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -31,7 +30,6 @@ import org.xrpl.xrpl4j.model.transactions.CredentialWrapper;
 import org.xrpl.xrpl4j.model.transactions.DepositPreAuth;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
 import org.xrpl.xrpl4j.model.transactions.Transaction;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -48,66 +46,66 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableMetaDepositPreAuthObject.class)
 public interface MetaDepositPreAuthObject extends MetaLedgerObject {
 
-  /**
-   * The account that granted the preauthorization. (The destination of the preauthorized payments.)
-   *
-   * @return The {@link Address} of the account.
-   */
-  @JsonProperty("Account")
-  Optional<Address> account();
+    /**
+     * The account that granted the preauthorization. (The destination of the preauthorized payments.)
+     *
+     * @return The {@link Address} of the account.
+     */
+    @JsonProperty("Account")
+    Optional<Address> account();
 
-  /**
-   * The account that received the preauthorization. (The sender of the preauthorized payments.)
-   *
-   * @return The {@link Address} of the account to authorize.
-   */
-  @JsonProperty("Authorize")
-  Optional<Address> authorize();
+    /**
+     * The account that received the preauthorization. (The sender of the preauthorized payments.)
+     *
+     * @return The {@link Address} of the account to authorize.
+     */
+    @JsonProperty("Authorize")
+    Optional<Address> authorize();
 
-  /**
-   * The credential(s) that received the preauthorization.
-   *
-   * @return A list of {@link MetaCredentialWrapper}.
-   */
-  @JsonProperty("AuthorizeCredentials")
-  List<MetaCredentialWrapper> authorizeCredentials();
+    /**
+     * The credential(s) that received the preauthorization.
+     *
+     * @return A list of {@link MetaCredentialWrapper}.
+     */
+    @JsonProperty("AuthorizeCredentials")
+    List<MetaCredentialWrapper> authorizeCredentials();
 
-  /**
-   * A bit-map of boolean flags. No flags are defined for {@link MetaDepositPreAuthObject}s, so this value is always 0.
-   *
-   * @return Always {@link Flags#UNSET}.
-   */
-  @JsonProperty("Flags")
-  @Value.Derived
-  default Flags flags() {
-    return Flags.UNSET;
-  }
+    /**
+     * A bit-map of boolean flags. No flags are defined for {@link MetaDepositPreAuthObject}s, so this value is always 0.
+     *
+     * @return Always {@link Flags#UNSET}.
+     */
+    @JsonProperty("Flags")
+    @Value.Derived
+    default Flags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
-   * of multiple pages.
-   *
-   * <p>Note: The object does not contain a direct link to the owner directory containing it, since that value can be
-   * derived from the Account.
-   *
-   * @return A {@link String} containing the owner node hint.
-   */
-  @JsonProperty("OwnerNode")
-  Optional<String> ownerNode();
+    /**
+     * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
+     * of multiple pages.
+     *
+     * <p>Note: The object does not contain a direct link to the owner directory containing it, since that value can be
+     * derived from the Account.
+     *
+     * @return A {@link String} containing the owner node hint.
+     */
+    @JsonProperty("OwnerNode")
+    Optional<String> ownerNode();
 
-  /**
-   * The identifying hash of the transaction that most recently modified this object.
-   *
-   * @return A {@link Hash256} containing the previous transaction hash.
-   */
-  @JsonProperty("PreviousTxnID")
-  Optional<Hash256> previousTransactionId();
+    /**
+     * The identifying hash of the transaction that most recently modified this object.
+     *
+     * @return A {@link Hash256} containing the previous transaction hash.
+     */
+    @JsonProperty("PreviousTxnID")
+    Optional<Hash256> previousTransactionId();
 
-  /**
-   * The index of the ledger that contains the transaction that most recently modified this object.
-   *
-   * @return An {@link LedgerIndex} representing the previous transaction ledger sequence.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  Optional<LedgerIndex> previousTransactionLedgerSequence();
+    /**
+     * The index of the ledger that contains the transaction that most recently modified this object.
+     *
+     * @return An {@link LedgerIndex} representing the previous transaction ledger sequence.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    Optional<LedgerIndex> previousTransactionLedgerSequence();
 }

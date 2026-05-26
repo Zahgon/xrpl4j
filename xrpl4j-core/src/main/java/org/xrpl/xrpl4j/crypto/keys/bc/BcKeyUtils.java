@@ -19,9 +19,7 @@ package org.xrpl.xrpl4j.crypto.keys.bc;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import static org.xrpl.xrpl4j.codec.addresses.KeyType.ED25519;
-
 import com.google.common.base.Preconditions;
 import com.google.common.io.BaseEncoding;
 import org.bouncycastle.crypto.params.ECDomainParameters;
@@ -38,7 +36,6 @@ import org.xrpl.xrpl4j.codec.addresses.UnsignedByteArray;
 import org.xrpl.xrpl4j.crypto.keys.PrivateKey;
 import org.xrpl.xrpl4j.crypto.keys.PublicKey;
 import org.xrpl.xrpl4j.crypto.signing.bc.Secp256k1;
-
 import java.math.BigInteger;
 import java.security.Security;
 import java.util.Arrays;
@@ -49,196 +46,134 @@ import java.util.Objects;
  */
 public final class BcKeyUtils {
 
-  private static final String SECP256K1 = "secp256k1";
-  private static final ECNamedCurveParameterSpec EC_PARAMS = ECNamedCurveTable.getParameterSpec(SECP256K1);
-  public static final ECDomainParameters PARAMS =
-    new ECDomainParameters(
-      EC_PARAMS.getCurve(),
-      EC_PARAMS.getG(),
-      EC_PARAMS.getN(),
-      EC_PARAMS.getH()
-    );
+    private static final String SECP256K1 = "secp256k1";
 
-  static {
-    if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
-      final BouncyCastleProvider bcProvider = new BouncyCastleProvider();
-      if (Security.addProvider(bcProvider) == -1) {
-        throw new RuntimeException("Could not configure BouncyCastle provider");
-      }
+    private static final ECNamedCurveParameterSpec EC_PARAMS = ECNamedCurveTable.getParameterSpec(SECP256K1);
+
+    public static final ECDomainParameters PARAMS = new ECDomainParameters(EC_PARAMS.getCurve(), EC_PARAMS.getG(), EC_PARAMS.getN(), EC_PARAMS.getH());
+
+    static {
+        if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            final BouncyCastleProvider bcProvider = new BouncyCastleProvider();
+            if (Security.addProvider(bcProvider) == -1) {
+                throw new RuntimeException("Could not configure BouncyCastle provider");
+            }
+        }
     }
-  }
 
-  /**
-   * No-args Constructor to prevent instantiation.
-   */
-  private BcKeyUtils() {
-  }
-
-  /**
-   * Convert from a {@link Ed25519PrivateKeyParameters} to a {@link PrivateKey}.
-   *
-   * @param ed25519PrivateKeyParameters A {@link Ed25519PrivateKeyParameters}.
-   *
-   * @return A {@link PrivateKey}.
-   */
-  public static PrivateKey toPrivateKey(final Ed25519PrivateKeyParameters ed25519PrivateKeyParameters) {
-    Objects.requireNonNull(ed25519PrivateKeyParameters);
-
-    // XRPL ED25519 keys are prefixed with 0xED so that the keys are 33 bytes and match the length of sekp256k1 keys.
-    // Bouncy Castle only deals with 32 byte keys, but in XRPL these often include a one byte prefix (i.e., `0xED`) to
-    // indicate this is an ed25519 private key. However, this is taken care of by the `PrivateKey.fromNaturalBytes`.
-    return PrivateKey.fromNaturalBytes(
-      UnsignedByteArray.of(ed25519PrivateKeyParameters.getEncoded()), KeyType.ED25519
-    );
-  }
-
-  /**
-   * Convert from a {@link ECPrivateKeyParameters} to a {@link PrivateKey}.
-   *
-   * @param ecPrivateKeyParameters A {@link ECPrivateKeyParameters}.
-   *
-   * @return A {@link PrivateKey}.
-   */
-  public static PrivateKey toPrivateKey(final ECPrivateKeyParameters ecPrivateKeyParameters) {
-    return PrivateKey.fromPrefixedBytes(
-      // Call `UnsignedByteArray.from` to properly prefix-pad the BigInteger's bytes.
-      Secp256k1.toUnsignedByteArray(ecPrivateKeyParameters.getD(), 33)
-    );
-  }
-
-  /**
-   * Convert from a {@link PublicKey} to a {@link Ed25519PublicKeyParameters}.
-   *
-   * @param publicKey A {@link PublicKey} with
-   *
-   * @return A {@link Ed25519PublicKeyParameters}.
-   */
-  public static Ed25519PublicKeyParameters toEd25519PublicKeyParameters(final PublicKey publicKey) {
-    Objects.requireNonNull(publicKey);
-    Preconditions.checkArgument(publicKey.keyType() == ED25519);
-
-    final byte[] bytes = publicKey.value().toByteArray();
-    Preconditions.checkArgument(bytes.length == 33);
-
-    // Remove the leading prefix byte, which will be `0xED`
-    final byte[] truncatedBytes = Arrays.copyOfRange(bytes, 1, bytes.length);
-    return new Ed25519PublicKeyParameters(truncatedBytes, 0);
-  }
-
-  /**
-   * Convert from a {@link Ed25519PublicKeyParameters} to a {@link PublicKey}.
-   *
-   * @param ed25519PublicKeyParameters A {@link Ed25519PublicKeyParameters}.
-   *
-   * @return A {@link PublicKey}.
-   */
-  public static PublicKey toPublicKey(final Ed25519PublicKeyParameters ed25519PublicKeyParameters) {
-    Objects.requireNonNull(ed25519PublicKeyParameters);
-    // XRPL ED25519 keys are prefixed with 0xED so that the keys are 33 bytes and match the length of sekp256k1 keys.
-    // Bouncy Castle only deals with 32 byte keys, so we need to manually add the prefix
-    UnsignedByteArray prefixedPublicKey = UnsignedByteArray.of(PublicKey.ED2559_PREFIX)
-      .append(UnsignedByteArray.of(ed25519PublicKeyParameters.getEncoded()));
-
-    return PublicKey.builder()
-      .value(prefixedPublicKey)
-      .build();
-  }
-
-  /**
-   * Convert from a {@link ECPublicKeyParameters} to a {@link PublicKey}.
-   *
-   * @param ecPublicKeyParameters A {@link ECPublicKeyParameters}.
-   *
-   * @return A {@link PublicKey}.
-   */
-  public static PublicKey toPublicKey(final ECPublicKeyParameters ecPublicKeyParameters) {
-    Objects.requireNonNull(ecPublicKeyParameters);
-    // The binary version of an EC PublicKey is the encoded ECPoint, compressed.
-    final byte[] encodedPublicKey = ecPublicKeyParameters.getQ().getEncoded(true);
-    return PublicKey.builder()
-      .value(UnsignedByteArray.of(encodedPublicKey))
-      .build();
-  }
-
-  /**
-   * Convert from a {@link ECPrivateKeyParameters} to a {@link PublicKey}.
-   *
-   * @param ecPrivateKeyParameters A {@link ECPrivateKeyParameters}.
-   *
-   * @return A {@link PublicKey}.
-   */
-  public static ECPublicKeyParameters toPublicKey(final ECPrivateKeyParameters ecPrivateKeyParameters) {
-    Objects.requireNonNull(ecPrivateKeyParameters);
-    ECPoint ecPoint = BcKeyUtils.PARAMS.getG().multiply(ecPrivateKeyParameters.getD());
-    return new ECPublicKeyParameters(ecPoint, PARAMS);
-  }
-
-  /**
-   * Convert from a {@link PrivateKey} to a {@link PublicKey}.
-   *
-   * @param privateKey A {@link PrivateKey}.
-   *
-   * @return A {@link PublicKey}.
-   */
-  public static PublicKey toPublicKey(final PrivateKey privateKey) {
-    Objects.requireNonNull(privateKey);
-
-    if (privateKey.keyType() == ED25519) {
-      final Ed25519PrivateKeyParameters ed25519PrivateKeyParameters = toEd25519PrivateKeyParams(privateKey);
-      return toPublicKey(ed25519PrivateKeyParameters.generatePublicKey());
-    } else if (privateKey.keyType() == KeyType.SECP256K1) {
-      final ECPrivateKeyParameters ecPrivateKeyParameters = toEcPrivateKeyParams(privateKey);
-      final ECPublicKeyParameters ecPublicKeyParameters = toPublicKey(ecPrivateKeyParameters);
-      return toPublicKey(ecPublicKeyParameters);
-    } else {
-      throw new IllegalArgumentException("Invalid KeyType: " + privateKey.keyType());
+    /**
+     * No-args Constructor to prevent instantiation.
+     */
+    private BcKeyUtils() {
     }
-  }
 
-  /**
-   * Convert from a {@link PrivateKey} to a {@link Ed25519PrivateKeyParameters}.
-   *
-   * @param privateKey A {@link PrivateKey}.
-   *
-   * @return A {@link Ed25519PrivateKeyParameters}.
-   */
-  public static Ed25519PrivateKeyParameters toEd25519PrivateKeyParams(PrivateKey privateKey) {
-    Objects.requireNonNull(privateKey);
-    Preconditions.checkArgument(privateKey.keyType() == ED25519);
-    // Use offset 0 with no prefix
-    return new Ed25519PrivateKeyParameters(privateKey.naturalBytes().toByteArray(), 0);
-  }
+    /**
+     * Convert from a {@link Ed25519PrivateKeyParameters} to a {@link PrivateKey}.
+     *
+     * @param ed25519PrivateKeyParameters A {@link Ed25519PrivateKeyParameters}.
+     *
+     * @return A {@link PrivateKey}.
+     */
+    public static PrivateKey toPrivateKey(final Ed25519PrivateKeyParameters ed25519PrivateKeyParameters) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Convert from a {@link PublicKey} to a {@link ECPublicKeyParameters}.
-   *
-   * @param publicKey A {@link PublicKey} with
-   *
-   * @return A {@link ECPublicKeyParameters}.
-   */
-  public static ECPublicKeyParameters toEcPublicKeyParameters(final PublicKey publicKey) {
-    Objects.requireNonNull(publicKey);
-    Preconditions.checkArgument(publicKey.keyType() == KeyType.SECP256K1);
+    /**
+     * Convert from a {@link ECPrivateKeyParameters} to a {@link PrivateKey}.
+     *
+     * @param ecPrivateKeyParameters A {@link ECPrivateKeyParameters}.
+     *
+     * @return A {@link PrivateKey}.
+     */
+    public static PrivateKey toPrivateKey(final ECPrivateKeyParameters ecPrivateKeyParameters) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-    ECPoint ecPoint = PARAMS.getCurve()
-      .decodePoint(publicKey.value().toByteArray());
-    return new ECPublicKeyParameters(ecPoint, PARAMS);
-  }
+    /**
+     * Convert from a {@link PublicKey} to a {@link Ed25519PublicKeyParameters}.
+     *
+     * @param publicKey A {@link PublicKey} with
+     *
+     * @return A {@link Ed25519PublicKeyParameters}.
+     */
+    public static Ed25519PublicKeyParameters toEd25519PublicKeyParameters(final PublicKey publicKey) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Convert from a {@link PrivateKey} to a {@link ECPrivateKeyParameters}.
-   *
-   * @param privateKey A {@link PrivateKey}.
-   *
-   * @return A {@link ECPrivateKeyParameters}.
-   */
-  public static ECPrivateKeyParameters toEcPrivateKeyParams(final PrivateKey privateKey) {
-    Objects.requireNonNull(privateKey);
-    Preconditions.checkArgument(privateKey.keyType() == KeyType.SECP256K1, "KeyType must be SECP256K1");
+    /**
+     * Convert from a {@link Ed25519PublicKeyParameters} to a {@link PublicKey}.
+     *
+     * @param ed25519PublicKeyParameters A {@link Ed25519PublicKeyParameters}.
+     *
+     * @return A {@link PublicKey}.
+     */
+    public static PublicKey toPublicKey(final Ed25519PublicKeyParameters ed25519PublicKeyParameters) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-    // From http://www.secg.org/sec1-v2.pdf: A PrivateKey consists of an elliptic curve secret key `d` which is an
-    // integer in the interval [1, n − 1]. Therefore, it is safe to assume that the signum below should always be 1.
-    final BigInteger secretKeyD = new BigInteger(1, privateKey.naturalBytes().toByteArray());
-    return new ECPrivateKeyParameters(secretKeyD, BcKeyUtils.PARAMS);
-  }
+    /**
+     * Convert from a {@link ECPublicKeyParameters} to a {@link PublicKey}.
+     *
+     * @param ecPublicKeyParameters A {@link ECPublicKeyParameters}.
+     *
+     * @return A {@link PublicKey}.
+     */
+    public static PublicKey toPublicKey(final ECPublicKeyParameters ecPublicKeyParameters) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Convert from a {@link ECPrivateKeyParameters} to a {@link PublicKey}.
+     *
+     * @param ecPrivateKeyParameters A {@link ECPrivateKeyParameters}.
+     *
+     * @return A {@link PublicKey}.
+     */
+    public static ECPublicKeyParameters toPublicKey(final ECPrivateKeyParameters ecPrivateKeyParameters) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Convert from a {@link PrivateKey} to a {@link PublicKey}.
+     *
+     * @param privateKey A {@link PrivateKey}.
+     *
+     * @return A {@link PublicKey}.
+     */
+    public static PublicKey toPublicKey(final PrivateKey privateKey) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Convert from a {@link PrivateKey} to a {@link Ed25519PrivateKeyParameters}.
+     *
+     * @param privateKey A {@link PrivateKey}.
+     *
+     * @return A {@link Ed25519PrivateKeyParameters}.
+     */
+    public static Ed25519PrivateKeyParameters toEd25519PrivateKeyParams(PrivateKey privateKey) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Convert from a {@link PublicKey} to a {@link ECPublicKeyParameters}.
+     *
+     * @param publicKey A {@link PublicKey} with
+     *
+     * @return A {@link ECPublicKeyParameters}.
+     */
+    public static ECPublicKeyParameters toEcPublicKeyParameters(final PublicKey publicKey) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Convert from a {@link PrivateKey} to a {@link ECPrivateKeyParameters}.
+     *
+     * @param privateKey A {@link PrivateKey}.
+     *
+     * @return A {@link ECPrivateKeyParameters}.
+     */
+    public static ECPrivateKeyParameters toEcPrivateKeyParams(final PrivateKey privateKey) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

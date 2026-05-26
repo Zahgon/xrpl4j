@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -37,36 +36,36 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @JsonDeserialize(as = ImmutableTicketCreate.class)
 public interface TicketCreate extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableTicketCreate.Builder}.
-   */
-  static ImmutableTicketCreate.Builder builder() {
-    return ImmutableTicketCreate.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableTicketCreate.Builder}.
+     */
+    static ImmutableTicketCreate.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * How many Tickets to create. This number of tickets cannot cause the account to own more than 250 Tickets after
-   * executing this transaction.
-   *
-   * @return An {@link UnsignedInteger} denoting the number of Tickets to create.
-   */
-  @JsonProperty("TicketCount")
-  UnsignedInteger ticketCount();
+    /**
+     * How many Tickets to create. This number of tickets cannot cause the account to own more than 250 Tickets after
+     * executing this transaction.
+     *
+     * @return An {@link UnsignedInteger} denoting the number of Tickets to create.
+     */
+    @JsonProperty("TicketCount")
+    UnsignedInteger ticketCount();
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link TicketCreate}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link TicketCreate}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -19,8 +19,6 @@ package org.xrpl.xrpl4j.model.client.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -37,115 +35,114 @@ import org.xrpl.xrpl4j.model.client.common.LedgerSpecifier;
 @JsonDeserialize(as = ImmutableLedgerRequestParams.class)
 public interface LedgerRequestParams extends XrplRequestParams {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableLedgerRequestParams.Builder}.
-   */
-  static ImmutableLedgerRequestParams.Builder builder() {
-    return ImmutableLedgerRequestParams.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableLedgerRequestParams.Builder}.
+     */
+    static ImmutableLedgerRequestParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Specifies the ledger version to request. A ledger version can be specified by ledger hash,
-   * numerical ledger index, or a shortcut value.
-   *
-   * @return A {@link LedgerSpecifier} specifying the ledger version to request.
-   */
-  @JsonUnwrapped
-  LedgerSpecifier ledgerSpecifier();
+    /**
+     * Specifies the ledger version to request. A ledger version can be specified by ledger hash,
+     * numerical ledger index, or a shortcut value.
+     *
+     * @return A {@link LedgerSpecifier} specifying the ledger version to request.
+     */
+    @JsonUnwrapped
+    LedgerSpecifier ledgerSpecifier();
 
-  /**
-   * If true, return full information on the entire ledger. Ignored if you did not specify a {@code ledgerHash} in
-   * {@link #ledgerSpecifier()}}.
-   * Defaults to false. (Equivalent to enabling transactions, accounts, and expand.)
-   *
-   * <p>Caution: This is a very large amount of data -- on the order of several hundred megabytes!
-   *
-   * <p>Note: You must be a rippled Admin to set to true.
-   *
-   * @return {@code true} if requesting full information on the entire ledger, otherwise {@code false}.
-   *   Defaults to {@code false}.
-   */
-  @Value.Default
-  default boolean full() {
-    return false;
-  }
+    /**
+     * If true, return full information on the entire ledger. Ignored if you did not specify a {@code ledgerHash} in
+     * {@link #ledgerSpecifier()}}.
+     * Defaults to false. (Equivalent to enabling transactions, accounts, and expand.)
+     *
+     * <p>Caution: This is a very large amount of data -- on the order of several hundred megabytes!
+     *
+     * <p>Note: You must be a rippled Admin to set to true.
+     *
+     * @return {@code true} if requesting full information on the entire ledger, otherwise {@code false}.
+     *   Defaults to {@code false}.
+     */
+    @Value.Default
+    default boolean full() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * If true, return information on accounts in the ledger. Ignored if you did not specify a {@code ledgerHash} in
-   * {@link #ledgerSpecifier()}}.
-   *
-   * <p>Caution: This returns a very large amount of data!
-   *
-   * <p>Note: You must be a rippled Admin to set to true.
-   *
-   * @return {@code true} if requesting account information, otherwise {@code false}.
-   *   Defaults to {@code false}.
-   */
-  @Value.Default
-  default boolean accounts() {
-    return false;
-  }
+    /**
+     * If true, return information on accounts in the ledger. Ignored if you did not specify a {@code ledgerHash} in
+     * {@link #ledgerSpecifier()}}.
+     *
+     * <p>Caution: This returns a very large amount of data!
+     *
+     * <p>Note: You must be a rippled Admin to set to true.
+     *
+     * @return {@code true} if requesting account information, otherwise {@code false}.
+     *   Defaults to {@code false}.
+     */
+    @Value.Default
+    default boolean accounts() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * If true, return information on transactions in the specified ledger version. Defaults to false.
-   * Ignored if you did not specify a {@code ledgerHash} in
-   * {@link #ledgerSpecifier()}}.
-   *
-   * @return {@code true} if requesting transactions, otherwise {@code false}.
-   *   Defaults to {@code false}.
-   */
-  @Value.Default
-  default boolean transactions() {
-    return false;
-  }
+    /**
+     * If true, return information on transactions in the specified ledger version. Defaults to false.
+     * Ignored if you did not specify a {@code ledgerHash} in
+     * {@link #ledgerSpecifier()}}.
+     *
+     * @return {@code true} if requesting transactions, otherwise {@code false}.
+     *   Defaults to {@code false}.
+     */
+    @Value.Default
+    default boolean transactions() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Provide full JSON-formatted information for transaction/account information instead of only hashes.
-   * Defaults to false. Ignored unless you request {@link #transactions()}, {@link #accounts()}, or both.
-   *
-   * @return {@code true} if requesting expanded transactions, otherwise {@code false}. Always {@code true}.
-   */
-  @Value.Derived
-  default boolean expand() {
-    return true;
-  }
+    /**
+     * Provide full JSON-formatted information for transaction/account information instead of only hashes.
+     * Defaults to false. Ignored unless you request {@link #transactions()}, {@link #accounts()}, or both.
+     *
+     * @return {@code true} if requesting expanded transactions, otherwise {@code false}. Always {@code true}.
+     */
+    @Value.Derived
+    default boolean expand() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * If true, include the {@code "owner_funds"} field in the metadata of
-   * {@link org.xrpl.xrpl4j.model.transactions.OfferCreate} transactions in the response. Defaults to false.
-   * Ignored unless {@link #transactions()} and {@link #expand()} are true.
-   *
-   * @return {@code true} if requesting the {@code "owner_funds"} field, otherwise {@code false}.
-   *   Defaults to {@code false}.
-   */
-  @JsonProperty("owner_funds")
-  @Value.Default
-  default boolean ownerFunds() {
-    return false;
-  }
+    /**
+     * If true, include the {@code "owner_funds"} field in the metadata of
+     * {@link org.xrpl.xrpl4j.model.transactions.OfferCreate} transactions in the response. Defaults to false.
+     * Ignored unless {@link #transactions()} and {@link #expand()} are true.
+     *
+     * @return {@code true} if requesting the {@code "owner_funds"} field, otherwise {@code false}.
+     *   Defaults to {@code false}.
+     */
+    @JsonProperty("owner_funds")
+    @Value.Default
+    default boolean ownerFunds() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * If true, and {@link #transactions()} and {@link #expand()} are both also true, return transaction information
-   * in binary format (hexadecimal string) instead of JSON format.
-   *
-   * @return {@code true} if requesting transactions in binary format, otherwise {@code false}. Always {@code false}.
-   */
-  @Value.Derived
-  default boolean binary() {
-    return false;
-  }
+    /**
+     * If true, and {@link #transactions()} and {@link #expand()} are both also true, return transaction information
+     * in binary format (hexadecimal string) instead of JSON format.
+     *
+     * @return {@code true} if requesting transactions in binary format, otherwise {@code false}. Always {@code false}.
+     */
+    @Value.Derived
+    default boolean binary() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * If true, and the command is requesting the current ledger, includes an array of queued transactions in the results.
-   *
-   * @return {@code true} if requesting queued transactions, otherwise {@code false}.
-   *   Defaults to {@code false}.
-   */
-  @Value.Default
-  default boolean queue() {
-    return false;
-  }
-
+    /**
+     * If true, and the command is requesting the current ledger, includes an array of queued transactions in the results.
+     *
+     * @return {@code true} if requesting queued transactions, otherwise {@code false}.
+     *   Defaults to {@code false}.
+     */
+    @Value.Default
+    default boolean queue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

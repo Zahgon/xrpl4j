@@ -18,26 +18,23 @@ import org.immutables.value.Value.Immutable;
 @JsonDeserialize(as = ImmutableXChainClaimAttestation.class)
 public interface XChainClaimAttestation {
 
-  /**
-   * Construct an {@link XChainClaimAttestation} containing the specified {@link XChainClaimProofSig}.
-   *
-   * @param proofSig An {@link XChainClaimProofSig}.
-   *
-   * @return An {@link XChainClaimAttestation}.
-   */
-  static XChainClaimAttestation of(XChainClaimProofSig proofSig) {
-    return ImmutableXChainClaimAttestation.builder()
-      .xChainClaimProofSig(proofSig)
-      .build();
-  }
+    /**
+     * Construct an {@link XChainClaimAttestation} containing the specified {@link XChainClaimProofSig}.
+     *
+     * @param proofSig An {@link XChainClaimProofSig}.
+     *
+     * @return An {@link XChainClaimAttestation}.
+     */
+    static XChainClaimAttestation of(XChainClaimProofSig proofSig) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * An {@link XChainClaimProofSig}.
-   *
-   * @return An {@link XChainClaimProofSig}.
-   */
-  @JsonProperty("XChainClaimProofSig")
-  @SuppressWarnings("MethodName")
-  XChainClaimProofSig xChainClaimProofSig();
-
+    /**
+     * An {@link XChainClaimProofSig}.
+     *
+     * @return An {@link XChainClaimProofSig}.
+     */
+    @JsonProperty("XChainClaimProofSig")
+    @SuppressWarnings("MethodName")
+    XChainClaimProofSig xChainClaimProofSig();
 }

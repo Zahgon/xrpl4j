@@ -12,157 +12,141 @@ import org.xrpl.xrpl4j.model.transactions.LoanManage;
 @Beta
 public class LoanManageFlags extends TransactionFlags {
 
-  /**
-   * Constant {@link LoanManageFlags} for the {@code tfLoanDefault} flag.
-   */
-  public static final LoanManageFlags LOAN_DEFAULT = new LoanManageFlags(0x00010000L);
-
-  /**
-   * Constant {@link LoanManageFlags} for the {@code tfLoanImpair} flag.
-   */
-  public static final LoanManageFlags LOAN_IMPAIR = new LoanManageFlags(0x00020000L);
-
-  /**
-   * Constant {@link LoanManageFlags} for the {@code tfLoanUnimpair} flag.
-   */
-  public static final LoanManageFlags LOAN_UNIMPAIR = new LoanManageFlags(0x00040000L);
-
-  private LoanManageFlags(long value) {
-    super(value);
-  }
-
-  private LoanManageFlags() {
-  }
-
-  /**
-   * Create a new {@link Builder}.
-   *
-   * @return A new {@link Builder}.
-   */
-  public static Builder builder() {
-    return new Builder();
-  }
-
-  /**
-   * Construct {@link LoanManageFlags} with a given value.
-   *
-   * @param value The long-number encoded flags value of this {@link LoanManageFlags}.
-   *
-   * @return New {@link LoanManageFlags}.
-   */
-  public static LoanManageFlags of(long value) {
-    return new LoanManageFlags(value);
-  }
-
-  private static LoanManageFlags of(
-    boolean tfFullyCanonicalSig,
-    boolean tfLoanDefault,
-    boolean tfLoanImpair,
-    boolean tfLoanUnimpair
-  ) {
-    long value = Flags.of(
-      tfFullyCanonicalSig ? TransactionFlags.FULLY_CANONICAL_SIG : UNSET,
-      tfLoanDefault ? LOAN_DEFAULT : UNSET,
-      tfLoanImpair ? LOAN_IMPAIR : UNSET,
-      tfLoanUnimpair ? LOAN_UNIMPAIR : UNSET
-    ).getValue();
-    return new LoanManageFlags(value);
-  }
-
-  /**
-   * Construct an empty instance of {@link LoanManageFlags}. Transactions with empty flags will not be serialized
-   * with a {@code Flags} field.
-   *
-   * @return An empty {@link LoanManageFlags}.
-   */
-  public static LoanManageFlags empty() {
-    return new LoanManageFlags();
-  }
-
-  /**
-   * Indicates that the Loan should be defaulted.
-   *
-   * @return {@code true} if {@code tfLoanDefault} is set, otherwise {@code false}.
-   */
-  public boolean tfLoanDefault() {
-    return this.isSet(LoanManageFlags.LOAN_DEFAULT);
-  }
-
-  /**
-   * Indicates that the Loan should be impaired.
-   *
-   * @return {@code true} if {@code tfLoanImpair} is set, otherwise {@code false}.
-   */
-  public boolean tfLoanImpair() {
-    return this.isSet(LoanManageFlags.LOAN_IMPAIR);
-  }
-
-  /**
-   * Indicates that the Loan should be un-impaired.
-   *
-   * @return {@code true} if {@code tfLoanUnimpair} is set, otherwise {@code false}.
-   */
-  public boolean tfLoanUnimpair() {
-    return this.isSet(LoanManageFlags.LOAN_UNIMPAIR);
-  }
-
-  /**
-   * A builder class for {@link LoanManageFlags} flags.
-   */
-  public static class Builder {
-
-    private boolean tfLoanDefault = false;
-    private boolean tfLoanImpair = false;
-    private boolean tfLoanUnimpair = false;
+    /**
+     * Constant {@link LoanManageFlags} for the {@code tfLoanDefault} flag.
+     */
+    public static final LoanManageFlags LOAN_DEFAULT = new LoanManageFlags(0x00010000L);
 
     /**
-     * Set {@code tfLoanDefault} to the given value.
-     *
-     * @param tfLoanDefault A boolean value.
-     *
-     * @return The same {@link Builder}.
+     * Constant {@link LoanManageFlags} for the {@code tfLoanImpair} flag.
      */
-    public Builder tfLoanDefault(boolean tfLoanDefault) {
-      this.tfLoanDefault = tfLoanDefault;
-      return this;
+    public static final LoanManageFlags LOAN_IMPAIR = new LoanManageFlags(0x00020000L);
+
+    /**
+     * Constant {@link LoanManageFlags} for the {@code tfLoanUnimpair} flag.
+     */
+    public static final LoanManageFlags LOAN_UNIMPAIR = new LoanManageFlags(0x00040000L);
+
+    private LoanManageFlags(long value) {
+        super(value);
+    }
+
+    private LoanManageFlags() {
     }
 
     /**
-     * Set {@code tfLoanImpair} to the given value.
+     * Create a new {@link Builder}.
      *
-     * @param tfLoanImpair A boolean value.
-     *
-     * @return The same {@link Builder}.
+     * @return A new {@link Builder}.
      */
-    public Builder tfLoanImpair(boolean tfLoanImpair) {
-      this.tfLoanImpair = tfLoanImpair;
-      return this;
+    public static Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     * Set {@code tfLoanUnimpair} to the given value.
+     * Construct {@link LoanManageFlags} with a given value.
      *
-     * @param tfLoanUnimpair A boolean value.
+     * @param value The long-number encoded flags value of this {@link LoanManageFlags}.
      *
-     * @return The same {@link Builder}.
+     * @return New {@link LoanManageFlags}.
      */
-    public Builder tfLoanUnimpair(boolean tfLoanUnimpair) {
-      this.tfLoanUnimpair = tfLoanUnimpair;
-      return this;
+    public static LoanManageFlags of(long value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    private static LoanManageFlags of(boolean tfFullyCanonicalSig, boolean tfLoanDefault, boolean tfLoanImpair, boolean tfLoanUnimpair) {
+        long value = Flags.of(tfFullyCanonicalSig ? TransactionFlags.FULLY_CANONICAL_SIG : UNSET, tfLoanDefault ? LOAN_DEFAULT : UNSET, tfLoanImpair ? LOAN_IMPAIR : UNSET, tfLoanUnimpair ? LOAN_UNIMPAIR : UNSET).getValue();
+        return new LoanManageFlags(value);
     }
 
     /**
-     * Build a new {@link LoanManageFlags} from the current boolean values.
+     * Construct an empty instance of {@link LoanManageFlags}. Transactions with empty flags will not be serialized
+     * with a {@code Flags} field.
      *
-     * @return A new {@link LoanManageFlags}.
+     * @return An empty {@link LoanManageFlags}.
      */
-    public LoanManageFlags build() {
-      return LoanManageFlags.of(
-        true,
-        tfLoanDefault,
-        tfLoanImpair,
-        tfLoanUnimpair
-      );
+    public static LoanManageFlags empty() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    /**
+     * Indicates that the Loan should be defaulted.
+     *
+     * @return {@code true} if {@code tfLoanDefault} is set, otherwise {@code false}.
+     */
+    public boolean tfLoanDefault() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Indicates that the Loan should be impaired.
+     *
+     * @return {@code true} if {@code tfLoanImpair} is set, otherwise {@code false}.
+     */
+    public boolean tfLoanImpair() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Indicates that the Loan should be un-impaired.
+     *
+     * @return {@code true} if {@code tfLoanUnimpair} is set, otherwise {@code false}.
+     */
+    public boolean tfLoanUnimpair() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * A builder class for {@link LoanManageFlags} flags.
+     */
+    public static class Builder {
+
+        private boolean tfLoanDefault = false;
+
+        private boolean tfLoanImpair = false;
+
+        private boolean tfLoanUnimpair = false;
+
+        /**
+         * Set {@code tfLoanDefault} to the given value.
+         *
+         * @param tfLoanDefault A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfLoanDefault(boolean tfLoanDefault) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfLoanImpair} to the given value.
+         *
+         * @param tfLoanImpair A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfLoanImpair(boolean tfLoanImpair) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfLoanUnimpair} to the given value.
+         *
+         * @param tfLoanUnimpair A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfLoanUnimpair(boolean tfLoanUnimpair) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Build a new {@link LoanManageFlags} from the current boolean values.
+         *
+         * @return A new {@link LoanManageFlags}.
+         */
+        public LoanManageFlags build() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+    }
 }

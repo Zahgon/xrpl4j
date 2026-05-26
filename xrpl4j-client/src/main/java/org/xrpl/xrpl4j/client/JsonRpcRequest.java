@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.client;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.client.XrplRequestParams;
-
 import java.util.List;
 
 /**
@@ -35,23 +33,22 @@ import java.util.List;
 @JsonDeserialize(as = ImmutableJsonRpcRequest.class)
 public interface JsonRpcRequest {
 
-  static ImmutableJsonRpcRequest.Builder builder() {
-    return ImmutableJsonRpcRequest.builder();
-  }
+    static ImmutableJsonRpcRequest.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The name of the <a href="https://xrpl.org/public-rippled-methods.html">API method</a>.
-   *
-   * @return A {@link String} containing the method name.
-   */
-  String method();
+    /**
+     * The name of the <a href="https://xrpl.org/public-rippled-methods.html">API method</a>.
+     *
+     * @return A {@link String} containing the method name.
+     */
+    String method();
 
-  /**
-   * A one-item {@link List} containing a {@link XrplRequestParams} with the parameters to this method.
-   * You may omit this field if the method does not require any parameters.
-   *
-   * @return A {@link List} of {@link XrplRequestParams}.
-   */
-  List<XrplRequestParams> params();
-
+    /**
+     * A one-item {@link List} containing a {@link XrplRequestParams} with the parameters to this method.
+     * You may omit this field if the method does not require any parameters.
+     *
+     * @return A {@link List} of {@link XrplRequestParams}.
+     */
+    List<XrplRequestParams> params();
 }

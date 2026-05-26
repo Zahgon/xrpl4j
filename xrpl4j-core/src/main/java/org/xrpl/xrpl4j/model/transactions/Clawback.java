@@ -8,7 +8,6 @@ import com.google.common.annotations.Beta;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -23,38 +22,37 @@ import java.util.Optional;
 @Beta
 public interface Clawback extends Transaction {
 
-  /**
-   * Construct a {@code Clawback} builder.
-   *
-   * @return An {@link ImmutableClawback.Builder}.
-   */
-  static ImmutableClawback.Builder builder() {
-    return ImmutableClawback.builder();
-  }
+    /**
+     * Construct a {@code Clawback} builder.
+     *
+     * @return An {@link ImmutableClawback.Builder}.
+     */
+    static ImmutableClawback.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link Clawback}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link Clawback}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Indicates the amount being clawed back, as well as the counterparty from which the amount is being clawed back
-   * from. This amount must not exceed the holder's balance and must be greater than zero. The issuer in this amount
-   * must not be the same as the source account of this transaction.
-   *
-   * @return An {@link IssuedCurrencyAmount} indicating the amount to clawback.
-   */
-  @JsonProperty("Amount")
-  CurrencyAmount amount();
+    /**
+     * Indicates the amount being clawed back, as well as the counterparty from which the amount is being clawed back
+     * from. This amount must not exceed the holder's balance and must be greater than zero. The issuer in this amount
+     * must not be the same as the source account of this transaction.
+     *
+     * @return An {@link IssuedCurrencyAmount} indicating the amount to clawback.
+     */
+    @JsonProperty("Amount")
+    CurrencyAmount amount();
 
-  @JsonProperty("Holder")
-  Optional<Address> holder();
-
+    @JsonProperty("Holder")
+    Optional<Address> holder();
 }

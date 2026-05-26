@@ -13,23 +13,22 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = ImmutableNfTokenWrapper.class)
 public interface NfTokenWrapper {
 
-  /**
-   * Construct a new wrapper for the given {@link NfToken}.
-   *
-   * @param nfToken A {@link NfToken}.
-   *
-   * @return A {@link NfTokenWrapper} wrapping the given {@link NfToken}.
-   */
-  static NfTokenWrapper of(NfToken nfToken) {
-    return ImmutableNfTokenWrapper.builder().nfToken(nfToken).build();
-  }
+    /**
+     * Construct a new wrapper for the given {@link NfToken}.
+     *
+     * @param nfToken A {@link NfToken}.
+     *
+     * @return A {@link NfTokenWrapper} wrapping the given {@link NfToken}.
+     */
+    static NfTokenWrapper of(NfToken nfToken) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link NfToken} that this wrapper wraps.
-   *
-   * @return A {@link NfToken}.
-   */
-  @JsonProperty("NFToken")
-  NfToken nfToken();
-
+    /**
+     * The {@link NfToken} that this wrapper wraps.
+     *
+     * @return A {@link NfToken}.
+     */
+    @JsonProperty("NFToken")
+    NfToken nfToken();
 }

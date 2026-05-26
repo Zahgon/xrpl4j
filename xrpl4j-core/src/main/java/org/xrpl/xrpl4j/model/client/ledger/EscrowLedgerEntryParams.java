@@ -15,27 +15,26 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @JsonDeserialize(as = ImmutableEscrowLedgerEntryParams.class)
 public interface EscrowLedgerEntryParams {
 
-  /**
-   * Construct a {@code EscrowLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableEscrowLedgerEntryParams.Builder}.
-   */
-  static ImmutableEscrowLedgerEntryParams.Builder builder() {
-    return ImmutableEscrowLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code EscrowLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableEscrowLedgerEntryParams.Builder}.
+     */
+    static ImmutableEscrowLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The owner (sender) of the Escrow object.
-   *
-   * @return The {@link Address} of the owner.
-   */
-  Address owner();
+    /**
+     * The owner (sender) of the Escrow object.
+     *
+     * @return The {@link Address} of the owner.
+     */
+    Address owner();
 
-  /**
-   * The Sequence Number of the transaction that created the Escrow object.
-   *
-   * @return An {@link UnsignedInteger}.
-   */
-  UnsignedInteger seq();
-
+    /**
+     * The Sequence Number of the transaction that created the Escrow object.
+     *
+     * @return An {@link UnsignedInteger}.
+     */
+    UnsignedInteger seq();
 }

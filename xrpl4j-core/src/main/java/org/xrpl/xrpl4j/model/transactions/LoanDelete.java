@@ -20,42 +20,39 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @Beta
 public interface LoanDelete extends Transaction {
 
-  /**
-   * Construct a {@code LoanDelete} builder.
-   *
-   * @return An {@link ImmutableLoanDelete.Builder}.
-   */
-  static ImmutableLoanDelete.Builder builder() {
-    return ImmutableLoanDelete.builder();
-  }
+    /**
+     * Construct a {@code LoanDelete} builder.
+     *
+     * @return An {@link ImmutableLoanDelete.Builder}.
+     */
+    static ImmutableLoanDelete.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link LoanDelete}.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link LoanDelete}.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ID of the Loan object to be deleted.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("LoanID")
-  Hash256 loanId();
+    /**
+     * The ID of the Loan object to be deleted.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("LoanID")
+    Hash256 loanId();
 
-  /**
-   * Validates LoanDelete data verification preconditions.
-   */
-  @Value.Check
-  default void check() {
-    Preconditions.checkArgument(
-      !loanId().equals(Hash256.ZERO),
-      "LoanID must not be zero."
-    );
-  }
+    /**
+     * Validates LoanDelete data verification preconditions.
+     */
+    @Value.Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

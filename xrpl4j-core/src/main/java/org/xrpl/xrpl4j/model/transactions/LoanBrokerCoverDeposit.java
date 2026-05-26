@@ -20,55 +20,47 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @Beta
 public interface LoanBrokerCoverDeposit extends Transaction {
 
-  /**
-   * Construct a {@code LoanBrokerCoverDeposit} builder.
-   *
-   * @return An {@link ImmutableLoanBrokerCoverDeposit.Builder}.
-   */
-  static ImmutableLoanBrokerCoverDeposit.Builder builder() {
-    return ImmutableLoanBrokerCoverDeposit.builder();
-  }
+    /**
+     * Construct a {@code LoanBrokerCoverDeposit} builder.
+     *
+     * @return An {@link ImmutableLoanBrokerCoverDeposit.Builder}.
+     */
+    static ImmutableLoanBrokerCoverDeposit.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link LoanBrokerCoverDeposit}.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link LoanBrokerCoverDeposit}.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The Loan Broker ID to which to deposit First-Loss Capital.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("LoanBrokerID")
-  Hash256 loanBrokerId();
+    /**
+     * The Loan Broker ID to which to deposit First-Loss Capital.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("LoanBrokerID")
+    Hash256 loanBrokerId();
 
-  /**
-   * The First-Loss Capital amount to deposit.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  CurrencyAmount amount();
+    /**
+     * The First-Loss Capital amount to deposit.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    CurrencyAmount amount();
 
-  /**
-   * Validates LoanBrokerCoverDeposit data verification preconditions.
-   */
-  @Value.Check
-  default void check() {
-    Preconditions.checkArgument(
-      !loanBrokerId().equals(Hash256.ZERO),
-      "LoanBrokerID must not be zero."
-    );
-
-    Preconditions.checkArgument(
-      !amount().isNegative() && !amount().isZero(),
-      "Amount must be greater than zero."
-    );
-  }
+    /**
+     * Validates LoanBrokerCoverDeposit data verification preconditions.
+     */
+    @Value.Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.flags;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.xrpl.xrpl4j.model.ledger.CredentialObject;
 
 /**
@@ -27,38 +26,37 @@ import org.xrpl.xrpl4j.model.ledger.CredentialObject;
  */
 public class CredentialFlags extends Flags {
 
-  /**
-   * Constant for an unset flag.
-   */
-  public static final CredentialFlags UNSET = new CredentialFlags(0);
+    /**
+     * Constant for an unset flag.
+     */
+    public static final CredentialFlags UNSET = new CredentialFlags(0);
 
-  /**
-   * Constant {@link CredentialFlags} for the {@code lsfAccepted} flag.
-   */
-  public static final CredentialFlags ACCEPTED = new CredentialFlags(0x00010000);
+    /**
+     * Constant {@link CredentialFlags} for the {@code lsfAccepted} flag.
+     */
+    public static final CredentialFlags ACCEPTED = new CredentialFlags(0x00010000);
 
+    private CredentialFlags(long value) {
+        super(value);
+    }
 
-  private CredentialFlags(long value) {
-    super(value);
-  }
+    /**
+     * Construct {@link CredentialFlags} with a given value.
+     *
+     * @param value The long-number encoded flags value of this {@link CredentialFlags}.
+     *
+     * @return New {@link CredentialFlags}.
+     */
+    public static CredentialFlags of(long value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Construct {@link CredentialFlags} with a given value.
-   *
-   * @param value The long-number encoded flags value of this {@link CredentialFlags}.
-   *
-   * @return New {@link CredentialFlags}.
-   */
-  public static CredentialFlags of(long value) {
-    return new CredentialFlags(value);
-  }
-
-  /**
-   * Indicates whether the subject of the credential has accepted the credential.
-   *
-   * @return {@code true} if {@code lsfAccepted} is set, otherwise {@code false}.
-   */
-  public boolean lsfAccepted() {
-    return this.isSet(ACCEPTED);
-  }
+    /**
+     * Indicates whether the subject of the credential has accepted the credential.
+     *
+     * @return {@code true} if {@code lsfAccepted} is set, otherwise {@code false}.
+     */
+    public boolean lsfAccepted() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

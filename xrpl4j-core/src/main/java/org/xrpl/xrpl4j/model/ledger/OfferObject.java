@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -30,7 +29,6 @@ import org.xrpl.xrpl4j.model.flags.OfferFlags;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.CurrencyAmount;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -44,141 +42,140 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableOfferObject.class)
 public interface OfferObject extends LedgerObject {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableOfferObject.Builder}.
-   */
-  static ImmutableOfferObject.Builder builder() {
-    return ImmutableOfferObject.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableOfferObject.Builder}.
+     */
+    static ImmutableOfferObject.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The value 0x006F, mapped to the string "Offer", indicates that this object is a {@link OfferObject} object.
-   *
-   * @return Always {@link org.xrpl.xrpl4j.model.ledger.LedgerObject.LedgerEntryType#OFFER}.
-   */
-  @JsonProperty("LedgerEntryType")
-  @Value.Derived
-  default LedgerEntryType ledgerEntryType() {
-    return LedgerEntryType.OFFER;
-  }
+    /**
+     * The value 0x006F, mapped to the string "Offer", indicates that this object is a {@link OfferObject} object.
+     *
+     * @return Always {@link org.xrpl.xrpl4j.model.ledger.LedgerObject.LedgerEntryType#OFFER}.
+     */
+    @JsonProperty("LedgerEntryType")
+    @Value.Derived
+    default LedgerEntryType ledgerEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The sender of the {@link OfferObject}. Cashing the {@link OfferObject} debits this address's balance.
-   *
-   * @return The {@link Address} of the offer sender.
-   */
-  @JsonProperty("Account")
-  Address account();
+    /**
+     * The sender of the {@link OfferObject}. Cashing the {@link OfferObject} debits this address's balance.
+     *
+     * @return The {@link Address} of the offer sender.
+     */
+    @JsonProperty("Account")
+    Address account();
 
-  /**
-   * A bit-map of boolean flags.
-   *
-   * @return A {@link OfferFlags}.
-   */
-  @JsonProperty("Flags")
-  OfferFlags flags();
+    /**
+     * A bit-map of boolean flags.
+     *
+     * @return A {@link OfferFlags}.
+     */
+    @JsonProperty("Flags")
+    OfferFlags flags();
 
-  /**
-   * The sequence number of the {@link org.xrpl.xrpl4j.model.transactions.OfferCreate} transaction that created this
-   * offer.
-   *
-   * @return An {@link UnsignedInteger} representing the sequence number.
-   */
-  @JsonProperty("Sequence")
-  UnsignedInteger sequence();
+    /**
+     * The sequence number of the {@link org.xrpl.xrpl4j.model.transactions.OfferCreate} transaction that created this
+     * offer.
+     *
+     * @return An {@link UnsignedInteger} representing the sequence number.
+     */
+    @JsonProperty("Sequence")
+    UnsignedInteger sequence();
 
-  /**
-   * The remaining amount and type of currency requested by the offer creator.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("TakerPays")
-  CurrencyAmount takerPays();
+    /**
+     * The remaining amount and type of currency requested by the offer creator.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("TakerPays")
+    CurrencyAmount takerPays();
 
-  /**
-   * The remaining amount and type of currency being provided by the offer creator.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("TakerGets")
-  CurrencyAmount takerGets();
+    /**
+     * The remaining amount and type of currency being provided by the offer creator.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("TakerGets")
+    CurrencyAmount takerGets();
 
-  /**
-   * The ID of the Offer Directory that links to this offer.
-   *
-   * @return A {@link Hash256} containing the ID.
-   */
-  @JsonProperty("BookDirectory")
-  Hash256 bookDirectory();
+    /**
+     * The ID of the Offer Directory that links to this offer.
+     *
+     * @return A {@link Hash256} containing the ID.
+     */
+    @JsonProperty("BookDirectory")
+    Hash256 bookDirectory();
 
-  /**
-   * A hint indicating which page of the offer directory links to this object, in case the directory consists of
-   * multiple pages.
-   *
-   * @return A {@link String} containing the hint.
-   */
-  @JsonProperty("BookNode")
-  String bookNode();
+    /**
+     * A hint indicating which page of the offer directory links to this object, in case the directory consists of
+     * multiple pages.
+     *
+     * @return A {@link String} containing the hint.
+     */
+    @JsonProperty("BookNode")
+    String bookNode();
 
-  /**
-   * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
-   * of multiple pages. Note: The object does not contain a direct link to the owner directory containing it, since that
-   * value can be derived from the Account.
-   *
-   * @return A {@link String} containing the hint.
-   */
-  @JsonProperty("OwnerNode")
-  String ownerNode();
+    /**
+     * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
+     * of multiple pages. Note: The object does not contain a direct link to the owner directory containing it, since that
+     * value can be derived from the Account.
+     *
+     * @return A {@link String} containing the hint.
+     */
+    @JsonProperty("OwnerNode")
+    String ownerNode();
 
-  /**
-   * The identifying hash of the transaction that most recently modified this object.
-   *
-   * @return A {@link Hash256} containing the previous transaction hash.
-   */
-  @JsonProperty("PreviousTxnID")
-  Hash256 previousTransactionId();
+    /**
+     * The identifying hash of the transaction that most recently modified this object.
+     *
+     * @return A {@link Hash256} containing the previous transaction hash.
+     */
+    @JsonProperty("PreviousTxnID")
+    Hash256 previousTransactionId();
 
-  /**
-   * The index of the ledger that contains the transaction that most recently modified this object.
-   *
-   * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  UnsignedInteger previousTransactionLedgerSequence();
+    /**
+     * The index of the ledger that contains the transaction that most recently modified this object.
+     *
+     * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    UnsignedInteger previousTransactionLedgerSequence();
 
-  /**
-   * Indicates the time after which this offer is considered expired, in
-   * <a href="https://xrpl.org/basic-data-types.html#specifying-time">seconds since the Ripple Epoch</a>.
-   *
-   * @return An {@link Optional} of type {@link UnsignedInteger} representing the expiration of this offer.
-   */
-  @JsonProperty("Expiration")
-  Optional<UnsignedInteger> expiration();
+    /**
+     * Indicates the time after which this offer is considered expired, in
+     * <a href="https://xrpl.org/basic-data-types.html#specifying-time">seconds since the Ripple Epoch</a>.
+     *
+     * @return An {@link Optional} of type {@link UnsignedInteger} representing the expiration of this offer.
+     */
+    @JsonProperty("Expiration")
+    Optional<UnsignedInteger> expiration();
 
-  /**
-   * The permissioned domain that the offer is part of.
-   *
-   * @return A {@link Hash256} representing DomainID.
-   */
-  @JsonProperty("DomainID")
-  Optional<Hash256> domainId();
+    /**
+     * The permissioned domain that the offer is part of.
+     *
+     * @return A {@link Hash256} representing DomainID.
+     */
+    @JsonProperty("DomainID")
+    Optional<Hash256> domainId();
 
-  /**
-   * An additional list of order book directories that this offer belongs to. Currently, this field only applicable to
-   * hybrid offers.
-   *
-   * @return A list of {@link BookWrapper} representing order book directories.
-   */
-  @JsonProperty("AdditionalBooks")
-  List<BookWrapper> additionalBooks();
+    /**
+     * An additional list of order book directories that this offer belongs to. Currently, this field only applicable to
+     * hybrid offers.
+     *
+     * @return A list of {@link BookWrapper} representing order book directories.
+     */
+    @JsonProperty("AdditionalBooks")
+    List<BookWrapper> additionalBooks();
 
-  /**
-   * The unique ID of the {@link OfferObject}.
-   *
-   * @return A {@link Hash256} containing the ID.
-   */
-  Hash256 index();
-
+    /**
+     * The unique ID of the {@link OfferObject}.
+     *
+     * @return A {@link Hash256} containing the ID.
+     */
+    Hash256 index();
 }

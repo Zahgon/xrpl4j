@@ -18,25 +18,22 @@ import org.immutables.value.Value;
 @Beta
 public interface AuthAccountWrapper {
 
-  /**
-   * Construct an {@link AuthAccountWrapper} containing the specified {@link AuthAccount}.
-   *
-   * @param authAccount An {@link AuthAccount}.
-   *
-   * @return An {@link AuthAccountWrapper}.
-   */
-  static AuthAccountWrapper of(AuthAccount authAccount) {
-    return ImmutableAuthAccountWrapper.builder()
-      .authAccount(authAccount)
-      .build();
-  }
+    /**
+     * Construct an {@link AuthAccountWrapper} containing the specified {@link AuthAccount}.
+     *
+     * @param authAccount An {@link AuthAccount}.
+     *
+     * @return An {@link AuthAccountWrapper}.
+     */
+    static AuthAccountWrapper of(AuthAccount authAccount) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * An {@link AuthAccount}.
-   *
-   * @return An {@link AuthAccount}.
-   */
-  @JsonProperty("AuthAccount")
-  AuthAccount authAccount();
-
+    /**
+     * An {@link AuthAccount}.
+     *
+     * @return An {@link AuthAccount}.
+     */
+    @JsonProperty("AuthAccount")
+    AuthAccount authAccount();
 }

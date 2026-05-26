@@ -18,36 +18,35 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @JsonDeserialize(as = ImmutableOracleDelete.class)
 public interface OracleDelete extends Transaction {
 
-  /**
-   * Construct a {@code OracleDelete} builder.
-   *
-   * @return An {@link ImmutableOracleDelete.Builder}.
-   */
-  static ImmutableOracleDelete.Builder builder() {
-    return ImmutableOracleDelete.builder();
-  }
+    /**
+     * Construct a {@code OracleDelete} builder.
+     *
+     * @return An {@link ImmutableOracleDelete.Builder}.
+     */
+    static ImmutableOracleDelete.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link OracleDelete}, which only allows the {@code tfFullyCanonicalSig}
-   * flag, which is deprecated.
-   *
-   * <p>The value of the flags can be set manually, but exists mostly for JSON serialization/deserialization only and
-   * for proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link OracleDelete}, which only allows the {@code tfFullyCanonicalSig}
+     * flag, which is deprecated.
+     *
+     * <p>The value of the flags can be set manually, but exists mostly for JSON serialization/deserialization only and
+     * for proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A unique identifier of the price oracle for the account.
-   *
-   * @return An {@link UnsignedInteger}.
-   */
-  @JsonProperty("OracleDocumentID")
-  OracleDocumentId oracleDocumentId();
-
+    /**
+     * A unique identifier of the price oracle for the account.
+     *
+     * @return An {@link UnsignedInteger}.
+     */
+    @JsonProperty("OracleDocumentID")
+    OracleDocumentId oracleDocumentId();
 }

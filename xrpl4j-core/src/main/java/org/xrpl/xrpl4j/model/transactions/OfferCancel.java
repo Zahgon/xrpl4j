@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -27,7 +26,6 @@ import com.google.common.primitives.UnsignedInteger;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -40,36 +38,35 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableOfferCancel.class)
 public interface OfferCancel extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableOfferCancel.Builder}.
-   */
-  static ImmutableOfferCancel.Builder builder() {
-    return ImmutableOfferCancel.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableOfferCancel.Builder}.
+     */
+    static ImmutableOfferCancel.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link OfferCancel}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link OfferCancel}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The sequence number of a previous {@link OfferCreate} transaction.
-   *
-   * @return An {@link Optional} of type {@link UnsignedInteger} representing the offer sequence.
-   */
-  @JsonProperty("OfferSequence")
-  Optional<UnsignedInteger> offerSequence();
-
+    /**
+     * The sequence number of a previous {@link OfferCreate} transaction.
+     *
+     * @return An {@link Optional} of type {@link UnsignedInteger} representing the offer sequence.
+     */
+    @JsonProperty("OfferSequence")
+    Optional<UnsignedInteger> offerSequence();
 }

@@ -11,43 +11,42 @@ import com.google.common.annotations.Beta;
 @Beta
 public class VaultFlags extends Flags {
 
-  /**
-   * Constant for an unset flag.
-   */
-  public static final VaultFlags UNSET = new VaultFlags(0);
+    /**
+     * Constant for an unset flag.
+     */
+    public static final VaultFlags UNSET = new VaultFlags(0);
 
-  /**
-   * Constant {@link VaultFlags} for the {@code lsfVaultPrivate} flag.
-   */
-  public static final VaultFlags VAULT_PRIVATE = new VaultFlags(0x00010000);
+    /**
+     * Constant {@link VaultFlags} for the {@code lsfVaultPrivate} flag.
+     */
+    public static final VaultFlags VAULT_PRIVATE = new VaultFlags(0x00010000);
 
-  /**
-   * Required-args Constructor.
-   *
-   * @param value The long-number encoded flags value of this {@link VaultFlags}.
-   */
-  private VaultFlags(final long value) {
-    super(value);
-  }
+    /**
+     * Required-args Constructor.
+     *
+     * @param value The long-number encoded flags value of this {@link VaultFlags}.
+     */
+    private VaultFlags(final long value) {
+        super(value);
+    }
 
-  /**
-   * Construct {@link VaultFlags} with a given value.
-   *
-   * @param value The long-number encoded flags value of this {@link VaultFlags}.
-   *
-   * @return New {@link VaultFlags}.
-   */
-  public static VaultFlags of(long value) {
-    return new VaultFlags(value);
-  }
+    /**
+     * Construct {@link VaultFlags} with a given value.
+     *
+     * @param value The long-number encoded flags value of this {@link VaultFlags}.
+     *
+     * @return New {@link VaultFlags}.
+     */
+    public static VaultFlags of(long value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * If set, indicates the vault is private and requires credentials.
-   *
-   * @return {@code true} if {@code lsfVaultPrivate} is set, otherwise {@code false}.
-   */
-  public boolean lsfVaultPrivate() {
-    return this.isSet(VaultFlags.VAULT_PRIVATE);
-  }
-
+    /**
+     * If set, indicates the vault is private and requires credentials.
+     *
+     * @return {@code true} if {@code lsfVaultPrivate} is set, otherwise {@code false}.
+     */
+    public boolean lsfVaultPrivate() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

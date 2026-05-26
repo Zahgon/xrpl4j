@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.crypto.signing;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.google.common.annotations.VisibleForTesting;
 import org.xrpl.xrpl4j.codec.addresses.UnsignedByteArray;
 import org.xrpl.xrpl4j.crypto.keys.PrivateKey;
@@ -31,7 +30,6 @@ import org.xrpl.xrpl4j.model.transactions.Batch;
 import org.xrpl.xrpl4j.model.transactions.LoanSet;
 import org.xrpl.xrpl4j.model.transactions.Signer;
 import org.xrpl.xrpl4j.model.transactions.Transaction;
-
 import java.util.Objects;
 import java.util.Set;
 
@@ -40,163 +38,158 @@ import java.util.Set;
  */
 public abstract class AbstractSignatureService<P extends PrivateKeyable> implements SignatureService<P> {
 
-  private final AbstractTransactionSigner<P> abstractTransactionSigner;
-  private final AbstractTransactionVerifier abstractTransactionVerifier;
+    private final AbstractTransactionSigner<P> abstractTransactionSigner;
 
-  /**
-   * Required-args Constructor.
-   *
-   * @param signatureUtils A {@link SignatureUtils}.
-   */
-  public AbstractSignatureService(final SignatureUtils signatureUtils) {
-    this.abstractTransactionSigner = new AbstractTransactionSigner<P>(signatureUtils) {
-      @Override
-      protected Signature edDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes) {
-        return AbstractSignatureService.this.edDsaSign(privateKey, signableTransactionBytes);
-      }
+    private final AbstractTransactionVerifier abstractTransactionVerifier;
 
-      @Override
-      protected Signature ecDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes) {
-        return AbstractSignatureService.this.ecDsaSign(privateKey, signableTransactionBytes);
-      }
+    /**
+     * Required-args Constructor.
+     *
+     * @param signatureUtils A {@link SignatureUtils}.
+     */
+    public AbstractSignatureService(final SignatureUtils signatureUtils) {
+        this.abstractTransactionSigner = new AbstractTransactionSigner<P>(signatureUtils) {
 
-      @Override
-      public PublicKey derivePublicKey(P privateKey) {
-        return AbstractSignatureService.this.derivePublicKey(privateKey);
-      }
-    };
+            @Override
+            protected Signature edDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes) {
+                throw new UnsupportedOperationException("STUB: not implemented");
+            }
 
-    this.abstractTransactionVerifier = new AbstractTransactionVerifier(signatureUtils) {
-      @Override
-      protected boolean edDsaVerify(PublicKey publicKey, UnsignedByteArray transactionBytes, Signature signature) {
-        return AbstractSignatureService.this.edDsaVerify(publicKey, transactionBytes, signature);
-      }
+            @Override
+            protected Signature ecDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes) {
+                throw new UnsupportedOperationException("STUB: not implemented");
+            }
 
-      @Override
-      protected boolean ecDsaVerify(PublicKey publicKey, UnsignedByteArray transactionBytes, Signature signature) {
-        return AbstractSignatureService.this.ecDsaVerify(publicKey, transactionBytes, signature);
-      }
-    };
-  }
+            @Override
+            public PublicKey derivePublicKey(P privateKey) {
+                throw new UnsupportedOperationException("STUB: not implemented");
+            }
+        };
+        this.abstractTransactionVerifier = new AbstractTransactionVerifier(signatureUtils) {
 
-  /**
-   * Required-args Constructor, for testing.
-   *
-   * @param abstractTransactionSigner   A {@link AbstractTransactionSigner}.
-   * @param abstractTransactionVerifier A {@link AbstractTransactionVerifier}.
-   */
-  @VisibleForTesting
-  protected AbstractSignatureService(
-    final AbstractTransactionSigner<P> abstractTransactionSigner,
-    final AbstractTransactionVerifier abstractTransactionVerifier
-  ) {
-    this.abstractTransactionSigner = Objects.requireNonNull(abstractTransactionSigner);
-    this.abstractTransactionVerifier = Objects.requireNonNull(abstractTransactionVerifier);
-  }
+            @Override
+            protected boolean edDsaVerify(PublicKey publicKey, UnsignedByteArray transactionBytes, Signature signature) {
+                throw new UnsupportedOperationException("STUB: not implemented");
+            }
 
-  @Override
-  public <T extends Transaction> SingleSignedTransaction<T> sign(final P privateKeyable, final T transaction) {
-    return this.abstractTransactionSigner.sign(privateKeyable, transaction);
-  }
+            @Override
+            protected boolean ecDsaVerify(PublicKey publicKey, UnsignedByteArray transactionBytes, Signature signature) {
+                throw new UnsupportedOperationException("STUB: not implemented");
+            }
+        };
+    }
 
-  @Override
-  public Signature sign(final P privateKeyable, final Attestation attestation) {
-    return this.abstractTransactionSigner.sign(privateKeyable, attestation);
-  }
+    /**
+     * Required-args Constructor, for testing.
+     *
+     * @param abstractTransactionSigner   A {@link AbstractTransactionSigner}.
+     * @param abstractTransactionVerifier A {@link AbstractTransactionVerifier}.
+     */
+    @VisibleForTesting
+    protected AbstractSignatureService(final AbstractTransactionSigner<P> abstractTransactionSigner, final AbstractTransactionVerifier abstractTransactionVerifier) {
+        this.abstractTransactionSigner = Objects.requireNonNull(abstractTransactionSigner);
+        this.abstractTransactionVerifier = Objects.requireNonNull(abstractTransactionVerifier);
+    }
 
-  @Override
-  public Signature sign(final P privateKeyable, final UnsignedClaim unsignedClaim) {
-    return this.abstractTransactionSigner.sign(privateKeyable, unsignedClaim);
-  }
+    @Override
+    public <T extends Transaction> SingleSignedTransaction<T> sign(final P privateKeyable, final T transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public Signature signInner(final P privateKeyable, final Batch batchTransaction) {
-    return this.abstractTransactionSigner.signInner(privateKeyable, batchTransaction);
-  }
+    @Override
+    public Signature sign(final P privateKeyable, final Attestation attestation) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public <T extends Transaction> Signature multiSign(final P privateKeyable, final T transaction) {
-    return abstractTransactionSigner.multiSign(privateKeyable, transaction);
-  }
+    @Override
+    public Signature sign(final P privateKeyable, final UnsignedClaim unsignedClaim) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public Signature multiSignInner(final P privateKeyable, final Batch batchTransaction) {
-    return abstractTransactionSigner.multiSignInner(privateKeyable, batchTransaction);
-  }
+    @Override
+    public Signature signInner(final P privateKeyable, final Batch batchTransaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public Signature counterpartySign(final P privateKeyable, final LoanSet transaction) {
-    return abstractTransactionSigner.counterpartySign(privateKeyable, transaction);
-  }
+    @Override
+    public <T extends Transaction> Signature multiSign(final P privateKeyable, final T transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public Signature counterpartyMultiSign(final P privateKeyable, final LoanSet transaction) {
-    return abstractTransactionSigner.counterpartyMultiSign(privateKeyable, transaction);
-  }
+    @Override
+    public Signature multiSignInner(final P privateKeyable, final Batch batchTransaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public <T extends Transaction> boolean verify(final Signer signer, final T unsignedTransaction) {
-    return abstractTransactionVerifier.verify(signer, unsignedTransaction);
-  }
+    @Override
+    public Signature counterpartySign(final P privateKeyable, final LoanSet transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public <T extends Transaction> boolean verifyMultiSigned(
-    final Set<Signer> signerSet,
-    final T unsignedTransaction,
-    final int minSigners
-  ) {
-    return abstractTransactionVerifier.verifyMultiSigned(signerSet, unsignedTransaction, minSigners);
-  }
+    @Override
+    public Signature counterpartyMultiSign(final P privateKeyable, final LoanSet transaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Does the actual work of computing a signature using a ed25519 private-key, as locatable using {@code privateKey}.
-   *
-   * @param privateKey               A {@link P} used for signing.
-   * @param signableTransactionBytes A {@link UnsignedByteArray} to sign.
-   *
-   * @return A {@link Signature} with data that can be used to submit a transaction to the XRP Ledger.
-   */
-  protected abstract Signature edDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes);
+    @Override
+    public <T extends Transaction> boolean verify(final Signer signer, final T unsignedTransaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Does the actual work of computing a signature using a secp256k1 private-key, as locatable using
-   * {@code privateKey}.
-   *
-   * @param privateKey               A {@link P} used for signing.
-   * @param signableTransactionBytes A {@link UnsignedByteArray} to sign.
-   *
-   * @return A {@link Signature} with data that can be used to submit a transaction to the XRP Ledger.
-   */
-  protected abstract Signature ecDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes);
+    @Override
+    public <T extends Transaction> boolean verifyMultiSigned(final Set<Signer> signerSet, final T unsignedTransaction, final int minSigners) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Verify a signature.
-   *
-   * @param publicKey        The {@link PublicKey} used to verify the signed transaction.
-   * @param transactionBytes An {@link UnsignedByteArray} containing the bytes of the transaction that was signed.
-   * @param signature        A {@link Signature} over the transaction.
-   *
-   * @return {@code true} if the signature is valid; {@code false} otherwise.
-   */
-  protected abstract boolean edDsaVerify(PublicKey publicKey, UnsignedByteArray transactionBytes, Signature signature);
+    /**
+     * Does the actual work of computing a signature using a ed25519 private-key, as locatable using {@code privateKey}.
+     *
+     * @param privateKey               A {@link P} used for signing.
+     * @param signableTransactionBytes A {@link UnsignedByteArray} to sign.
+     *
+     * @return A {@link Signature} with data that can be used to submit a transaction to the XRP Ledger.
+     */
+    protected abstract Signature edDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes);
 
-  /**
-   * Verify a signature.
-   *
-   * @param publicKey        A {@link PublicKey}.
-   * @param transactionBytes An {@link UnsignedByteArray} containing the bytes of the transaction that was signed.
-   * @param signature        A {@link Signature} over the transaction.
-   *
-   * @return {@code true} if the signature is valid; {@code false} otherwise.
-   */
-  protected abstract boolean ecDsaVerify(PublicKey publicKey, UnsignedByteArray transactionBytes, Signature signature);
+    /**
+     * Does the actual work of computing a signature using a secp256k1 private-key, as locatable using
+     * {@code privateKey}.
+     *
+     * @param privateKey               A {@link P} used for signing.
+     * @param signableTransactionBytes A {@link UnsignedByteArray} to sign.
+     *
+     * @return A {@link Signature} with data that can be used to submit a transaction to the XRP Ledger.
+     */
+    protected abstract Signature ecDsaSign(P privateKey, UnsignedByteArray signableTransactionBytes);
 
-  /**
-   * Helper method to derive a public key from a private key.
-   *
-   * @param privateKey An instance of {@link PrivateKey}.
-   *
-   * @return A corresponding {@link PublicKey}.
-   */
-  public abstract PublicKey derivePublicKey(P privateKey);
+    /**
+     * Verify a signature.
+     *
+     * @param publicKey        The {@link PublicKey} used to verify the signed transaction.
+     * @param transactionBytes An {@link UnsignedByteArray} containing the bytes of the transaction that was signed.
+     * @param signature        A {@link Signature} over the transaction.
+     *
+     * @return {@code true} if the signature is valid; {@code false} otherwise.
+     */
+    protected abstract boolean edDsaVerify(PublicKey publicKey, UnsignedByteArray transactionBytes, Signature signature);
+
+    /**
+     * Verify a signature.
+     *
+     * @param publicKey        A {@link PublicKey}.
+     * @param transactionBytes An {@link UnsignedByteArray} containing the bytes of the transaction that was signed.
+     * @param signature        A {@link Signature} over the transaction.
+     *
+     * @return {@code true} if the signature is valid; {@code false} otherwise.
+     */
+    protected abstract boolean ecDsaVerify(PublicKey publicKey, UnsignedByteArray transactionBytes, Signature signature);
+
+    /**
+     * Helper method to derive a public key from a private key.
+     *
+     * @param privateKey An instance of {@link PrivateKey}.
+     *
+     * @return A corresponding {@link PublicKey}.
+     */
+    public abstract PublicKey derivePublicKey(P privateKey);
 }

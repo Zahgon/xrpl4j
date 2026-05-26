@@ -16,28 +16,27 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @JsonDeserialize(as = ImmutableTicketLedgerEntryParams.class)
 public interface TicketLedgerEntryParams {
 
-  /**
-   * Construct a {@code TicketLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableTicketLedgerEntryParams.Builder}.
-   */
-  static ImmutableTicketLedgerEntryParams.Builder builder() {
-    return ImmutableTicketLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code TicketLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableTicketLedgerEntryParams.Builder}.
+     */
+    static ImmutableTicketLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The owner of the Ticket.
-   *
-   * @return The {@link Address} of the owner.
-   */
-  Address account();
+    /**
+     * The owner of the Ticket.
+     *
+     * @return The {@link Address} of the owner.
+     */
+    Address account();
 
-  /**
-   * The Ticket Sequence number of the Ticket to retrieve.
-   *
-   * @return An {@link UnsignedInteger}.
-   */
-  @JsonProperty("ticket_seq")
-  UnsignedInteger ticketSeq();
-
+    /**
+     * The Ticket Sequence number of the Ticket to retrieve.
+     *
+     * @return An {@link UnsignedInteger}.
+     */
+    @JsonProperty("ticket_seq")
+    UnsignedInteger ticketSeq();
 }

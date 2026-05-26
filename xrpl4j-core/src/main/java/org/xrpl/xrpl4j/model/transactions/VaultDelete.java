@@ -19,32 +19,31 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @Beta
 public interface VaultDelete extends Transaction {
 
-  /**
-   * Construct a {@code VaultDelete} builder.
-   *
-   * @return An {@link ImmutableVaultDelete.Builder}.
-   */
-  static ImmutableVaultDelete.Builder builder() {
-    return ImmutableVaultDelete.builder();
-  }
+    /**
+     * Construct a {@code VaultDelete} builder.
+     *
+     * @return An {@link ImmutableVaultDelete.Builder}.
+     */
+    static ImmutableVaultDelete.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link VaultDelete}.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link VaultDelete}.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ID of the Vault to delete.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("VaultID")
-  Hash256 vaultId();
-
+    /**
+     * The ID of the Vault to delete.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("VaultID")
+    Hash256 vaultId();
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -27,7 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.node.TextNode;
 import org.xrpl.xrpl4j.model.transactions.Marker;
-
 import java.io.IOException;
 
 /**
@@ -35,25 +33,15 @@ import java.io.IOException;
  */
 public class MarkerDeserializer extends StdDeserializer<Marker> {
 
-  /**
-   * No-args constructor.
-   */
-  protected MarkerDeserializer() {
-    super(Marker.class);
-  }
-
-  @Override
-  public Marker deserialize(
-    JsonParser jsonParser,
-    DeserializationContext deserializationContext
-  ) throws IOException {
-    ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
-    JsonNode node = mapper.readTree(jsonParser);
-
-    if (node instanceof TextNode) {
-      return Marker.of(node.asText());
+    /**
+     * No-args constructor.
+     */
+    protected MarkerDeserializer() {
+        super(Marker.class);
     }
 
-    return Marker.of(mapper.writeValueAsString(node));
-  }
+    @Override
+    public Marker deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

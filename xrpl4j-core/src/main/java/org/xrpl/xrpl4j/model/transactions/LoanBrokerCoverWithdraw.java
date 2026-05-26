@@ -9,7 +9,6 @@ import com.google.common.primitives.UnsignedInteger;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.AddressConstants;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -24,76 +23,63 @@ import java.util.Optional;
 @Beta
 public interface LoanBrokerCoverWithdraw extends Transaction {
 
-  /**
-   * Construct a {@code LoanBrokerCoverWithdraw} builder.
-   *
-   * @return An {@link ImmutableLoanBrokerCoverWithdraw.Builder}.
-   */
-  static ImmutableLoanBrokerCoverWithdraw.Builder builder() {
-    return ImmutableLoanBrokerCoverWithdraw.builder();
-  }
+    /**
+     * Construct a {@code LoanBrokerCoverWithdraw} builder.
+     *
+     * @return An {@link ImmutableLoanBrokerCoverWithdraw.Builder}.
+     */
+    static ImmutableLoanBrokerCoverWithdraw.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link LoanBrokerCoverWithdraw}.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link LoanBrokerCoverWithdraw}.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The Loan Broker ID from which to withdraw First-Loss Capital.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("LoanBrokerID")
-  Hash256 loanBrokerId();
+    /**
+     * The Loan Broker ID from which to withdraw First-Loss Capital.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("LoanBrokerID")
+    Hash256 loanBrokerId();
 
-  /**
-   * The First-Loss Capital amount to withdraw.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  CurrencyAmount amount();
+    /**
+     * The First-Loss Capital amount to withdraw.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    CurrencyAmount amount();
 
-  /**
-   * An account to receive the assets. It must be able to receive the asset.
-   *
-   * @return An optionally-present {@link Address}.
-   */
-  @JsonProperty("Destination")
-  Optional<Address> destination();
+    /**
+     * An account to receive the assets. It must be able to receive the asset.
+     *
+     * @return An optionally-present {@link Address}.
+     */
+    @JsonProperty("Destination")
+    Optional<Address> destination();
 
-  /**
-   * Arbitrary tag identifying the reason for the transaction to the destination.
-   *
-   * @return An optionally-present {@link UnsignedInteger}.
-   */
-  @JsonProperty("DestinationTag")
-  Optional<UnsignedInteger> destinationTag();
+    /**
+     * Arbitrary tag identifying the reason for the transaction to the destination.
+     *
+     * @return An optionally-present {@link UnsignedInteger}.
+     */
+    @JsonProperty("DestinationTag")
+    Optional<UnsignedInteger> destinationTag();
 
-  /**
-   * Validates LoanBrokerCoverWithdraw data verification preconditions.
-   */
-  @Value.Check
-  default void check() {
-    Preconditions.checkArgument(
-      !loanBrokerId().equals(Hash256.ZERO),
-      "LoanBrokerID must not be zero."
-    );
-
-    Preconditions.checkArgument(
-      !amount().isNegative() && !amount().isZero(),
-      "Amount must be greater than zero."
-    );
-
-    destination().ifPresent(dest -> Preconditions.checkArgument(
-      !dest.equals(AddressConstants.ACCOUNT_ZERO),
-      "Destination must not be the zero account."
-    ));
-  }
+    /**
+     * Validates LoanBrokerCoverWithdraw data verification preconditions.
+     */
+    @Value.Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

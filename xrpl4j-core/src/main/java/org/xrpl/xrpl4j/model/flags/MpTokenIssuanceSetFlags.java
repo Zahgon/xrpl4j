@@ -7,64 +7,62 @@ package org.xrpl.xrpl4j.model.flags;
 @SuppressWarnings("abbreviationaswordinname")
 public class MpTokenIssuanceSetFlags extends TransactionFlags {
 
-  /**
-   * Constant {@link MpTokenIssuanceSetFlags} for the {@code tfMPTLock} flag.
-   */
-  public static final MpTokenIssuanceSetFlags LOCK = new MpTokenIssuanceSetFlags(0x00000001);
-  /**
-   * Constant {@link MpTokenIssuanceSetFlags} for the {@code tfMPTUnlock} flag.
-   */
-  public static final MpTokenIssuanceSetFlags UNLOCK = new MpTokenIssuanceSetFlags(0x00000002);
+    /**
+     * Constant {@link MpTokenIssuanceSetFlags} for the {@code tfMPTLock} flag.
+     */
+    public static final MpTokenIssuanceSetFlags LOCK = new MpTokenIssuanceSetFlags(0x00000001);
 
-  /**
-   * Constant {@link MpTokenIssuanceSetFlags} for the {@code tfInnerBatchTxn} flag.
-   */
-  public static final MpTokenIssuanceSetFlags INNER_BATCH_TXN = new MpTokenIssuanceSetFlags(
-    TransactionFlags.INNER_BATCH_TXN.getValue()
-  );
+    /**
+     * Constant {@link MpTokenIssuanceSetFlags} for the {@code tfMPTUnlock} flag.
+     */
+    public static final MpTokenIssuanceSetFlags UNLOCK = new MpTokenIssuanceSetFlags(0x00000002);
 
-  private MpTokenIssuanceSetFlags(long value) {
-    super(value);
-  }
+    /**
+     * Constant {@link MpTokenIssuanceSetFlags} for the {@code tfInnerBatchTxn} flag.
+     */
+    public static final MpTokenIssuanceSetFlags INNER_BATCH_TXN = new MpTokenIssuanceSetFlags(TransactionFlags.INNER_BATCH_TXN.getValue());
 
-  private MpTokenIssuanceSetFlags() {
-  }
+    private MpTokenIssuanceSetFlags(long value) {
+        super(value);
+    }
 
-  /**
-   * Construct an empty instance of {@link MpTokenIssuanceSetFlags}. Transactions with empty flags will not be
-   * serialized with a {@code Flags} field.
-   *
-   * @return An empty {@link MpTokenIssuanceSetFlags}.
-   */
-  public static MpTokenIssuanceSetFlags empty() {
-    return new MpTokenIssuanceSetFlags();
-  }
+    private MpTokenIssuanceSetFlags() {
+    }
 
-  /**
-   * If set, indicates that all MPT balances for this asset should be locked.
-   *
-   * @return {@code true} if {@code tfMPTLock} is set, otherwise {@code false}.
-   */
-  public boolean tfMptLock() {
-    return this.isSet(LOCK);
-  }
+    /**
+     * Construct an empty instance of {@link MpTokenIssuanceSetFlags}. Transactions with empty flags will not be
+     * serialized with a {@code Flags} field.
+     *
+     * @return An empty {@link MpTokenIssuanceSetFlags}.
+     */
+    public static MpTokenIssuanceSetFlags empty() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * If set, indicates that all MPT balances for this asset should be unlocked.
-   *
-   * @return {@code true} if {@code tfMPTUnlock} is set, otherwise {@code false}.
-   */
-  public boolean tfMptUnlock() {
-    return this.isSet(UNLOCK);
-  }
+    /**
+     * If set, indicates that all MPT balances for this asset should be locked.
+     *
+     * @return {@code true} if {@code tfMPTLock} is set, otherwise {@code false}.
+     */
+    public boolean tfMptLock() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Whether the {@code tfInnerBatchTxn} flag is set.
-   *
-   * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
-   */
-  public boolean tfInnerBatchTxn() {
-    return this.isSet(INNER_BATCH_TXN);
-  }
+    /**
+     * If set, indicates that all MPT balances for this asset should be unlocked.
+     *
+     * @return {@code true} if {@code tfMPTUnlock} is set, otherwise {@code false}.
+     */
+    public boolean tfMptUnlock() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
+    /**
+     * Whether the {@code tfInnerBatchTxn} flag is set.
+     *
+     * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
+     */
+    public boolean tfInnerBatchTxn() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

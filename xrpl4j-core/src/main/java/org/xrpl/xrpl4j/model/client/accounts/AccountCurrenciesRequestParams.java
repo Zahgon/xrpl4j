@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.accounts;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -36,40 +35,40 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @JsonDeserialize(as = ImmutableAccountCurrenciesRequestParams.class)
 public interface AccountCurrenciesRequestParams extends XrplRequestParams {
 
-  /**
-   * Builder for {@link AccountCurrenciesRequestParams}.
-   *
-   * @return A {@link ImmutableAccountCurrenciesRequestParams.Builder}.
-   */
-  static ImmutableAccountCurrenciesRequestParams.Builder builder() {
-    return ImmutableAccountCurrenciesRequestParams.builder();
-  }
+    /**
+     * Builder for {@link AccountCurrenciesRequestParams}.
+     *
+     * @return A {@link ImmutableAccountCurrenciesRequestParams.Builder}.
+     */
+    static ImmutableAccountCurrenciesRequestParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A unique identifier for the account, most commonly the account's {@link Address}.
-   *
-   * @return The {@link Address} for the account.
-   */
-  Address account();
+    /**
+     * A unique identifier for the account, most commonly the account's {@link Address}.
+     *
+     * @return The {@link Address} for the account.
+     */
+    Address account();
 
-  /**
-   * Specifies the ledger version to request. A ledger version can be specified by ledger hash, numerical ledger index,
-   * or a shortcut value.
-   *
-   * @return A {@link LedgerSpecifier} specifying the ledger version to request.
-   */
-  @JsonUnwrapped
-  LedgerSpecifier ledgerSpecifier();
+    /**
+     * Specifies the ledger version to request. A ledger version can be specified by ledger hash, numerical ledger index,
+     * or a shortcut value.
+     *
+     * @return A {@link LedgerSpecifier} specifying the ledger version to request.
+     */
+    @JsonUnwrapped
+    LedgerSpecifier ledgerSpecifier();
 
-  /**
-   * A boolean indicating if the {@link #account()} field only accepts a public key or XRP Ledger {@link Address}.
-   * Always true, as {@link #account()} is always an {@link Address}.
-   *
-   * @return {@code true} if the account field only accepts a public key or XRP Ledger address, otherwise {@code false}.
-   *   Defaults to {@code true}.
-   */
-  @Value.Derived
-  default boolean strict() {
-    return true;
-  }
+    /**
+     * A boolean indicating if the {@link #account()} field only accepts a public key or XRP Ledger {@link Address}.
+     * Always true, as {@link #account()} is always an {@link Address}.
+     *
+     * @return {@code true} if the account field only accepts a public key or XRP Ledger address, otherwise {@code false}.
+     *   Defaults to {@code true}.
+     */
+    @Value.Derived
+    default boolean strict() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

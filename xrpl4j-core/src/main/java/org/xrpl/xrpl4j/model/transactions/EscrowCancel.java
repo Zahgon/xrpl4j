@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -44,45 +43,44 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @JsonDeserialize(as = ImmutableEscrowCancel.class)
 public interface EscrowCancel extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableEscrowCancel.Builder}.
-   */
-  static ImmutableEscrowCancel.Builder builder() {
-    return ImmutableEscrowCancel.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableEscrowCancel.Builder}.
+     */
+    static ImmutableEscrowCancel.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link EscrowCancel}, which only allows the {@code tfFullyCanonicalSig}
-   * flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link EscrowCancel}, which only allows the {@code tfFullyCanonicalSig}
+     * flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * {@link Address} of the source account that funded the escrow payment.
-   *
-   * @return The {@link Address} of the escrow owner.
-   */
-  @JsonProperty("Owner")
-  Address owner();
+    /**
+     * {@link Address} of the source account that funded the escrow payment.
+     *
+     * @return The {@link Address} of the escrow owner.
+     */
+    @JsonProperty("Owner")
+    Address owner();
 
-  /**
-   * The {@link EscrowCreate#sequence()} of the transaction that created the escrow to cancel.
-   *
-   * @return An {@link UnsignedInteger} representing the sequence of the {@link EscrowCreate} transaction that created
-   *   the escrow.
-   */
-  @JsonProperty("OfferSequence")
-  UnsignedInteger offerSequence();
-
+    /**
+     * The {@link EscrowCreate#sequence()} of the transaction that created the escrow to cancel.
+     *
+     * @return An {@link UnsignedInteger} representing the sequence of the {@link EscrowCreate} transaction that created
+     *   the escrow.
+     */
+    @JsonProperty("OfferSequence")
+    UnsignedInteger offerSequence();
 }

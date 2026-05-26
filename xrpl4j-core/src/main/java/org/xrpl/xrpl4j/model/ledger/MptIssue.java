@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -39,21 +38,20 @@ import org.xrpl.xrpl4j.model.transactions.MpTokenIssuanceId;
 @Beta
 public interface MptIssue extends Issue {
 
-  /**
-   * Construct a {@code MptIssue} builder.
-   *
-   * @return An {@link ImmutableMptIssue.Builder}.
-   */
-  static ImmutableMptIssue.Builder builder() {
-    return ImmutableMptIssue.builder();
-  }
+    /**
+     * Construct a {@code MptIssue} builder.
+     *
+     * @return An {@link ImmutableMptIssue.Builder}.
+     */
+    static ImmutableMptIssue.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The MPT issuance ID of this asset.
-   *
-   * @return A {@link MpTokenIssuanceId}.
-   */
-  @JsonProperty("mpt_issuance_id")
-  MpTokenIssuanceId mptIssuanceId();
-
+    /**
+     * The MPT issuance ID of this asset.
+     *
+     * @return A {@link MpTokenIssuanceId}.
+     */
+    @JsonProperty("mpt_issuance_id")
+    MpTokenIssuanceId mptIssuanceId();
 }

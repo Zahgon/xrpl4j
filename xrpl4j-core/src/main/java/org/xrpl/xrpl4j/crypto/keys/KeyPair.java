@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.crypto.keys;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.immutables.value.Value;
 
 /**
@@ -28,27 +27,26 @@ import org.immutables.value.Value;
 @Value.Immutable
 public interface KeyPair {
 
-  /**
-   * Convenience builder.
-   *
-   * @return A {@link ImmutableKeyPair.Builder}.
-   */
-  static ImmutableKeyPair.Builder builder() {
-    return ImmutableKeyPair.builder();
-  }
+    /**
+     * Convenience builder.
+     *
+     * @return A {@link ImmutableKeyPair.Builder}.
+     */
+    static ImmutableKeyPair.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The private key of this {@link KeyPair}.
-   *
-   * @return A {@link PrivateKey} containing the private key.
-   */
-  PrivateKey privateKey();
+    /**
+     * The private key of this {@link KeyPair}.
+     *
+     * @return A {@link PrivateKey} containing the private key.
+     */
+    PrivateKey privateKey();
 
-  /**
-   * The public key of this {@link KeyPair}.
-   *
-   * @return A {@link PublicKey} containing the public key.
-   */
-  PublicKey publicKey();
-
+    /**
+     * The public key of this {@link KeyPair}.
+     *
+     * @return A {@link PublicKey} containing the public key.
+     */
+    PublicKey publicKey();
 }

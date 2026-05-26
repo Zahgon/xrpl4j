@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.google.common.primitives.UnsignedInteger;
-
 import java.io.IOException;
 
 /**
@@ -33,15 +31,15 @@ import java.io.IOException;
  */
 public class UnsignedIntegerStringDeserializer extends StdDeserializer<UnsignedInteger> {
 
-  /**
-   * No-args constructor.
-   */
-  protected UnsignedIntegerStringDeserializer() {
-    super(UnsignedInteger.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    protected UnsignedIntegerStringDeserializer() {
+        super(UnsignedInteger.class);
+    }
 
-  @Override
-  public UnsignedInteger deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    return UnsignedInteger.valueOf(jsonParser.getValueAsString());
-  }
+    @Override
+    public UnsignedInteger deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

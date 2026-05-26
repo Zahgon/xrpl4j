@@ -7,7 +7,6 @@ import com.google.common.base.Preconditions;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.transactions.Address;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -21,60 +20,50 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableDepositPreAuthLedgerEntryParams.class)
 public interface DepositPreAuthLedgerEntryParams {
 
-  /**
-   * Construct a {@code DepositPreAuthLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableDepositPreAuthLedgerEntryParams.Builder}.
-   */
-  static ImmutableDepositPreAuthLedgerEntryParams.Builder builder() {
-    return ImmutableDepositPreAuthLedgerEntryParams.builder();
-  }
-
-  /**
-   * The {@link Address} of the account that provided the preauthorization.
-   *
-   * @return An {@link Address}.
-   */
-  Address owner();
-
-  /**
-   * The {@link Address} of the account that received the preauthorization.
-   *
-   * @return An {@link Address}.
-   */
-  Optional<Address> authorized();
-
-  /**
-   * A list of {@link DepositPreAuthCredential} that received the preauthorization.
-   *
-   * @return A list of type {@link DepositPreAuthCredential}.
-   */
-  @JsonProperty("authorized_credentials")
-  List<DepositPreAuthCredential> authorizedCredentials();
-
-  /**
-   * Validate {@link DepositPreAuthLedgerEntryParams#authorizedCredentials} has less than or equal to 8 credentials.
-   */
-  @Value.Check
-  default void validateCredentialsLength() {
-    if (!authorizedCredentials().isEmpty()) {
-      Preconditions.checkArgument(
-        authorizedCredentials().size() <= 8,
-        "authorizedCredentials should have less than or equal to 8 items."
-      );
+    /**
+     * Construct a {@code DepositPreAuthLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableDepositPreAuthLedgerEntryParams.Builder}.
+     */
+    static ImmutableDepositPreAuthLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  /**
-   * Validate {@link DepositPreAuthLedgerEntryParams#authorizedCredentials} are unique.
-   */
-  @Value.Check
-  default void validateUniqueCredentials() {
-    if (!authorizedCredentials().isEmpty()) {
-      Preconditions.checkArgument(
-        new HashSet<>(authorizedCredentials()).size() == authorizedCredentials().size(),
-        "authorizedCredentials should have unique values."
-      );
+    /**
+     * The {@link Address} of the account that provided the preauthorization.
+     *
+     * @return An {@link Address}.
+     */
+    Address owner();
+
+    /**
+     * The {@link Address} of the account that received the preauthorization.
+     *
+     * @return An {@link Address}.
+     */
+    Optional<Address> authorized();
+
+    /**
+     * A list of {@link DepositPreAuthCredential} that received the preauthorization.
+     *
+     * @return A list of type {@link DepositPreAuthCredential}.
+     */
+    @JsonProperty("authorized_credentials")
+    List<DepositPreAuthCredential> authorizedCredentials();
+
+    /**
+     * Validate {@link DepositPreAuthLedgerEntryParams#authorizedCredentials} has less than or equal to 8 credentials.
+     */
+    @Value.Check
+    default void validateCredentialsLength() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    /**
+     * Validate {@link DepositPreAuthLedgerEntryParams#authorizedCredentials} are unique.
+     */
+    @Value.Check
+    default void validateUniqueCredentials() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

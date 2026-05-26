@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.nft;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -37,41 +36,41 @@ import org.xrpl.xrpl4j.model.transactions.Hash256;
 @JsonDeserialize(as = ImmutableSellOffer.class)
 public interface SellOffer {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableSellOffer.Builder}.
-   */
-  static ImmutableSellOffer.Builder builder() {
-    return ImmutableSellOffer.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableSellOffer.Builder}.
+     */
+    static ImmutableSellOffer.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The amount offered to sell the NFT.
-   *
-   * @return The {@link CurrencyAmount}.
-   */
-  CurrencyAmount amount();
+    /**
+     * The amount offered to sell the NFT.
+     *
+     * @return The {@link CurrencyAmount}.
+     */
+    CurrencyAmount amount();
 
-  /**
-   * A set of boolean {@link NfTokenOfferFlags} containing options enabled for this object.
-   *
-   * @return The {@link NfTokenOfferFlags} for this object.
-   */
-  NfTokenOfferFlags flags();
+    /**
+     * A set of boolean {@link NfTokenOfferFlags} containing options enabled for this object.
+     *
+     * @return The {@link NfTokenOfferFlags} for this object.
+     */
+    NfTokenOfferFlags flags();
 
-  /**
-   * The ledger object ID of this offer.
-   *
-   * @return The {@link String} index.
-   */
-  @JsonProperty("nft_offer_index")
-  Hash256 nftOfferIndex();
+    /**
+     * The ledger object ID of this offer.
+     *
+     * @return The {@link String} index.
+     */
+    @JsonProperty("nft_offer_index")
+    Hash256 nftOfferIndex();
 
-  /**
-   * The account that placed this {@link BuyOffer}.
-   *
-   * @return The {@link Address} of owner of the NfToken.
-   */
-  Address owner();
+    /**
+     * The account that placed this {@link BuyOffer}.
+     *
+     * @return The {@link Address} of owner of the NfToken.
+     */
+    Address owner();
 }

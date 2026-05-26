@@ -20,52 +20,51 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @Beta
 public interface AmmCreate extends Transaction {
 
-  /**
-   * Construct a {@code AmmCreate} builder.
-   *
-   * @return An {@link ImmutableAmmCreate.Builder}.
-   */
-  static ImmutableAmmCreate.Builder builder() {
-    return ImmutableAmmCreate.builder();
-  }
+    /**
+     * Construct a {@code AmmCreate} builder.
+     *
+     * @return An {@link ImmutableAmmCreate.Builder}.
+     */
+    static ImmutableAmmCreate.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link AmmCreate}, which only allows the {@code tfFullyCanonicalSig}
-   * flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link AmmCreate}, which only allows the {@code tfFullyCanonicalSig}
+     * flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The first of the two assets to fund this AMM with.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount")
-  CurrencyAmount amount();
+    /**
+     * The first of the two assets to fund this AMM with.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount")
+    CurrencyAmount amount();
 
-  /**
-   * The second of the two assets to fund this AMM with.
-   *
-   * @return A {@link CurrencyAmount}.
-   */
-  @JsonProperty("Amount2")
-  CurrencyAmount amount2();
+    /**
+     * The second of the two assets to fund this AMM with.
+     *
+     * @return A {@link CurrencyAmount}.
+     */
+    @JsonProperty("Amount2")
+    CurrencyAmount amount2();
 
-  /**
-   * The fee to charge for trades against this AMM instance.
-   *
-   * @return A {@link TradingFee}.
-   */
-  @JsonProperty("TradingFee")
-  TradingFee tradingFee();
-
+    /**
+     * The fee to charge for trades against this AMM instance.
+     *
+     * @return A {@link TradingFee}.
+     */
+    @JsonProperty("TradingFee")
+    TradingFee tradingFee();
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -41,32 +40,31 @@ import org.immutables.value.Value;
 @Beta
 public interface BatchSignerWrapper {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableBatchSignerWrapper.Builder}.
-   */
-  static ImmutableBatchSignerWrapper.Builder builder() {
-    return ImmutableBatchSignerWrapper.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableBatchSignerWrapper.Builder}.
+     */
+    static ImmutableBatchSignerWrapper.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Construct a {@link BatchSignerWrapper} wrapping the given {@link BatchSigner}.
-   *
-   * @param batchSigner A {@link BatchSigner}.
-   *
-   * @return A {@link BatchSignerWrapper}.
-   */
-  static BatchSignerWrapper of(BatchSigner batchSigner) {
-    return builder().batchSigner(batchSigner).build();
-  }
+    /**
+     * Construct a {@link BatchSignerWrapper} wrapping the given {@link BatchSigner}.
+     *
+     * @param batchSigner A {@link BatchSigner}.
+     *
+     * @return A {@link BatchSignerWrapper}.
+     */
+    static BatchSignerWrapper of(BatchSigner batchSigner) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link BatchSigner} that this wrapper wraps.
-   *
-   * @return A {@link BatchSigner}.
-   */
-  @JsonProperty("BatchSigner")
-  BatchSigner batchSigner();
-
+    /**
+     * The {@link BatchSigner} that this wrapper wraps.
+     *
+     * @return A {@link BatchSigner}.
+     */
+    @JsonProperty("BatchSigner")
+    BatchSigner batchSigner();
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.fees;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -37,45 +36,44 @@ import org.xrpl.xrpl4j.model.transactions.XrpCurrencyAmount;
 @JsonDeserialize(as = ImmutableFeeLevels.class)
 public interface FeeLevels {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableFeeLevels.Builder}.
-   */
-  static ImmutableFeeLevels.Builder builder() {
-    return ImmutableFeeLevels.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableFeeLevels.Builder}.
+     */
+    static ImmutableFeeLevels.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The median transaction cost among transactions in the previous validated ledger, represented in fee levels.
-   *
-   * @return An {@link XrpCurrencyAmount} representing the median level.
-   */
-  @JsonProperty("median_level")
-  XrpCurrencyAmount medianLevel();
+    /**
+     * The median transaction cost among transactions in the previous validated ledger, represented in fee levels.
+     *
+     * @return An {@link XrpCurrencyAmount} representing the median level.
+     */
+    @JsonProperty("median_level")
+    XrpCurrencyAmount medianLevel();
 
-  /**
-   * The minimum transaction cost required to be queued for a future ledger, represented in fee levels.
-   *
-   * @return An {@link XrpCurrencyAmount} representing the minimum level.
-   */
-  @JsonProperty("minimum_level")
-  XrpCurrencyAmount minimumLevel();
+    /**
+     * The minimum transaction cost required to be queued for a future ledger, represented in fee levels.
+     *
+     * @return An {@link XrpCurrencyAmount} representing the minimum level.
+     */
+    @JsonProperty("minimum_level")
+    XrpCurrencyAmount minimumLevel();
 
-  /**
-   * The minimum transaction cost required to be included in the current open ledger, represented in fee levels.
-   *
-   * @return An {@link XrpCurrencyAmount} representing the open ledger level.
-   */
-  @JsonProperty("open_ledger_level")
-  XrpCurrencyAmount openLedgerLevel();
+    /**
+     * The minimum transaction cost required to be included in the current open ledger, represented in fee levels.
+     *
+     * @return An {@link XrpCurrencyAmount} representing the open ledger level.
+     */
+    @JsonProperty("open_ledger_level")
+    XrpCurrencyAmount openLedgerLevel();
 
-  /**
-   * The equivalent of the minimum transaction cost, represented in fee levels.
-   *
-   * @return An {@link XrpCurrencyAmount} representing the reference level.
-   */
-  @JsonProperty("reference_level")
-  XrpCurrencyAmount referenceLevel();
-
+    /**
+     * The equivalent of the minimum transaction cost, represented in fee levels.
+     *
+     * @return An {@link XrpCurrencyAmount} representing the reference level.
+     */
+    @JsonProperty("reference_level")
+    XrpCurrencyAmount referenceLevel();
 }

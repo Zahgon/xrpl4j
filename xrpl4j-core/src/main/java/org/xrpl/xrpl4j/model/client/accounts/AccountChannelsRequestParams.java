@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.client.accounts;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -30,7 +29,6 @@ import org.xrpl.xrpl4j.model.client.XrplRequestParams;
 import org.xrpl.xrpl4j.model.client.common.LedgerSpecifier;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.Marker;
-
 import java.util.Optional;
 
 /**
@@ -41,52 +39,52 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableAccountChannelsRequestParams.class)
 public interface AccountChannelsRequestParams extends XrplRequestParams {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableAccountChannelsRequestParams.Builder}.
-   */
-  static ImmutableAccountChannelsRequestParams.Builder builder() {
-    return ImmutableAccountChannelsRequestParams.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableAccountChannelsRequestParams.Builder}.
+     */
+    static ImmutableAccountChannelsRequestParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The unique {@link Address} for the account. The request returns channels where this account is the channel's
-   * owner/source.
-   *
-   * @return The {@link Address} for the account.
-   */
-  Address account();
+    /**
+     * The unique {@link Address} for the account. The request returns channels where this account is the channel's
+     * owner/source.
+     *
+     * @return The {@link Address} for the account.
+     */
+    Address account();
 
-  /**
-   * The unique {@link Address} for the destination account. If provided, the response results are filtered
-   * by channels whose destination is this account.
-   *
-   * @return The optionally present {@link Address} of the destination account.
-   */
-  @JsonProperty("destination_account")
-  Optional<Address> destinationAccount();
+    /**
+     * The unique {@link Address} for the destination account. If provided, the response results are filtered
+     * by channels whose destination is this account.
+     *
+     * @return The optionally present {@link Address} of the destination account.
+     */
+    @JsonProperty("destination_account")
+    Optional<Address> destinationAccount();
 
-  /**
-   * Specifies the ledger version to request. A ledger version can be specified by ledger hash,
-   * numerical ledger index, or a shortcut value.
-   *
-   * @return A {@link LedgerSpecifier} specifying the ledger version to request.
-   */
-  @JsonUnwrapped
-  LedgerSpecifier ledgerSpecifier();
+    /**
+     * Specifies the ledger version to request. A ledger version can be specified by ledger hash,
+     * numerical ledger index, or a shortcut value.
+     *
+     * @return A {@link LedgerSpecifier} specifying the ledger version to request.
+     */
+    @JsonUnwrapped
+    LedgerSpecifier ledgerSpecifier();
 
-  /**
-   * Limit the number of transactions to retrieve. Cannot be less than 10 or more than 400. The default is 200.
-   *
-   * @return An optionally-present {@link UnsignedInteger}.
-   */
-  Optional<UnsignedInteger> limit();
+    /**
+     * Limit the number of transactions to retrieve. Cannot be less than 10 or more than 400. The default is 200.
+     *
+     * @return An optionally-present {@link UnsignedInteger}.
+     */
+    Optional<UnsignedInteger> limit();
 
-  /**
-   * Value from a previous paginated response. Resume retrieving data where that response left off.
-   *
-   * @return An optionally-present {@link String}.
-   */
-  Optional<Marker> marker();
+    /**
+     * Value from a previous paginated response. Resume retrieving data where that response left off.
+     *
+     * @return An optionally-present {@link String}.
+     */
+    Optional<Marker> marker();
 }

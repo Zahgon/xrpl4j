@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.xrpl.xrpl4j.model.transactions.LoanBrokerData;
-
 import java.io.IOException;
 
 /**
@@ -32,15 +30,15 @@ import java.io.IOException;
  */
 public class LoanBrokerDataDeserializer extends StdDeserializer<LoanBrokerData> {
 
-  /**
-   * No-args constructor.
-   */
-  public LoanBrokerDataDeserializer() {
-    super(LoanBrokerData.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public LoanBrokerDataDeserializer() {
+        super(LoanBrokerData.class);
+    }
 
-  @Override
-  public LoanBrokerData deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    return LoanBrokerData.of(jsonParser.getText());
-  }
+    @Override
+    public LoanBrokerData deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

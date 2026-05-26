@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.crypto.signing;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Preconditions;
@@ -30,7 +29,6 @@ import org.xrpl.xrpl4j.crypto.keys.PublicKey;
 import org.xrpl.xrpl4j.model.transactions.Signer;
 import org.xrpl.xrpl4j.model.transactions.SignerWrapper;
 import org.xrpl.xrpl4j.model.transactions.Transaction;
-
 import java.math.BigInteger;
 import java.util.Comparator;
 import java.util.List;
@@ -47,79 +45,44 @@ import java.util.stream.Collectors;
 @JsonDeserialize(as = ImmutableMultiSignedTransaction.class)
 public interface MultiSignedTransaction<T extends Transaction> extends SignedTransaction<T> {
 
-  /**
-   * A builder.
-   *
-   * @return An {@link ImmutableMultiSignedTransaction.Builder}.
-   */
-  static <T extends Transaction> ImmutableMultiSignedTransaction.Builder<T> builder() {
-    return ImmutableMultiSignedTransaction.builder();
-  }
+    /**
+     * A builder.
+     *
+     * @return An {@link ImmutableMultiSignedTransaction.Builder}.
+     */
+    static <T extends Transaction> ImmutableMultiSignedTransaction.Builder<T> builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The set of signatures and public keys used to sign.
-   *
-   * @return A {@link Set} of {@link Signer}s.
-   */
-  Set<Signer> signerSet();
+    /**
+     * The set of signatures and public keys used to sign.
+     *
+     * @return A {@link Set} of {@link Signer}s.
+     */
+    Set<Signer> signerSet();
 
-  /**
-   * The transaction with all signers in {@link #signerSet()} added to the {@link Transaction#signers()} field in the
-   * correct order.
-   *
-   * @return A {@link T}.
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  @Value.Derived
-  default T signedTransaction() {
-    final List<SignerWrapper> signers = signerSet().stream()
-      .map(SignerWrapper::of)
-      .sorted(
-        Comparator.comparing(
-          signature -> new BigInteger(
-            AddressCodec.getInstance().decodeAccountId(signature.signer().account()).hexValue(), 16
-          )
-        )
-      )
-      .collect(Collectors.toList());
+    /**
+     * The transaction with all signers in {@link #signerSet()} added to the {@link Transaction#signers()} field in the
+     * correct order.
+     *
+     * @return A {@link T}.
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    @Value.Derived
+    default T signedTransaction() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-    return (T) this.unsignedTransaction().withSigners(signers);
-  }
-
-  /**
-   * Validates the state of the current `MultiSignedTransaction` instance to ensure it meets the requirements for
-   * properly forming a multi-signed XRP Ledger transaction.
-   *
-   * @throws IllegalArgumentException If the transaction already has a signature in the `TxnSignature` field or if the
-   *                                  `signingPublicKey` is not set to the empty public key constant.
-   */
-  @Check
-  default void check() {
-
-    // signers are reserved for multisig
-    Preconditions.checkArgument(
-      this.unsignedTransaction().signers().isEmpty(),
-      "Transactions to be multi-signed must not already have Signers."
-    );
-
-    // tx sig is reserved for single-sig
-    Preconditions.checkArgument(
-      !this.unsignedTransaction().transactionSignature().isPresent(),
-      "Transactions to be multi-signed must not include a signature (this is reserved for single-sig)."
-    );
-
-    // TODO: Once https://github.com/XRPLF/xrpl4j/pull/684 is merged, we should update this check to use the new
-    // empty public key constant (and update the error message).
-    Preconditions.checkArgument(
-      this.unsignedTransaction().signingPublicKey().equals(PublicKey.MULTI_SIGN_PUBLIC_KEY),
-      "Transactions to be multi-signed must set `signingPublicKey` to an empty public key."
-    );
-
-    Preconditions.checkArgument(
-      !this.signerSet().isEmpty(),
-      "Transactions to be multi-signed must have at least one signer."
-    );
-
-  }
+    /**
+     * Validates the state of the current `MultiSignedTransaction` instance to ensure it meets the requirements for
+     * properly forming a multi-signed XRP Ledger transaction.
+     *
+     * @throws IllegalArgumentException If the transaction already has a signature in the `TxnSignature` field or if the
+     *                                  `signingPublicKey` is not set to the empty public key constant.
+     */
+    @Check
+    default void check() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

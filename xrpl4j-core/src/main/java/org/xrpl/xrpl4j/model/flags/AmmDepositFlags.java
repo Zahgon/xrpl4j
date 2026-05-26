@@ -17,107 +17,105 @@ import org.xrpl.xrpl4j.model.transactions.AmmDeposit;
 @Beta
 public class AmmDepositFlags extends TransactionFlags {
 
-  /**
-   * Constant {@link AmmDepositFlags} for the {@code tfLPToken} flag.
-   */
-  public static final AmmDepositFlags LP_TOKEN = new AmmDepositFlags(0x00010000);
+    /**
+     * Constant {@link AmmDepositFlags} for the {@code tfLPToken} flag.
+     */
+    public static final AmmDepositFlags LP_TOKEN = new AmmDepositFlags(0x00010000);
 
-  /**
-   * Constant {@link AmmDepositFlags} for the {@code tfSingleAsset} flag.
-   */
-  public static final AmmDepositFlags SINGLE_ASSET = new AmmDepositFlags(0x00080000);
+    /**
+     * Constant {@link AmmDepositFlags} for the {@code tfSingleAsset} flag.
+     */
+    public static final AmmDepositFlags SINGLE_ASSET = new AmmDepositFlags(0x00080000);
 
-  /**
-   * Constant {@link AmmDepositFlags} for the {@code tfTwoAsset} flag.
-   */
-  public static final AmmDepositFlags TWO_ASSET = new AmmDepositFlags(0x00100000);
+    /**
+     * Constant {@link AmmDepositFlags} for the {@code tfTwoAsset} flag.
+     */
+    public static final AmmDepositFlags TWO_ASSET = new AmmDepositFlags(0x00100000);
 
-  /**
-   * Constant {@link AmmDepositFlags} for the {@code tfOneAssetLPToken} flag.
-   */
-  public static final AmmDepositFlags ONE_ASSET_LP_TOKEN = new AmmDepositFlags(0x00200000);
+    /**
+     * Constant {@link AmmDepositFlags} for the {@code tfOneAssetLPToken} flag.
+     */
+    public static final AmmDepositFlags ONE_ASSET_LP_TOKEN = new AmmDepositFlags(0x00200000);
 
-  /**
-   * Constant {@link AmmDepositFlags} for the {@code tfLimitLPToken} flag.
-   */
-  public static final AmmDepositFlags LIMIT_LP_TOKEN = new AmmDepositFlags(0x00400000);
+    /**
+     * Constant {@link AmmDepositFlags} for the {@code tfLimitLPToken} flag.
+     */
+    public static final AmmDepositFlags LIMIT_LP_TOKEN = new AmmDepositFlags(0x00400000);
 
-  /**
-   * Constant {@link AmmDepositFlags} for the {@code tfTwoAssetIfEmpty} flag.
-   */
-  public static final AmmDepositFlags TWO_ASSET_IF_EMPTY = new AmmDepositFlags(0x00800000);
+    /**
+     * Constant {@link AmmDepositFlags} for the {@code tfTwoAssetIfEmpty} flag.
+     */
+    public static final AmmDepositFlags TWO_ASSET_IF_EMPTY = new AmmDepositFlags(0x00800000);
 
-  /**
-   * Constant {@link AmmDepositFlags} for the {@code tfInnerBatchTxn} flag.
-   */
-  public static final AmmDepositFlags INNER_BATCH_TXN = new AmmDepositFlags(
-    TransactionFlags.INNER_BATCH_TXN.getValue());
+    /**
+     * Constant {@link AmmDepositFlags} for the {@code tfInnerBatchTxn} flag.
+     */
+    public static final AmmDepositFlags INNER_BATCH_TXN = new AmmDepositFlags(TransactionFlags.INNER_BATCH_TXN.getValue());
 
-  private AmmDepositFlags(long value) {
-    super(value);
-  }
+    private AmmDepositFlags(long value) {
+        super(value);
+    }
 
-  /**
-   * Whether the {@code tfLPToken} flag is set.
-   *
-   * @return {@code true} if {@code tfLPToken} is set, otherwise {@code false}.
-   */
-  public boolean tfLpToken() {
-    return this.isSet(LP_TOKEN);
-  }
+    /**
+     * Whether the {@code tfLPToken} flag is set.
+     *
+     * @return {@code true} if {@code tfLPToken} is set, otherwise {@code false}.
+     */
+    public boolean tfLpToken() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Whether the {@code tfSingleAsset} flag is set.
-   *
-   * @return {@code true} if {@code tfSingleAsset} is set, otherwise {@code false}.
-   */
-  public boolean tfSingleAsset() {
-    return this.isSet(SINGLE_ASSET);
-  }
+    /**
+     * Whether the {@code tfSingleAsset} flag is set.
+     *
+     * @return {@code true} if {@code tfSingleAsset} is set, otherwise {@code false}.
+     */
+    public boolean tfSingleAsset() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Whether the {@code tfTwoAsset} flag is set.
-   *
-   * @return {@code true} if {@code tfTwoAsset} is set, otherwise {@code false}.
-   */
-  public boolean tfTwoAsset() {
-    return this.isSet(TWO_ASSET);
-  }
+    /**
+     * Whether the {@code tfTwoAsset} flag is set.
+     *
+     * @return {@code true} if {@code tfTwoAsset} is set, otherwise {@code false}.
+     */
+    public boolean tfTwoAsset() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Whether the {@code tfOneAssetLPToken} flag is set.
-   *
-   * @return {@code true} if {@code tfOneAssetLPToken} is set, otherwise {@code false}.
-   */
-  public boolean tfOneAssetLpToken() {
-    return this.isSet(ONE_ASSET_LP_TOKEN);
-  }
+    /**
+     * Whether the {@code tfOneAssetLPToken} flag is set.
+     *
+     * @return {@code true} if {@code tfOneAssetLPToken} is set, otherwise {@code false}.
+     */
+    public boolean tfOneAssetLpToken() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Whether the {@code tfLimitLPToken} flag is set.
-   *
-   * @return {@code true} if {@code tfLimitLPToken} is set, otherwise {@code false}.
-   */
-  public boolean tfLimitLpToken() {
-    return this.isSet(LIMIT_LP_TOKEN);
-  }
+    /**
+     * Whether the {@code tfLimitLPToken} flag is set.
+     *
+     * @return {@code true} if {@code tfLimitLPToken} is set, otherwise {@code false}.
+     */
+    public boolean tfLimitLpToken() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Whether the {@code tfTwoAssetIfEmpty} flag is set.
-   *
-   * @return {@code true} if {@code tfTwoAssetIfEmpty} is set, otherwise {@code false}.
-   */
-  public boolean tfTwoAssetIfEmpty() {
-    return this.isSet(TWO_ASSET_IF_EMPTY);
-  }
+    /**
+     * Whether the {@code tfTwoAssetIfEmpty} flag is set.
+     *
+     * @return {@code true} if {@code tfTwoAssetIfEmpty} is set, otherwise {@code false}.
+     */
+    public boolean tfTwoAssetIfEmpty() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Whether the {@code tfInnerBatchTxn} flag is set.
-   *
-   * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
-   */
-  public boolean tfInnerBatchTxn() {
-    return this.isSet(INNER_BATCH_TXN);
-  }
-
+    /**
+     * Whether the {@code tfInnerBatchTxn} flag is set.
+     *
+     * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
+     */
+    public boolean tfInnerBatchTxn() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

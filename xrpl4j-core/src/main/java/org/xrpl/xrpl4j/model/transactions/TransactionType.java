@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.annotations.Beta;
 
@@ -28,529 +27,455 @@ import com.google.common.annotations.Beta;
  */
 public enum TransactionType {
 
-  /**
-   * The {@link TransactionType} for the {@link AccountSet} transaction.
-   */
-  ACCOUNT_SET("AccountSet"),
-
-  /**
-   * The {@link TransactionType} for the {@link AccountDelete} transaction.
-   */
-  ACCOUNT_DELETE("AccountDelete"),
-
-  /**
-   * The {@link TransactionType} for the {@link CheckCancel} transaction.
-   */
-  CHECK_CANCEL("CheckCancel"),
-
-  /**
-   * The {@link TransactionType} for the {@link CheckCash} transaction.
-   */
-  CHECK_CASH("CheckCash"),
-
-  /**
-   * The {@link TransactionType} for the {@link CheckCreate} transaction.
-   */
-  CHECK_CREATE("CheckCreate"),
-
-  /**
-   * The {@link TransactionType} for the {@link CredentialAccept} transaction.
-   */
-  CREDENTIAL_ACCEPT("CredentialAccept"),
-
-  /**
-   * The {@link TransactionType} for the {@link CredentialCreate} transaction.
-   */
-  CREDENTIAL_CREATE("CredentialCreate"),
-
-  /**
-   * The {@link TransactionType} for the {@link CredentialDelete} transaction.
-   */
-  CREDENTIAL_DELETE("CredentialDelete"),
-
-  /**
-   * The {@link TransactionType} for the {@link DepositPreAuth} transaction.
-   */
-  DEPOSIT_PRE_AUTH("DepositPreauth"),
-
-  /**
-   * The {@link TransactionType} for the {@link EnableAmendment} transaction.
-   */
-  ENABLE_AMENDMENT("EnableAmendment"),
-
-  /**
-   * The {@link TransactionType} for the {@link EscrowCancel} transaction.
-   */
-  ESCROW_CANCEL("EscrowCancel"),
-
-  /**
-   * The {@link TransactionType} for the {@link EscrowCreate} transaction.
-   */
-  ESCROW_CREATE("EscrowCreate"),
-
-  /**
-   * The {@link TransactionType} for the {@link EscrowFinish} transaction.
-   */
-  ESCROW_FINISH("EscrowFinish"),
-
-  /**
-   * The {@link TransactionType} for the {@link NfTokenMint} transaction.
-   */
-  NFTOKEN_MINT("NFTokenMint"),
-
-  /**
-   * The {@link TransactionType} for the {@link NfTokenBurn} transaction.
-   */
-  NFTOKEN_BURN("NFTokenBurn"),
-
-  /**
-   * The {@link TransactionType} for the {@link NfTokenAcceptOffer} transaction.
-   */
-  NFTOKEN_ACCEPT_OFFER("NFTokenAcceptOffer"),
-
-  /**
-   * The {@link TransactionType} for the {@link NfTokenCancelOffer} transaction.
-   */
-  NFTOKEN_CANCEL_OFFER("NFTokenCancelOffer"),
-
-  /**
-   * The {@link TransactionType} for the {@link NfTokenCreateOffer} transaction.
-   */
-  NFTOKEN_CREATE_OFFER("NFTokenCreateOffer"),
-
-  /**
-   * The {@link TransactionType} for the {@link OfferCancel} transaction.
-   */
-  OFFER_CANCEL("OfferCancel"),
-
-  /**
-   * The {@link TransactionType} for the {@link OfferCreate} transaction.
-   */
-  OFFER_CREATE("OfferCreate"),
-
-  /**
-   * The {@link TransactionType} for the {@link Payment} transaction.
-   */
-  PAYMENT("Payment"),
-
-  /**
-   * The {@link TransactionType} for the {@link PaymentChannelClaim} transaction.
-   */
-  PAYMENT_CHANNEL_CLAIM("PaymentChannelClaim"),
-
-  /**
-   * The {@link TransactionType} for the {@link PaymentChannelCreate} transaction.
-   */
-  PAYMENT_CHANNEL_CREATE("PaymentChannelCreate"),
-
-  /**
-   * The {@link TransactionType} for the {@link PaymentChannelFund} transaction.
-   */
-  PAYMENT_CHANNEL_FUND("PaymentChannelFund"),
-
-  /**
-   * The {@link TransactionType} for the {@link PermissionedDomainSet} transaction.
-   */
-  PERMISSIONED_DOMAIN_SET("PermissionedDomainSet"),
-
-  /**
-   * The {@link TransactionType} for the {@link PermissionedDomainDelete} transaction.
-   */
-  PERMISSIONED_DOMAIN_DELETE("PermissionedDomainDelete"),
-
-  /**
-   * The {@link TransactionType} for the {@link SetFee} transaction.
-   */
-  SET_FEE("SetFee"),
-
-  /**
-   * The {@link TransactionType} for the {@link SetRegularKey} transaction.
-   */
-  SET_REGULAR_KEY("SetRegularKey"),
-
-  /**
-   * The {@link TransactionType} for the {@link SignerListSet} transaction.
-   */
-  SIGNER_LIST_SET("SignerListSet"),
-
-  /**
-   * The {@link TransactionType} for the {@link TrustSet} transaction.
-   */
-  TRUST_SET("TrustSet"),
-
-  /**
-   * The {@link TransactionType} for the {@link TicketCreate} transaction.
-   */
-  TICKET_CREATE("TicketCreate"),
-
-  /**
-   * The {@link TransactionType} for the {@link UnlModify} transaction.
-   */
-  UNL_MODIFY("UNLModify"),
-
-  /**
-   * The {@link TransactionType} for the {@link Clawback} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the Clawback amendment is enabled on mainnet. Its API is
-   * subject to change.</p>
-   */
-  @Beta
-  CLAWBACK("Clawback"),
-
-  /**
-   * The {@link TransactionType} for the {@link AmmBid} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
-   * change.</p>
-   */
-  @Beta
-  AMM_BID("AMMBid"),
-
-  /**
-   * The {@link TransactionType} for the {@link AmmCreate} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
-   * change.</p>
-   */
-  @Beta
-  AMM_CREATE("AMMCreate"),
-
-  /**
-   * The {@link TransactionType} for the {@link AmmDeposit} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
-   * change.</p>
-   */
-  @Beta
-  AMM_DEPOSIT("AMMDeposit"),
-
-  /**
-   * The {@link TransactionType} for the {@link AmmVote} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
-   * change.</p>
-   */
-  @Beta
-  AMM_VOTE("AMMVote"),
-
-  /**
-   * The {@link TransactionType} for the {@link AmmWithdraw} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
-   * change.</p>
-   */
-  @Beta
-  AMM_WITHDRAW("AMMWithdraw"),
-
-  /**
-   * The {@link TransactionType} for the {@link AmmDelete} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
-   * change.</p>
-   */
-  @Beta
-  AMM_DELETE("AMMDelete"),
-
-  /**
-   * The {@link TransactionType} for the {@link XChainAccountCreateCommit} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
-   * API is subject to change.</p>
-   */
-  @Beta
-  XCHAIN_ACCOUNT_CREATE_COMMIT("XChainAccountCreateCommit"),
-
-  /**
-   * The {@link TransactionType} for the {@link XChainAddAccountCreateAttestation} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
-   * API is subject to change.</p>
-   */
-  @Beta
-  XCHAIN_ADD_ACCOUNT_CREATE_ATTESTATION("XChainAddAccountCreateAttestation"),
-
-  /**
-   * The {@link TransactionType} for the {@link XChainAddClaimAttestation} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
-   * API is subject to change.</p>
-   */
-  @Beta
-  XCHAIN_ADD_CLAIM_ATTESTATION("XChainAddClaimAttestation"),
-
-  /**
-   * The {@link TransactionType} for the {@link XChainClaim} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
-   * API is subject to change.</p>
-   */
-  @Beta
-  XCHAIN_CLAIM("XChainClaim"),
-
-  /**
-   * The {@link TransactionType} for the {@link XChainCommit} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
-   * API is subject to change.</p>
-   */
-  @Beta
-  XCHAIN_COMMIT("XChainCommit"),
-
-  /**
-   * The {@link TransactionType} for the {@link XChainCreateBridge} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
-   * API is subject to change.</p>
-   */
-  @Beta
-  XCHAIN_CREATE_BRIDGE("XChainCreateBridge"),
-
-  /**
-   * The {@link TransactionType} for the {@link XChainCreateClaimId} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
-   * API is subject to change.</p>
-   */
-  @Beta
-  XCHAIN_CREATE_CLAIM_ID("XChainCreateClaimID"),
-
-  /**
-   * The {@link TransactionType} for the {@link XChainModifyBridge} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
-   * API is subject to change.</p>
-   */
-  @Beta
-  XCHAIN_MODIFY_BRIDGE("XChainModifyBridge"),
-
-  /**
-   * The {@link TransactionType} for the {@link DidSet} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureDID amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  DID_SET("DIDSet"),
-
-  /**
-   * The {@link TransactionType} for the {@link DidDelete} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureDID amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  DID_DELETE("DIDDelete"),
-
-  /**
-   * The {@link TransactionType} for the {@link OracleSet} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featurePriceOracle amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  ORACLE_SET("OracleSet"),
-
-  /**
-   * The {@link TransactionType} for the {@link OracleDelete} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featurePriceOracle amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  ORACLE_DELETE("OracleDelete"),
-
-  /**
-   * The {@link TransactionType} for the {@link AmmClawback} transaction.
-   */
-  AMM_CLAWBACK("AMMClawback"),
-  @Beta
-  MPT_ISSUANCE_CREATE("MPTokenIssuanceCreate"),
-  @Beta
-  MPT_ISSUANCE_DESTROY("MPTokenIssuanceDestroy"),
-  @Beta
-  MPT_ISSUANCE_SET("MPTokenIssuanceSet"),
-  @Beta
-  MPT_AUTHORIZE("MPTokenAuthorize"),
-
-  /**
-   * The {@link TransactionType} for the {@link VaultCreate} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  VAULT_CREATE("VaultCreate"),
-
-  /**
-   * The {@link TransactionType} for the {@link VaultSet} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  VAULT_SET("VaultSet"),
-
-  /**
-   * The {@link TransactionType} for the {@link VaultDelete} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  VAULT_DELETE("VaultDelete"),
-
-  /**
-   * The {@link TransactionType} for the {@link VaultDeposit} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  VAULT_DEPOSIT("VaultDeposit"),
-
-  /**
-   * The {@link TransactionType} for the {@link VaultWithdraw} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  VAULT_WITHDRAW("VaultWithdraw"),
-
-  /**
-   * The {@link TransactionType} for the {@link VaultClawback} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  VAULT_CLAWBACK("VaultClawback"),
-
-  /**
-   * The {@link TransactionType} for the {@link Batch} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the featureBatch amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  BATCH("Batch"),
-
-  /**
-   * The {@link TransactionType} for the {@link LoanBrokerSet} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  LOAN_BROKER_SET("LoanBrokerSet"),
-
-  /**
-   * The {@link TransactionType} for the {@link LoanBrokerDelete} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  LOAN_BROKER_DELETE("LoanBrokerDelete"),
-
-  /**
-   * The {@link TransactionType} for the {@link LoanBrokerCoverDeposit} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  LOAN_BROKER_COVER_DEPOSIT("LoanBrokerCoverDeposit"),
-
-  /**
-   * The {@link TransactionType} for the {@link LoanBrokerCoverWithdraw} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  LOAN_BROKER_COVER_WITHDRAW("LoanBrokerCoverWithdraw"),
-
-  /**
-   * The {@link TransactionType} for the {@link LoanBrokerCoverClawback} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  LOAN_BROKER_COVER_CLAWBACK("LoanBrokerCoverClawback"),
-
-  /**
-   * The {@link TransactionType} for the {@link LoanSet} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  LOAN_SET("LoanSet"),
-
-  /**
-   * The {@link TransactionType} for the {@link LoanDelete} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  LOAN_DELETE("LoanDelete"),
-
-  /**
-   * The {@link TransactionType} for the {@link LoanManage} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  LOAN_MANAGE("LoanManage"),
-
-  /**
-   * The {@link TransactionType} for the {@link LoanPay} transaction.
-   *
-   * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
-   * is subject to change.</p>
-   */
-  @Beta
-  LOAN_PAY("LoanPay"),
-
-  /**
-   * The {@link TransactionType} for any transaction that is unrecognized/unsupported by xrpl4j.
-   */
-  UNKNOWN("Unknown");
-
-  private final String value;
-
-  TransactionType(String value) {
-    this.value = value;
-  }
-
-  /**
-   * Gets an instance of {@link TransactionType} for the given string value.
-   *
-   * @param value The {@link String} value corresponding to a {@link TransactionType}.
-   *
-   * @return The {@link TransactionType} with the corresponding value.
-   */
-  public static TransactionType forValue(String value) {
-    for (TransactionType transactionType : TransactionType.values()) {
-      if (transactionType.value.equals(value)) {
-        return transactionType;
-      }
+    /**
+     * The {@link TransactionType} for the {@link AccountSet} transaction.
+     */
+    ACCOUNT_SET("AccountSet"),
+    /**
+     * The {@link TransactionType} for the {@link AccountDelete} transaction.
+     */
+    ACCOUNT_DELETE("AccountDelete"),
+    /**
+     * The {@link TransactionType} for the {@link CheckCancel} transaction.
+     */
+    CHECK_CANCEL("CheckCancel"),
+    /**
+     * The {@link TransactionType} for the {@link CheckCash} transaction.
+     */
+    CHECK_CASH("CheckCash"),
+    /**
+     * The {@link TransactionType} for the {@link CheckCreate} transaction.
+     */
+    CHECK_CREATE("CheckCreate"),
+    /**
+     * The {@link TransactionType} for the {@link CredentialAccept} transaction.
+     */
+    CREDENTIAL_ACCEPT("CredentialAccept"),
+    /**
+     * The {@link TransactionType} for the {@link CredentialCreate} transaction.
+     */
+    CREDENTIAL_CREATE("CredentialCreate"),
+    /**
+     * The {@link TransactionType} for the {@link CredentialDelete} transaction.
+     */
+    CREDENTIAL_DELETE("CredentialDelete"),
+    /**
+     * The {@link TransactionType} for the {@link DepositPreAuth} transaction.
+     */
+    DEPOSIT_PRE_AUTH("DepositPreauth"),
+    /**
+     * The {@link TransactionType} for the {@link EnableAmendment} transaction.
+     */
+    ENABLE_AMENDMENT("EnableAmendment"),
+    /**
+     * The {@link TransactionType} for the {@link EscrowCancel} transaction.
+     */
+    ESCROW_CANCEL("EscrowCancel"),
+    /**
+     * The {@link TransactionType} for the {@link EscrowCreate} transaction.
+     */
+    ESCROW_CREATE("EscrowCreate"),
+    /**
+     * The {@link TransactionType} for the {@link EscrowFinish} transaction.
+     */
+    ESCROW_FINISH("EscrowFinish"),
+    /**
+     * The {@link TransactionType} for the {@link NfTokenMint} transaction.
+     */
+    NFTOKEN_MINT("NFTokenMint"),
+    /**
+     * The {@link TransactionType} for the {@link NfTokenBurn} transaction.
+     */
+    NFTOKEN_BURN("NFTokenBurn"),
+    /**
+     * The {@link TransactionType} for the {@link NfTokenAcceptOffer} transaction.
+     */
+    NFTOKEN_ACCEPT_OFFER("NFTokenAcceptOffer"),
+    /**
+     * The {@link TransactionType} for the {@link NfTokenCancelOffer} transaction.
+     */
+    NFTOKEN_CANCEL_OFFER("NFTokenCancelOffer"),
+    /**
+     * The {@link TransactionType} for the {@link NfTokenCreateOffer} transaction.
+     */
+    NFTOKEN_CREATE_OFFER("NFTokenCreateOffer"),
+    /**
+     * The {@link TransactionType} for the {@link OfferCancel} transaction.
+     */
+    OFFER_CANCEL("OfferCancel"),
+    /**
+     * The {@link TransactionType} for the {@link OfferCreate} transaction.
+     */
+    OFFER_CREATE("OfferCreate"),
+    /**
+     * The {@link TransactionType} for the {@link Payment} transaction.
+     */
+    PAYMENT("Payment"),
+    /**
+     * The {@link TransactionType} for the {@link PaymentChannelClaim} transaction.
+     */
+    PAYMENT_CHANNEL_CLAIM("PaymentChannelClaim"),
+    /**
+     * The {@link TransactionType} for the {@link PaymentChannelCreate} transaction.
+     */
+    PAYMENT_CHANNEL_CREATE("PaymentChannelCreate"),
+    /**
+     * The {@link TransactionType} for the {@link PaymentChannelFund} transaction.
+     */
+    PAYMENT_CHANNEL_FUND("PaymentChannelFund"),
+    /**
+     * The {@link TransactionType} for the {@link PermissionedDomainSet} transaction.
+     */
+    PERMISSIONED_DOMAIN_SET("PermissionedDomainSet"),
+    /**
+     * The {@link TransactionType} for the {@link PermissionedDomainDelete} transaction.
+     */
+    PERMISSIONED_DOMAIN_DELETE("PermissionedDomainDelete"),
+    /**
+     * The {@link TransactionType} for the {@link SetFee} transaction.
+     */
+    SET_FEE("SetFee"),
+    /**
+     * The {@link TransactionType} for the {@link SetRegularKey} transaction.
+     */
+    SET_REGULAR_KEY("SetRegularKey"),
+    /**
+     * The {@link TransactionType} for the {@link SignerListSet} transaction.
+     */
+    SIGNER_LIST_SET("SignerListSet"),
+    /**
+     * The {@link TransactionType} for the {@link TrustSet} transaction.
+     */
+    TRUST_SET("TrustSet"),
+    /**
+     * The {@link TransactionType} for the {@link TicketCreate} transaction.
+     */
+    TICKET_CREATE("TicketCreate"),
+    /**
+     * The {@link TransactionType} for the {@link UnlModify} transaction.
+     */
+    UNL_MODIFY("UNLModify"),
+    /**
+     * The {@link TransactionType} for the {@link Clawback} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the Clawback amendment is enabled on mainnet. Its API is
+     * subject to change.</p>
+     */
+    @Beta
+    CLAWBACK("Clawback"),
+    /**
+     * The {@link TransactionType} for the {@link AmmBid} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
+     * change.</p>
+     */
+    @Beta
+    AMM_BID("AMMBid"),
+    /**
+     * The {@link TransactionType} for the {@link AmmCreate} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
+     * change.</p>
+     */
+    @Beta
+    AMM_CREATE("AMMCreate"),
+    /**
+     * The {@link TransactionType} for the {@link AmmDeposit} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
+     * change.</p>
+     */
+    @Beta
+    AMM_DEPOSIT("AMMDeposit"),
+    /**
+     * The {@link TransactionType} for the {@link AmmVote} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
+     * change.</p>
+     */
+    @Beta
+    AMM_VOTE("AMMVote"),
+    /**
+     * The {@link TransactionType} for the {@link AmmWithdraw} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
+     * change.</p>
+     */
+    @Beta
+    AMM_WITHDRAW("AMMWithdraw"),
+    /**
+     * The {@link TransactionType} for the {@link AmmDelete} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the AMM amendment is enabled on mainnet. Its API is subject to
+     * change.</p>
+     */
+    @Beta
+    AMM_DELETE("AMMDelete"),
+    /**
+     * The {@link TransactionType} for the {@link XChainAccountCreateCommit} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
+     * API is subject to change.</p>
+     */
+    @Beta
+    XCHAIN_ACCOUNT_CREATE_COMMIT("XChainAccountCreateCommit"),
+    /**
+     * The {@link TransactionType} for the {@link XChainAddAccountCreateAttestation} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
+     * API is subject to change.</p>
+     */
+    @Beta
+    XCHAIN_ADD_ACCOUNT_CREATE_ATTESTATION("XChainAddAccountCreateAttestation"),
+    /**
+     * The {@link TransactionType} for the {@link XChainAddClaimAttestation} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
+     * API is subject to change.</p>
+     */
+    @Beta
+    XCHAIN_ADD_CLAIM_ATTESTATION("XChainAddClaimAttestation"),
+    /**
+     * The {@link TransactionType} for the {@link XChainClaim} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
+     * API is subject to change.</p>
+     */
+    @Beta
+    XCHAIN_CLAIM("XChainClaim"),
+    /**
+     * The {@link TransactionType} for the {@link XChainCommit} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
+     * API is subject to change.</p>
+     */
+    @Beta
+    XCHAIN_COMMIT("XChainCommit"),
+    /**
+     * The {@link TransactionType} for the {@link XChainCreateBridge} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
+     * API is subject to change.</p>
+     */
+    @Beta
+    XCHAIN_CREATE_BRIDGE("XChainCreateBridge"),
+    /**
+     * The {@link TransactionType} for the {@link XChainCreateClaimId} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
+     * API is subject to change.</p>
+     */
+    @Beta
+    XCHAIN_CREATE_CLAIM_ID("XChainCreateClaimID"),
+    /**
+     * The {@link TransactionType} for the {@link XChainModifyBridge} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureXChainBridge amendment is enabled on mainnet. Its
+     * API is subject to change.</p>
+     */
+    @Beta
+    XCHAIN_MODIFY_BRIDGE("XChainModifyBridge"),
+    /**
+     * The {@link TransactionType} for the {@link DidSet} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureDID amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    DID_SET("DIDSet"),
+    /**
+     * The {@link TransactionType} for the {@link DidDelete} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureDID amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    DID_DELETE("DIDDelete"),
+    /**
+     * The {@link TransactionType} for the {@link OracleSet} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featurePriceOracle amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    ORACLE_SET("OracleSet"),
+    /**
+     * The {@link TransactionType} for the {@link OracleDelete} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featurePriceOracle amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    ORACLE_DELETE("OracleDelete"),
+    /**
+     * The {@link TransactionType} for the {@link AmmClawback} transaction.
+     */
+    AMM_CLAWBACK("AMMClawback"),
+    @Beta
+    MPT_ISSUANCE_CREATE("MPTokenIssuanceCreate"),
+    @Beta
+    MPT_ISSUANCE_DESTROY("MPTokenIssuanceDestroy"),
+    @Beta
+    MPT_ISSUANCE_SET("MPTokenIssuanceSet"),
+    @Beta
+    MPT_AUTHORIZE("MPTokenAuthorize"),
+    /**
+     * The {@link TransactionType} for the {@link VaultCreate} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    VAULT_CREATE("VaultCreate"),
+    /**
+     * The {@link TransactionType} for the {@link VaultSet} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    VAULT_SET("VaultSet"),
+    /**
+     * The {@link TransactionType} for the {@link VaultDelete} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    VAULT_DELETE("VaultDelete"),
+    /**
+     * The {@link TransactionType} for the {@link VaultDeposit} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    VAULT_DEPOSIT("VaultDeposit"),
+    /**
+     * The {@link TransactionType} for the {@link VaultWithdraw} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    VAULT_WITHDRAW("VaultWithdraw"),
+    /**
+     * The {@link TransactionType} for the {@link VaultClawback} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the SingleAssetVault amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    VAULT_CLAWBACK("VaultClawback"),
+    /**
+     * The {@link TransactionType} for the {@link Batch} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the featureBatch amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    BATCH("Batch"),
+    /**
+     * The {@link TransactionType} for the {@link LoanBrokerSet} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    LOAN_BROKER_SET("LoanBrokerSet"),
+    /**
+     * The {@link TransactionType} for the {@link LoanBrokerDelete} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    LOAN_BROKER_DELETE("LoanBrokerDelete"),
+    /**
+     * The {@link TransactionType} for the {@link LoanBrokerCoverDeposit} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    LOAN_BROKER_COVER_DEPOSIT("LoanBrokerCoverDeposit"),
+    /**
+     * The {@link TransactionType} for the {@link LoanBrokerCoverWithdraw} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    LOAN_BROKER_COVER_WITHDRAW("LoanBrokerCoverWithdraw"),
+    /**
+     * The {@link TransactionType} for the {@link LoanBrokerCoverClawback} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    LOAN_BROKER_COVER_CLAWBACK("LoanBrokerCoverClawback"),
+    /**
+     * The {@link TransactionType} for the {@link LoanSet} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    LOAN_SET("LoanSet"),
+    /**
+     * The {@link TransactionType} for the {@link LoanDelete} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    LOAN_DELETE("LoanDelete"),
+    /**
+     * The {@link TransactionType} for the {@link LoanManage} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    LOAN_MANAGE("LoanManage"),
+    /**
+     * The {@link TransactionType} for the {@link LoanPay} transaction.
+     *
+     * <p>This constant will be marked {@link Beta} until the LendingProtocol amendment is enabled on mainnet. Its API
+     * is subject to change.</p>
+     */
+    @Beta
+    LOAN_PAY("LoanPay"),
+    /**
+     * The {@link TransactionType} for any transaction that is unrecognized/unsupported by xrpl4j.
+     */
+    UNKNOWN("Unknown");
+
+    private final String value;
+
+    TransactionType(String value) {
+        this.value = value;
     }
 
-    return UNKNOWN;
-  }
+    /**
+     * Gets an instance of {@link TransactionType} for the given string value.
+     *
+     * @param value The {@link String} value corresponding to a {@link TransactionType}.
+     *
+     * @return The {@link TransactionType} with the corresponding value.
+     */
+    public static TransactionType forValue(String value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Get the underlying value of this {@link TransactionType}.
-   *
-   * @return The {@link String} value.
-   */
-  @JsonValue
-  public String value() {
-    return value;
-  }
+    /**
+     * Get the underlying value of this {@link TransactionType}.
+     *
+     * @return The {@link String} value.
+     */
+    @JsonValue
+    public String value() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

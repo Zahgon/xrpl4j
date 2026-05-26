@@ -19,10 +19,8 @@ package org.xrpl.xrpl4j.codec.addresses;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.google.common.collect.Lists;
 import com.google.common.primitives.UnsignedInteger;
-
 import java.util.Objects;
 
 /**
@@ -30,82 +28,57 @@ import java.util.Objects;
  */
 public class PrivateKeyCodec {
 
-  private static final PrivateKeyCodec INSTANCE = new PrivateKeyCodec();
+    private static final PrivateKeyCodec INSTANCE = new PrivateKeyCodec();
 
-  public static PrivateKeyCodec getInstance() {
-    return INSTANCE;
-  }
+    public static PrivateKeyCodec getInstance() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Encode an XRPL Node Private Key to a Base58Check encoded {@link String}.
-   *
-   * @param privateKeyBytes An {@link UnsignedByteArray} containing the public key to be encoded.
-   *
-   * @return The Base58 representation of privateKeyBytes.
-   */
-  public String encodeNodePrivateKey(final UnsignedByteArray privateKeyBytes) {
-    Objects.requireNonNull(privateKeyBytes);
+    /**
+     * Encode an XRPL Node Private Key to a Base58Check encoded {@link String}.
+     *
+     * @param privateKeyBytes An {@link UnsignedByteArray} containing the public key to be encoded.
+     *
+     * @return The Base58 representation of privateKeyBytes.
+     */
+    public String encodeNodePrivateKey(final UnsignedByteArray privateKeyBytes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-    return AddressBase58.encode(
-      privateKeyBytes,
-      Lists.newArrayList(Version.NODE_PRIVATE),
-      UnsignedInteger.valueOf(32)
-    );
-  }
+    /**
+     * Decode a Base58Check encoded XRPL Node Private Key.
+     *
+     * @param privateKeyBase58 The Base58 encoded public key to be decoded.
+     *
+     * @return An {@link UnsignedByteArray} containing the decoded public key.
+     *
+     * @see "https://xrpl.org/base58-encodings.html"
+     */
+    public UnsignedByteArray decodeNodePrivateKey(final String privateKeyBase58) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Decode a Base58Check encoded XRPL Node Private Key.
-   *
-   * @param privateKeyBase58 The Base58 encoded public key to be decoded.
-   *
-   * @return An {@link UnsignedByteArray} containing the decoded public key.
-   *
-   * @see "https://xrpl.org/base58-encodings.html"
-   */
-  public UnsignedByteArray decodeNodePrivateKey(final String privateKeyBase58) {
-    Objects.requireNonNull(privateKeyBase58);
+    /**
+     * Encode an XRPL Account Private Key to a Base58Check encoded {@link String}.
+     *
+     * @param privateKeyBytes An {@link UnsignedByteArray} containing the public key to be encoded.
+     *
+     * @return The Base58 representation of privateKeyBytes.
+     */
+    public String encodeAccountPrivateKey(final UnsignedByteArray privateKeyBytes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-    return AddressBase58.decode(
-      privateKeyBase58,
-      Lists.newArrayList(Version.NODE_PRIVATE),
-      UnsignedInteger.valueOf(32)
-    ).bytes();
-  }
-
-  /**
-   * Encode an XRPL Account Private Key to a Base58Check encoded {@link String}.
-   *
-   * @param privateKeyBytes An {@link UnsignedByteArray} containing the public key to be encoded.
-   *
-   * @return The Base58 representation of privateKeyBytes.
-   */
-  public String encodeAccountPrivateKey(final UnsignedByteArray privateKeyBytes) {
-    Objects.requireNonNull(privateKeyBytes);
-
-    return AddressBase58.encode(
-      privateKeyBytes,
-      Lists.newArrayList(Version.ACCOUNT_SECRET_KEY),
-      UnsignedInteger.valueOf(32)
-    );
-  }
-
-  /**
-   * Decode a Base58Check encoded XRPL Account Private Key.
-   *
-   * @param privateKeyBase58 The Base58 encoded public key to be decoded.
-   *
-   * @return An {@link UnsignedByteArray} containing the decoded public key.
-   *
-   * @see "https://xrpl.org/base58-encodings.html"
-   */
-  public UnsignedByteArray decodeAccountPrivateKey(final String privateKeyBase58) {
-    Objects.requireNonNull(privateKeyBase58);
-
-    return AddressBase58.decode(
-      privateKeyBase58,
-      Lists.newArrayList(Version.ACCOUNT_SECRET_KEY),
-      UnsignedInteger.valueOf(32)
-    ).bytes();
-  }
-
+    /**
+     * Decode a Base58Check encoded XRPL Account Private Key.
+     *
+     * @param privateKeyBase58 The Base58 encoded public key to be decoded.
+     *
+     * @return An {@link UnsignedByteArray} containing the decoded public key.
+     *
+     * @see "https://xrpl.org/base58-encodings.html"
+     */
+    public UnsignedByteArray decodeAccountPrivateKey(final String privateKeyBase58) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

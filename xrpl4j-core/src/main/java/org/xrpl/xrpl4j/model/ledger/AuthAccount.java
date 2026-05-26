@@ -19,25 +19,22 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @Beta
 public interface AuthAccount {
 
-  /**
-   * Construct an {@link AuthAccount} containing the specified {@link Address}.
-   *
-   * @param account An {@link Address}.
-   *
-   * @return An {@link AuthAccount}.
-   */
-  static AuthAccount of(Address account) {
-    return ImmutableAuthAccount.builder()
-      .account(account)
-      .build();
-  }
+    /**
+     * Construct an {@link AuthAccount} containing the specified {@link Address}.
+     *
+     * @param account An {@link Address}.
+     *
+     * @return An {@link AuthAccount}.
+     */
+    static AuthAccount of(Address account) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The address of the account.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Account")
-  Address account();
-
+    /**
+     * The address of the account.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Account")
+    Address account();
 }

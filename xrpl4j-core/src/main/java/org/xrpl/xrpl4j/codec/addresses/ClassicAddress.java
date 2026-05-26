@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.codec.addresses;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.google.common.primitives.UnsignedInteger;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.transactions.Address;
@@ -33,33 +32,33 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 @Value.Immutable
 public interface ClassicAddress {
 
-  /**
-   * Get a new {@link ImmutableClassicAddress.Builder} instance.
-   *
-   * @return A {@link ImmutableClassicAddress.Builder}.
-   */
-  static ImmutableClassicAddress.Builder builder() {
-    return ImmutableClassicAddress.builder();
-  }
+    /**
+     * Get a new {@link ImmutableClassicAddress.Builder} instance.
+     *
+     * @return A {@link ImmutableClassicAddress.Builder}.
+     */
+    static ImmutableClassicAddress.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A classic address, as an {@link Address}.
-   *
-   * @return An {@link Address} containing the classic address.
-   */
-  Address classicAddress();
+    /**
+     * A classic address, as an {@link Address}.
+     *
+     * @return An {@link Address} containing the classic address.
+     */
+    Address classicAddress();
 
-  /**
-   * The tag of the classic address.
-   *
-   * @return An {@link UnsignedInteger}.
-   */
-  UnsignedInteger tag();
+    /**
+     * The tag of the classic address.
+     *
+     * @return An {@link UnsignedInteger}.
+     */
+    UnsignedInteger tag();
 
-  /**
-   * Whether or not this address exists on mainnet or testnet.
-   *
-   * @return {@code true} if it is a tesnet address, {@code false} if it is mainnet.
-   */
-  boolean test();
+    /**
+     * Whether or not this address exists on mainnet or testnet.
+     *
+     * @return {@code true} if it is a tesnet address, {@code false} if it is mainnet.
+     */
+    boolean test();
 }

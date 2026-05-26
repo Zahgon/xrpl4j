@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.flags;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.xrpl.xrpl4j.model.ledger.NfTokenOfferObject;
 
 /**
@@ -27,47 +26,46 @@ import org.xrpl.xrpl4j.model.ledger.NfTokenOfferObject;
  */
 public class NfTokenOfferFlags extends Flags {
 
-  /**
-   * Constant {@link NfTokenOfferFlags} for the {@code lsfBuyToken} flag.
-   */
-  public static final NfTokenOfferFlags BUY_TOKEN = new NfTokenOfferFlags(0x00000001);
+    /**
+     * Constant {@link NfTokenOfferFlags} for the {@code lsfBuyToken} flag.
+     */
+    public static final NfTokenOfferFlags BUY_TOKEN = new NfTokenOfferFlags(0x00000001);
 
-  /**
-   * Constant {@link NfTokenOfferFlags} for the {@code lsfAuthorized} flag.
-   */
-  public static final NfTokenOfferFlags AUTHORIZED = new NfTokenOfferFlags(0x00000002);
+    /**
+     * Constant {@link NfTokenOfferFlags} for the {@code lsfAuthorized} flag.
+     */
+    public static final NfTokenOfferFlags AUTHORIZED = new NfTokenOfferFlags(0x00000002);
 
+    private NfTokenOfferFlags(long value) {
+        super(value);
+    }
 
-  private NfTokenOfferFlags(long value) {
-    super(value);
-  }
+    /**
+     * Construct {@link NfTokenOfferFlags} with a given value.
+     *
+     * @param value The long-number encoded flags value of this {@link NfTokenOfferFlags}.
+     *
+     * @return New {@link NfTokenOfferFlags}.
+     */
+    public static NfTokenOfferFlags of(long value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Construct {@link NfTokenOfferFlags} with a given value.
-   *
-   * @param value The long-number encoded flags value of this {@link NfTokenOfferFlags}.
-   *
-   * @return New {@link NfTokenOfferFlags}.
-   */
-  public static NfTokenOfferFlags of(long value) {
-    return new NfTokenOfferFlags(value);
-  }
+    /**
+     * Indicates the offer is a buy offer.
+     *
+     * @return {@code true} if {@code lsfBuyToken} is set, otherwise {@code false}.
+     */
+    public boolean lsfBuyToken() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Indicates the offer is a buy offer.
-   *
-   * @return {@code true} if {@code lsfBuyToken} is set, otherwise {@code false}.
-   */
-  public boolean lsfBuyToken() {
-    return this.isSet(BUY_TOKEN);
-  }
-
-  /**
-   * Indicates the offer has been approved by the issuer.
-   *
-   * @return {@code true} if {@code lsfAuthorized} is set, otherwise {@code false}.
-   */
-  public boolean lsfAuthorized() {
-    return this.isSet(AUTHORIZED);
-  }
+    /**
+     * Indicates the offer has been approved by the issuer.
+     *
+     * @return {@code true} if {@code lsfAuthorized} is set, otherwise {@code false}.
+     */
+    public boolean lsfAuthorized() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
-
 import java.io.IOException;
 
 /**
@@ -32,15 +30,15 @@ import java.io.IOException;
  */
 public class Hash256Serializer extends StdScalarSerializer<Hash256> {
 
-  /**
-   * No-args constructor.
-   */
-  public Hash256Serializer() {
-    super(Hash256.class, false);
-  }
+    /**
+     * No-args constructor.
+     */
+    public Hash256Serializer() {
+        super(Hash256.class, false);
+    }
 
-  @Override
-  public void serialize(Hash256 hash256, JsonGenerator gen, SerializerProvider provider) throws IOException {
-    gen.writeString(hash256.value());
-  }
+    @Override
+    public void serialize(Hash256 hash256, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

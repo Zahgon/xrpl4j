@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.codec.binary.types;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,90 +32,37 @@ import org.xrpl.xrpl4j.codec.binary.serdes.BinaryParser;
  */
 public class HopType extends SerializedType<HopType> {
 
-  /**
-   * Constant for masking types of a Hop.
-   */
-  public static final byte TYPE_ACCOUNT = 0x01;
-  public static final byte TYPE_CURRENCY = 0x10;
-  public static final byte TYPE_ISSUER = 0x20;
+    /**
+     * Constant for masking types of a Hop.
+     */
+    public static final byte TYPE_ACCOUNT = 0x01;
 
-  private static final ObjectMapper objectMapper = BinaryCodecObjectMapperFactory.getObjectMapper();
+    public static final byte TYPE_CURRENCY = 0x10;
 
-  public HopType() {
-    this(UnsignedByteArray.empty());
-  }
+    public static final byte TYPE_ISSUER = 0x20;
 
-  public HopType(UnsignedByteArray list) {
-    super(list);
-  }
+    private static final ObjectMapper objectMapper = BinaryCodecObjectMapperFactory.getObjectMapper();
 
-  @Override
-  public HopType fromParser(BinaryParser parser) {
-    int type = parser.readUInt8().intValue();
-    UnsignedByteArray byteArray = UnsignedByteArray.of(UnsignedByte.of(type));
-
-    if ((type & TYPE_ACCOUNT) > 0) {
-      byteArray.append(parser.read(AccountIdType.WIDTH));
+    public HopType() {
+        this(UnsignedByteArray.empty());
     }
 
-    if ((type & TYPE_CURRENCY) > 0) {
-      byteArray.append(parser.read(CurrencyType.WIDTH));
+    public HopType(UnsignedByteArray list) {
+        super(list);
     }
 
-    if ((type & TYPE_ISSUER) > 0) {
-      byteArray.append(parser.read(AccountIdType.WIDTH));
+    @Override
+    public HopType fromParser(BinaryParser parser) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    return new HopType(byteArray);
-  }
-
-  @Override
-  public HopType fromJson(JsonNode node) throws JsonProcessingException {
-    if (!node.isObject()) {
-      throw new IllegalArgumentException("node is not an object");
+    @Override
+    public HopType fromJson(JsonNode node) throws JsonProcessingException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    UnsignedByteArray byteArray = UnsignedByteArray.ofSize(1);
-
-    Hop hop = objectMapper.treeToValue(node, Hop.class);
-
-    hop.account().ifPresent(account -> {
-      byteArray.append(new AccountIdType().fromJson(account).value());
-      byteArray.set(0, byteArray.get(0).or(UnsignedByte.of(TYPE_ACCOUNT)));
-    });
-
-    hop.currency().ifPresent(currency -> {
-      byteArray.append(new CurrencyType().fromJson(currency).value());
-      byteArray.set(0, byteArray.get(0).or(UnsignedByte.of(TYPE_CURRENCY)));
-    });
-
-    hop.issuer().ifPresent(issuer -> {
-      byteArray.append(new AccountIdType().fromJson(issuer).value());
-      byteArray.set(0, byteArray.get(0).or(UnsignedByte.of(TYPE_ISSUER)));
-    });
-
-    return new HopType(byteArray);
-  }
-
-  @Override
-  public JsonNode toJson() {
-    BinaryParser parser = new BinaryParser(this.toHex());
-    int type = parser.readUInt8().intValue();
-
-    ImmutableHop.Builder builder = Hop.builder();
-
-    if ((type & TYPE_ACCOUNT) > 0) {
-      builder.account(new AccountIdType().fromParser(parser).toJson());
+    @Override
+    public JsonNode toJson() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
-    if ((type & TYPE_CURRENCY) > 0) {
-      builder.currency(new CurrencyType().fromParser(parser).toJson());
-    }
-
-    if ((type & TYPE_ISSUER) > 0) {
-      builder.account(new AccountIdType().fromParser(parser).toJson());
-    }
-
-    return objectMapper.valueToTree(builder.build());
-  }
 }

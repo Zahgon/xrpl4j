@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.xrpl.xrpl4j.model.transactions.CredentialType;
-
 import java.io.IOException;
 
 /**
@@ -32,15 +30,15 @@ import java.io.IOException;
  */
 public class CredentialTypeDeserializer extends StdDeserializer<CredentialType> {
 
-  /**
-   * No-args constructor.
-   */
-  public CredentialTypeDeserializer() {
-    super(CredentialType.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public CredentialTypeDeserializer() {
+        super(CredentialType.class);
+    }
 
-  @Override
-  public CredentialType deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    return CredentialType.of(jsonParser.getText());
-  }
+    @Override
+    public CredentialType deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

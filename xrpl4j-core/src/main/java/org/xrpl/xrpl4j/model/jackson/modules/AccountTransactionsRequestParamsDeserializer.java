@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,7 +35,6 @@ import org.xrpl.xrpl4j.model.client.common.LedgerSpecifier;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
 import org.xrpl.xrpl4j.model.transactions.Marker;
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -47,83 +45,15 @@ import java.util.Optional;
  */
 public class AccountTransactionsRequestParamsDeserializer extends StdDeserializer<AccountTransactionsRequestParams> {
 
-  /**
-   * No-args constructor.
-   */
-  public AccountTransactionsRequestParamsDeserializer() {
-    super(AccountTransactionsRequestParams.class);
-  }
-
-  @Override
-  public AccountTransactionsRequestParams deserialize(
-    JsonParser jsonParser,
-    DeserializationContext ctxt
-  ) throws IOException {
-    ObjectMapper objectMapper = (ObjectMapper) jsonParser.getCodec();
-    JsonNode node = objectMapper.readTree(jsonParser);
-
-    AccountTransactionsRequestParams params = ImmutableAccountTransactionsRequestParams.builder()
-      .account(Address.of(node.get("account").asText()))
-      .ledgerIndexMinimum(
-        node.has("ledger_index_min") ?
-          LedgerIndexBound.of(node.get("ledger_index_min").asLong()) :
-          null
-      )
-      .ledgerIndexMaximum(
-        node.has("ledger_index_max") ?
-          LedgerIndexBound.of(node.get("ledger_index_max").asLong()) :
-          null
-      )
-      .forward(node.get("forward").asBoolean())
-      .limit(
-        Optional.ofNullable(node.get("limit"))
-          .map(JsonNode::asLong)
-          .map(UnsignedInteger::valueOf)
-      )
-      .marker(
-        Optional.ofNullable(node.get("marker"))
-          .map(JsonNode::toString)
-          .map(markerString -> {
-            try {
-              return objectMapper.readValue(markerString, Marker.class);
-            } catch (JsonProcessingException e) {
-              return null;
-            }
-          })
-      )
-      .build();
-
-    LedgerSpecifier ledgerSpecifier = null;
-
-    final JsonNode ledgerHash = node.get("ledger_hash");
-    if (ledgerHash != null) {
-      ledgerSpecifier = LedgerSpecifier.of(Hash256.of(ledgerHash.asText()));
-    } else if (node.has("ledger_index")) {
-      final JsonNode ledgerIndex = node.get("ledger_index");
-      if (ledgerIndex.isNumber()) {
-        ledgerSpecifier = LedgerSpecifier.of(LedgerIndex.of(UnsignedInteger.valueOf(ledgerIndex.asInt())));
-      } else {
-        switch (ledgerIndex.asText()) {
-          case "validated":
-            ledgerSpecifier = LedgerSpecifier.VALIDATED;
-            break;
-          case "current":
-            ledgerSpecifier = LedgerSpecifier.CURRENT;
-            break;
-          case "closed":
-            ledgerSpecifier = LedgerSpecifier.CLOSED;
-            break;
-          default:
-            throw new JsonParseException(
-              jsonParser,
-              "Unrecognized LedgerIndex shortcut '" + ledgerIndex.toString() + "'."
-            );
-        }
-      }
+    /**
+     * No-args constructor.
+     */
+    public AccountTransactionsRequestParamsDeserializer() {
+        super(AccountTransactionsRequestParams.class);
     }
 
-    return ImmutableAccountTransactionsRequestParams.builder().from(params)
-      .ledgerSpecifier(Optional.ofNullable(ledgerSpecifier))
-      .build();
-  }
+    @Override
+    public AccountTransactionsRequestParams deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

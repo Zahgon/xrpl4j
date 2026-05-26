@@ -19,8 +19,6 @@ package org.xrpl.xrpl4j.model.client.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -28,7 +26,6 @@ import com.google.common.primitives.UnsignedLong;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.client.XrplRequestParams;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
-
 import java.util.Optional;
 
 /**
@@ -43,67 +40,66 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableTransactionRequestParams.class)
 public interface TransactionRequestParams extends XrplRequestParams {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableTransactionRequestParams.Builder}.
-   */
-  static ImmutableTransactionRequestParams.Builder builder() {
-    return ImmutableTransactionRequestParams.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableTransactionRequestParams.Builder}.
+     */
+    static ImmutableTransactionRequestParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Convenience constructor for creating {@link TransactionRequestParams} with only a transaction hash.
-   *
-   * @param transactionHash A {@link Hash256} containing the transaction hash of the transaction to look up.
-   *
-   * @return {@link TransactionRequestParams} with {@link TransactionRequestParams#transaction()} set to
-   *   {@code transactionHash}
-   */
-  static TransactionRequestParams of(Hash256 transactionHash) {
-    return builder().transaction(transactionHash).build();
-  }
+    /**
+     * Convenience constructor for creating {@link TransactionRequestParams} with only a transaction hash.
+     *
+     * @param transactionHash A {@link Hash256} containing the transaction hash of the transaction to look up.
+     *
+     * @return {@link TransactionRequestParams} with {@link TransactionRequestParams#transaction()} set to
+     *   {@code transactionHash}
+     */
+    static TransactionRequestParams of(Hash256 transactionHash) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The 256-bit hash of the transaction in hexadecimal form.
-   *
-   * @return A {@link Hash256} containing the transaction hash.
-   */
-  Hash256 transaction();
+    /**
+     * The 256-bit hash of the transaction in hexadecimal form.
+     *
+     * @return A {@link Hash256} containing the transaction hash.
+     */
+    Hash256 transaction();
 
-  /**
-   * Whether or not to return transaction data and metadata as binary serialized to hexadecimal strings. Always
-   * {@code false}.
-   *
-   * @return Always {@code false}.
-   */
-  @Value.Derived
-  default boolean binary() {
-    return false;
-  }
+    /**
+     * Whether or not to return transaction data and metadata as binary serialized to hexadecimal strings. Always
+     * {@code false}.
+     *
+     * @return Always {@code false}.
+     */
+    @Value.Derived
+    default boolean binary() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Use this with {@link TransactionRequestParams#maxLedger()} to specify a range of up to 1000 ledger indexes,
-   * starting with this ledger (inclusive).
-   *
-   * <p>If the server cannot find the transaction, it confirms whether it was able to search all the
-   * ledgers in this range.
-   *
-   * @return An optionally-present {@link UnsignedLong} indicating the minimum ledger to search.
-   */
-  @JsonProperty("min_ledger")
-  Optional<UnsignedLong> minLedger();
+    /**
+     * Use this with {@link TransactionRequestParams#maxLedger()} to specify a range of up to 1000 ledger indexes,
+     * starting with this ledger (inclusive).
+     *
+     * <p>If the server cannot find the transaction, it confirms whether it was able to search all the
+     * ledgers in this range.
+     *
+     * @return An optionally-present {@link UnsignedLong} indicating the minimum ledger to search.
+     */
+    @JsonProperty("min_ledger")
+    Optional<UnsignedLong> minLedger();
 
-  /**
-   * Use this with {@link TransactionRequestParams#minLedger()} to specify a range of up to 1000 ledger indexes,
-   * ending with this ledger (inclusive).
-   *
-   * <p>If the server cannot find the transaction, it confirms whether it was able to search all the ledgers in the
-   * requested range.
-   *
-   * @return An optionally-present {@link UnsignedLong} indicating the maximum ledger to search.
-   */
-  @JsonProperty("max_ledger")
-  Optional<UnsignedLong> maxLedger();
-
+    /**
+     * Use this with {@link TransactionRequestParams#minLedger()} to specify a range of up to 1000 ledger indexes,
+     * ending with this ledger (inclusive).
+     *
+     * <p>If the server cannot find the transaction, it confirms whether it was able to search all the ledgers in the
+     * requested range.
+     *
+     * @return An optionally-present {@link UnsignedLong} indicating the maximum ledger to search.
+     */
+    @JsonProperty("max_ledger")
+    Optional<UnsignedLong> maxLedger();
 }

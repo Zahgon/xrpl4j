@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.xrpl.xrpl4j.model.transactions.OracleUri;
-
 import java.io.IOException;
 
 /**
@@ -12,16 +11,15 @@ import java.io.IOException;
  */
 public class OracleUriDeserializer extends StdDeserializer<OracleUri> {
 
-  /**
-   * No-args constructor.
-   */
-  public OracleUriDeserializer() {
-    super(OracleUri.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public OracleUriDeserializer() {
+        super(OracleUri.class);
+    }
 
-  @Override
-  public OracleUri deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    return OracleUri.of(jsonParser.getText());
-  }
-
+    @Override
+    public OracleUri deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

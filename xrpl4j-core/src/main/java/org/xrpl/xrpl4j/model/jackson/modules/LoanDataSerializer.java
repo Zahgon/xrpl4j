@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import org.xrpl.xrpl4j.model.transactions.LoanData;
-
 import java.io.IOException;
 
 /**
@@ -32,16 +30,15 @@ import java.io.IOException;
  */
 public class LoanDataSerializer extends StdScalarSerializer<LoanData> {
 
-  /**
-   * No-args constructor.
-   */
-  public LoanDataSerializer() {
-    super(LoanData.class, false);
-  }
+    /**
+     * No-args constructor.
+     */
+    public LoanDataSerializer() {
+        super(LoanData.class, false);
+    }
 
-  @Override
-  public void serialize(LoanData loanData, JsonGenerator gen, SerializerProvider provider)
-      throws IOException {
-    gen.writeString(loanData.value());
-  }
+    @Override
+    public void serialize(LoanData loanData, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

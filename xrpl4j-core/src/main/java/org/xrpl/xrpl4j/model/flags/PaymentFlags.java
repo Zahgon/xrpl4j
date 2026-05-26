@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.flags;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.xrpl.xrpl4j.model.transactions.Payment;
 
 /**
@@ -27,195 +26,182 @@ import org.xrpl.xrpl4j.model.transactions.Payment;
  */
 public class PaymentFlags extends TransactionFlags {
 
-  /**
-   * Constant {@link PaymentFlags} for an unset flag.
-   */
-  public static final PaymentFlags UNSET = new PaymentFlags(0);
-
-  /**
-   * Constant {@link PaymentFlags} for the {@code tfNoDirectRipple} flag.
-   */
-  protected static final PaymentFlags NO_DIRECT_RIPPLE = new PaymentFlags(0x00010000L);
-
-  /**
-   * Constant {@link PaymentFlags} for the {@code tfPartialPayment} flag.
-   */
-  protected static final PaymentFlags PARTIAL_PAYMENT = new PaymentFlags(0x00020000L);
-
-  /**
-   * Constant {@link PaymentFlags} for the {@code tfLimitQuality} flag.
-   */
-  protected static final PaymentFlags LIMIT_QUALITY = new PaymentFlags(0x00040000L);
-
-  /**
-   * Constant {@link PaymentFlags} for the {@code tfInnerBatchTxn} flag. This flag is used to indicate that a
-   * transaction is an inner transaction of a Batch.
-   *
-   * @see "https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0056-batch"
-   */
-  public static final PaymentFlags INNER_BATCH_TXN = new PaymentFlags(TransactionFlags.INNER_BATCH_TXN.getValue());
-
-  private PaymentFlags(long value) {
-    super(value);
-  }
-
-  private PaymentFlags() {
-  }
-
-  /**
-   * Create a new {@link Builder}.
-   *
-   * @return A new {@link Builder}.
-   */
-  public static Builder builder() {
-    return new Builder();
-  }
-
-  /**
-   * Construct {@link PaymentFlags} with a given value.
-   *
-   * @param value The long-number encoded flags value of this {@link PaymentFlags}.
-   *
-   * @return New {@link PaymentFlags}.
-   */
-  public static PaymentFlags of(long value) {
-    return new PaymentFlags(value);
-  }
-
-  private static PaymentFlags of(
-    boolean tfFullyCanonicalSig,
-    boolean tfNoDirectRipple,
-    boolean tfPartialPayment,
-    boolean tfLimitQuality,
-    boolean tfInnerBatchTxn
-  ) {
-    return new PaymentFlags(of(
-      tfFullyCanonicalSig ? TransactionFlags.FULLY_CANONICAL_SIG : UNSET,
-      tfNoDirectRipple ? NO_DIRECT_RIPPLE : UNSET,
-      tfPartialPayment ? PARTIAL_PAYMENT : UNSET,
-      tfLimitQuality ? LIMIT_QUALITY : UNSET,
-      tfInnerBatchTxn ? TransactionFlags.INNER_BATCH_TXN : UNSET
-    ).getValue());
-  }
-
-  /**
-   * Construct an empty instance of {@link PaymentFlags}. Transactions with empty flags will not be serialized with a
-   * {@code Flags} field.
-   *
-   * @return An empty {@link PaymentFlags}.
-   */
-  public static PaymentFlags empty() {
-    return new PaymentFlags();
-  }
-
-  /**
-   * Do not use the default path; only use paths included in the {@link Payment#paths()} field. This is intended to
-   * force the transaction to take arbitrage opportunities. Most clients do not need this.
-   *
-   * @return {@code true} if {@code tfNoDirectRipple} is set, otherwise {@code false}.
-   */
-  public boolean tfNoDirectRipple() {
-    return this.isSet(PaymentFlags.NO_DIRECT_RIPPLE);
-  }
-
-  /**
-   * If the specified {@link Payment#amount()} cannot be sent without spending more than {@link Payment#sendMax()},
-   * reduce the received amount instead of failing outright.
-   *
-   * @return {@code true} if {@code tfPartialPayment} is set, otherwise {@code false}.
-   *
-   * @see "https://xrpl.org/partial-payments.html"
-   */
-  public boolean tfPartialPayment() {
-    return this.isSet(PaymentFlags.PARTIAL_PAYMENT);
-  }
-
-  /**
-   * Only take paths where all the conversions have an input:output ratio that is equal or better than the ratio of
-   * {@link Payment#amount()}:{@link Payment#sendMax()}.
-   *
-   * @return {@code true} if {@code tfLimitQuality} is set, otherwise {@code false}.
-   */
-  public boolean tfLimitQuality() {
-    return this.isSet(PaymentFlags.LIMIT_QUALITY);
-  }
-
-  /**
-   * Indicates that this transaction is an inner transaction of a Batch transaction.
-   *
-   * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
-   *
-   * @see "https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0056-batch"
-   */
-  public boolean tfInnerBatchTxn() {
-    return this.isSet(PaymentFlags.INNER_BATCH_TXN);
-  }
-
-  /**
-   * A builder class for {@link PaymentFlags} flags.
-   */
-  public static class Builder {
-
-    private boolean tfNoDirectRipple = false;
-    private boolean tfPartialPayment = false;
-    private boolean tfLimitQuality = false;
-    private boolean tfInnerBatchTxn = false;
+    /**
+     * Constant {@link PaymentFlags} for an unset flag.
+     */
+    public static final PaymentFlags UNSET = new PaymentFlags(0);
 
     /**
-     * Set {@code tfNoDirectRipple} to the given value.
-     *
-     * @param tfNoDirectRipple A boolean value.
-     *
-     * @return The same {@link Builder}.
+     * Constant {@link PaymentFlags} for the {@code tfNoDirectRipple} flag.
      */
-    public Builder tfNoDirectRipple(boolean tfNoDirectRipple) {
-      this.tfNoDirectRipple = tfNoDirectRipple;
-      return this;
+    protected static final PaymentFlags NO_DIRECT_RIPPLE = new PaymentFlags(0x00010000L);
+
+    /**
+     * Constant {@link PaymentFlags} for the {@code tfPartialPayment} flag.
+     */
+    protected static final PaymentFlags PARTIAL_PAYMENT = new PaymentFlags(0x00020000L);
+
+    /**
+     * Constant {@link PaymentFlags} for the {@code tfLimitQuality} flag.
+     */
+    protected static final PaymentFlags LIMIT_QUALITY = new PaymentFlags(0x00040000L);
+
+    /**
+     * Constant {@link PaymentFlags} for the {@code tfInnerBatchTxn} flag. This flag is used to indicate that a
+     * transaction is an inner transaction of a Batch.
+     *
+     * @see "https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0056-batch"
+     */
+    public static final PaymentFlags INNER_BATCH_TXN = new PaymentFlags(TransactionFlags.INNER_BATCH_TXN.getValue());
+
+    private PaymentFlags(long value) {
+        super(value);
+    }
+
+    private PaymentFlags() {
     }
 
     /**
-     * Set {@code tfPartialPayment} to the given value.
+     * Create a new {@link Builder}.
      *
-     * @param tfPartialPayment A boolean value.
-     *
-     * @return The same {@link Builder}.
+     * @return A new {@link Builder}.
      */
-    public Builder tfPartialPayment(boolean tfPartialPayment) {
-      this.tfPartialPayment = tfPartialPayment;
-      return this;
+    public static Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     * Set {@code tfLimitQuality} to the given value.
+     * Construct {@link PaymentFlags} with a given value.
      *
-     * @param tfLimitQuality A boolean value.
+     * @param value The long-number encoded flags value of this {@link PaymentFlags}.
      *
-     * @return The same {@link Builder}.
+     * @return New {@link PaymentFlags}.
      */
-    public Builder tfLimitQuality(boolean tfLimitQuality) {
-      this.tfLimitQuality = tfLimitQuality;
-      return this;
+    public static PaymentFlags of(long value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    private static PaymentFlags of(boolean tfFullyCanonicalSig, boolean tfNoDirectRipple, boolean tfPartialPayment, boolean tfLimitQuality, boolean tfInnerBatchTxn) {
+        return new PaymentFlags(of(tfFullyCanonicalSig ? TransactionFlags.FULLY_CANONICAL_SIG : UNSET, tfNoDirectRipple ? NO_DIRECT_RIPPLE : UNSET, tfPartialPayment ? PARTIAL_PAYMENT : UNSET, tfLimitQuality ? LIMIT_QUALITY : UNSET, tfInnerBatchTxn ? TransactionFlags.INNER_BATCH_TXN : UNSET).getValue());
     }
 
     /**
-     * Set {@code tfInnerBatchTxn} to the given value.
+     * Construct an empty instance of {@link PaymentFlags}. Transactions with empty flags will not be serialized with a
+     * {@code Flags} field.
      *
-     * @param tfInnerBatchTxn A boolean value.
-     *
-     * @return The same {@link Builder}.
+     * @return An empty {@link PaymentFlags}.
      */
-    public Builder tfInnerBatchTxn(boolean tfInnerBatchTxn) {
-      this.tfInnerBatchTxn = tfInnerBatchTxn;
-      return this;
+    public static PaymentFlags empty() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     * Build a new {@link PaymentFlags} from the current boolean values.
+     * Do not use the default path; only use paths included in the {@link Payment#paths()} field. This is intended to
+     * force the transaction to take arbitrage opportunities. Most clients do not need this.
      *
-     * @return A new {@link PaymentFlags}.
+     * @return {@code true} if {@code tfNoDirectRipple} is set, otherwise {@code false}.
      */
-    public PaymentFlags build() {
-      return PaymentFlags.of(true, tfNoDirectRipple, tfPartialPayment, tfLimitQuality, tfInnerBatchTxn);
+    public boolean tfNoDirectRipple() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    /**
+     * If the specified {@link Payment#amount()} cannot be sent without spending more than {@link Payment#sendMax()},
+     * reduce the received amount instead of failing outright.
+     *
+     * @return {@code true} if {@code tfPartialPayment} is set, otherwise {@code false}.
+     *
+     * @see "https://xrpl.org/partial-payments.html"
+     */
+    public boolean tfPartialPayment() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Only take paths where all the conversions have an input:output ratio that is equal or better than the ratio of
+     * {@link Payment#amount()}:{@link Payment#sendMax()}.
+     *
+     * @return {@code true} if {@code tfLimitQuality} is set, otherwise {@code false}.
+     */
+    public boolean tfLimitQuality() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Indicates that this transaction is an inner transaction of a Batch transaction.
+     *
+     * @return {@code true} if {@code tfInnerBatchTxn} is set, otherwise {@code false}.
+     *
+     * @see "https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0056-batch"
+     */
+    public boolean tfInnerBatchTxn() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * A builder class for {@link PaymentFlags} flags.
+     */
+    public static class Builder {
+
+        private boolean tfNoDirectRipple = false;
+
+        private boolean tfPartialPayment = false;
+
+        private boolean tfLimitQuality = false;
+
+        private boolean tfInnerBatchTxn = false;
+
+        /**
+         * Set {@code tfNoDirectRipple} to the given value.
+         *
+         * @param tfNoDirectRipple A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfNoDirectRipple(boolean tfNoDirectRipple) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfPartialPayment} to the given value.
+         *
+         * @param tfPartialPayment A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfPartialPayment(boolean tfPartialPayment) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfLimitQuality} to the given value.
+         *
+         * @param tfLimitQuality A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfLimitQuality(boolean tfLimitQuality) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set {@code tfInnerBatchTxn} to the given value.
+         *
+         * @param tfInnerBatchTxn A boolean value.
+         *
+         * @return The same {@link Builder}.
+         */
+        public Builder tfInnerBatchTxn(boolean tfInnerBatchTxn) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Build a new {@link PaymentFlags} from the current boolean values.
+         *
+         * @return A new {@link PaymentFlags}.
+         */
+        public PaymentFlags build() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+    }
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -31,7 +30,6 @@ import org.xrpl.xrpl4j.model.transactions.CredentialWrapper;
 import org.xrpl.xrpl4j.model.transactions.DepositPreAuth;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
 import org.xrpl.xrpl4j.model.transactions.Transaction;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -48,93 +46,93 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableDepositPreAuthObject.class)
 public interface DepositPreAuthObject extends LedgerObject {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableDepositPreAuthObject.Builder}.
-   */
-  static ImmutableDepositPreAuthObject.Builder builder() {
-    return ImmutableDepositPreAuthObject.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableDepositPreAuthObject.Builder}.
+     */
+    static ImmutableDepositPreAuthObject.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The type of ledger object, which will always be "DepositPreauth" in this case.
-   *
-   * @return Always {@link LedgerEntryType#DEPOSIT_PRE_AUTH}.
-   */
-  @JsonProperty("LedgerEntryType")
-  @Value.Derived
-  default LedgerEntryType ledgerEntryType() {
-    return LedgerEntryType.DEPOSIT_PRE_AUTH;
-  }
+    /**
+     * The type of ledger object, which will always be "DepositPreauth" in this case.
+     *
+     * @return Always {@link LedgerEntryType#DEPOSIT_PRE_AUTH}.
+     */
+    @JsonProperty("LedgerEntryType")
+    @Value.Derived
+    default LedgerEntryType ledgerEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The account that granted the preauthorization. (The destination of the preauthorized payments.)
-   *
-   * @return The {@link Address} of the account.
-   */
-  @JsonProperty("Account")
-  Address account();
+    /**
+     * The account that granted the preauthorization. (The destination of the preauthorized payments.)
+     *
+     * @return The {@link Address} of the account.
+     */
+    @JsonProperty("Account")
+    Address account();
 
-  /**
-   * The account that received the preauthorization. (The sender of the preauthorized payments.)
-   *
-   * @return The {@link Address} of the account to authorize.
-   */
-  @JsonProperty("Authorize")
-  Optional<Address> authorize();
+    /**
+     * The account that received the preauthorization. (The sender of the preauthorized payments.)
+     *
+     * @return The {@link Address} of the account to authorize.
+     */
+    @JsonProperty("Authorize")
+    Optional<Address> authorize();
 
-  /**
-   * The credential(s) that received the preauthorization.
-   *
-   * @return A list of {@link CredentialWrapper}.
-   */
-  @JsonProperty("AuthorizeCredentials")
-  List<CredentialWrapper> authorizeCredentials();
+    /**
+     * The credential(s) that received the preauthorization.
+     *
+     * @return A list of {@link CredentialWrapper}.
+     */
+    @JsonProperty("AuthorizeCredentials")
+    List<CredentialWrapper> authorizeCredentials();
 
-  /**
-   * A bit-map of boolean flags. No flags are defined for {@link DepositPreAuthObject}s, so this value is always 0.
-   *
-   * @return Always {@link Flags#UNSET}.
-   */
-  @JsonProperty("Flags")
-  @Value.Derived
-  default Flags flags() {
-    return Flags.UNSET;
-  }
+    /**
+     * A bit-map of boolean flags. No flags are defined for {@link DepositPreAuthObject}s, so this value is always 0.
+     *
+     * @return Always {@link Flags#UNSET}.
+     */
+    @JsonProperty("Flags")
+    @Value.Derived
+    default Flags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
-   * of multiple pages.
-   *
-   * <p>Note: The object does not contain a direct link to the owner directory containing it, since that value can be
-   * derived from the Account.
-   *
-   * @return A {@link String} containing the owner node hint.
-   */
-  @JsonProperty("OwnerNode")
-  String ownerNode();
+    /**
+     * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
+     * of multiple pages.
+     *
+     * <p>Note: The object does not contain a direct link to the owner directory containing it, since that value can be
+     * derived from the Account.
+     *
+     * @return A {@link String} containing the owner node hint.
+     */
+    @JsonProperty("OwnerNode")
+    String ownerNode();
 
-  /**
-   * The identifying hash of the transaction that most recently modified this object.
-   *
-   * @return A {@link Hash256} containing the previous transaction hash.
-   */
-  @JsonProperty("PreviousTxnID")
-  Hash256 previousTransactionId();
+    /**
+     * The identifying hash of the transaction that most recently modified this object.
+     *
+     * @return A {@link Hash256} containing the previous transaction hash.
+     */
+    @JsonProperty("PreviousTxnID")
+    Hash256 previousTransactionId();
 
-  /**
-   * The index of the ledger that contains the transaction that most recently modified this object.
-   *
-   * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  UnsignedInteger previousTransactionLedgerSequence();
+    /**
+     * The index of the ledger that contains the transaction that most recently modified this object.
+     *
+     * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    UnsignedInteger previousTransactionLedgerSequence();
 
-  /**
-   * The unique ID of the {@link DepositPreAuthObject}.
-   *
-   * @return A {@link Hash256} containing the ID.
-   */
-  Hash256 index();
+    /**
+     * The unique ID of the {@link DepositPreAuthObject}.
+     *
+     * @return A {@link Hash256} containing the ID.
+     */
+    Hash256 index();
 }

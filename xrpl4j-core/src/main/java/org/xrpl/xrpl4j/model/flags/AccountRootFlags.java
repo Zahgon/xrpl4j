@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.flags;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.google.common.annotations.Beta;
 import org.xrpl.xrpl4j.model.transactions.AccountSet;
 
@@ -28,257 +27,257 @@ import org.xrpl.xrpl4j.model.transactions.AccountSet;
  */
 public class AccountRootFlags extends Flags {
 
-  /**
-   * Constant for an unset flag.
-   */
-  public static final AccountRootFlags UNSET = new AccountRootFlags(0);
+    /**
+     * Constant for an unset flag.
+     */
+    public static final AccountRootFlags UNSET = new AccountRootFlags(0);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfDefaultRipple} account flag.
-   */
-  public static final AccountRootFlags DEFAULT_RIPPLE = new AccountRootFlags(0x00800000L);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfDefaultRipple} account flag.
+     */
+    public static final AccountRootFlags DEFAULT_RIPPLE = new AccountRootFlags(0x00800000L);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfDepositAuth} account flag.
-   */
-  public static final AccountRootFlags DEPOSIT_AUTH = new AccountRootFlags(0x01000000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfDepositAuth} account flag.
+     */
+    public static final AccountRootFlags DEPOSIT_AUTH = new AccountRootFlags(0x01000000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfDisableMaster} account flag.
-   */
-  public static final AccountRootFlags DISABLE_MASTER = new AccountRootFlags(0x00100000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfDisableMaster} account flag.
+     */
+    public static final AccountRootFlags DISABLE_MASTER = new AccountRootFlags(0x00100000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfDisallowXRP} account flag.
-   */
-  public static final AccountRootFlags DISALLOW_XRP = new AccountRootFlags(0x00080000L);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfDisallowXRP} account flag.
+     */
+    public static final AccountRootFlags DISALLOW_XRP = new AccountRootFlags(0x00080000L);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfGlobalFreeze} account flag.
-   */
-  public static final AccountRootFlags GLOBAL_FREEZE = new AccountRootFlags(0x00400000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfGlobalFreeze} account flag.
+     */
+    public static final AccountRootFlags GLOBAL_FREEZE = new AccountRootFlags(0x00400000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfNoFreeze} account flag.
-   */
-  public static final AccountRootFlags NO_FREEZE = new AccountRootFlags(0x00200000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfNoFreeze} account flag.
+     */
+    public static final AccountRootFlags NO_FREEZE = new AccountRootFlags(0x00200000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfPasswordSpent} account flag.
-   */
-  public static final AccountRootFlags PASSWORD_SPENT = new AccountRootFlags(0x00010000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfPasswordSpent} account flag.
+     */
+    public static final AccountRootFlags PASSWORD_SPENT = new AccountRootFlags(0x00010000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfRequireAuth} account flag.
-   */
-  public static final AccountRootFlags REQUIRE_AUTH = new AccountRootFlags(0x00040000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfRequireAuth} account flag.
+     */
+    public static final AccountRootFlags REQUIRE_AUTH = new AccountRootFlags(0x00040000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfRequireDestTag} account flag.
-   */
-  public static final AccountRootFlags REQUIRE_DEST_TAG = new AccountRootFlags(0x00020000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfRequireDestTag} account flag.
+     */
+    public static final AccountRootFlags REQUIRE_DEST_TAG = new AccountRootFlags(0x00020000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfDisallowIncomingNFTokenOffer} account flag.
-   */
-  public static final AccountRootFlags DISALLOW_INCOMING_NFT_OFFER = new AccountRootFlags(0x04000000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfDisallowIncomingNFTokenOffer} account flag.
+     */
+    public static final AccountRootFlags DISALLOW_INCOMING_NFT_OFFER = new AccountRootFlags(0x04000000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfDisallowIncomingCheck} account flag.
-   */
-  public static final AccountRootFlags DISALLOW_INCOMING_CHECK = new AccountRootFlags(0x08000000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfDisallowIncomingCheck} account flag.
+     */
+    public static final AccountRootFlags DISALLOW_INCOMING_CHECK = new AccountRootFlags(0x08000000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfDisallowIncomingPayChan} account flag.
-   */
-  public static final AccountRootFlags DISALLOW_INCOMING_PAY_CHAN = new AccountRootFlags(0x10000000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfDisallowIncomingPayChan} account flag.
+     */
+    public static final AccountRootFlags DISALLOW_INCOMING_PAY_CHAN = new AccountRootFlags(0x10000000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfDisallowIncomingTrustline} account flag.
-   */
-  public static final AccountRootFlags DISALLOW_INCOMING_TRUSTLINE = new AccountRootFlags(0x20000000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfDisallowIncomingTrustline} account flag.
+     */
+    public static final AccountRootFlags DISALLOW_INCOMING_TRUSTLINE = new AccountRootFlags(0x20000000);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfAllowTrustLineClawback} account flag.
-   *
-   * <p>This constant will be marked {@link Beta} until the Clawback amendment is enabled on mainnet. Its API is subject
-   * to change.</p>
-   */
-  @Beta
-  public static final AccountRootFlags ALLOW_TRUSTLINE_CLAWBACK = new AccountRootFlags(0x80000000L);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfAllowTrustLineClawback} account flag.
+     *
+     * <p>This constant will be marked {@link Beta} until the Clawback amendment is enabled on mainnet. Its API is subject
+     * to change.</p>
+     */
+    @Beta
+    public static final AccountRootFlags ALLOW_TRUSTLINE_CLAWBACK = new AccountRootFlags(0x80000000L);
 
-  /**
-   * Constant {@link AccountRootFlags} for the {@code lsfAllowTrustLineLocking} account flag.
-   *
-   * <p>This constant will be marked {@link Beta} until the TokenEscrow amendment is enabled on mainnet. Its API is
-   * subject to change.</p>
-   */
-  @Beta
-  public static final AccountRootFlags ALLOW_TRUSTLINE_LOCKING = new AccountRootFlags(0x40000000);
+    /**
+     * Constant {@link AccountRootFlags} for the {@code lsfAllowTrustLineLocking} account flag.
+     *
+     * <p>This constant will be marked {@link Beta} until the TokenEscrow amendment is enabled on mainnet. Its API is
+     * subject to change.</p>
+     */
+    @Beta
+    public static final AccountRootFlags ALLOW_TRUSTLINE_LOCKING = new AccountRootFlags(0x40000000);
 
-  /**
-   * Required-args Constructor.
-   *
-   * @param value The long-number encoded flags value of this {@link AccountRootFlags}.
-   */
-  private AccountRootFlags(final long value) {
-    super(value);
-  }
+    /**
+     * Required-args Constructor.
+     *
+     * @param value The long-number encoded flags value of this {@link AccountRootFlags}.
+     */
+    private AccountRootFlags(final long value) {
+        super(value);
+    }
 
-  /**
-   * Construct {@link AccountRootFlags} with a given value.
-   *
-   * @param value The long-number encoded flags value of this {@link AccountRootFlags}.
-   *
-   * @return New {@link AccountRootFlags}.
-   */
-  public static AccountRootFlags of(long value) {
-    return new AccountRootFlags(value);
-  }
+    /**
+     * Construct {@link AccountRootFlags} with a given value.
+     *
+     * @param value The long-number encoded flags value of this {@link AccountRootFlags}.
+     *
+     * @return New {@link AccountRootFlags}.
+     */
+    public static AccountRootFlags of(long value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Enable rippling on this addresses's trust lines by default. Required for issuing addresses; discouraged for
-   * others.
-   *
-   * @return {@code true} if {@code lsfDefaultRipple} is set, otherwise {@code false}.
-   */
-  public boolean lsfDefaultRipple() {
-    return this.isSet(AccountRootFlags.DEFAULT_RIPPLE);
-  }
+    /**
+     * Enable rippling on this addresses's trust lines by default. Required for issuing addresses; discouraged for
+     * others.
+     *
+     * @return {@code true} if {@code lsfDefaultRipple} is set, otherwise {@code false}.
+     */
+    public boolean lsfDefaultRipple() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * This account can only receive funds from transactions it sends, and from preauthorized accounts. (It has
-   * DepositAuth enabled.)
-   *
-   * @return {@code true} if {@code lsfDepositAuth} is set, otherwise {@code false}.
-   */
-  public boolean lsfDepositAuth() {
-    return this.isSet(AccountRootFlags.DEPOSIT_AUTH);
-  }
+    /**
+     * This account can only receive funds from transactions it sends, and from preauthorized accounts. (It has
+     * DepositAuth enabled.)
+     *
+     * @return {@code true} if {@code lsfDepositAuth} is set, otherwise {@code false}.
+     */
+    public boolean lsfDepositAuth() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Disallows use of the master key to sign transactions for this account.
-   *
-   * @return {@code true} if {@code lsfDisableMaster} is set, otherwise {@code false}.
-   */
-  public boolean lsfDisableMaster() {
-    return this.isSet(AccountRootFlags.DISABLE_MASTER);
-  }
+    /**
+     * Disallows use of the master key to sign transactions for this account.
+     *
+     * @return {@code true} if {@code lsfDisableMaster} is set, otherwise {@code false}.
+     */
+    public boolean lsfDisableMaster() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Client applications should not send XRP to this account. Not enforced by rippled.
-   *
-   * @return {@code true} if {@code lsfDisallowXrp} is set, otherwise {@code false}.
-   */
-  public boolean lsfDisallowXrp() {
-    return this.isSet(AccountRootFlags.DISALLOW_XRP);
-  }
+    /**
+     * Client applications should not send XRP to this account. Not enforced by rippled.
+     *
+     * @return {@code true} if {@code lsfDisallowXrp} is set, otherwise {@code false}.
+     */
+    public boolean lsfDisallowXrp() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * All assets issued by this address are frozen.
-   *
-   * @return {@code true} if {@code lsfGlobalFreeze} is set, otherwise {@code false}.
-   */
-  public boolean lsfGlobalFreeze() {
-    return this.isSet(AccountRootFlags.GLOBAL_FREEZE);
-  }
+    /**
+     * All assets issued by this address are frozen.
+     *
+     * @return {@code true} if {@code lsfGlobalFreeze} is set, otherwise {@code false}.
+     */
+    public boolean lsfGlobalFreeze() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * This address cannot freeze trust lines connected to it. Once enabled, cannot be disabled.
-   *
-   * @return {@code true} if {@code lsfNoFreeze} is set, otherwise {@code false}.
-   */
-  public boolean lsfNoFreeze() {
-    return this.isSet(AccountRootFlags.NO_FREEZE);
-  }
+    /**
+     * This address cannot freeze trust lines connected to it. Once enabled, cannot be disabled.
+     *
+     * @return {@code true} if {@code lsfNoFreeze} is set, otherwise {@code false}.
+     */
+    public boolean lsfNoFreeze() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The account has used its free SetRegularKey transaction.
-   *
-   * @return {@code true} if {@code lsfPasswordSpent} is set, otherwise {@code false}.
-   */
-  public boolean lsfPasswordSpent() {
-    return this.isSet(AccountRootFlags.PASSWORD_SPENT);
-  }
+    /**
+     * The account has used its free SetRegularKey transaction.
+     *
+     * @return {@code true} if {@code lsfPasswordSpent} is set, otherwise {@code false}.
+     */
+    public boolean lsfPasswordSpent() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * This account must individually approve other users for those users to hold this account's issued currencies.
-   *
-   * @return {@code true} if {@code lsfRequireAuth} is set, otherwise {@code false}.
-   */
-  public boolean lsfRequireAuth() {
-    return this.isSet(AccountRootFlags.REQUIRE_AUTH);
-  }
+    /**
+     * This account must individually approve other users for those users to hold this account's issued currencies.
+     *
+     * @return {@code true} if {@code lsfRequireAuth} is set, otherwise {@code false}.
+     */
+    public boolean lsfRequireAuth() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Requires incoming payments to specify a Destination Tag.
-   *
-   * @return {@code true} if {@code lsfRequireDestTag} is set, otherwise {@code false}.
-   */
-  public boolean lsfRequireDestTag() {
-    return this.isSet(AccountRootFlags.REQUIRE_DEST_TAG);
-  }
+    /**
+     * Requires incoming payments to specify a Destination Tag.
+     *
+     * @return {@code true} if {@code lsfRequireDestTag} is set, otherwise {@code false}.
+     */
+    public boolean lsfRequireDestTag() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Blocks incoming NFToken Offers.
-   *
-   * @return {@code true} if {@code lsfDisallowIncomingNFTokenOffer} is set, otherwise {@code false}.
-   */
-  @SuppressWarnings("AbbreviationAsWordInName")
-  public boolean lsfDisallowIncomingNFTokenOffer() {
-    return this.isSet(AccountRootFlags.DISALLOW_INCOMING_NFT_OFFER);
-  }
+    /**
+     * Blocks incoming NFToken Offers.
+     *
+     * @return {@code true} if {@code lsfDisallowIncomingNFTokenOffer} is set, otherwise {@code false}.
+     */
+    @SuppressWarnings("AbbreviationAsWordInName")
+    public boolean lsfDisallowIncomingNFTokenOffer() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Blocks incoming Checks.
-   *
-   * @return {@code true} if {@code lsfDisallowIncomingCheck} is set, otherwise {@code false}.
-   */
-  public boolean lsfDisallowIncomingCheck() {
-    return this.isSet(AccountRootFlags.DISALLOW_INCOMING_CHECK);
-  }
+    /**
+     * Blocks incoming Checks.
+     *
+     * @return {@code true} if {@code lsfDisallowIncomingCheck} is set, otherwise {@code false}.
+     */
+    public boolean lsfDisallowIncomingCheck() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Blocks incoming Payment Channels.
-   *
-   * @return {@code true} if {@code lsfDisallowIncomingPayChan} is set, otherwise {@code false}.
-   */
-  public boolean lsfDisallowIncomingPayChan() {
-    return this.isSet(AccountRootFlags.DISALLOW_INCOMING_PAY_CHAN);
-  }
+    /**
+     * Blocks incoming Payment Channels.
+     *
+     * @return {@code true} if {@code lsfDisallowIncomingPayChan} is set, otherwise {@code false}.
+     */
+    public boolean lsfDisallowIncomingPayChan() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Blocks incoming Trustlines.
-   *
-   * @return {@code true} if {@code lsfDisallowIncomingTrustline} is set, otherwise {@code false}.
-   */
-  public boolean lsfDisallowIncomingTrustline() {
-    return this.isSet(AccountRootFlags.DISALLOW_INCOMING_TRUSTLINE);
-  }
+    /**
+     * Blocks incoming Trustlines.
+     *
+     * @return {@code true} if {@code lsfDisallowIncomingTrustline} is set, otherwise {@code false}.
+     */
+    public boolean lsfDisallowIncomingTrustline() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Allows trustline clawback on this account.
-   *
-   * <p>This constant will be marked {@link Beta} until the Clawback amendment is enabled on mainnet. Its API is subject
-   * to change.</p>
-   *
-   * @return {@code true} if {@code lsfAllowTrustLineClawback} is set, otherwise {@code false}.
-   */
-  @Beta
-  public boolean lsfAllowTrustLineClawback() {
-    return this.isSet(AccountRootFlags.ALLOW_TRUSTLINE_CLAWBACK);
-  }
+    /**
+     * Allows trustline clawback on this account.
+     *
+     * <p>This constant will be marked {@link Beta} until the Clawback amendment is enabled on mainnet. Its API is subject
+     * to change.</p>
+     *
+     * @return {@code true} if {@code lsfAllowTrustLineClawback} is set, otherwise {@code false}.
+     */
+    @Beta
+    public boolean lsfAllowTrustLineClawback() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Allows trust line tokens (IOUs) issued by this account to be held in escrow.
-   *
-   * <p>This constant will be marked {@link Beta} until the TokenEscrow amendment is enabled on mainnet. Its API is
-   * subject to change.</p>
-   *
-   * @return {@code true} if {@code lsfAllowTrustLineLocking} is set, otherwise {@code false}.
-   */
-  @Beta
-  public boolean lsfAllowTrustLineLocking() {
-    return this.isSet(AccountRootFlags.ALLOW_TRUSTLINE_LOCKING);
-  }
+    /**
+     * Allows trust line tokens (IOUs) issued by this account to be held in escrow.
+     *
+     * <p>This constant will be marked {@link Beta} until the TokenEscrow amendment is enabled on mainnet. Its API is
+     * subject to change.</p>
+     *
+     * @return {@code true} if {@code lsfAllowTrustLineLocking} is set, otherwise {@code false}.
+     */
+    @Beta
+    public boolean lsfAllowTrustLineLocking() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

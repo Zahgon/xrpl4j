@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import org.xrpl.xrpl4j.model.transactions.NetworkId;
-
 import java.io.IOException;
 
 /**
@@ -32,15 +30,15 @@ import java.io.IOException;
  */
 public class NetworkIdSerializer extends StdScalarSerializer<NetworkId> {
 
-  /**
-   * No-args constructor.
-   */
-  public NetworkIdSerializer() {
-    super(NetworkId.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public NetworkIdSerializer() {
+        super(NetworkId.class);
+    }
 
-  @Override
-  public void serialize(NetworkId networkId, JsonGenerator gen, SerializerProvider provider) throws IOException {
-    gen.writeNumber(networkId.value().longValue());
-  }
+    @Override
+    public void serialize(NetworkId networkId, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

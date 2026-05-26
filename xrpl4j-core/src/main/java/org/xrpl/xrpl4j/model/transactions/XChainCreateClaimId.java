@@ -20,51 +20,50 @@ import org.xrpl.xrpl4j.model.flags.TransactionFlags;
 @JsonDeserialize(as = ImmutableXChainCreateClaimId.class)
 public interface XChainCreateClaimId extends Transaction {
 
-  /**
-   * Construct a {@code XChainCreateClaimId} builder.
-   *
-   * @return An {@link ImmutableXChainCreateClaimId.Builder}.
-   */
-  static ImmutableXChainCreateClaimId.Builder builder() {
-    return ImmutableXChainCreateClaimId.builder();
-  }
+    /**
+     * Construct a {@code XChainCreateClaimId} builder.
+     *
+     * @return An {@link ImmutableXChainCreateClaimId.Builder}.
+     */
+    static ImmutableXChainCreateClaimId.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link XChainCreateClaimId}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * @return A set of {@link TransactionFlags}, default is {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link XChainCreateClaimId}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * @return A set of {@link TransactionFlags}, default is {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The account that must send the {@link XChainCommit} transaction on the source chain.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("OtherChainSource")
-  Address otherChainSource();
+    /**
+     * The account that must send the {@link XChainCommit} transaction on the source chain.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("OtherChainSource")
+    Address otherChainSource();
 
-  /**
-   * The amount, in XRP, to reward the witness servers for providing signatures. This must match the amount on the
-   * {@code Bridge} ledger object.
-   *
-   * @return An {@link XrpCurrencyAmount}.
-   */
-  @JsonProperty("SignatureReward")
-  XrpCurrencyAmount signatureReward();
+    /**
+     * The amount, in XRP, to reward the witness servers for providing signatures. This must match the amount on the
+     * {@code Bridge} ledger object.
+     *
+     * @return An {@link XrpCurrencyAmount}.
+     */
+    @JsonProperty("SignatureReward")
+    XrpCurrencyAmount signatureReward();
 
-  /**
-   * The bridge to create the claim ID for.
-   *
-   * @return An {@link XChainBridge}.
-   */
-  @JsonProperty("XChainBridge")
-  @SuppressWarnings("MethodName")
-  XChainBridge xChainBridge();
-
+    /**
+     * The bridge to create the claim ID for.
+     *
+     * @return An {@link XChainBridge}.
+     */
+    @JsonProperty("XChainBridge")
+    @SuppressWarnings("MethodName")
+    XChainBridge xChainBridge();
 }

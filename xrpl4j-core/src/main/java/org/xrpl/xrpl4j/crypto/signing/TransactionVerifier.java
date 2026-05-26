@@ -19,10 +19,8 @@ package org.xrpl.xrpl4j.crypto.signing;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import org.xrpl.xrpl4j.model.transactions.Signer;
 import org.xrpl.xrpl4j.model.transactions.Transaction;
-
 import java.util.Set;
 
 /**
@@ -30,50 +28,43 @@ import java.util.Set;
  */
 public interface TransactionVerifier {
 
-  /**
-   * Verify the supplied digital-signature to ensure that it was constructed using the private-key corresponding to
-   * {@code signerPublicKey}.
-   *
-   * @param signer              A {@link Signer} used for verification.
-   * @param unsignedTransaction The {@link Transaction} of type {@link T} that was signed.
-   * @param <T>                 The actual type of {@link Transaction}.
-   *
-   * @return {@code true} if the signature is valid and verified; {@code false} otherwise.
-   */
-  <T extends Transaction> boolean verify(
-    Signer signer, T unsignedTransaction
-  );
+    /**
+     * Verify the supplied digital-signature to ensure that it was constructed using the private-key corresponding to
+     * {@code signerPublicKey}.
+     *
+     * @param signer              A {@link Signer} used for verification.
+     * @param unsignedTransaction The {@link Transaction} of type {@link T} that was signed.
+     * @param <T>                 The actual type of {@link Transaction}.
+     *
+     * @return {@code true} if the signature is valid and verified; {@code false} otherwise.
+     */
+    <T extends Transaction> boolean verify(Signer signer, T unsignedTransaction);
 
-  /**
-   * Verify that all signers have properly signed the {@code unsignedTransaction}.
-   *
-   * @param signerSet           A {@link Set} of {@link Signer} objects used for verification.
-   * @param unsignedTransaction The {@link Transaction} of type {@link T} that was signed.
-   * @param <T>                 The actual type of {@link Transaction}.
-   *
-   * @return {@code true} if a minimum number of signatures are valid for the supplied transaction; {@code false}
-   *   otherwise.
-   */
-  default <T extends Transaction> boolean verifyMultiSigned(
-    final Set<Signer> signerSet, final T unsignedTransaction
-  ) {
-    return verifyMultiSigned(signerSet, unsignedTransaction, signerSet.size());
-  }
+    /**
+     * Verify that all signers have properly signed the {@code unsignedTransaction}.
+     *
+     * @param signerSet           A {@link Set} of {@link Signer} objects used for verification.
+     * @param unsignedTransaction The {@link Transaction} of type {@link T} that was signed.
+     * @param <T>                 The actual type of {@link Transaction}.
+     *
+     * @return {@code true} if a minimum number of signatures are valid for the supplied transaction; {@code false}
+     *   otherwise.
+     */
+    default <T extends Transaction> boolean verifyMultiSigned(final Set<Signer> signerSet, final T unsignedTransaction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Verify that {@code minSigners} from the collection of public keys have supplied signatures for a given signed
-   * transaction.
-   *
-   * @param signerSet           A {@link Set} of {@link Signer} objects used for verification.
-   * @param unsignedTransaction The transaction of type {@link T} that was signed.
-   * @param minSigners          The minimum number of signatures required to form a quorum.
-   * @param <T>                 The actual type of {@link Transaction}.
-   *
-   * @return {@code true} if a minimum number of signatures are valid for the supplied transaction; {@code false}
-   *   otherwise.
-   */
-  <T extends Transaction> boolean verifyMultiSigned(
-    Set<Signer> signerSet, T unsignedTransaction, int minSigners
-  );
-
+    /**
+     * Verify that {@code minSigners} from the collection of public keys have supplied signatures for a given signed
+     * transaction.
+     *
+     * @param signerSet           A {@link Set} of {@link Signer} objects used for verification.
+     * @param unsignedTransaction The transaction of type {@link T} that was signed.
+     * @param minSigners          The minimum number of signatures required to form a quorum.
+     * @param <T>                 The actual type of {@link Transaction}.
+     *
+     * @return {@code true} if a minimum number of signatures are valid for the supplied transaction; {@code false}
+     *   otherwise.
+     */
+    <T extends Transaction> boolean verifyMultiSigned(Set<Signer> signerSet, T unsignedTransaction, int minSigners);
 }

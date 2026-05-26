@@ -7,7 +7,6 @@ import com.google.common.primitives.UnsignedInteger;
 import com.google.common.primitives.UnsignedLong;
 import org.xrpl.xrpl4j.model.transactions.AssetPrice;
 import org.xrpl.xrpl4j.model.transactions.AssetScale;
-
 import java.io.IOException;
 
 /**
@@ -15,15 +14,15 @@ import java.io.IOException;
  */
 public class AssetScaleDeserializer extends StdDeserializer<AssetScale> {
 
-  /**
-   * No-args constructor.
-   */
-  public AssetScaleDeserializer() {
-    super(AssetScale.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public AssetScaleDeserializer() {
+        super(AssetScale.class);
+    }
 
-  @Override
-  public AssetScale deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    return AssetScale.of(UnsignedInteger.valueOf(jsonParser.getLongValue()));
-  }
+    @Override
+    public AssetScale deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -27,7 +26,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.primitives.UnsignedInteger;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -41,81 +39,70 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableAccountDelete.class)
 public interface AccountDelete extends Transaction {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableAccountDelete.Builder}.
-   */
-  static ImmutableAccountDelete.Builder builder() {
-    return ImmutableAccountDelete.builder();
-  }
-
-  /**
-   * Set of {@link TransactionFlags}s for this {@link AccountDelete}, which only allows the {@code tfFullyCanonicalSig}
-   * flag, which is deprecated.
-   *
-   * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
-   * proper signature computation in rippled.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
-
-  /**
-   * The {@link Address} of an account to receive any leftover XRP after deleting the sending account. Must be a funded
-   * account in the ledger, and must not be the sending account.
-   *
-   * @return The {@link Address} of the leftover XRP destination account.
-   */
-  @JsonProperty("Destination")
-  Address destination();
-
-  /**
-   * Arbitrary destination tag that identifies a hosted recipient or other information for the recipient of the deleted
-   * account's leftover XRP.
-   *
-   * @return An {@link Optional} of type {@link UnsignedInteger} representing the tag of the destination account.
-   */
-  @JsonProperty("DestinationTag")
-  Optional<UnsignedInteger> destinationTag();
-
-  /**
-   * Set of Credentials to authorize a deposit made by this transaction. Each member of the array must be the ledger
-   * entry ID of a Credential entry in the ledger.
-   *
-   * @return A list of type {@link Hash256}.
-   */
-  @JsonProperty("CredentialIDs")
-  List<Hash256> credentialIds();
-
-  /**
-   * Validate {@link AccountDelete#credentialIds} has less than or equal to 8 credentials.
-   */
-  @Value.Check
-  default void validateCredentialIdsLength() {
-    if (!credentialIds().isEmpty()) {
-      Preconditions.checkArgument(
-        credentialIds().size() <= 8,
-        "CredentialIDs should have less than or equal to 8 items."
-      );
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableAccountDelete.Builder}.
+     */
+    static ImmutableAccountDelete.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  /**
-   * Validate {@link AccountDelete#credentialIds} are unique.
-   */
-  @Value.Check
-  default void validateUniqueCredentialIds() {
-    if (!credentialIds().isEmpty()) {
-      Preconditions.checkArgument(
-        new HashSet<>(credentialIds()).size() == credentialIds().size(),
-        "CredentialIDs should have unique values."
-      );
+    /**
+     * Set of {@link TransactionFlags}s for this {@link AccountDelete}, which only allows the {@code tfFullyCanonicalSig}
+     * flag, which is deprecated.
+     *
+     * <p>The value of the flags cannot be set manually, but exists for JSON serialization/deserialization only and for
+     * proper signature computation in rippled.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
+    /**
+     * The {@link Address} of an account to receive any leftover XRP after deleting the sending account. Must be a funded
+     * account in the ledger, and must not be the sending account.
+     *
+     * @return The {@link Address} of the leftover XRP destination account.
+     */
+    @JsonProperty("Destination")
+    Address destination();
+
+    /**
+     * Arbitrary destination tag that identifies a hosted recipient or other information for the recipient of the deleted
+     * account's leftover XRP.
+     *
+     * @return An {@link Optional} of type {@link UnsignedInteger} representing the tag of the destination account.
+     */
+    @JsonProperty("DestinationTag")
+    Optional<UnsignedInteger> destinationTag();
+
+    /**
+     * Set of Credentials to authorize a deposit made by this transaction. Each member of the array must be the ledger
+     * entry ID of a Credential entry in the ledger.
+     *
+     * @return A list of type {@link Hash256}.
+     */
+    @JsonProperty("CredentialIDs")
+    List<Hash256> credentialIds();
+
+    /**
+     * Validate {@link AccountDelete#credentialIds} has less than or equal to 8 credentials.
+     */
+    @Value.Check
+    default void validateCredentialIdsLength() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Validate {@link AccountDelete#credentialIds} are unique.
+     */
+    @Value.Check
+    default void validateUniqueCredentialIds() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

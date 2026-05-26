@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -29,7 +28,6 @@ import org.xrpl.xrpl4j.model.flags.SignerListFlags;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
 import org.xrpl.xrpl4j.model.transactions.SignerListSet;
 import org.xrpl.xrpl4j.model.transactions.Transaction;
-
 import java.util.List;
 
 /**
@@ -41,90 +39,89 @@ import java.util.List;
 @JsonDeserialize(as = ImmutableSignerListObject.class)
 public interface SignerListObject extends LedgerObject {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableSignerListObject.Builder}.
-   */
-  static ImmutableSignerListObject.Builder builder() {
-    return ImmutableSignerListObject.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableSignerListObject.Builder}.
+     */
+    static ImmutableSignerListObject.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The type of ledger object. In this case, always "SignerList".
-   *
-   * @return Always {@link LedgerObject.LedgerEntryType#SIGNER_LIST}.
-   */
-  @JsonProperty("LedgerEntryType")
-  @Value.Derived
-  default LedgerEntryType ledgerEntryType() {
-    return LedgerEntryType.SIGNER_LIST;
-  }
+    /**
+     * The type of ledger object. In this case, always "SignerList".
+     *
+     * @return Always {@link LedgerObject.LedgerEntryType#SIGNER_LIST}.
+     */
+    @JsonProperty("LedgerEntryType")
+    @Value.Derived
+    default LedgerEntryType ledgerEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A bit-map of Boolean {@link SignerListFlags} enabled for this signer list.
-   *
-   * @return The {@link SignerListFlags} for this object.
-   */
-  @JsonProperty("Flags")
-  SignerListFlags flags();
+    /**
+     * A bit-map of Boolean {@link SignerListFlags} enabled for this signer list.
+     *
+     * @return The {@link SignerListFlags} for this object.
+     */
+    @JsonProperty("Flags")
+    SignerListFlags flags();
 
-  /**
-   * The identifying hash of the transaction that most recently modified this object.
-   *
-   * @return A {@link Hash256} containing the previous transaction hash.
-   */
-  @JsonProperty("PreviousTxnID")
-  Hash256 previousTransactionId();
+    /**
+     * The identifying hash of the transaction that most recently modified this object.
+     *
+     * @return A {@link Hash256} containing the previous transaction hash.
+     */
+    @JsonProperty("PreviousTxnID")
+    Hash256 previousTransactionId();
 
-  /**
-   * The index of the ledger that contains the transaction that most recently modified this object.
-   *
-   * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  UnsignedInteger previousTransactionLedgerSequence();
+    /**
+     * The index of the ledger that contains the transaction that most recently modified this object.
+     *
+     * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    UnsignedInteger previousTransactionLedgerSequence();
 
-  /**
-   * A hint indicating which page of the owner directory links to this object, in case the directory
-   * consists of multiple pages.
-   *
-   * @return A {@link String} containing the hint.
-   */
-  @JsonProperty("OwnerNode")
-  String ownerNode();
+    /**
+     * A hint indicating which page of the owner directory links to this object, in case the directory
+     * consists of multiple pages.
+     *
+     * @return A {@link String} containing the hint.
+     */
+    @JsonProperty("OwnerNode")
+    String ownerNode();
 
-  /**
-   * An ID for this signer list. Currently always set to 0. If a future amendment allows multiple
-   * signer lists for an account, this may change.
-   *
-   * @return An {@link UnsignedInteger} representing the ID.
-   */
-  @JsonProperty("SignerListID")
-  UnsignedInteger signerListId();
+    /**
+     * An ID for this signer list. Currently always set to 0. If a future amendment allows multiple
+     * signer lists for an account, this may change.
+     *
+     * @return An {@link UnsignedInteger} representing the ID.
+     */
+    @JsonProperty("SignerListID")
+    UnsignedInteger signerListId();
 
-  /**
-   * A target number for signer weights. To produce a valid signature for the owner of this {@link SignerListObject},
-   * the signers must provide valid signatures whose weights sum to this value or more.
-   *
-   * @return An {@link UnsignedInteger} representing the signer quorum.
-   */
-  @JsonProperty("SignerQuorum")
-  UnsignedInteger signerQuorum();
+    /**
+     * A target number for signer weights. To produce a valid signature for the owner of this {@link SignerListObject},
+     * the signers must provide valid signatures whose weights sum to this value or more.
+     *
+     * @return An {@link UnsignedInteger} representing the signer quorum.
+     */
+    @JsonProperty("SignerQuorum")
+    UnsignedInteger signerQuorum();
 
-  /**
-   * A {@link List} of {@link SignerEntry} objects representing the parties who are part of this signer list.
-   *
-   * @return A {@link List} of {@link SignerEntryWrapper}s for this signer list.
-   */
-  @JsonProperty("SignerEntries")
-  List<SignerEntryWrapper> signerEntries();
+    /**
+     * A {@link List} of {@link SignerEntry} objects representing the parties who are part of this signer list.
+     *
+     * @return A {@link List} of {@link SignerEntryWrapper}s for this signer list.
+     */
+    @JsonProperty("SignerEntries")
+    List<SignerEntryWrapper> signerEntries();
 
-  /**
-   * Unique ID for this {@link SignerListObject}.
-   *
-   * @return A {@link Hash256} containing the ID.
-   */
-  Hash256 index();
-
+    /**
+     * Unique ID for this {@link SignerListObject}.
+     *
+     * @return A {@link Hash256} containing the ID.
+     */
+    Hash256 index();
 }

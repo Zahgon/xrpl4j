@@ -18,18 +18,17 @@ import org.xrpl.xrpl4j.model.transactions.OracleDocumentId;
 @JsonDeserialize(as = ImmutableOracleLedgerEntryParams.class)
 public interface OracleLedgerEntryParams {
 
-  /**
-   * Construct a {@code OracleLedgerEntryParams} builder.
-   *
-   * @return An {@link ImmutableOracleLedgerEntryParams.Builder}.
-   */
-  static ImmutableOracleLedgerEntryParams.Builder builder() {
-    return ImmutableOracleLedgerEntryParams.builder();
-  }
+    /**
+     * Construct a {@code OracleLedgerEntryParams} builder.
+     *
+     * @return An {@link ImmutableOracleLedgerEntryParams.Builder}.
+     */
+    static ImmutableOracleLedgerEntryParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  Address account();
+    Address account();
 
-  @JsonProperty("oracle_document_id")
-  OracleDocumentId oracleDocumentId();
-
+    @JsonProperty("oracle_document_id")
+    OracleDocumentId oracleDocumentId();
 }

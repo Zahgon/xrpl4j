@@ -7,7 +7,6 @@ import com.google.common.primitives.UnsignedLong;
 import org.xrpl.xrpl4j.model.transactions.VoteWeight;
 import org.xrpl.xrpl4j.model.transactions.XChainClaimId;
 import org.xrpl.xrpl4j.model.transactions.XChainCount;
-
 import java.io.IOException;
 
 /**
@@ -15,17 +14,15 @@ import java.io.IOException;
  */
 public class XChainCountDeserializer extends StdDeserializer<XChainCount> {
 
-  /**
-   * No-args constructor.
-   */
-  public XChainCountDeserializer() {
-    super(XChainCount.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public XChainCountDeserializer() {
+        super(XChainCount.class);
+    }
 
-  @Override
-  public XChainCount deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    // sfXChainAccountCreateCount and sfXChainAccountClaimCount are STUInt64s, which in JSON is represented as a
-    // hex-encoded String.
-    return XChainCount.of(UnsignedLong.valueOf(jsonParser.getText(), 16));
-  }
+    @Override
+    public XChainCount deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

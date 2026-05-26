@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xrpl.xrpl4j.model.ledger.UnknownLedgerObject;
-
 import java.io.IOException;
 
 /**
@@ -18,28 +17,14 @@ import java.io.IOException;
  */
 public class UnknownLedgerObjectDeserializer extends StdDeserializer<UnknownLedgerObject> {
 
-  static Logger logger = LoggerFactory.getLogger(UnknownLedgerObjectDeserializer.class);
+    static Logger logger = LoggerFactory.getLogger(UnknownLedgerObjectDeserializer.class);
 
-  protected UnknownLedgerObjectDeserializer() {
-    super(UnknownLedgerObject.class);
-  }
+    protected UnknownLedgerObjectDeserializer() {
+        super(UnknownLedgerObject.class);
+    }
 
-  @Override
-  public UnknownLedgerObject deserialize(
-    JsonParser jsonParser,
-    DeserializationContext ctxt
-  ) throws IOException, JacksonException {
-    JsonNode treeNode = jsonParser.readValueAsTree();
-
-    UnknownLedgerObject ledgerObject = UnknownLedgerObject.builder()
-      .properties(treeNode)
-      .build();
-
-    logger.warn(
-      "Encountered an unknown LedgerObject of type {}. xrpl4j either does not yet support this LedgerObject type," +
-        " or the version you are using does not support this LedgerObject type.",
-      ledgerObject.ledgerEntryType()
-    );
-    return ledgerObject;
-  }
+    @Override
+    public UnknownLedgerObject deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.transactions.NfTokenId;
 import org.xrpl.xrpl4j.model.transactions.NfTokenUri;
-
 import java.util.Optional;
 
 /**
@@ -19,29 +18,28 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableNfToken.class)
 public interface NfToken {
 
-  /**
-   * Construct a {@code NfToken} builder.
-   *
-   * @return An {@link ImmutableNfToken.Builder}.
-   */
-  static ImmutableNfToken.Builder builder() {
-    return ImmutableNfToken.builder();
-  }
+    /**
+     * Construct a {@code NfToken} builder.
+     *
+     * @return An {@link ImmutableNfToken.Builder}.
+     */
+    static ImmutableNfToken.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The unique NFTokenID of the token.
-   *
-   * @return The unique NFTokenID of the token.
-   */
-  @JsonProperty("NFTokenID")
-  NfTokenId nfTokenId();
+    /**
+     * The unique NFTokenID of the token.
+     *
+     * @return The unique NFTokenID of the token.
+     */
+    @JsonProperty("NFTokenID")
+    NfTokenId nfTokenId();
 
-  /**
-   * The URI for the data of the token.
-   *
-   * @return The URI for the data of the token.
-   */
-  @JsonProperty("URI")
-  Optional<NfTokenUri> uri();
-
+    /**
+     * The URI for the data of the token.
+     *
+     * @return The URI for the data of the token.
+     */
+    @JsonProperty("URI")
+    Optional<NfTokenUri> uri();
 }

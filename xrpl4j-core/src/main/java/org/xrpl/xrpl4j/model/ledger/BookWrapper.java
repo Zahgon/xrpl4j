@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.ledger;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -33,21 +32,20 @@ import org.immutables.value.Value.Immutable;
 @JsonDeserialize(as = ImmutableBookWrapper.class)
 public interface BookWrapper {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableBookWrapper.Builder}.
-   */
-  static ImmutableBookWrapper.Builder builder() {
-    return ImmutableBookWrapper.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableBookWrapper.Builder}.
+     */
+    static ImmutableBookWrapper.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A Book object.
-   *
-   * @return A {@link Book} object.
-   */
-  @JsonProperty("Book")
-  Book book();
-
+    /**
+     * A Book object.
+     *
+     * @return A {@link Book} object.
+     */
+    @JsonProperty("Book")
+    Book book();
 }

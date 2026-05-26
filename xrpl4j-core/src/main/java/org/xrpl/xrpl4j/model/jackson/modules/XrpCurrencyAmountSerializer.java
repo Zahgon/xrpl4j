@@ -19,12 +19,10 @@ package org.xrpl.xrpl4j.model.jackson.modules;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import org.xrpl.xrpl4j.model.transactions.XrpCurrencyAmount;
-
 import java.io.IOException;
 
 /**
@@ -32,19 +30,15 @@ import java.io.IOException;
  */
 public class XrpCurrencyAmountSerializer extends StdScalarSerializer<XrpCurrencyAmount> {
 
-  /**
-   * No-args constructor.
-   */
-  public XrpCurrencyAmountSerializer() {
-    super(XrpCurrencyAmount.class, false);
-  }
+    /**
+     * No-args constructor.
+     */
+    public XrpCurrencyAmountSerializer() {
+        super(XrpCurrencyAmount.class, false);
+    }
 
-  @Override
-  public void serialize(
-    XrpCurrencyAmount xrpCurrencyAmount,
-    JsonGenerator gen,
-    SerializerProvider provider
-  ) throws IOException {
-    gen.writeString(xrpCurrencyAmount.toString());
-  }
+    @Override
+    public void serialize(XrpCurrencyAmount xrpCurrencyAmount, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

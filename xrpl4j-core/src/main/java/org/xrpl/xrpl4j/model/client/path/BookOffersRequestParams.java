@@ -11,7 +11,6 @@ import org.xrpl.xrpl4j.model.client.common.LedgerSpecifier;
 import org.xrpl.xrpl4j.model.ledger.Issue;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
-
 import java.util.Optional;
 
 /**
@@ -24,65 +23,65 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableBookOffersRequestParams.class)
 public interface BookOffersRequestParams extends XrplRequestParams {
 
-  /**
-   * Construct a {@code BookOffersRequestParams} builder.
-   *
-   * @return An {@link ImmutableBookOffersRequestParams.Builder}.
-   */
-  static ImmutableBookOffersRequestParams.Builder builder() {
-    return ImmutableBookOffersRequestParams.builder();
-  }
+    /**
+     * Construct a {@code BookOffersRequestParams} builder.
+     *
+     * @return An {@link ImmutableBookOffersRequestParams.Builder}.
+     */
+    static ImmutableBookOffersRequestParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The asset the account taking the Offer would receive.
-   *
-   * @return An {@link Issue}.
-   */
-  @JsonProperty("taker_gets")
-  Issue takerGets();
+    /**
+     * The asset the account taking the Offer would receive.
+     *
+     * @return An {@link Issue}.
+     */
+    @JsonProperty("taker_gets")
+    Issue takerGets();
 
-  /**
-   * The asset the account taking the Offer would pay.
-   *
-   * @return An {@link Issue}.
-   */
-  @JsonProperty("taker_pays")
-  Issue takerPays();
+    /**
+     * The asset the account taking the Offer would pay.
+     *
+     * @return An {@link Issue}.
+     */
+    @JsonProperty("taker_pays")
+    Issue takerPays();
 
-  /**
-   * The Address of an account to use as a perspective. The response includes this account's Offers even if they are
-   * unfunded. (You can use this to see what Offers are above or below yours in the order book.)
-   *
-   * @return An optionally-present {@link Address}.
-   */
-  @JsonProperty("taker")
-  Optional<Address> taker();
+    /**
+     * The Address of an account to use as a perspective. The response includes this account's Offers even if they are
+     * unfunded. (You can use this to see what Offers are above or below yours in the order book.)
+     *
+     * @return An optionally-present {@link Address}.
+     */
+    @JsonProperty("taker")
+    Optional<Address> taker();
 
-  /**
-   * The object ID of a PermissionedDomain object. If this field is provided, the response will include only valid
-   * domain offers associated with that specific domain. If omitted, the response will include only hybrid and open
-   * offers for the trading pair, excluding all domain-specific offers.
-   *
-   * @return An optionally-present {@link Hash256}.
-   */
-  @JsonProperty("domain")
-  Optional<Hash256> domain();
+    /**
+     * The object ID of a PermissionedDomain object. If this field is provided, the response will include only valid
+     * domain offers associated with that specific domain. If omitted, the response will include only hybrid and open
+     * offers for the trading pair, excluding all domain-specific offers.
+     *
+     * @return An optionally-present {@link Hash256}.
+     */
+    @JsonProperty("domain")
+    Optional<Hash256> domain();
 
-  /**
-   * Specifies the ledger version to request. A ledger version can be specified by ledger hash, numerical ledger index,
-   * or a shortcut value.
-   *
-   * @return A {@link LedgerSpecifier} specifying the ledger version to request.
-   */
-  @JsonUnwrapped
-  LedgerSpecifier ledgerSpecifier();
+    /**
+     * Specifies the ledger version to request. A ledger version can be specified by ledger hash, numerical ledger index,
+     * or a shortcut value.
+     *
+     * @return A {@link LedgerSpecifier} specifying the ledger version to request.
+     */
+    @JsonUnwrapped
+    LedgerSpecifier ledgerSpecifier();
 
-  /**
-   * Limit the number of offers to retrieve. Note that until
-   * <a href="https://github.com/XRPLF/rippled/issues/3534">#3534</a> is fixed, book_offers results will not be
-   * paginated.
-   *
-   * @return An optionally-present {@link UnsignedInteger}.
-   */
-  Optional<UnsignedInteger> limit();
+    /**
+     * Limit the number of offers to retrieve. Note that until
+     * <a href="https://github.com/XRPLF/rippled/issues/3534">#3534</a> is fixed, book_offers results will not be
+     * paginated.
+     *
+     * @return An optionally-present {@link UnsignedInteger}.
+     */
+    Optional<UnsignedInteger> limit();
 }

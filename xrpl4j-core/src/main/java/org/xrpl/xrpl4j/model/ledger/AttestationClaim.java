@@ -7,7 +7,6 @@ import com.google.common.annotations.Beta;
 import org.immutables.value.Value.Immutable;
 import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.XChainClaimId;
-
 import java.util.Optional;
 
 /**
@@ -22,30 +21,29 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableAttestationClaim.class)
 public interface AttestationClaim extends Attestation {
 
-  /**
-   * Construct a {@code AttestationClaim} builder.
-   *
-   * @return An {@link ImmutableAttestationClaim.Builder}.
-   */
-  static ImmutableAttestationClaim.Builder builder() {
-    return ImmutableAttestationClaim.builder();
-  }
+    /**
+     * Construct a {@code AttestationClaim} builder.
+     *
+     * @return An {@link ImmutableAttestationClaim.Builder}.
+     */
+    static ImmutableAttestationClaim.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The destination account for the funds on the destination chain.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Destination")
-  Optional<Address> destination();
+    /**
+     * The destination account for the funds on the destination chain.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Destination")
+    Optional<Address> destination();
 
-  /**
-   * The ID of the {@link XChainOwnedClaimIdObject}.
-   *
-   * @return An {@link XChainClaimId}.
-   */
-  @JsonProperty("XChainClaimID")
-  @SuppressWarnings("MethodName")
-  XChainClaimId xChainClaimId();
-
+    /**
+     * The ID of the {@link XChainOwnedClaimIdObject}.
+     *
+     * @return An {@link XChainClaimId}.
+     */
+    @JsonProperty("XChainClaimID")
+    @SuppressWarnings("MethodName")
+    XChainClaimId xChainClaimId();
 }

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import org.xrpl.xrpl4j.model.transactions.Amount;
-
 import java.io.IOException;
 
 /**
@@ -12,15 +11,15 @@ import java.io.IOException;
  */
 public class AmountSerializer extends StdScalarSerializer<Amount> {
 
-  /**
-   * No-args constructor.
-   */
-  public AmountSerializer() {
-    super(Amount.class, false);
-  }
+    /**
+     * No-args constructor.
+     */
+    public AmountSerializer() {
+        super(Amount.class, false);
+    }
 
-  @Override
-  public void serialize(Amount value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-    gen.writeString(value.value());
-  }
+    @Override
+    public void serialize(Amount value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

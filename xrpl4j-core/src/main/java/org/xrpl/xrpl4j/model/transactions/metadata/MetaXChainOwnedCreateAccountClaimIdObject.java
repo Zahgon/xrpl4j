@@ -12,7 +12,6 @@ import org.xrpl.xrpl4j.model.transactions.Address;
 import org.xrpl.xrpl4j.model.transactions.Hash256;
 import org.xrpl.xrpl4j.model.transactions.XChainBridge;
 import org.xrpl.xrpl4j.model.transactions.XChainCount;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -36,82 +35,81 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableMetaXChainOwnedCreateAccountClaimIdObject.class)
 public interface MetaXChainOwnedCreateAccountClaimIdObject extends MetaLedgerObject {
 
-  /**
-   * A bit-map of boolean flags. No flags are defined for {@link MetaXChainOwnedCreateAccountClaimIdObject}, so this
-   * value is always 0.
-   *
-   * @return Always {@link Flags#UNSET}.
-   */
-  @JsonProperty("Flags")
-  @Value.Derived
-  default Flags flags() {
-    return Flags.UNSET;
-  }
+    /**
+     * A bit-map of boolean flags. No flags are defined for {@link MetaXChainOwnedCreateAccountClaimIdObject}, so this
+     * value is always 0.
+     *
+     * @return Always {@link Flags#UNSET}.
+     */
+    @JsonProperty("Flags")
+    @Value.Derived
+    default Flags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The account that owns this object.
-   *
-   * @return An {@link Address}.
-   */
-  @JsonProperty("Account")
-  Optional<Address> account();
+    /**
+     * The account that owns this object.
+     *
+     * @return An {@link Address}.
+     */
+    @JsonProperty("Account")
+    Optional<Address> account();
 
-  /**
-   * The door accounts and assets of the bridge this object correlates to.
-   *
-   * @return An {@link XChainBridge}.
-   */
-  @JsonProperty("XChainBridge")
-  @SuppressWarnings("MethodName")
-  Optional<XChainBridge> xChainBridge();
+    /**
+     * The door accounts and assets of the bridge this object correlates to.
+     *
+     * @return An {@link XChainBridge}.
+     */
+    @JsonProperty("XChainBridge")
+    @SuppressWarnings("MethodName")
+    Optional<XChainBridge> xChainBridge();
 
-  /**
-   * Attestations collected from the witness servers. This includes the parameters needed to recreate the message that
-   * was signed, including the amount, destination, signature reward amount, and reward account for that signature. With
-   * the exception of the reward account, all signatures must sign the message created with common parameters.
-   *
-   * @return A {@link List} of {@link MetaXChainCreateAccountAttestation}s.
-   */
-  @JsonProperty("XChainCreateAccountAttestations")
-  @SuppressWarnings("MethodName")
-  List<MetaXChainCreateAccountAttestation> xChainCreateAccountAttestations();
+    /**
+     * Attestations collected from the witness servers. This includes the parameters needed to recreate the message that
+     * was signed, including the amount, destination, signature reward amount, and reward account for that signature. With
+     * the exception of the reward account, all signatures must sign the message created with common parameters.
+     *
+     * @return A {@link List} of {@link MetaXChainCreateAccountAttestation}s.
+     */
+    @JsonProperty("XChainCreateAccountAttestations")
+    @SuppressWarnings("MethodName")
+    List<MetaXChainCreateAccountAttestation> xChainCreateAccountAttestations();
 
-  /**
-   * An integer that determines the order that accounts created through cross-chain transfers must be performed. Smaller
-   * numbers must execute before larger numbers.
-   *
-   * @return An {@link XChainCount}.
-   */
-  @JsonProperty("XChainAccountCreateCount")
-  @SuppressWarnings("MethodName")
-  Optional<XChainCount> xChainAccountCreateCount();
+    /**
+     * An integer that determines the order that accounts created through cross-chain transfers must be performed. Smaller
+     * numbers must execute before larger numbers.
+     *
+     * @return An {@link XChainCount}.
+     */
+    @JsonProperty("XChainAccountCreateCount")
+    @SuppressWarnings("MethodName")
+    Optional<XChainCount> xChainAccountCreateCount();
 
-  /**
-   * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
-   * of multiple pages.
-   *
-   * <p>Note: The object does not contain a direct link to the owner directory containing it, since that value can be
-   * derived from the Account.
-   *
-   * @return A {@link String} containing the owner node hint.
-   */
-  @JsonProperty("OwnerNode")
-  Optional<String> ownerNode();
+    /**
+     * A hint indicating which page of the sender's owner directory links to this object, in case the directory consists
+     * of multiple pages.
+     *
+     * <p>Note: The object does not contain a direct link to the owner directory containing it, since that value can be
+     * derived from the Account.
+     *
+     * @return A {@link String} containing the owner node hint.
+     */
+    @JsonProperty("OwnerNode")
+    Optional<String> ownerNode();
 
-  /**
-   * The identifying hash of the transaction that most recently modified this object.
-   *
-   * @return A {@link Hash256} containing the previous transaction hash.
-   */
-  @JsonProperty("PreviousTxnID")
-  Optional<Hash256> previousTransactionId();
+    /**
+     * The identifying hash of the transaction that most recently modified this object.
+     *
+     * @return A {@link Hash256} containing the previous transaction hash.
+     */
+    @JsonProperty("PreviousTxnID")
+    Optional<Hash256> previousTransactionId();
 
-  /**
-   * The index of the ledger that contains the transaction that most recently modified this object.
-   *
-   * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
-   */
-  @JsonProperty("PreviousTxnLgrSeq")
-  Optional<UnsignedInteger> previousTransactionLedgerSequence();
-
+    /**
+     * The index of the ledger that contains the transaction that most recently modified this object.
+     *
+     * @return An {@link UnsignedInteger} representing the previous transaction ledger sequence.
+     */
+    @JsonProperty("PreviousTxnLgrSeq")
+    Optional<UnsignedInteger> previousTransactionLedgerSequence();
 }

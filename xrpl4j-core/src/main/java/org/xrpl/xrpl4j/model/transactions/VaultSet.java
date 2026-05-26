@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.annotations.Beta;
 import org.immutables.value.Value;
 import org.xrpl.xrpl4j.model.flags.TransactionFlags;
-
 import java.util.Optional;
 
 /**
@@ -21,57 +20,56 @@ import java.util.Optional;
 @Beta
 public interface VaultSet extends Transaction {
 
-  /**
-   * Construct a {@code VaultSet} builder.
-   *
-   * @return An {@link ImmutableVaultSet.Builder}.
-   */
-  static ImmutableVaultSet.Builder builder() {
-    return ImmutableVaultSet.builder();
-  }
+    /**
+     * Construct a {@code VaultSet} builder.
+     *
+     * @return An {@link ImmutableVaultSet.Builder}.
+     */
+    static ImmutableVaultSet.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * Set of {@link TransactionFlags}s for this {@link VaultSet}, which only allows the
-   * {@code tfFullyCanonicalSig} flag, which is deprecated.
-   *
-   * @return Always {@link TransactionFlags#EMPTY}.
-   */
-  @JsonProperty("Flags")
-  @Value.Default
-  default TransactionFlags flags() {
-    return TransactionFlags.EMPTY;
-  }
+    /**
+     * Set of {@link TransactionFlags}s for this {@link VaultSet}, which only allows the
+     * {@code tfFullyCanonicalSig} flag, which is deprecated.
+     *
+     * @return Always {@link TransactionFlags#EMPTY}.
+     */
+    @JsonProperty("Flags")
+    @Value.Default
+    default TransactionFlags flags() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The ID of the Vault to modify.
-   *
-   * @return A {@link Hash256}.
-   */
-  @JsonProperty("VaultID")
-  Hash256 vaultId();
+    /**
+     * The ID of the Vault to modify.
+     *
+     * @return A {@link Hash256}.
+     */
+    @JsonProperty("VaultID")
+    Hash256 vaultId();
 
-  /**
-   * The maximum amount of assets the vault can hold. 0 means no cap.
-   *
-   * @return An optionally-present {@link Amount}.
-   */
-  @JsonProperty("AssetsMaximum")
-  Optional<Amount> assetsMaximum();
+    /**
+     * The maximum amount of assets the vault can hold. 0 means no cap.
+     *
+     * @return An optionally-present {@link Amount}.
+     */
+    @JsonProperty("AssetsMaximum")
+    Optional<Amount> assetsMaximum();
 
-  /**
-   * The PermissionedDomain object ID for private vaults.
-   *
-   * @return An optionally-present {@link Hash256}.
-   */
-  @JsonProperty("DomainID")
-  Optional<Hash256> domainId();
+    /**
+     * The PermissionedDomain object ID for private vaults.
+     *
+     * @return An optionally-present {@link Hash256}.
+     */
+    @JsonProperty("DomainID")
+    Optional<Hash256> domainId();
 
-  /**
-   * Arbitrary vault metadata, limited to 256 bytes, in hex format.
-   *
-   * @return An optionally-present {@link VaultData}.
-   */
-  @JsonProperty("Data")
-  Optional<VaultData> data();
-
+    /**
+     * Arbitrary vault metadata, limited to 256 bytes, in hex format.
+     *
+     * @return An optionally-present {@link VaultData}.
+     */
+    @JsonProperty("Data")
+    Optional<VaultData> data();
 }

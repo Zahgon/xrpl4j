@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.BeanProperty;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
-
 import java.io.IOException;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -23,42 +22,32 @@ import java.util.Objects;
  */
 public class ZonedDateTimeDeserializer extends JsonDeserializer<ZonedDateTime> implements ContextualDeserializer {
 
-  // Some XRPL dates have 9 digits of nanosecond precision (some have 6). This deserializer parses dates from various
-  // sources that may have variable nanosecond precision, so using `[.SSSSSSSSS][.SSSSSS][.SSS]` handles 9, 6, or 3
-  // decimal places correctly. For example, if this implementation merely used `[.n]`, n expects exactly 9 digits OR
-  // interprets shorter values as literal nanoseconds. So, `.486384` (6 digits) → parsed as 486,384 nanoseconds, which
-  // would be incorrect. Conversely, `.486384000` (9 digits) → parsed as 486,384,000 nanoseconds, which would be
-  // correct. Therefore, we need to use multiple patterns to handle variable precision.
-  private static final DateTimeFormatter DEFAULT_DESERIALIZATION_FORMATTER =
-    DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm:ss[.SSSSSSSSS][.SSSSSS][.SSS] z", Locale.US);
+    // Some XRPL dates have 9 digits of nanosecond precision (some have 6). This deserializer parses dates from various
+    // sources that may have variable nanosecond precision, so using `[.SSSSSSSSS][.SSSSSS][.SSS]` handles 9, 6, or 3
+    // decimal places correctly. For example, if this implementation merely used `[.n]`, n expects exactly 9 digits OR
+    // interprets shorter values as literal nanoseconds. So, `.486384` (6 digits) → parsed as 486,384 nanoseconds, which
+    // would be incorrect. Conversely, `.486384000` (9 digits) → parsed as 486,384,000 nanoseconds, which would be
+    // correct. Therefore, we need to use multiple patterns to handle variable precision.
+    private static final DateTimeFormatter DEFAULT_DESERIALIZATION_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm:ss[.SSSSSSSSS][.SSSSSS][.SSS] z", Locale.US);
 
-  private final DateTimeFormatter formatter;
+    private final DateTimeFormatter formatter;
 
-  public ZonedDateTimeDeserializer() {
-    this(DEFAULT_DESERIALIZATION_FORMATTER);
-  }
-
-  private ZonedDateTimeDeserializer(final DateTimeFormatter formatter) {
-    Objects.requireNonNull(formatter);
-    this.formatter = formatter;
-  }
-
-  @Override
-  public ZonedDateTime deserialize(JsonParser jsonParser, DeserializationContext context) throws IOException {
-    ZonedDateTime parsed = ZonedDateTime.parse(jsonParser.getText(), formatter);
-    // Ensure the zone is explicitly UTC, not just Z
-    return parsed.withZoneSameInstant(ZoneOffset.UTC);
-  }
-
-  @Override
-  public JsonDeserializer<?> createContextual(DeserializationContext context, BeanProperty property) {
-    if (property != null) {
-      JsonFormat.Value format = property.findPropertyFormat(context.getConfig(), ZonedDateTime.class);
-      if (format != null && format.hasPattern()) {
-        Locale locale = format.hasLocale() ? format.getLocale() : Locale.US;
-        return new ZonedDateTimeDeserializer(DateTimeFormatter.ofPattern(format.getPattern(), locale));
-      }
+    public ZonedDateTimeDeserializer() {
+        this(DEFAULT_DESERIALIZATION_FORMATTER);
     }
-    return this;
-  }
+
+    private ZonedDateTimeDeserializer(final DateTimeFormatter formatter) {
+        Objects.requireNonNull(formatter);
+        this.formatter = formatter;
+    }
+
+    @Override
+    public ZonedDateTime deserialize(JsonParser jsonParser, DeserializationContext context) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public JsonDeserializer<?> createContextual(DeserializationContext context, BeanProperty property) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

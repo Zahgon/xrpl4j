@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.google.common.primitives.UnsignedLong;
 import org.xrpl.xrpl4j.model.transactions.AssetPrice;
-
 import java.io.IOException;
 
 /**
@@ -13,16 +12,15 @@ import java.io.IOException;
  */
 public class AssetPriceDeserializer extends StdDeserializer<AssetPrice> {
 
-  /**
-   * No-args constructor.
-   */
-  public AssetPriceDeserializer() {
-    super(AssetPrice.class);
-  }
+    /**
+     * No-args constructor.
+     */
+    public AssetPriceDeserializer() {
+        super(AssetPrice.class);
+    }
 
-  @Override
-  public AssetPrice deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-    // sfAssetPrice is an STUInt64s, which in JSON is represented as a hex-encoded String.
-    return AssetPrice.of(UnsignedLong.valueOf(jsonParser.getText(), 16));
-  }
+    @Override
+    public AssetPrice deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

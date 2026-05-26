@@ -19,7 +19,6 @@ package org.xrpl.xrpl4j.model.transactions;
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -34,21 +33,20 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = ImmutableMemoWrapper.class)
 public interface MemoWrapper {
 
-  /**
-   * Construct a builder for this class.
-   *
-   * @return An {@link ImmutableMemoWrapper.Builder}.
-   */
-  static ImmutableMemoWrapper.Builder builder() {
-    return ImmutableMemoWrapper.builder();
-  }
+    /**
+     * Construct a builder for this class.
+     *
+     * @return An {@link ImmutableMemoWrapper.Builder}.
+     */
+    static ImmutableMemoWrapper.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * A {@link Memo} containing arbitrary information.
-   *
-   * @return A {@link Memo}.
-   */
-  @JsonProperty("Memo")
-  Memo memo();
-
+    /**
+     * A {@link Memo} containing arbitrary information.
+     *
+     * @return A {@link Memo}.
+     */
+    @JsonProperty("Memo")
+    Memo memo();
 }

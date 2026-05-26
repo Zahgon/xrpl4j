@@ -10,7 +10,6 @@ import org.xrpl.xrpl4j.model.client.XrplRequestParams;
 import org.xrpl.xrpl4j.model.client.common.LedgerSpecifier;
 import org.xrpl.xrpl4j.model.transactions.Marker;
 import org.xrpl.xrpl4j.model.transactions.MpTokenIssuanceId;
-
 import java.util.Optional;
 
 /**
@@ -21,33 +20,32 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutableMptHoldersRequestParams.class)
 public interface MptHoldersRequestParams extends XrplRequestParams {
 
-  /**
-   * Construct a {@code MptHoldersRequestParams} builder.
-   *
-   * @return An {@link ImmutableMptHoldersRequestParams.Builder}.
-   */
-  static ImmutableMptHoldersRequestParams.Builder builder() {
-    return ImmutableMptHoldersRequestParams.builder();
-  }
+    /**
+     * Construct a {@code MptHoldersRequestParams} builder.
+     *
+     * @return An {@link ImmutableMptHoldersRequestParams.Builder}.
+     */
+    static ImmutableMptHoldersRequestParams.Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  /**
-   * The {@link MpTokenIssuanceId} of the issuance.
-   *
-   * @return An {@link MpTokenIssuanceId}.
-   */
-  @JsonProperty("mpt_issuance_id")
-  MpTokenIssuanceId mpTokenIssuanceId();
+    /**
+     * The {@link MpTokenIssuanceId} of the issuance.
+     *
+     * @return An {@link MpTokenIssuanceId}.
+     */
+    @JsonProperty("mpt_issuance_id")
+    MpTokenIssuanceId mpTokenIssuanceId();
 
-  /**
-   * A {@link LedgerSpecifier}.
-   *
-   * @return A {@link LedgerSpecifier}.
-   */
-  @JsonUnwrapped
-  LedgerSpecifier ledgerSpecifier();
+    /**
+     * A {@link LedgerSpecifier}.
+     *
+     * @return A {@link LedgerSpecifier}.
+     */
+    @JsonUnwrapped
+    LedgerSpecifier ledgerSpecifier();
 
-  Optional<Marker> marker();
+    Optional<Marker> marker();
 
-  Optional<UnsignedInteger> limit();
-
+    Optional<UnsignedInteger> limit();
 }
